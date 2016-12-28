@@ -1,0 +1,16 @@
+C:\Users\Андрей\Documents\Visual Studio 2015\Projects\Administrator_company\Administrator_company\bin\Debug\Administrator_company.exe.config
+C:\Users\Андрей\Documents\Visual Studio 2015\Projects\Administrator_company\Administrator_company\bin\Debug\Administrator_company.exe
+C:\Users\Андрей\Documents\Visual Studio 2015\Projects\Administrator_company\Administrator_company\bin\Debug\Administrator_company.pdb
+C:\Users\Андрей\Documents\Visual Studio 2015\Projects\Administrator_company\Administrator_company\bin\Debug\MySql.Data.dll
+C:\Users\Андрей\Documents\Visual Studio 2015\Projects\Administrator_company\Administrator_company\bin\Debug\MySql.Data.xml
+C:\Users\Андрей\Documents\Visual Studio 2015\Projects\Administrator_company\Administrator_company\obj\Debug\Administrator_company.csprojResolveAssemblyReference.cache
+C:\Users\Андрей\Documents\Visual Studio 2015\Projects\Administrator_company\Administrator_company\obj\Debug\Administrator_company.Form1.resources
+C:\Users\Андрей\Documents\Visual Studio 2015\Projects\Administrator_company\Administrator_company\obj\Debug\Administrator_company.Properties.Resources.resources
+C:\Users\Андрей\Documents\Visual Studio 2015\Projects\Administrator_company\Administrator_company\obj\Debug\Administrator_company.csproj.GenerateResource.Cache
+C:\Users\Андрей\Documents\Visual Studio 2015\Projects\Administrator_company\Administrator_company\obj\Debug\Administrator_company.exe
+C:\Users\Андрей\Documents\Visual Studio 2015\Projects\Administrator_company\Administrator_company\obj\Debug\Administrator_company.pdb
+C:\Users\Андрей\Documents\Visual Studio 2015\Projects\Administrator_company\Administrator_company\bin\Debug\System.Web.DataVisualization.Design.dll
+C:\Users\Андрей\Documents\Visual Studio 2015\Projects\Administrator_company\Administrator_company\bin\Debug\System.Web.DataVisualization.dll
+C:\Users\Андрей\Documents\Visual Studio 2015\Projects\Administrator_company\Administrator_company\bin\Debug\System.Windows.Forms.DataVisualization.Design.dll
+C:\Users\Андрей\Documents\Visual Studio 2015\Projects\Administrator_company\Administrator_company\bin\Debug\System.Windows.Forms.DataVisualization.dll
+C:\Users\Андрей\Documents\Visual Studio 2015\Projects\Administrator_company\Administrator_company\obj\Debug\Administrator_company.Form2.resources

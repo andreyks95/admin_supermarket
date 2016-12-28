@@ -1,0 +1,314 @@
+﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.ComponentModel.Design.Serialization;
+using System.Data;
+using System.Windows.Forms;
+using MySql.Data.MySqlClient;
+
+namespace Administrator_supermarket
+{
+
+    public class Сalculations
+    {
+
+        Connection connect = new Connection();
+
+        #region Данные методы создают SELECT запрос(ы) только для ТАБЛИЦЫ
+
+        #region GetSelectFromOneFieldTable 
+        /// <summary>
+        /// Это функция создаёт Одиночный SELECT SQL запрос для одной таблицы. 
+        /// Передавать туда, только таблицы и поля которые содержать ЧИСЛОВЫЕ ЗНАЧЕНИЯ. 
+        /// </summary>
+        /// <param name="nameDatabase">Название БД. Пример: "Администратор продуктового супермаркета"</param>
+        /// <param name="nameTable">Название таблицы. "Сотрудники"</param>
+        /// <param name="nameField">Имя поля, с которого нужно получить ЧИСЛОВЫЕ данные . "Стаж"</param>
+        /// <param name="nameIdFieldTable">Название ID поля таблицы. "ID_Сотрудники"</param>
+        /// <param name="id">id конкретной строки. "ID_Сотрудники = 3"</param>
+        /// <returns>ОДИН SELECT SQL Запроса</returns>
+        public string GetSelectFromOneFieldTable(string nameDatabase, string nameTable, string nameField,
+            string nameIdFieldTable, uint id)
+        {
+
+            string select = " SELECT " + nameField + " FROM " + nameDatabase + "." + nameTable + " WHERE " +
+                            nameIdFieldTable + " = " + id.ToString() + " ";
+            //Example: SELECT Price_for_ne FROM Admin.Products WHERE id_product = 5 
+            return select;
+        }
+        #endregion
+
+        #region GetSelectAllFieldTables
+        /// <summary>
+        /// Это функция создаёт Много SELECT SQL запросов для одной таблицы. 
+        /// Передавать туда, только таблицы и поля которые содержать ЧИСЛОВЫЕ ЗНАЧЕНИЯ. 
+        /// </summary>
+        ///<param name="nameDatabase">Название БД. Пример: "Администратор продуктового супермаркета"</param>
+        /// <param name="nameTable">Название таблицы. "Сотрудники"</param>
+        /// <param name="nameFields">Имя ПОЛЕЙ, с которого нужно получить ЧИСЛОВЫЕ данные . "Стаж", "Возраст"</param>
+        /// <param name="nameIdFieldTable">Название ID поля таблицы. "ID_Сотрудники" для "Стажа" и "Возраста" должно быть одинаково</param>
+        /// <param name="id">id конкретной строки. "ID_Сотрудники = 1 " для "Стажа" и "Возраста" должно быть одинаково</param>
+        /// <param name="nameTable_AS">Как будут именоваться выбранные таблицы. ".. AS Table1 и т.д." </param>
+        /// <returns>Одну строку которая содержит МНОГО SELECT SQL Запросов всех полей для одной таблицы</returns>
+        public string GetSelectAllFieldTables(string nameDatabase, string[] nameTable, string[] nameFields,
+            string[] nameIdFieldTable, uint[] id, string[] nameTable_AS)
+        {
+            var countFieldsTable = nameFields.Length;
+            string select = default(string),
+                allSelect = default(string);
+            for (int i = 0; i < countFieldsTable; i++)
+            {
+                select = GetSelectFromOneFieldTable(nameDatabase, nameTable[i], nameFields[i], nameIdFieldTable[i], id[i]);
+                allSelect += " (" + select + ")" + " AS " + nameTable_AS[i] + ", ";
+            }
+            //удаляем пробел и запятую перед в конце запроса и заменяем на " " чтобы был корректный запрос.
+            allSelect = allSelect.Remove(allSelect.Length - 2) + " ";
+            //" (SELECT Price_for_ne FROM Admin.Products WHERE id_product = 5 ) AS Table1, 
+            // (SELECT Count_products FROM Admin.Stock WHERE id_stock = 3 ) AS Table2"
+            return allSelect;
+        }
+        #endregion
+
+        #region GetSelectAllFieldTables overload method
+        /// <summary>
+        /// Перегруженный параметр string[,] nameFields
+        /// </summary>
+        public string GetSelectAllFieldTables(string nameDatabase, string[] nameTable, string[,] nameFields, string[] nameIdFieldTable, uint[] id, string[] nameTable_AS)
+        {
+
+            int   count = 0; //для nameTable_AS, для нормального запроса. Буквально: Назвать таблицу как
+            //string[,] nameFields ={
+            //    {"price_for_one" }, строка 0, стоблец 0 => [row,col] = [0,0] поля для одной таблицы 
+            //    {"quantity" } строка 1, столбец 0 => [row,col] = [1,0] поля для другой таблицы таблиц 
+            // };
+            string select = default(string),
+                allSelect = default(string);
+            //for для строк, количество полей для каждой таблицы
+            for (int row = 0; row < nameFields.GetLength(0); row++)
+
+                //for для стоблцов, потому что их может быть много в одной строке, 
+                //а значит выполнять до тех пор, пока не закончяться все столбцы. 
+                for (int col = 0; col <  nameFields.GetLength(1); col++)
+                {
+                    //выбрать один select
+                    select = GetSelectFromOneFieldTable(nameDatabase, nameTable[row], nameFields[row, col], nameIdFieldTable[row], id[row]);
+                    //добавить много selectов и назвать их "как" (подписать) как "Table1, Table2 и т.д."
+                    allSelect += " (" + select + ")" + " AS " + nameTable_AS[count] + ", ";
+                    count++;
+                }
+            //удаляем пробел и запятую перед в конце запроса и заменяем на " " чтобы был корректный запрос.
+            allSelect = allSelect.Remove(allSelect.Length - 2) + " ";
+            //" (SELECT Price_for_ne FROM Admin.Products WHERE id_product = 5 ) AS Table1, 
+            // (SELECT Count_products FROM Admin.Stock WHERE id_stock = 3 ) AS Table2"
+            return allSelect;
+        }
+        #endregion
+
+        #endregion
+
+        #region Данные методы создают SET запрос(ы) только для ТАБЛИЦЫ
+
+        #region GetSet
+
+        /// <summary>
+        /// Количество nameTables_AS = количество nameFields
+        /// </summary>
+        /// <param name="nameTableResult_AS">Название таблицы (результирующая) в которой будет выполняться вычисление</param>
+        /// <param name="nameFieldResult">Название поля (результирующего) в котором будет выполняться вычисление</param>
+        /// <param name="nameTables_AS">Название таблиц "как". Как они подписаны в SELECT, когда выбирали данные</param>
+        /// <param name="nameFields">Название полей, которые непосредственно принимают учавствие в мат. операции(ях) для получения результата</param>
+        /// <param name="mathOperation">Математическая операция. Удаление, деление, умножение и т.д.</param>
+        /// <returns>Вернуть ОДНУ строку SET части запроса</returns>
+        public string GetSet(string nameTableResult_AS, string nameFieldResult, string[] nameTables_AS, string[] nameFields, string mathOperation)
+        {
+            string set = " SET " + nameTableResult_AS + "." + nameFieldResult + " = "; //Example: SET T1.price
+
+            //если количество полей которые должны принимать учавствие в расчёте меньше или равно одному, 
+            //то SET принимает результат первого поля.
+            if (nameTables_AS.Length <= 1)
+                set += nameFields[0] + " ";
+            //иначе создавать запрос (постепенно добавлять записи в строку)
+            else
+            {
+                for (int i = 0; i < nameTables_AS.Length; i++)
+                {
+                    //если ещё не конец названий таблиц "как" для вычисления 
+                    //то добавить в запись название таблицы "как", его поле и мат. операцию и это всё объединить 
+                    if (i < nameTables_AS.Length - 1)
+                        set += nameTables_AS[i] + "." + nameFields[i] + " " + mathOperation + " ";
+                    else
+                        //иначе просто завершить добавлением поля таблицы и завершить строку.
+                        set += nameTables_AS[i] + "." + nameFields[i] + " ";
+                }
+            }
+            //Example: " SET T1.price = T2.price_for_one * T3.quantity "
+            return set;
+        }
+
+        #endregion
+
+        #region GetSet overloaded method
+
+        //Количество nameTables_AS = количество nameFields
+        //GetSet overloaded method
+        public string GetSet(string nameTableResult_AS, string nameFieldResult, string[] nameTables_AS, string[,] nameFields, string mathOperation)
+        {
+            //string[,] nameFields ={
+            //    {"price_for_one" }, строка 0, стоблец 0 => [row,col] = [0,0] поля для одной таблицы 
+            //    {"quantity" } строка 1, столбец 0 => [row,col] = [1,0] поля для другой таблицы таблиц 
+            // };
+            int countRows = nameFields.GetLength(0); //количество строк  
+            int countCol = nameFields.GetLength(1); //количество столбцов 
+            string set = " SET " + nameTableResult_AS + "." + nameFieldResult + " = "; //Example: SET T1.price
+            //если количество полей которые должны принимать участие в расчёте меньше или равно одному, 
+            //то SET принимает результат первого поля.
+            if (nameTables_AS.Length <= 1) 
+                set += nameTableResult_AS + "." + nameFields[0, 0] + " ";
+            else
+            {
+                for (int i = 0; i < countRows; i++) //количество строк 
+                {
+                    for (int j = 0; j < countCol; j++) //количество столбцов
+                    {
+                        //если ещё не конец названий таблиц "как" для вычисления 
+                        //то добавить в запись название таблицы "как", его поле и мат. операцию и это всё объединить 
+                        if (i < nameTables_AS.Length - 1)
+                            set += nameTables_AS[i+j] + "." + nameFields[i, j] + " " + mathOperation + " ";
+                        //иначе просто завершить добавлением поля таблицы и завершить строку.
+                        else
+                            set += nameTables_AS[i+j] + "." + nameFields[i, j] + " ";
+                    }
+                }
+            }
+            //Example: " SET T1.price = T2.price_for_one * T3.quantity "
+            return set;
+        }
+        #endregion
+        
+        #endregion
+
+        #region Метод - GetWhere который создаёт WHERE подзапрос для ТАБЛИЦЫ
+        /// <summary>
+        /// Получаем одну строку запроса WHERE
+        /// </summary>
+        /// <param name="nameTableResult_AS">Название результируещей таблицы "как". Example: T1</param>
+        /// <param name="nameIdFieldResult">Название рельльтируещего поля таблицы. Example: id_stock</param>
+        /// <param name="id">Номер id куда нужно вставить данные</param>
+        /// <returns>Вернуть одну строку WHERE для запроса</returns>
+        public string GetWhere(string nameTableResult_AS, string nameIdFieldResult, uint id)
+        {
+            return " WHERE " + nameTableResult_AS + "." + nameIdFieldResult + " = " + id.ToString() + "; ";
+            //Exempl: WHERE T1.id_stock = 1; 
+        }
+        #endregion
+
+        #region Метод - GetUpdate который создаёт Update подзапрос для ТАБЛИЦЫ
+        /// <summary>
+        /// Получаем начало запроса UPDATE, где нужно обновить данные (посчитать значение для ячейки таблицы) 
+        /// </summary>
+        /// <param name="nameDatabase">Название БД</param>
+        /// <param name="nameTableResult">Название таблицы куда нужно вставить значение (посчитать в ячейке)</param>
+        /// <param name="nameTableResult_AS">Подписать в дальнейшем эту таблицу "как". К примеру: "T1"</param>
+        /// <returns>Вернуть одну строку запроса для Update</returns>
+        public string GetUpdate(string nameDatabase, string nameTableResult, string nameTableResult_AS)
+        {
+            return "UPDATE " + nameDatabase + "." + nameTableResult + " AS " + nameTableResult_AS + ", ";
+            //Example: UPDATE grocery_supermarket_manager.stock AS T1, 
+        }
+        #endregion
+
+        #region Метод - GetUpdateQuery создаёт полностью UPDATE запрос для обновления данных в ячейке таблицы (Расчёт в этой ячейке) 
+
+        #region GetUpdateQuery
+        /// <summary>
+        /// Получаем полностью запрос для обновления (расчёта значиений в ячейке таблицы)
+        /// </summary>
+        /// <param name="nameDatabase">Название БД</param>
+        /// <param name="nameTableResult">Название таблицы куда нужно вставить значение (посчитать в ячейке)</param>
+        /// <param name="nameTableResult_AS">Подписать в дальнейшем эту таблицу "как". К примеру: "T1"</param>
+        /// <param name="nameIdFieldResult">Для запроса WHERE. Навзание ID поля таблицы, где нужно выполнить вычисление ячейки</param>
+        /// <param name="resultId">Для подзапроса WHERE. Номер ID поля таблицы, где нужно выполнить вычисление ячейки</param>
+        /// <param name="SELECT">Чать запроса. Запросы SELECT</param>
+        /// <param name="SET">Часть запроса SET</param>
+        /// <returns>Возвращает полностью строку запроса</returns>
+        public string GetUpdateQuery(string nameDatabase, string nameTableResult, string nameTableResult_AS,
+            string nameIdFieldResult, uint resultId, string SELECT, string SET)
+        {
+            string update = "UPDATE " + nameDatabase + "." + nameTableResult + " AS " + nameTableResult_AS + ", ";
+            update += SELECT + SET;
+            update += " WHERE " + nameTableResult_AS + "." + nameIdFieldResult + " = " + resultId.ToString() + " ; ";
+            return update;
+            //Example:
+            // "UPDATE grocery_supermarket_manager.stock AS T1, " +
+            //         " (SELECT price_for_one  FROM grocery_supermarket_manager.products WHERE id_products = 1) AS T2, " +
+            //         " (SELECT quantity FROM grocery_supermarket_manager.stock WHERE id_stock = 1) AS T3 " +
+            // " SET T1.price = T2.price_for_one * T3.quantity " +
+            // " WHERE T1.id_stock = 1; ";
+        }
+        #endregion
+
+        #region GetUpdateQuery overload method
+        /// <summary>
+        /// Перегруженный метод. Простой в использовании. 
+        /// </summary>
+        /// <param name="UPDATE">Часть запроса Update</param>
+        /// <param name="SELECT">Чать запроса. Запросы SELECT</param>
+        /// <param name="SET">Часть запроса SET</param>
+        /// <param name="WHERE">Часть запроса WHERE</param>
+        /// <returns>Возвращает полностью строку запроса</returns>
+        public string GetUpdateQuery(string UPDATE, string SELECT, string SET, string WHERE)
+        {
+            return UPDATE + SELECT + SET + WHERE;
+            //Example:
+            // "UPDATE grocery_supermarket_manager.stock AS T1, " +
+            //         " (SELECT price_for_one  FROM grocery_supermarket_manager.products WHERE id_products = 1) AS T2, " +
+            //         " (SELECT quantity FROM grocery_supermarket_manager.stock WHERE id_stock = 1) AS T3 " +
+            // " SET T1.price = T2.price_for_one * T3.quantity " +
+            // " WHERE T1.id_stock = 1; ";
+        }
+        #endregion
+
+        #endregion
+
+        #region Метод - GetValueFromFieldTalbe позволяет получить нужное значение функции (min, max и т.д.) с помощью запроса
+        /// <summary>
+        /// Получаем нужное значение функции (min, max и т.д.) с помощью запроса 
+        /// для данного (одного) поля таблицы
+        /// </summary>
+        /// <param name="nameDatabase">Название базы данных</param>
+        /// <param name="table">Название таблицы с которого нужно получить значение функции</param>
+        /// <param name="field">Название поля таблицы с которого нужно получить значение функции</param>
+        /// <param name="func">Название самой функции</param>
+        /// <returns>Вернуть значение выполненной фукнции в сроке, для вставки в запрос или другого использования</returns>
+        public string GetValueFromFieldTable(string nameDatabase, string table, string field, string func)
+        {
+            Connection connect = new Connection();
+            string result = default(string),
+              //  Support functions 
+              //  AVG()  BIT_AND()  BIT_OR()   BIT_XOR()   COUNT() COUNT(DISTINCT) GROUP_CONCAT()  MAX()  MIN()  STD()  
+              //  STDDEV()    STDDEV_POP()  STDDEV_SAMP()  SUM()  VAR_POP()   VAR_SAMP()  VARIANCE() 
+            
+                query = "SELECT " + func + "(" + field + ")" + " FROM " + nameDatabase + "." + table + ";";
+
+            //передаём наш запрос и пытаемся выполнить команду.
+            connect.command = new MySqlCommand(query, connect.connection);
+            //Открываем соединение
+            connect.OpenConnection();
+            //System.NullReferenceException occurs when their is no data/result
+            //Пытаемся получить нужное нам значение с запроса
+            var getValue = connect.command.ExecuteScalar();
+            //если получаем значение
+            if (getValue != null)
+            {
+                //конвертируем результат в строку 
+                result = getValue.ToString();
+            }
+            connect.CloseConnection(); //закрываем соединение
+            //Example: query = 15; max id field id_stock table stock database admin_company
+            return result;
+        }
+        #endregion
+
+    }
+
+}
