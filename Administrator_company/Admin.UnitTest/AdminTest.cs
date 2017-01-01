@@ -152,7 +152,6 @@ namespace Admin.UnitTest
 
 
         }
-
         /*
         [TestMethod]
         public void GetSecondValue_ProductsAndPriceforone_notnullAndDoubleReturned()
