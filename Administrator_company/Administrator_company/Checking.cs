@@ -14,6 +14,8 @@ namespace Administrator_supermarket
     public class Checking
     {
 
+        #region Данные методы проверяют поле(я) (textBox) на ввод вредных запросов
+
         #region Security 
         /// <summary>
         /// Проверяет безопасность ввода. Если в textBox есть sql-инъекция, то прервать ввод. 
@@ -39,7 +41,7 @@ namespace Administrator_supermarket
                 //дать разрешение на вставку запроса в БД
                 return true;
         }
-        #endregion
+        #endregion 
 
         #region SecurityString overload 
         public bool SecurityString(string data)
@@ -60,23 +62,14 @@ namespace Administrator_supermarket
         }
         #endregion
 
-        public bool Void(TextBox textBox)
-        {
-            string data = textBox.ToString();
-            if (data == null || data == "" || data == " " || data == "0")
-                return false;
-            else
-                return true;
-        }
-
-        public bool VoidString(string data)
-        {
-            if (data == null || data == "" || data == " " || data == "0")
-                return false;
-            else
-                return true;
-        }
-
+        #region SecurityAll
+        /// <summary>
+        /// Проверяет каждый textBox таблицы на ввод sql-инъекции (вредный запрос)
+        /// Если есть хотя бы одно поле, которое содержит sql-инъекцию (вредный запрос)
+        /// тогда прервавть добавление данных в таблицу
+        /// </summary>
+        /// <param name="textBoxs">Массив textBox-ов таблицы</param>
+        /// <returns>Можно добавить данные или нет</returns>
         public bool SecurityAll(params TextBox[] textBoxs)
         {
             bool result = default(bool);
@@ -95,26 +88,9 @@ namespace Administrator_supermarket
             else
                 return true;
         }
+        #endregion
 
-        public bool VoidAll(params TextBox[] textBoxs)
-        {
-            bool result = default(bool);
-            byte count = 0;
-
-            foreach (var i in textBoxs)
-            {
-                result = Void(i);
-                //если результат проверки вернул то, что нельзя добавлять данные увеличиваем счётчик
-                if (result == false)
-                    count++;
-            }
-            //Если есть пустые данные, которые необходимо добавить больше, чем одно тогда нельзя добавлять данные.
-            if (count >= 1)
-                return false;
-            else
-                return true;
-        }
-
+        #region SecurityAllString overload
         public bool SecurityAllString(string[] str)
         {
             bool result = default(bool);
@@ -133,7 +109,68 @@ namespace Administrator_supermarket
             else
                 return true;
         }
+        #endregion
 
+        #endregion
+
+        #region  Данные методы проверяют поле(я) (textBox) на  ввод пустых данных
+
+        #region Void 
+        /// <summary>
+        /// Проверяет каждое поле (TextBox) на ввод пустых значений 
+        /// Если пустое поле - то вернуть информацию о том, что это поле нельзя добавлять в БД
+        /// </summary>
+        /// <param name="textBox">TextBox - который передаётся</param>
+        /// <returns>Можно это поле добавлять или нет</returns>
+        public bool Void(TextBox textBox)
+        {
+            string data = textBox.ToString();
+            if (data == null || data == "" || data == " " || data == "0")
+                return false;
+            else
+                return true;
+        }
+        #endregion
+
+        #region VoidString overload
+        public bool VoidString(string data)
+        {
+            if (data == null || data == "" || data == " " || data == "0")
+                return false;
+            else
+                return true;
+        }
+        #endregion
+
+        #region VoidAll 
+        /// <summary>
+        /// Проверяет все textBox-ы в таблице на ввод пустых значений
+        /// если хотя бы есть ОДНО пустое поле, которое нужно ОБЯЗАТЕЛЬНО заполнить
+        /// тогда возвращаем информацию о том, что поля нельзя добавлять в таблицу
+        /// </summary>
+        /// <param name="textBoxs">Массив TextBox-ов таблицы</param>
+        /// <returns>Можно добавлять или нет</returns>
+        public bool VoidAll(params TextBox[] textBoxs)
+        {
+            bool result = default(bool);
+            byte count = 0;
+
+            foreach (var i in textBoxs)
+            {
+                result = Void(i);
+                //если результат проверки вернул то, что нельзя добавлять данные увеличиваем счётчик
+                if (result == false)
+                    count++;
+            }
+            //Если есть пустые данные, которые необходимо добавить больше, чем одно тогда нельзя добавлять данные.
+            if (count >= 1)
+                return false;
+            else
+                return true;
+        }
+        #endregion
+
+        #region VoidAllString overload
         public bool VoidAllString(string[] str)
         {
             bool result = default(bool);
@@ -152,16 +189,31 @@ namespace Administrator_supermarket
             else
                 return true;
         }
+        #endregion
 
+        #endregion
+
+        #region ErrorMessage
+        /// <summary>
+        ///Если имеются неверно вводимиые данные в таблицу, то закрываем окно в которой оторображается таблица
+        /// если пользователь нажал "Отмена"
+        /// и даём возможность вводить данные,если пользователь выбрал "Продолжить"
+        /// </summary>
+        /// <param name="Form">Передача Формы для вывыда сообщения на экран</param>
         public void ErrorMessage(System.Windows.Forms.Form Form)
         {
 
             string message = "Ошибка при добавление записей в БД! \nПричины: пустое обязательное для записи поле или попытка ввода sql-инъекции.";
             string caption = "Неверный ввод!";
+            //создаётся MessageBox с кнопками: "Продолжить", "Отмена"
             MessageBoxButtons buttons = MessageBoxButtons.RetryCancel;
+            //Показываем MessageBox
+            //Возвращаем результат "Отмена" или "Продолжить" 
             DialogResult result = MessageBox.Show(message, caption, buttons);
+            //Если результат "Отмена" то закрыть форму таблицы
             if (result == DialogResult.Cancel)
                Form.Close();
         }
+        #endregion
     }
 }

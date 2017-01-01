@@ -45,3 +45,6 @@ C:\Users\Андрей\Desktop\Для БД (Администратор проду
 C:\Users\Андрей\Desktop\Для БД (Администратор продуктового супермаркета)\Administrator_company\Administrator_company\obj\Debug\Administrator_supermarket.csproj.GenerateResource.Cache
 C:\Users\Андрей\Desktop\Для БД (Администратор продуктового супермаркета)\Administrator_company\Administrator_company\obj\Debug\Administrator_company.exe.manifest
 C:\Users\Андрей\Desktop\Для БД (Администратор продуктового супермаркета)\Administrator_company\Administrator_company\obj\Debug\Administrator_company.application
+C:\Users\Андрей\Documents\Visual Studio 2015\Projects\admin_supermarket.git\Administrator_company\Administrator_company\bin\Debug\Administrator_company.exe.config
+C:\Users\Андрей\Documents\Visual Studio 2015\Projects\admin_supermarket.git\Administrator_company\Administrator_company\obj\Debug\Administrator_company.exe
+C:\Users\Андрей\Documents\Visual Studio 2015\Projects\admin_supermarket.git\Administrator_company\Administrator_company\obj\Debug\Administrator_company.pdb
