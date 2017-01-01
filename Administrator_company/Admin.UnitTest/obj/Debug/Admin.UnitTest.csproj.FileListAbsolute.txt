@@ -1,0 +1,18 @@
+C:\Users\Андрей\Documents\Visual Studio 2015\Projects\Administrator_company\Admin.UnitTest\bin\Debug\Admin.UnitTest.dll
+C:\Users\Андрей\Documents\Visual Studio 2015\Projects\Administrator_company\Admin.UnitTest\bin\Debug\Admin.UnitTest.pdb
+C:\Users\Андрей\Documents\Visual Studio 2015\Projects\Administrator_company\Admin.UnitTest\bin\Debug\Administrator_company.exe
+C:\Users\Андрей\Documents\Visual Studio 2015\Projects\Administrator_company\Admin.UnitTest\bin\Debug\MySql.Data.dll
+C:\Users\Андрей\Documents\Visual Studio 2015\Projects\Administrator_company\Admin.UnitTest\bin\Debug\Administrator_company.pdb
+C:\Users\Андрей\Documents\Visual Studio 2015\Projects\Administrator_company\Admin.UnitTest\bin\Debug\MySql.Data.xml
+C:\Users\Андрей\Documents\Visual Studio 2015\Projects\Administrator_company\Admin.UnitTest\obj\Debug\Admin.UnitTest.csprojResolveAssemblyReference.cache
+C:\Users\Андрей\Documents\Visual Studio 2015\Projects\Administrator_company\Admin.UnitTest\obj\Debug\Admin.UnitTest.dll
+C:\Users\Андрей\Documents\Visual Studio 2015\Projects\Administrator_company\Admin.UnitTest\obj\Debug\Admin.UnitTest.pdb
+C:\Users\Андрей\Desktop\Для БД (Администратор продуктового супермаркета)\Administrator_company\Admin.UnitTest\bin\Debug\Admin.UnitTest.dll
+C:\Users\Андрей\Desktop\Для БД (Администратор продуктового супермаркета)\Administrator_company\Admin.UnitTest\bin\Debug\Admin.UnitTest.pdb
+C:\Users\Андрей\Desktop\Для БД (Администратор продуктового супермаркета)\Administrator_company\Admin.UnitTest\bin\Debug\Administrator_company.exe
+C:\Users\Андрей\Desktop\Для БД (Администратор продуктового супермаркета)\Administrator_company\Admin.UnitTest\bin\Debug\MySql.Data.dll
+C:\Users\Андрей\Desktop\Для БД (Администратор продуктового супермаркета)\Administrator_company\Admin.UnitTest\bin\Debug\Administrator_company.pdb
+C:\Users\Андрей\Desktop\Для БД (Администратор продуктового супермаркета)\Administrator_company\Admin.UnitTest\bin\Debug\MySql.Data.xml
+C:\Users\Андрей\Desktop\Для БД (Администратор продуктового супермаркета)\Administrator_company\Admin.UnitTest\obj\Debug\Admin.UnitTest.csprojResolveAssemblyReference.cache
+C:\Users\Андрей\Desktop\Для БД (Администратор продуктового супермаркета)\Administrator_company\Admin.UnitTest\obj\Debug\Admin.UnitTest.dll
+C:\Users\Андрей\Desktop\Для БД (Администратор продуктового супермаркета)\Administrator_company\Admin.UnitTest\obj\Debug\Admin.UnitTest.pdb
