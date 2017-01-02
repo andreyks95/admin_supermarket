@@ -91,8 +91,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Checking.cs" />
-    <Compile Include="Connection.cs" />
+    <Compile Include="LogicProgram\Checking.cs" />
+    <Compile Include="LogicProgram\Connection.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -131,7 +131,7 @@
     <Compile Include="CodeForTable\TableStock.Designer.cs">
       <DependentUpon>TableStock.cs</DependentUpon>
     </Compile>
-    <Compile Include="Сalculations.cs" />
+    <Compile Include="LogicProgram\Сalculations.cs" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
