@@ -11,11 +11,10 @@ namespace Administrator_supermarket
     {
         #region Подключение к БД
         //Подсоединение к БД MySQL
-        //public MySqlConnection connection = new MySqlConnection("datasource=localhost; port=3306; username = root; password = andrey_1a6c2b");
-        // public MySqlConnection connection = new MySqlConnection("datasource=sql7.freemysqlhosting.net; port=3306; username = sql7150982; password = 1VAsQp6rY1");
+        public MySqlConnection connection = new MySqlConnection("datasource=localhost; port=3306; username = root; password = andrey_1a6c2b");
 
         //подключение к серверу где находится бд.
-        public MySqlConnection connection = new MySqlConnection("Server =sql7.freemysqlhosting.net; Port=3306; Database=sql7150982; Uid=sql7150982; Pwd=1VAsQp6rY1;");
+        //public MySqlConnection connection = new MySqlConnection("Server =sql7.freemysqlhosting.net; Port=3306; Database=sql7150982; Uid=sql7150982; Pwd=1VAsQp6rY1;");
         
         //для выполнения комманд в дальнейшем
         public MySqlCommand command;

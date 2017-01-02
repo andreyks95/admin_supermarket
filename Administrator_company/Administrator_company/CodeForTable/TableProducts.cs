@@ -23,7 +23,7 @@ namespace Administrator_company
         #region Загрузка формы и отображения таблицы 
         private void TableProducts_Load(object sender, EventArgs e)
         {
-            connect.ShowTable("sql7150982", "products", dataGridView1);//grocery_supermarket_manager
+            connect.ShowTable("grocery_supermarket_manager", "products", dataGridView1);//grocery_supermarket_manager //sql7150982
         }
         #endregion
 
@@ -37,8 +37,8 @@ namespace Administrator_company
             if (resultSecurity == true && resultVoid == true)
             {
                 string[] fieldsTable = { "name", "category", "price_for_one" };
-                connect.InsertDataTable("sql7150982", "products", fieldsTable, textBox1, textBox2, textBox3);
-            }//grocery_supermarket_manager
+                connect.InsertDataTable("grocery_supermarket_manager", "products", fieldsTable, textBox1, textBox2, textBox3);
+            }//grocery_supermarket_manager //sql7150982
             else
             {
                 checking.ErrorMessage(this);
@@ -56,8 +56,8 @@ namespace Administrator_company
             if (resultSecurity == true && resultVoid == true)
             {
                 string[] fieldsTable = { "name", "category", "price_for_one", "id_products" };
-            connect.UpdateDataTable("sql7150982", "products", fieldsTable, textBox4, textBox5, textBox6, textBox7);
-            }//grocery_supermarket_manager
+            connect.UpdateDataTable("grocery_supermarket_manager", "products", fieldsTable, textBox4, textBox5, textBox6, textBox7);
+            }//grocery_supermarket_manager //sql7150982
             else
             {
                 checking.ErrorMessage(this);
@@ -73,8 +73,8 @@ namespace Administrator_company
             if (resultSecurity == true && resultVoid == true)
             {
                 string[] fieldsTable = { "id_products" };
-            connect.DeleteDataTable("sql7150982", "products", fieldsTable, textBox8);
-            }//grocery_supermarket_manager
+            connect.DeleteDataTable("grocery_supermarket_manager", "products", fieldsTable, textBox8);
+            }//grocery_supermarket_manager //sql7150982
             else
             {
                 checking.ErrorMessage(this);

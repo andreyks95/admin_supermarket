@@ -120,7 +120,7 @@ namespace Admin.UnitTest
         public void GetMaxIdTest()
         {
             //arrange
-            string nameDatabase = "sql7150982",
+            string nameDatabase = "sql7150982", //sql7150982 //grocery_supermarket_manager
                 nameTable = "stock",
                 nameField = "id_stock",
                 nameFunc = "max";
