@@ -29,7 +29,7 @@ namespace Administrator_company
         /// <returns>Запрос для обновления данных</returns>
         private string CaclulationField(params TextBox[] textBoxsIdField)
         {
-            string nameDatabase = "sql7150982";//"grocery_supermarket_manager";
+            string nameDatabase = "grocery_supermarket_manager";//"grocery_supermarket_manager"; //sql7150982
             //Таблиы которые принимают участвие в вычислении
             string[] nameTables = { "products", "stock" };
             //Название полей выше указанных таблиц. У них есть значения для нужного нам вычисления
@@ -98,7 +98,7 @@ namespace Administrator_company
         #region Загрузить форму и отобразить таблицу
         private void TableStock_Load(object sender, EventArgs e)
         {
-            connect.ShowTable("sql7150982", "stock", dataGridView1);//grocery_supermarket_manager
+            connect.ShowTable("grocery_supermarket_manager", "stock", dataGridView1);//grocery_supermarket_manager //sql7150982
         }
         #endregion
 
@@ -112,8 +112,8 @@ namespace Administrator_company
             if (resultSecurity == true && resultVoid == true)
             {
                 string[] fieldsTable = {"id_products", "available", "entered", "sold", "quantity"}; //, "price" };
-                connect.InsertDataTable("sql7150982", "stock", fieldsTable, textBox1, textBox2,textBox3,
-                                        textBox4, textBox5); //, textBox6);grocery_supermarket_manager
+                connect.InsertDataTable("grocery_supermarket_manager", "stock", fieldsTable, textBox1, textBox2,textBox3,
+                                        textBox4, textBox5); //, textBox6);grocery_supermarket_manager //sql7150982
                 //вычисляем только одно поле, передаём значение текущего id_product, а id_stock получаем автоматически из последнего добавленного.
                 connect.FieldDateTableCalculation(CaclulationField(textBox1));
             }
@@ -134,8 +134,8 @@ namespace Administrator_company
             if (resultSecurity == true && resultVoid == true)
             {
                 string[] fieldsTable = { "id_products", "available", "entered", "sold", "quantity", /*"price",*/ "id_stock" };
-                connect.UpdateDataTable("sql7150982", "stock", fieldsTable, textBox7, textBox8,textBox9,
-                                        textBox10, textBox11, /*textBox12,*/ textBox13);//grocery_supermarket_manager
+                connect.UpdateDataTable("grocery_supermarket_manager", "stock", fieldsTable, textBox7, textBox8,textBox9,
+                                        textBox10, textBox11, /*textBox12,*/ textBox13);//grocery_supermarket_manager //sql7150982
                 //передаём два id 
                 connect.FieldDateTableCalculation(CaclulationField(textBox7, textBox13));
             }
@@ -154,7 +154,7 @@ namespace Administrator_company
             if (resultSecurity == true && resultVoid == true)
             {
                 string[] fieldsTable = {"id_stock"};
-                connect.DeleteDataTable("sql7150982", "stock", fieldsTable, textBox14);//grocery_supermarket_manager
+                connect.DeleteDataTable("grocery_supermarket_manager", "stock", fieldsTable, textBox14);//grocery_supermarket_manager //sql7150982
             }
             else
             {

@@ -25,7 +25,7 @@ namespace Administrator_company
         #region Загрузка формы и отображения таблицы 
         private void TableDepartment_Load(object sender, EventArgs e)
         {
-            connect.ShowTable("sql7150982", "department", dataGridView1);//grocery_supermarket_manager
+            connect.ShowTable("grocery_supermarket_manager", "department", dataGridView1);//grocery_supermarket_manager //sql7150982
         }
         #endregion
 
@@ -39,8 +39,8 @@ namespace Administrator_company
             if (resultSecurity == true && resultVoid == true)
             {
                 string[] fieldsTable = { "department_name" };
-            connect.InsertDataTable("sql7150982", "department", fieldsTable, textBox1);
-            }//grocery_supermarket_manager
+            connect.InsertDataTable("grocery_supermarket_manager", "department", fieldsTable, textBox1);//grocery_supermarket_manager //sql7150982
+            }
             else
             {
                 checking.ErrorMessage(this);
@@ -58,8 +58,8 @@ namespace Administrator_company
             if (resultSecurity == true && resultVoid == true)
             {
                 string[] fieldsTable = { "department_name", "id_department" };
-            connect.UpdateDataTable("sql7150982", "department", fieldsTable, textBox2, textBox3);
-            }//grocery_supermarket_manager
+            connect.UpdateDataTable("grocery_supermarket_manager", "department", fieldsTable, textBox2, textBox3);//grocery_supermarket_manager //sql7150982
+            }
             else
             {
                 checking.ErrorMessage(this);
@@ -77,8 +77,8 @@ namespace Administrator_company
             if (resultSecurity == true && resultVoid == true)
             {
                 string[] fieldsTable = { "id_department" };
-            connect.DeleteDataTable("sql7150982", "department", fieldsTable, textBox4);
-            }//grocery_supermarket_manager
+            connect.DeleteDataTable("grocery_supermarket_manager", "department", fieldsTable, textBox4);//grocery_supermarket_manager //sql7150982
+            }
             else
             {
                 checking.ErrorMessage(this);
