@@ -19,19 +19,20 @@ namespace Administrator_supermarket
         }
 
         //создаём объект класса Connection, где будем иметь доступ ко всем функциям 
-        private readonly Connection connect = new Connection();
-        private readonly Checking checking = new Checking();
-
-
-        // List<string> fieldsTable = new List<string> { "full_name", "passport_id", "experience", "address", "phone_number" }; 
+        private readonly Connection connect = new Connection(); //Для отображения, вставки, обновления, удаления данных в таблице
+        private readonly Checking checking = new Checking(); //Для проверки ячеек на вредные запросы и пустоту значений
 
         //public object DataGridViewDataSource => dataGridView1.DataSource;
+
+        #region Загрузка формы и отображения таблицы 
         //Отображение записей в таблице при загрузке
         private void TableAdministrator_Load(object sender, EventArgs e)
         {
                 connect.ShowTable("sql7150982", "administrator", dataGridView1);//grocery_supermarket_manager
         }
+        #endregion
 
+        #region Вставка данных в таблицу
         //Вставка записей в таблицу
         private void InsertData_Click(object sender, EventArgs e)
         {
@@ -49,8 +50,10 @@ namespace Administrator_supermarket
             {
                 checking.ErrorMessage(this);
             }
-        }   
+        }
+        #endregion
 
+        #region Обновление данных в таблице
         private void button1_Click(object sender, EventArgs e)
         {
             //возвращаем результаты проверок всех полей
@@ -67,7 +70,9 @@ namespace Administrator_supermarket
                 checking.ErrorMessage(this);
             }
         }
+        #endregion
 
+        #region Удаление данных в таблице
         private void buttonDeleteData_Click(object sender, EventArgs e)
         {
             //возвращаем результаты проверок всех полей
@@ -84,6 +89,7 @@ namespace Administrator_supermarket
                 checking.ErrorMessage(this);
             }
          }
+        #endregion
     }
 }
 

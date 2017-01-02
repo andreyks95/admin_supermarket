@@ -18,13 +18,18 @@ namespace Administrator_company
         {
             InitializeComponent();
         }
-        private readonly Connection connect = new Connection();
-        private readonly Checking checking = new Checking();
+
+        private readonly Connection connect = new Connection(); //Для отображения, вставки, обновления, удаления данных в таблице
+        private readonly Checking checking = new Checking(); //Для проверки ячеек на вредные запросы и пустоту значений
+
+        #region Загрузка формы и отображения таблицы 
         private void TableDepartment_Load(object sender, EventArgs e)
         {
             connect.ShowTable("sql7150982", "department", dataGridView1);//grocery_supermarket_manager
         }
+        #endregion
 
+        #region Вставка данных в таблицу
         private void InsertData_Click(object sender, EventArgs e)
         {
             //возвращаем результаты проверок всех полей
@@ -41,7 +46,9 @@ namespace Administrator_company
                 checking.ErrorMessage(this);
             }
         }
+        #endregion
 
+        #region Обновление данных в таблице
         private void UpdateData_Click(object sender, EventArgs e)
         {
             //возвращаем результаты проверок всех полей
@@ -58,7 +65,9 @@ namespace Administrator_company
                 checking.ErrorMessage(this);
             }
         }
+        #endregion
 
+        #region Удаление данных в таблице
         private void DeleteData_Click(object sender, EventArgs e)
         {
             //возвращаем результаты проверок всех полей
@@ -75,6 +84,7 @@ namespace Administrator_company
                 checking.ErrorMessage(this);
             }
         }
+        #endregion
 
 
     }
