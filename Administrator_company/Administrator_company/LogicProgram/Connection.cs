@@ -71,6 +71,39 @@ namespace Administrator_supermarket
         }
         #endregion
 
+        #region Отобразить выбранные нами поля в таблице
+
+        public string CreateQueryChooseFields()
+        {
+            return "";
+        }
+        #endregion
+
+        #region Отобразить выбранные поля в таблице
+        public void ShowTable( System.Windows.Forms.DataGridView DataGridView, string query, string nameTable)
+        {
+            //System.Windows.Forms.DataGridView DataGridView 
+            //Передаём в качестве параметра DataGridView из любых форм
+            //и можем использовать его методы
+            //например DataGridView.DataSource 
+            try
+            {
+                //выбрать все поля с таблицы БД
+                MySqlDataAdapter adapter = new MySqlDataAdapter("SELECT * FROM " + nameDatabase + "." + nameTable, connection);
+                connection.Open(); //открыть соединение
+                DataSet ds = new DataSet(); //создать новый DataSet
+                adapter.Fill(ds, nameTable); //заполнить 
+                //Подключение таблицы
+                DataGridView.DataSource = ds.Tables[nameTable];
+                connection.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+        #endregion
+
         #region Отобразить таблицу 
         //Метод, который содержит запрос для отображения таблицы
         public void ShowTable(string nameDatabase, string nameTable, System.Windows.Forms.DataGridView DataGridView)
@@ -119,6 +152,8 @@ namespace Administrator_supermarket
             }
         }*/
         #endregion
+
+
 
         #region Добавление (вставка) данных в таблицу 
         /// <summary>
