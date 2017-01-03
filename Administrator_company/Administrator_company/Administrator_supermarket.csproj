@@ -105,6 +105,12 @@
     <Compile Include="CodeForTable\TableAdministrator.Designer.cs">
       <DependentUpon>TableAdministrator.cs</DependentUpon>
     </Compile>
+    <Compile Include="Preview %28Test%29\MainForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Preview %28Test%29\MainForm.Designer.cs">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Preview %28Test%29\Stock.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -143,6 +149,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="CodeForTable\TableAdministrator.resx">
       <DependentUpon>TableAdministrator.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Preview %28Test%29\MainForm.resx">
+      <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Preview %28Test%29\Stock.resx">
       <DependentUpon>Stock.cs</DependentUpon>
