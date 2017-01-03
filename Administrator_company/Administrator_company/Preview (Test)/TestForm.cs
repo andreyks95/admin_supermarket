@@ -29,7 +29,7 @@ namespace Administrator_company.Preview__Test_
                 MySqlDataReader reader = command.ExecuteReader();
                 while (reader.Read())
                 {
-                    comboBox1.Items.Add(reader.GetValue(1));
+                    comboBox1.Items.Add(reader.GetValue(1)); //Получаем все значения products.name
                 }
             }
             catch (Exception ex)
