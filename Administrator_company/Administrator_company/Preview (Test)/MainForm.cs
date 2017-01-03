@@ -22,5 +22,11 @@ namespace Administrator_company.Preview__Test_
             Stock stock = new Stock();
             stock.Show();
         }
+
+        private void OpenTestForm_Click(object sender, EventArgs e)
+        {
+            TestForm testForm = new TestForm();
+            testForm.Show();
+        }
     }
 }
