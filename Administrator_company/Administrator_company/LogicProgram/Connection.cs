@@ -71,16 +71,16 @@ namespace Administrator_supermarket
         }
         #endregion
 
-        #region Отобразить выбранные нами поля в таблице
-
-        public string CreateQueryChooseFields()
-        {
-            return "";
-        }
-        #endregion
+        #region Методы для отображения таблицы
 
         #region Отобразить выбранные поля в таблице
-        public void ShowTable( System.Windows.Forms.DataGridView DataGridView, string query, string nameTable)
+        /// <summary>
+        /// Перегруженный методы, чтобы отобразить необходимые нам поля в таблице по запросу
+        /// </summary>
+        /// <param name="DataGridView">Где будем отображать таблицу</param>
+        /// <param name="query">Запрос в котором содержится что вывести</param>
+        /// <param name="nameTable">Название таблицы, которую будем выводить</param>
+        public void ShowTable( System.Windows.Forms.DataGridView DataGridView, string query)//, string nameTable)
         {
             //System.Windows.Forms.DataGridView DataGridView 
             //Передаём в качестве параметра DataGridView из любых форм
@@ -92,9 +92,9 @@ namespace Administrator_supermarket
                 MySqlDataAdapter adapter = new MySqlDataAdapter(query, connection);
                 connection.Open(); //открыть соединение
                 DataSet ds = new DataSet(); //создать новый DataSet
-                adapter.Fill(ds, nameTable); //заполнить 
+                adapter.Fill(ds, "Table");//nameTable); //заполнить 
                 //Подключение таблицы
-                DataGridView.DataSource = ds.Tables[nameTable];
+                DataGridView.DataSource = ds.Tables["Table"];
                 connection.Close();
             }
             catch (Exception ex)
@@ -128,7 +128,9 @@ namespace Administrator_supermarket
                 MessageBox.Show(ex.Message);
             }
         }
+        #endregion
 
+        #region для Telerik WinForm
         //Перегруженный метод, для Telerik WinForm
         /*public void ShowTable(string nameDatabase, string nameTable, Telerik.WinControls.UI.RadGridView DataGridView)
         {
@@ -153,7 +155,7 @@ namespace Administrator_supermarket
         }*/
         #endregion
 
-
+        #endregion
 
         #region Добавление (вставка) данных в таблицу 
         /// <summary>
