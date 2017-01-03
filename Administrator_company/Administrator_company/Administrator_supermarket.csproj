@@ -124,6 +124,7 @@
     <Compile Include="Preview %28Test%29\TestForm.Designer.cs">
       <DependentUpon>TestForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Preview %28Test%29\TestFunction.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="CodeForTable\TableDepartment.cs">
@@ -162,6 +163,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Preview %28Test%29\Stock.resx">
       <DependentUpon>Stock.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Preview %28Test%29\TestForm.resx">
+      <DependentUpon>TestForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
