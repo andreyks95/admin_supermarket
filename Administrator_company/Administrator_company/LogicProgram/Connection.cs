@@ -89,7 +89,7 @@ namespace Administrator_supermarket
             try
             {
                 //выбрать все поля с таблицы БД
-                MySqlDataAdapter adapter = new MySqlDataAdapter("SELECT * FROM " + nameDatabase + "." + nameTable, connection);
+                MySqlDataAdapter adapter = new MySqlDataAdapter(query, connection);
                 connection.Open(); //открыть соединение
                 DataSet ds = new DataSet(); //создать новый DataSet
                 adapter.Fill(ds, nameTable); //заполнить 
