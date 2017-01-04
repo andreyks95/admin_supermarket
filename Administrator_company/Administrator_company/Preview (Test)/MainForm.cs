@@ -28,5 +28,11 @@ namespace Administrator_company.Preview__Test_
             TestForm testForm = new TestForm();
             testForm.Show();
         }
+
+        private void TestFormTwo_Click(object sender, EventArgs e)
+        {
+            TestFormTwo testFormTwo = new TestFormTwo();
+            testFormTwo.Show();
+        }
     }
 }
