@@ -44,6 +44,7 @@
             this.label5 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.BTN_CHOOSE_IMAGE = new System.Windows.Forms.Button();
+            this.Insert = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -184,12 +185,23 @@
             this.BTN_CHOOSE_IMAGE.UseVisualStyleBackColor = true;
             this.BTN_CHOOSE_IMAGE.Click += new System.EventHandler(this.BTN_CHOOSE_IMAGE_Click);
             // 
+            // Insert
+            // 
+            this.Insert.Location = new System.Drawing.Point(338, 94);
+            this.Insert.Name = "Insert";
+            this.Insert.Size = new System.Drawing.Size(75, 23);
+            this.Insert.TabIndex = 16;
+            this.Insert.Text = "Insert";
+            this.Insert.UseVisualStyleBackColor = true;
+            this.Insert.Click += new System.EventHandler(this.Insert_Click);
+            // 
             // TestFormTwo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(1101, 484);
+            this.Controls.Add(this.Insert);
             this.Controls.Add(this.BTN_CHOOSE_IMAGE);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.label5);
@@ -234,5 +246,6 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Button BTN_CHOOSE_IMAGE;
+        private System.Windows.Forms.Button Insert;
     }
 }
