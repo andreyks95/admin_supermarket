@@ -124,6 +124,7 @@ namespace Administrator_company.Preview__Test_
                         
             }
         }
+
         /// <summary>
         /// Помещает в textBox значение с ячейки текущей строки DataGridView
         /// </summary>
@@ -134,6 +135,7 @@ namespace Administrator_company.Preview__Test_
         {
             textBox.Text = dataGridView.CurrentRow.Cells[number].Value.ToString();
         }
+
         /// <summary>
         /// Помещает во ВСЕ textBox-ы значения из текущей строки DataGridView
         /// </summary>
