@@ -80,10 +80,9 @@ namespace Administrator_company.Preview__Test_
            //или можно так:
 
             CurrentRowCellsIMG(6, pictureBox1, dataGridView1);
-            //CurrentRowCellsTEXT(0, textBox1, dataGridView1);
-            int countFieldsTable = 6;
+            //CurrentRowCellsTEXT(0, textBox1, dataGridView1); 
             TextBox[] textBoxs = {textBox1, textBox2, textBox3, textBox4, textBox5, textBox6};
-            CurrentRowCellsTEXT(countFieldsTable, textBoxs, dataGridView1);
+            CurrentRowCellsTEXT(textBoxs, dataGridView1);
         }
 
 
@@ -114,15 +113,19 @@ namespace Administrator_company.Preview__Test_
             textBox.Text = dataGridView.CurrentRow.Cells[number].Value.ToString();
         }
 
-        public void CurrentRowCellsTEXT(int number, TextBox[] textBoxs, DataGridView dataGridView)
+        public void CurrentRowCellsTEXT(TextBox[] textBoxs, DataGridView dataGridView)
         {
-            for (var i=0; i< number; i++)
+            for (var i=0; i< textBoxs.Length; i++)
             {
                 CurrentRowCellsTEXT(i, textBoxs[i], dataGridView);
             }
-
         }
 
-
+        private void dataGridView1_SelectionChanged(object sender, EventArgs e)
+        {
+            CurrentRowCellsIMG(6, pictureBox1, dataGridView1);
+            TextBox[] textBoxs = { textBox1, textBox2, textBox3, textBox4, textBox5, textBox6 };
+            CurrentRowCellsTEXT(textBoxs, dataGridView1);
+        }
     }
 }
