@@ -151,5 +151,37 @@ namespace Administrator_company.Preview__Test_
             }
         }
 
+        private void Insert_Click(object sender, EventArgs e)
+        {
+            MemoryStream ms = new MemoryStream();
+            pictureBox1.Image.Save(ms,pictureBox1.Image.RawFormat);
+            byte[] img = ms.ToArray();
+            string query = "INSERT INTO supermarket.info (id_info, full_name, passport_id, age, address, phone, photo) " +
+                           " VALUES(@id, @name, @passport, @age, @address, @phone, @photo)";
+            MySqlCommand command = new MySqlCommand(query,connection);
+            command.Parameters.Add("@id",MySqlDbType.UInt32).Value = textBox1.Text;
+            command.Parameters.Add("@name", MySqlDbType.VarChar).Value = textBox2.Text;
+            command.Parameters.Add("@passport", MySqlDbType.VarChar).Value = textBox3.Text;
+            command.Parameters.Add("@age", MySqlDbType.UInt32).Value = textBox4.Text;
+            command.Parameters.Add("@address", MySqlDbType.MediumText).Value = textBox5.Text;
+            command.Parameters.Add("@phone", MySqlDbType.VarChar).Value = textBox6.Text;
+            command.Parameters.Add("@photo", MySqlDbType.LongBlob).Value = img;
+
+            ExecuteQuery(command, "Данные успешно добавлены!");
+        }
+
+        public void ExecuteQuery(MySqlCommand command, string message)
+        {
+            connection.Open();
+            if (command.ExecuteNonQuery() == 1)
+            {
+                MessageBox.Show(message);
+            }
+            else
+            {
+                MessageBox.Show("Ошибка при выполнении запроса!");
+            }
+            connection.Close();
+        }
     }
 }
