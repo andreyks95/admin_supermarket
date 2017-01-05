@@ -49,6 +49,7 @@
             this.Delete = new System.Windows.Forms.Button();
             this.textBoxSearch = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
+            this.Find = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -236,12 +237,23 @@
             this.label6.TabIndex = 19;
             this.label6.Text = "Enter Value To Search";
             // 
+            // Find
+            // 
+            this.Find.Location = new System.Drawing.Point(299, 9);
+            this.Find.Name = "Find";
+            this.Find.Size = new System.Drawing.Size(75, 23);
+            this.Find.TabIndex = 21;
+            this.Find.Text = "Find";
+            this.Find.UseVisualStyleBackColor = true;
+            this.Find.Click += new System.EventHandler(this.Find_Click);
+            // 
             // TestFormTwo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(1101, 484);
+            this.Controls.Add(this.Find);
             this.Controls.Add(this.textBoxSearch);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.Delete);
@@ -296,5 +308,6 @@
         private System.Windows.Forms.Button Delete;
         private System.Windows.Forms.TextBox textBoxSearch;
         private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Button Find;
     }
 }
