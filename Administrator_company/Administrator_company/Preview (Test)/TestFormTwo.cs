@@ -20,6 +20,8 @@ namespace Administrator_company.Preview__Test_
         {
             InitializeComponent();
         }
+
+        DataTable table = new DataTable(); //Создаём таблицу
         public MySqlConnection connection = new MySqlConnection("datasource=localhost; port=3306; username = root; password = andrey_1a6c2b");
         
         //При загрузке отобразить таблицу
@@ -63,7 +65,7 @@ namespace Administrator_company.Preview__Test_
         
 
             //Для отображения в таблице
-            DataTable table = new DataTable(); //Создаём таблицу
+           
             adapter.Fill(table); //Вставляем данные при выполнении команды в таблицу
 
             dataGridView1.RowTemplate.Height = 60; //высота строк
@@ -100,17 +102,20 @@ namespace Administrator_company.Preview__Test_
         {
             //отображаем текущую картинку из DataGridView в pictureBox
             CurrentRowCellsIMG(6, pictureBox1, dataGridView1);
+
             //Массив куда будут (в textBox-ы) отображаться значения текущей строки из DataGridView
             TextBox[] textBoxs = {textBox1, textBox2, textBox3, textBox4, textBox5, textBox6};
             //отображаем все текстовые записи из DataGridView в textBox-ы
             CurrentRowCellsTEXT(textBoxs, dataGridView1);
+
         }
 
         //Когда пользователь будет нажимать стрелками клавиш "вверх" и "вниз" то будут в textBox-ах и pictuerBox отображаться данные текущей строки
         private void dataGridView1_SelectionChanged(object sender, EventArgs e)
         {
             //отображаем текущую картинку из DataGridView в pictureBox
-            CurrentRowCellsIMG(6, pictureBox1, dataGridView1);
+             CurrentRowCellsIMG(6, pictureBox1, dataGridView1);
+
             //Массив куда будут (в textBox-ы) отображаться значения текущей строки из DataGridView
             TextBox[] textBoxs = { textBox1, textBox2, textBox3, textBox4, textBox5, textBox6 };
             //отображаем все текстовые записи из DataGridView в textBox-ы
