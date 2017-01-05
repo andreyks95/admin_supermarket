@@ -182,6 +182,38 @@ namespace Administrator_company.Preview__Test_
                 MessageBox.Show("Ошибка при выполнении запроса!");
             }
             connection.Close();
+
+            FillDataGridView();
+        }
+
+        private void Update_Click(object sender, EventArgs e)
+        {
+            MemoryStream ms = new MemoryStream();
+            pictureBox1.Image.Save(ms, pictureBox1.Image.RawFormat);
+            byte[] img = ms.ToArray();
+            string query = "UPDATE supermarket.info " +
+                           "SET full_name = @name, passport_id = @passport, age = @age, address = @address, phone = @phone, photo = @photo" +
+                           " WHERE id_info = @id";
+            MySqlCommand command = new MySqlCommand(query, connection);
+            command.Parameters.Add("@id", MySqlDbType.UInt32).Value = textBox1.Text;
+            command.Parameters.Add("@name", MySqlDbType.VarChar).Value = textBox2.Text;
+            command.Parameters.Add("@passport", MySqlDbType.VarChar).Value = textBox3.Text;
+            command.Parameters.Add("@age", MySqlDbType.UInt32).Value = textBox4.Text;
+            command.Parameters.Add("@address", MySqlDbType.MediumText).Value = textBox5.Text;
+            command.Parameters.Add("@phone", MySqlDbType.VarChar).Value = textBox6.Text;
+            command.Parameters.Add("@photo", MySqlDbType.LongBlob).Value = img;
+
+            ExecuteQuery(command, "Данные успешно обновлены!");
+        }
+
+        private void Delete_Click(object sender, EventArgs e)
+        {
+            string query = "DELETE FROM supermarket.info WHERE id_info = @id";
+            MySqlCommand command = new MySqlCommand(query, connection);
+            command.Parameters.Add("@id", MySqlDbType.UInt32).Value = textBox1.Text;
+
+            ExecuteQuery(command, "Данные успешно удалены!");
+
         }
     }
 }
