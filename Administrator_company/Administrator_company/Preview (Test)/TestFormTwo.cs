@@ -238,6 +238,8 @@ namespace Administrator_company.Preview__Test_
 
             ExecuteQuery(command, "Данные успешно удалены!");
 
+            ClearFields();
+
         }
 
         private void textBoxSearch_TextChanged(object sender, EventArgs e)
@@ -260,6 +262,7 @@ namespace Administrator_company.Preview__Test_
             if (table.Rows.Count <= 0)
             {
                 MessageBox.Show("Не найдено!");
+                ClearFields();
             }
             else
             {
@@ -274,6 +277,22 @@ namespace Administrator_company.Preview__Test_
                 MemoryStream ms = new MemoryStream(img);
                 pictureBox1.Image = Image.FromStream(ms);
             }
+        }
+
+        private void Clear_Click(object sender, EventArgs e)
+        {
+            ClearFields();
+        }
+
+        public void ClearFields()
+        {
+            textBox1.Text = "";
+            textBox2.Text = "";
+            textBox3.Text = "";
+            textBox4.Text = "";
+            textBox5.Text = "";
+            textBox6.Text = "";
+            pictureBox1.Image = null;
         }
     }
 }
