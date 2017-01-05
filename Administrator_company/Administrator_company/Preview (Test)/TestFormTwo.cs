@@ -244,5 +244,36 @@ namespace Administrator_company.Preview__Test_
         {
             FillDataGridView(textBoxSearch.Text);
         }
+
+        private void Find_Click(object sender, EventArgs e)
+        {
+            string query = " SELECT * FROM supermarket.info " +
+                           " WHERE id_info = @id ";
+            MySqlCommand command = new MySqlCommand(query, connection); //Создаём запрос для поиска
+            command.Parameters.Add("@id", MySqlDbType.UInt32).Value = textBox1.Text;
+
+            MySqlDataAdapter adapter = new MySqlDataAdapter(command); //Выполняем команду
+
+            //Для отображения в таблице
+            DataTable table = new DataTable(); //Создаём таблицу
+            adapter.Fill(table); //Вставляем данные при выполнении команды в таблицу
+            if (table.Rows.Count <= 0)
+            {
+                MessageBox.Show("Не найдено!");
+            }
+            else
+            {
+                textBox1.Text = table.Rows[0][0].ToString();
+                textBox2.Text = table.Rows[0][1].ToString();
+                textBox3.Text = table.Rows[0][2].ToString();
+                textBox4.Text = table.Rows[0][3].ToString();
+                textBox5.Text = table.Rows[0][4].ToString();
+                textBox6.Text = table.Rows[0][5].ToString();
+
+                byte[] img = (byte[])table.Rows[0][6];
+                MemoryStream ms = new MemoryStream(img);
+                pictureBox1.Image = Image.FromStream(ms);
+            }
+        }
     }
 }
