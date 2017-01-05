@@ -45,6 +45,8 @@
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.BTN_CHOOSE_IMAGE = new System.Windows.Forms.Button();
             this.Insert = new System.Windows.Forms.Button();
+            this.Update = new System.Windows.Forms.Button();
+            this.Delete = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -195,12 +197,34 @@
             this.Insert.UseVisualStyleBackColor = true;
             this.Insert.Click += new System.EventHandler(this.Insert_Click);
             // 
+            // Update
+            // 
+            this.Update.Location = new System.Drawing.Point(338, 135);
+            this.Update.Name = "Update";
+            this.Update.Size = new System.Drawing.Size(75, 23);
+            this.Update.TabIndex = 17;
+            this.Update.Text = "Update";
+            this.Update.UseVisualStyleBackColor = true;
+            this.Update.Click += new System.EventHandler(this.Update_Click);
+            // 
+            // Delete
+            // 
+            this.Delete.Location = new System.Drawing.Point(338, 173);
+            this.Delete.Name = "Delete";
+            this.Delete.Size = new System.Drawing.Size(75, 23);
+            this.Delete.TabIndex = 18;
+            this.Delete.Text = "Delete";
+            this.Delete.UseVisualStyleBackColor = true;
+            this.Delete.Click += new System.EventHandler(this.Delete_Click);
+            // 
             // TestFormTwo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(1101, 484);
+            this.Controls.Add(this.Delete);
+            this.Controls.Add(this.Update);
             this.Controls.Add(this.Insert);
             this.Controls.Add(this.BTN_CHOOSE_IMAGE);
             this.Controls.Add(this.pictureBox1);
@@ -247,5 +271,7 @@
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Button BTN_CHOOSE_IMAGE;
         private System.Windows.Forms.Button Insert;
+        private System.Windows.Forms.Button Update;
+        private System.Windows.Forms.Button Delete;
     }
 }
