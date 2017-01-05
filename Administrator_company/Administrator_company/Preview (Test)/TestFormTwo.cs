@@ -25,13 +25,34 @@ namespace Administrator_company.Preview__Test_
         //При загрузке отобразить таблицу
         private void TestFormTwo_Load(object sender, EventArgs e)
         {
-            FillDataGridView();
+            FillDataGridView("");
         }
 
         //Заполняем DataGridView и корректируем её
-        public void FillDataGridView()
+        public void FillDataGridView(string valueToSearch)
         {
-            MySqlCommand command = new MySqlCommand("SELECT * FROM supermarket.info", connection); //Создаём запрос для выполнения команды
+            //MySqlCommand command = new MySqlCommand("SELECT * FROM supermarket.info", connection); //Создаём запрос для выполнения команды
+            /*string query = " SELECT * FROM supermarket.info " +
+                           " WHERE CONCAT(id_info, full_name, passport_id, age, address, phone, photo) " +
+                           " LIKE '%"+valueToSearch+"%'";*/
+            string query = default(string);
+            uint valueNumber = 0;
+
+            if (valueToSearch != "" && uint.TryParse(valueToSearch, out valueNumber) == true)
+            {
+                if (valueNumber > 0)
+                    query = " SELECT * FROM supermarket.info " +
+                            " WHERE CONCAT(id_info, age) " +
+                            " LIKE '%" + valueNumber + "%'";
+            }
+            else
+            {
+               query =  " SELECT * FROM supermarket.info " +
+                        " WHERE CONCAT(id_info, full_name, passport_id, age, address, phone, photo) " +
+                        " LIKE '%" + valueToSearch + "%'";
+            }
+        
+            MySqlCommand command = new MySqlCommand(query, connection); //Создаём запрос для поиска
             MySqlDataAdapter adapter = new MySqlDataAdapter(command); //Выполняем команду
 
             /*//connection.Open(); //открыть соединение
@@ -167,6 +188,9 @@ namespace Administrator_company.Preview__Test_
             command.Parameters.Add("@phone", MySqlDbType.VarChar).Value = textBox6.Text;
             command.Parameters.Add("@photo", MySqlDbType.LongBlob).Value = img;
 
+            //для будущей функции
+            MySqlDbType[] mySqlDbTypes = { MySqlDbType.UInt32, MySqlDbType.VarChar };
+
             ExecuteQuery(command, "Данные успешно добавлены!");
         }
 
@@ -182,8 +206,8 @@ namespace Administrator_company.Preview__Test_
                 MessageBox.Show("Ошибка при выполнении запроса!");
             }
             connection.Close();
-
-            FillDataGridView();
+            //как выполнилась функция сразу обновить dataGridView
+            FillDataGridView("");
         }
 
         private void Update_Click(object sender, EventArgs e)
@@ -214,6 +238,11 @@ namespace Administrator_company.Preview__Test_
 
             ExecuteQuery(command, "Данные успешно удалены!");
 
+        }
+
+        private void textBoxSearch_TextChanged(object sender, EventArgs e)
+        {
+            FillDataGridView(textBoxSearch.Text);
         }
     }
 }
