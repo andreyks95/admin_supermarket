@@ -50,6 +50,7 @@
             this.textBoxSearch = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.Find = new System.Windows.Forms.Button();
+            this.Clear = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -192,7 +193,7 @@
             // 
             // Insert
             // 
-            this.Insert.Location = new System.Drawing.Point(338, 94);
+            this.Insert.Location = new System.Drawing.Point(338, 125);
             this.Insert.Name = "Insert";
             this.Insert.Size = new System.Drawing.Size(75, 23);
             this.Insert.TabIndex = 16;
@@ -202,7 +203,7 @@
             // 
             // Update
             // 
-            this.Update.Location = new System.Drawing.Point(338, 135);
+            this.Update.Location = new System.Drawing.Point(338, 168);
             this.Update.Name = "Update";
             this.Update.Size = new System.Drawing.Size(75, 23);
             this.Update.TabIndex = 17;
@@ -212,7 +213,7 @@
             // 
             // Delete
             // 
-            this.Delete.Location = new System.Drawing.Point(338, 173);
+            this.Delete.Location = new System.Drawing.Point(338, 213);
             this.Delete.Name = "Delete";
             this.Delete.Size = new System.Drawing.Size(75, 23);
             this.Delete.TabIndex = 18;
@@ -247,12 +248,23 @@
             this.Find.UseVisualStyleBackColor = true;
             this.Find.Click += new System.EventHandler(this.Find_Click);
             // 
+            // Clear
+            // 
+            this.Clear.Location = new System.Drawing.Point(338, 84);
+            this.Clear.Name = "Clear";
+            this.Clear.Size = new System.Drawing.Size(75, 23);
+            this.Clear.TabIndex = 22;
+            this.Clear.Text = "Clear";
+            this.Clear.UseVisualStyleBackColor = true;
+            this.Clear.Click += new System.EventHandler(this.Clear_Click);
+            // 
             // TestFormTwo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(1101, 484);
+            this.Controls.Add(this.Clear);
             this.Controls.Add(this.Find);
             this.Controls.Add(this.textBoxSearch);
             this.Controls.Add(this.label6);
@@ -309,5 +321,6 @@
         private System.Windows.Forms.TextBox textBoxSearch;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Button Find;
+        private System.Windows.Forms.Button Clear;
     }
 }
