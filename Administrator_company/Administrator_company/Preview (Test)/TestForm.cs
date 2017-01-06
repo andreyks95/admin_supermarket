@@ -60,8 +60,35 @@ namespace Administrator_company.Preview__Test_
                     comboBox1.Items.Add(reader.GetValue(1)); //Получаем все значения products.name
                 }
 
-                
+                connect.CloseConnection();
+
+
                 //для comboBox2
+                connect.OpenConnection();
+
+                selectQuery = "select trim(trailing ')'                    " +
+                              "    from trim(leading '('                  " +
+                              "    from trim(leading 'enum'               " +
+                              "    from column_type))) column_type        " +
+                              "    from information_schema.COLUMNS        " +
+                              "    where TABLE_SCHEMA = 'supermarket'     " +
+                              "    AND TABLE_NAME = 'products'            " +
+                              "    AND COLUMN_NAME = 'category';          ";
+                ;
+                connect.command = new MySqlCommand(selectQuery, connect.connection);
+
+                string enumCategory  = connect.command.ExecuteScalar().ToString(); //вид перечислений будет таким 'text','text2'
+                char delimiter = '\''; 
+                string[] substrings = enumCategory.Split(delimiter); //массив строк будет таким "text" "," "text2"
+                enumCategory = "";
+                foreach (var str in substrings)
+                    enumCategory += str; //объединяем массив в строку чтобы потом удалить , будет таким  "text,text2"
+                delimiter = ','; 
+                substrings = enumCategory.Split(delimiter); //массив строк будет таки "text" "text2"
+                foreach(var x in substrings)
+                    comboBox2.Items.Add(x); //Получаем все значения products.name
+
+                connect.CloseConnection();
 
             }
             catch (Exception ex)
