@@ -74,7 +74,6 @@ namespace Administrator_company.Preview__Test_
                               "    where TABLE_SCHEMA = 'supermarket'     " +
                               "    AND TABLE_NAME = 'products'            " +
                               "    AND COLUMN_NAME = 'category';          ";
-                ;
                 connect.command = new MySqlCommand(selectQuery, connect.connection);
 
                 string enumCategory  = connect.command.ExecuteScalar().ToString(); //вид перечислений будет таким 'text','text2'
@@ -89,6 +88,49 @@ namespace Administrator_company.Preview__Test_
                     comboBox2.Items.Add(x); //Получаем все значения products.name
 
                 connect.CloseConnection();
+
+                //для textBox8 и textBox9 получаем значения из ячеек
+
+                //НОВЫЙ СПОСОБ СДЕЛАТЬ ПОЛЕ CALCULATED
+                //БЫСТРЕЕ!!!
+                connect.OpenConnection();
+
+                selectQuery = " SELECT price_for_one            " +
+                              "   FROM supermarket.products     " +
+                              "   where id_products = 2;        ";
+                connect.command = new MySqlCommand(selectQuery, connect.connection);
+                var valueCell_1 = connect.command.ExecuteScalar();
+                textBox8.Text = valueCell_1.ToString();
+
+                selectQuery = " SELECT quantity             "+
+                              "   FROM supermarket.stock    "+
+                              "  WHERE id_stock = 1;        ";
+                connect.command = new MySqlCommand(selectQuery, connect.connection);
+                var valueCell_2 = connect.command.ExecuteScalar();
+                textBox9.Text = valueCell_2.ToString();
+
+                float v1 = Convert.ToSingle(valueCell_1),
+                    v2 = Convert.ToSingle(valueCell_2);
+
+                float result = v1 * v2;
+                label13.Text = result.ToString();
+
+                selectQuery = " UPDATE supermarket.stock AS T1 " +
+                              " SET T1.price = " + result.ToString() + " " +
+                              " WHERE T1.id_stock = 1;         ";
+                     
+                connect.command = new MySqlCommand(selectQuery, connect.connection);
+                connect.command.ExecuteScalar();
+                
+                selectQuery = " SELECT price            " +
+                              "  FROM supermarket.stock " +
+                              "  where id_stock = 1;    ";
+                connect.command = new MySqlCommand(selectQuery, connect.connection);
+                string valueShow = connect.command.ExecuteScalar().ToString();
+                label14.Text = valueShow;
+
+    
+
 
             }
             catch (Exception ex)
