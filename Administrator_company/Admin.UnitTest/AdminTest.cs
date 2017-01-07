@@ -265,6 +265,7 @@ namespace Admin.UnitTest
             //assert
             Assert.AreEqual(WaitResult.ToLower(), query.ToLower());
         }
+
         /*
         [TestMethod]
         public void GetSecondValue_ProductsAndPriceforone_notnullAndDoubleReturned()

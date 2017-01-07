@@ -87,6 +87,9 @@ namespace Administrator_company.Preview__Test_
                 foreach(var x in substrings)
                     comboBox2.Items.Add(x); //Получаем все значения products.name
 
+                
+
+
                 connect.CloseConnection();
 
                 //для textBox8 и textBox9 получаем значения из ячеек
@@ -129,7 +132,7 @@ namespace Administrator_company.Preview__Test_
                 string valueShow = connect.command.ExecuteScalar().ToString();
                 label14.Text = valueShow;
 
-    
+                
 
 
             }
@@ -143,6 +146,8 @@ namespace Administrator_company.Preview__Test_
         private void button1_Click(object sender, EventArgs e)
         {
             managerBase.Position = 0;
+            //присвоить label текущий выбранные текст в comboBox
+            label16.Text = comboBox2.SelectedItem.ToString();
         }
         //Следующий
         private void button2_Click(object sender, EventArgs e)
