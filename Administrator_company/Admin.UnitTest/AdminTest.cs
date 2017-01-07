@@ -1,5 +1,6 @@
 ﻿using Administrator_supermarket;
 using System;
+using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using MySql.Data.MySqlClient;
 
@@ -120,7 +121,7 @@ namespace Admin.UnitTest
         public void GetMaxIdTest()
         {
             //arrange
-            string nameDatabase = "sql7150982", //sql7150982 //grocery_supermarket_manager
+            string nameDatabase = "grocery_supermarket_manager", //sql7150982 //
                 nameTable = "stock",
                 nameField = "id_stock",
                 nameFunc = "max";
@@ -151,6 +152,118 @@ namespace Admin.UnitTest
             Assert.AreEqual(waitResult, result);
 
 
+        }
+
+        [TestMethod]
+        public void GetSetTestForExecuteScalar()
+        {
+            //arrange
+            string nameDatabase = "supermarket",
+                table = "products",
+                field = "price_for_one",
+                idField = "id_products",
+                id = "2",
+                WaitResult = " SELECT price_for_one" +
+                                " FROM supermarket.products" +
+                                " WHERE id_products = 2; ";
+
+            //act
+            Administrator_supermarket.Сalculations calc = new Administrator_supermarket.Сalculations();
+            string select = calc.GetSelectQuery(nameDatabase, table, field, idField, id);
+
+            //assert
+            Assert.AreEqual(WaitResult.ToLower(), select.ToLower());
+        }
+
+        [TestMethod]
+        public void GetSelectValueTest()
+        {
+            //arrange 
+            string query = " SELECT price_for_one" +
+                                " FROM supermarket.products" +
+                                " WHERE id_products = 2; ";
+            Single WaitResult = 9.45f;
+
+            //act
+            Connection connect = new Connection();
+            connect.OpenConnection();
+            Administrator_supermarket.Сalculations calc = new Administrator_supermarket.Сalculations();
+            Single result = calc.GetSelectValue(query);
+            connect.CloseConnection();
+
+            //assert
+            Assert.AreEqual(WaitResult, Convert.ToSingle(result));
+        }
+
+        [TestMethod]
+        public void GetAllSelectValuesTest()
+        {
+            //arrange
+            string nameDatabase = "supermarket";
+            string[] tables = new string[] {"products","products"},
+                idFields = new string[] {"id_products","id_products"},
+                ids = new string[] {"2","3"};
+            string[][] fields = new string[][]
+            {
+                new string[] {"price_for_one"},
+                new string[] {"price_for_one"},
+            };
+
+            List<float> WaitResult = new List<float>() { 9.45f, 95.45f };
+            float WaitSum = 9.45f + 95.45f;
+
+            //act
+            Connection connect = new Connection();
+            connect.OpenConnection();
+            Administrator_supermarket.Сalculations calc = new Administrator_supermarket.Сalculations();
+            List<float> result = calc.GetAllSelectValues( nameDatabase, tables, fields, idFields, ids);
+            connect.CloseConnection();
+            float sum = 0.0f;
+            foreach (var i in result)
+                sum += i;
+
+
+            //assert
+            Assert.AreEqual(WaitResult.GetType(), result.GetType());
+            Assert.AreEqual(WaitSum,sum);
+        }
+
+        [TestMethod]
+        public void GetCalcTest()
+        {
+            //arrange
+            List<float> data = new List<float>() { 9.45f, 95.45f, 1.45f};
+            string mathOperation = "/";
+            float WaitResult = 9.45f  / 95.45f / 1.45f;
+
+            //act
+            Administrator_supermarket.Сalculations calc = new Administrator_supermarket.Сalculations();
+            float result = calc.GetCalc(data, mathOperation);
+
+            //assert
+            Assert.AreEqual(WaitResult, result);
+        }
+
+        [TestMethod]
+        public void GetUpdateQueryTest()
+        {
+            //arrange
+            string nameDatabase = "supermarket",
+                   table = "stock",
+                   field = "price",
+                   idField = "id_stock",
+                   id = "1",
+                   WaitResult = " UPDATE supermarket.stock AS T1 " +
+                              " SET T1.price = 10 " +
+                              " WHERE T1.id_stock = 1; ";
+            float result = 10.0f;
+
+            //act
+            Administrator_supermarket.Сalculations calc = new Administrator_supermarket.Сalculations();
+            string query = calc.GetUpdateQuery(nameDatabase, table, field, idField, id, result);
+
+            //assert
+            Assert.AreEqual(WaitResult.ToLower(), query.ToLower());
         }
         /*
         [TestMethod]
