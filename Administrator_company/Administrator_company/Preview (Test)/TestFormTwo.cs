@@ -34,13 +34,13 @@ namespace Administrator_company.Preview__Test_
         public void FillDataGridView(string valueToSearch)
         {
             //MySqlCommand command = new MySqlCommand("SELECT * FROM supermarket.info", connection); //Создаём запрос для выполнения команды
-            string query = " SELECT * FROM supermarket.info " +
+            /*string query = " SELECT * FROM supermarket.info " +
                            " WHERE CONCAT(id_info, full_name, passport_id, age, address, phone, photo) " +
-                           " LIKE '%"+valueToSearch+"%'";
-           // string query = default(string);
+                           " LIKE '%"+valueToSearch+"%'";*/
+            string query = default(string);
             uint valueNumber = 0;
 
-           /* if (valueToSearch != "" && uint.TryParse(valueToSearch, out valueNumber) == true)
+            if (valueToSearch != "" && uint.TryParse(valueToSearch, out valueNumber) == true)
             {
                 if (valueNumber > 0)
                     query = " SELECT * FROM supermarket.info " +
@@ -49,10 +49,10 @@ namespace Administrator_company.Preview__Test_
             }
             else
             {
-               query =  " SELECT * FROM supermarket.info " +
+               query = " SELECT id_info AS 'id', full_name AS 'Имя', passport_id AS 'Серия и номер паспорта', age, address, phone, photo FROM supermarket.info " +
                         " WHERE CONCAT(id_info, full_name, passport_id, age, address, phone, photo) " +
                         " LIKE '%" + valueToSearch + "%'";
-            }*/
+            }
         
             MySqlCommand command = new MySqlCommand(query, connection); //Создаём запрос для поиска
             MySqlDataAdapter adapter = new MySqlDataAdapter(command); //Выполняем команду
