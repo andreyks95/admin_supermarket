@@ -313,8 +313,18 @@ namespace Administrator_supermarket
         #endregion
 
 
-        //Новая версия. Новые методы для просчёта значения в ячейке с использование ExecuteScalar
+        //Новая версия. Новые методы для получения значения из ячейки с использование ExecuteScalar
 
+        #region GetSelectQuery. Запрос для получения значения ячейки
+        /// <summary>
+        /// Получить запрос для выбора числового значения (и не только) из ячейки поля таблицы
+        /// </summary>
+        /// <param name="nameDatabase">Название базы данных</param>
+        /// <param name="table">Название таблицы</param>
+        /// <param name="field">Название поля таблицы</param>
+        /// <param name="idField">Название id поля таблицы, по котором будет осуществляться выборка</param>
+        /// <param name="id">id поля с которого нужно получить значение</param>
+        /// <returns>Запрос SELECT</returns>
         public string GetSelectQuery(string nameDatabase = "", string table =  "", string field = "", string idField = "", string id = "" )
         {
 
@@ -322,7 +332,14 @@ namespace Administrator_supermarket
                    " FROM " + nameDatabase + "." + table +
                    " WHERE " + idField + " = " + id + "; ";
         }
+        #endregion
 
+        #region GetSelectValue. Получить число с ячейки
+        /// <summary>
+        /// Получить числовое значение с ячейки  (с плавающей точкой) из запроса
+        /// </summary>
+        /// <param name="query">Запрос SELECT для получения значения из ячейки</param>
+        /// <returns>Вернуть значение ячейки (число с плавающей точкой)</returns>
         public float GetSelectValue(string query)
         {
             connect.OpenConnection();
@@ -341,15 +358,18 @@ namespace Administrator_supermarket
             }
 
         }
+        #endregion
 
-        /*//Запись двумерного массива
-        private string[][] fields = new string[][]
-        {
-            new string[]  { "one", "two"}, //fields current 0 Table table[0]
-            new string[] {"oneSecond","twoSecond","There"} //fields current  1 Table table[1]
-        };*/
-       
- 
+        #region GetAllSelectValues. Получить список List<float>  всех значений из нужных ячеек таблиц
+        /// <summary>
+        /// Получить числовове значение из всех выбранных ячеек полей таблиц 
+        /// </summary>
+        /// <param name="nameDatabase">Название базы данных</param>
+        /// <param name="tables">Массив таблиц с которых нужно получить значения</param>
+        /// <param name="fields">Двумерный массив полей таблиц в котороых содержаться необходимые значения</param>
+        /// <param name="idFields">Массив названия id полей таблиц</param>
+        /// <param name="ids">Номера id записей в таблице</param>
+        /// <returns>Получить float List список всех числовых значений необходимых нам ячеек из таблиц</returns>
         public List<float> GetAllSelectValues(string nameDatabase, string[] tables, string[][] fields, string[] idFields, string[] ids)
         {
             string query = default(string);
@@ -366,7 +386,15 @@ namespace Administrator_supermarket
                 }
             return values;
         }
+        #endregion
 
+        #region GetCalc Получить результат вычисления значений
+        /// <summary>
+        ///Получение результата вычисления из списка числовых значений
+        /// </summary>
+        /// <param name="values">Списко всех числовых значений</param>
+        /// <param name="mathOperation">Мат. операция</param>
+        /// <returns>Результат вычисления</returns>
         public float GetCalc(List<float> values, string mathOperation = "+")
         {
             float result = values.First();
@@ -403,7 +431,19 @@ namespace Administrator_supermarket
             }
             return result;
         }
+        #endregion
 
+        #region GetUpdateQuery. Получить update запрос для просчета значения в ячейке
+        /// <summary>
+        /// Update запрос для обновления данных (нового значения) в указанной ячейке таблицы
+        /// </summary>
+        /// <param name="nameDatabase">Название БД</param>
+        /// <param name="table">Название таблицы, где нужно применить запрос</param>
+        /// <param name="field">Поле таблицы, к которому относиться запрос</param>
+        /// <param name="idField">Название id поля табилцы</param>
+        /// <param name="id">Необходимая ячейка куда нужно вставить новое значение</param>
+        /// <param name="result">Числовое значение, результата вычисления</param>
+        /// <returns>Update запрос для вставки нового значения в ячейку</returns>
         public string GetUpdateQuery(string nameDatabase, string table, string field, string idField, string id,
             float result)
         {
@@ -412,6 +452,7 @@ namespace Administrator_supermarket
                               " WHERE T1." + idField + " = " + id + "; ";
             return updateQuery;
         }
+        #endregion
 
     }
 
