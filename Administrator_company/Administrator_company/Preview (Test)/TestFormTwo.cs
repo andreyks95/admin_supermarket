@@ -21,7 +21,7 @@ namespace Administrator_company.Preview__Test_
             InitializeComponent();
         }
 
-        DataTable table = new DataTable(); //Создаём таблицу
+       
         public MySqlConnection connection = new MySqlConnection("datasource=localhost; port=3306; username = root; password = andrey_1a6c2b");
         
         //При загрузке отобразить таблицу
@@ -34,13 +34,13 @@ namespace Administrator_company.Preview__Test_
         public void FillDataGridView(string valueToSearch)
         {
             //MySqlCommand command = new MySqlCommand("SELECT * FROM supermarket.info", connection); //Создаём запрос для выполнения команды
-            /*string query = " SELECT * FROM supermarket.info " +
+            string query = " SELECT * FROM supermarket.info " +
                            " WHERE CONCAT(id_info, full_name, passport_id, age, address, phone, photo) " +
-                           " LIKE '%"+valueToSearch+"%'";*/
-            string query = default(string);
+                           " LIKE '%"+valueToSearch+"%'";
+           // string query = default(string);
             uint valueNumber = 0;
 
-            if (valueToSearch != "" && uint.TryParse(valueToSearch, out valueNumber) == true)
+           /* if (valueToSearch != "" && uint.TryParse(valueToSearch, out valueNumber) == true)
             {
                 if (valueNumber > 0)
                     query = " SELECT * FROM supermarket.info " +
@@ -52,7 +52,7 @@ namespace Administrator_company.Preview__Test_
                query =  " SELECT * FROM supermarket.info " +
                         " WHERE CONCAT(id_info, full_name, passport_id, age, address, phone, photo) " +
                         " LIKE '%" + valueToSearch + "%'";
-            }
+            }*/
         
             MySqlCommand command = new MySqlCommand(query, connection); //Создаём запрос для поиска
             MySqlDataAdapter adapter = new MySqlDataAdapter(command); //Выполняем команду
@@ -62,10 +62,10 @@ namespace Administrator_company.Preview__Test_
             adapter.Fill(ds, "Table");//nameTable); //заполнить 
                                       //Подключение таблицы
             dataGridView1.DataSource = ds.Tables["Table"];*/
-        
+
 
             //Для отображения в таблице
-           
+            DataTable table = new DataTable(); //Создаём таблицу
             adapter.Fill(table); //Вставляем данные при выполнении команды в таблицу
 
             dataGridView1.RowTemplate.Height = 60; //высота строк
@@ -123,7 +123,7 @@ namespace Administrator_company.Preview__Test_
         }
 
         /// <summary>
-        /// Отображает из текущей ячейки строи DataGridView картинку в PicureBox
+        /// Отображает из текущей ячейки строки DataGridView картинку в PicureBox
         /// </summary>
         /// <param name="number">номер столбца (ячейки) DataGridView в котором содержиться картинка</param>
         /// <param name="pictureBox">pictureBox куда нужно вставить картинку</param>
