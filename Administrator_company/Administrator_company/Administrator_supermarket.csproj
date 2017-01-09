@@ -91,8 +91,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Checking.cs" />
-    <Compile Include="Connection.cs" />
+    <Compile Include="LogicProgram\Checking.cs" />
+    <Compile Include="LogicProgram\Connection.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -105,6 +105,33 @@
     <Compile Include="CodeForTable\TableAdministrator.Designer.cs">
       <DependentUpon>TableAdministrator.cs</DependentUpon>
     </Compile>
+    <Compile Include="LogicProgram\Queries.cs" />
+    <Compile Include="LogicProgram\ViewProgram.cs" />
+    <Compile Include="Preview %28Test%29\MainForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Preview %28Test%29\MainForm.Designer.cs">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Preview %28Test%29\Stock.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Preview %28Test%29\Stock.Designer.cs">
+      <DependentUpon>Stock.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Preview %28Test%29\TestForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Preview %28Test%29\TestForm.Designer.cs">
+      <DependentUpon>TestForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Preview %28Test%29\TestFormTwo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Preview %28Test%29\TestFormTwo.Designer.cs">
+      <DependentUpon>TestFormTwo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Preview %28Test%29\TestFunction.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="CodeForTable\TableDepartment.cs">
@@ -131,12 +158,24 @@
     <Compile Include="CodeForTable\TableStock.Designer.cs">
       <DependentUpon>TableStock.cs</DependentUpon>
     </Compile>
-    <Compile Include="Сalculations.cs" />
+    <Compile Include="LogicProgram\Сalculations.cs" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="CodeForTable\TableAdministrator.resx">
       <DependentUpon>TableAdministrator.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Preview %28Test%29\MainForm.resx">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Preview %28Test%29\Stock.resx">
+      <DependentUpon>Stock.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Preview %28Test%29\TestForm.resx">
+      <DependentUpon>TestForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Preview %28Test%29\TestFormTwo.resx">
+      <DependentUpon>TestFormTwo.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -186,6 +225,7 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

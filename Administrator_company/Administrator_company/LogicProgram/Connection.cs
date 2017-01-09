@@ -71,6 +71,39 @@ namespace Administrator_supermarket
         }
         #endregion
 
+        #region Методы для отображения таблицы
+
+        #region Отобразить выбранные поля в таблице
+        /// <summary>
+        /// Перегруженный методы, чтобы отобразить необходимые нам поля в таблице по запросу
+        /// </summary>
+        /// <param name="DataGridView">Где будем отображать таблицу</param>
+        /// <param name="query">Запрос в котором содержится что вывести</param>
+        /// <param name="nameTable">Название таблицы, которую будем выводить</param>
+        public void ShowTable( System.Windows.Forms.DataGridView DataGridView, string query)//, string nameTable)
+        {
+            //System.Windows.Forms.DataGridView DataGridView 
+            //Передаём в качестве параметра DataGridView из любых форм
+            //и можем использовать его методы
+            //например DataGridView.DataSource 
+            try
+            {
+                //выбрать все поля с таблицы БД
+                MySqlDataAdapter adapter = new MySqlDataAdapter(query, connection);
+                connection.Open(); //открыть соединение
+                DataSet ds = new DataSet(); //создать новый DataSet
+                adapter.Fill(ds, "Table");//nameTable); //заполнить 
+                //Подключение таблицы
+                DataGridView.DataSource = ds.Tables["Table"];
+                connection.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+        #endregion
+
         #region Отобразить таблицу 
         //Метод, который содержит запрос для отображения таблицы
         public void ShowTable(string nameDatabase, string nameTable, System.Windows.Forms.DataGridView DataGridView)
@@ -95,7 +128,9 @@ namespace Administrator_supermarket
                 MessageBox.Show(ex.Message);
             }
         }
+        #endregion
 
+        #region для Telerik WinForm
         //Перегруженный метод, для Telerik WinForm
         /*public void ShowTable(string nameDatabase, string nameTable, Telerik.WinControls.UI.RadGridView DataGridView)
         {
@@ -118,6 +153,8 @@ namespace Administrator_supermarket
                 MessageBox.Show(ex.Message);
             }
         }*/
+        #endregion
+
         #endregion
 
         #region Добавление (вставка) данных в таблицу 
@@ -223,26 +260,71 @@ namespace Administrator_supermarket
         {
             ExecuteQuery(updateQuery, false);
         }
+        #endregion
 
-      /*  //Метод который содержит обновления одного поля таблицы, то есть посчитать значения в ячейке. (статический использовался в качестве примера)
-        public void FieldDateTableCalculation()
+        /*  //Метод который содержит обновления одного поля таблицы, то есть посчитать значения в ячейке. (статический использовался в качестве примера)
+          public void FieldDateTableCalculation()
+          {
+
+              string updateQuery = "UPDATE grocery_supermarket_manager.stock AS T1, " +
+                                       " (SELECT price_for_one " +
+                                       " FROM grocery_supermarket_manager.products " +
+                                       " WHERE id_products = 1) AS T2, " +
+
+                                       " (SELECT quantity " +
+                                       " FROM grocery_supermarket_manager.stock " +
+                                       " WHERE id_stock = 1) AS T3 " +
+
+                                   " SET T1.price = T2.price_for_one * T3.quantity " +
+                                   " WHERE T1.id_stock = 1; ";
+              ExecuteQuery(updateQuery, false);
+          }
+          */
+
+
+        //Новые методы 
+
+
+        
+        //вытащить в отдельный функцию запрос с поиском 
+        //и наверное лучше применять эту разбитую функцию по кусочкам, там где она будет работать. 
+        //а не лепить всё сюда
+        //потому что, картинки могут быть и ненужны.
+        //а может даже и переписать её, тем самым удалить старую версию ShowTable, а вместо поставить эту и протестировать
+        //разница будет в Open and Close Connection
+        public void FillDataGridView(DataGridView dataGridView, string valueToSearh="")
         {
-  
-            string updateQuery = "UPDATE grocery_supermarket_manager.stock AS T1, " +
-                                     " (SELECT price_for_one " +
-                                     " FROM grocery_supermarket_manager.products " +
-                                     " WHERE id_products = 1) AS T2, " +
 
-                                     " (SELECT quantity " +
-                                     " FROM grocery_supermarket_manager.stock " +
-                                     " WHERE id_stock = 1) AS T3 " +
+             //string query = " SELECT * FROM supermarket.info " +
+              //              " WHERE CONCAT(id_info, full_name, passport_id, age, address, phone, photo) " +
+               //             " LIKE '%"+valueToSearch+"%'";
 
-                                 " SET T1.price = T2.price_for_one * T3.quantity " +
-                                 " WHERE T1.id_stock = 1; ";
-            ExecuteQuery(updateQuery, false);
-        }
-*/
+            string query = default(string),
+                value = valueToSearh;
+             uint valueNumber = 0;
+             if (value != "" && uint.TryParse(value, out valueNumber) == true)
+             {
+                 if (valueNumber > 0)
+                     query = " SELECT * FROM supermarket.info " +
+                             " WHERE CONCAT(id_info, age) " +
+                             " LIKE '%" + valueNumber + "%'";
+             }
+             else
+             {
+                 query = " SELECT id_info AS 'id', full_name AS 'Имя', passport_id AS 'Серия и номер паспорта', age, address, phone, photo FROM supermarket.info " +
+                          " WHERE CONCAT(id_info, full_name, passport_id, age, address, phone, photo) " +
+                          " LIKE '%" + value + "%'";
+             }
+
+             command = new MySqlCommand(query, connection); //Создаём запрос для поиска
+             MySqlDataAdapter adapter = new MySqlDataAdapter(command); //Выполняем команду
+
+             //Для отображения в таблице
+             DataTable table = new DataTable(); //Создаём таблицу
+             adapter.Fill(table); //Вставляем данные при выполнении команды в таблицу
+
+             dataGridView.DataSource = table; //подключаем заполненную таблицу и отображаем
+
+             }
     }
-    #endregion
-
 }
