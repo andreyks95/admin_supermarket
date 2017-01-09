@@ -106,6 +106,7 @@
       <DependentUpon>TableAdministrator.cs</DependentUpon>
     </Compile>
     <Compile Include="LogicProgram\Queries.cs" />
+    <Compile Include="LogicProgram\ViewProgram.cs" />
     <Compile Include="Preview %28Test%29\MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
