@@ -19,6 +19,8 @@ namespace Administrator_supermarket
         //для выполнения комманд в дальнейшем
         public MySqlCommand command;
 
+        public const string NAME_DATABASE = "supermarket";
+
         //Открыть соединение для работы с БД
         public void OpenConnection()
         {
@@ -292,7 +294,7 @@ namespace Administrator_supermarket
         //потому что, картинки могут быть и ненужны.
         //а может даже и переписать её, тем самым удалить старую версию ShowTable, а вместо поставить эту и протестировать
         //разница будет в Open and Close Connection
-        public void FillDataGridView(DataGridView dataGridView, string valueToSearh="")
+        public void FillDataGridView(DataGridView dataGridView, string query="")
         {
 
              //string query = " SELECT * FROM supermarket.info " +
@@ -305,26 +307,59 @@ namespace Administrator_supermarket
              if (value != "" && uint.TryParse(value, out valueNumber) == true)
              {
                  if (valueNumber > 0)
-                     query = " SELECT * FROM supermarket.info " +
+                     query = " SELECT * " +
+                             "FROM supermarket.info " +
                              " WHERE CONCAT(id_info, age) " +
                              " LIKE '%" + valueNumber + "%'";
              }
              else
              {
-                 query = " SELECT id_info AS 'id', full_name AS 'Имя', passport_id AS 'Серия и номер паспорта', age, address, phone, photo FROM supermarket.info " +
+                 query = " SELECT id_info AS 'id', full_name AS 'Имя', passport_id AS 'Серия и номер паспорта', age, address, phone, photo " +
+                         "FROM supermarket.info " +
                           " WHERE CONCAT(id_info, full_name, passport_id, age, address, phone, photo) " +
                           " LIKE '%" + value + "%'";
              }
 
              command = new MySqlCommand(query, connection); //Создаём запрос для поиска
              MySqlDataAdapter adapter = new MySqlDataAdapter(command); //Выполняем команду
-
              //Для отображения в таблице
              DataTable table = new DataTable(); //Создаём таблицу
              adapter.Fill(table); //Вставляем данные при выполнении команды в таблицу
-
              dataGridView.DataSource = table; //подключаем заполненную таблицу и отображаем
-
              }
+
+        //для этой функции написать тест
+        //учесть что может быть пустой массив nameNumericFields
+        public void GetQueryShowSearch(string nameTable, string[] nameFieldsAll,  string[] newNameFieldsAS, string[] nameNumericFields=null, string valueToSearh = "")
+        {
+            string query = "",
+                value = valueToSearh;
+            uint valueNumber = 0;
+
+            query = " SELECT * FROM supermarket.info " +
+        " WHERE CONCAT(id_info, age) " +
+        " LIKE '%" + valueNumber + "%'";
+        }
+
+        //и для этой тоже
+        //дописать  WHERE и like
+        public void GetQuerySearch(string nameTable, string[] nameFields, string[] newNameFieldsAS, string valueToSearh = "")
+        {
+            string select = " SELECT ",
+                   from  = " FROM ",
+            query = " SELECT id_info AS 'id', full_name AS 'Имя', passport_id AS 'Серия и номер паспорта', " +
+                    "age, address, phone, photo " +
+                    "FROM supermarket.info " +
+         " WHERE CONCAT(id_info, full_name, passport_id, age, address, phone, photo) " +
+         " LIKE '%" + value + "%'";
+
+            //сформировать часть запроса select
+            for(int i =0; i < nameFields.Length; i++)
+                select += " " + nameFields[i] + " AS " + "'" + newNameFieldsAS[i] + "'" + ", ";
+           select += select.Remove(select.Length - 2) + " ";
+
+           //сформировать часть запроса from
+            from += NAME_DATABASE + "." + nameTable;
+        }
     }
 }
