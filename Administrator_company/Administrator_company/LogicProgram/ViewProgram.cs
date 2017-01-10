@@ -19,5 +19,16 @@ namespace Administrator_supermarket
             imgCol = (DataGridViewImageColumn)dataGridView.Columns[numberColumn]; //номер ячейки, где будет отоброжаться изображение
             imgCol.ImageLayout = DataGridViewImageCellLayout.Stretch; //делает картинку пропорционально ячейке 
         }
+
+        public void GetAllViewImagesInCellTable(DataGridView dataGridView, int[] numberColumns)
+        {
+            foreach (var i in numberColumns)
+            {
+                //Для отображения картинки в DataGridView
+                DataGridViewImageColumn imgCol = new DataGridViewImageColumn();
+                imgCol = (DataGridViewImageColumn)dataGridView.Columns[i]; //номер ячейки, где будет отоброжаться изображение
+                imgCol.ImageLayout = DataGridViewImageCellLayout.Stretch; //делает картинку пропорционально ячейке 
+            }
+        }
     }
 }
