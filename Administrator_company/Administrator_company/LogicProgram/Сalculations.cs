@@ -402,27 +402,27 @@ namespace Administrator_supermarket
             {
                 case "+":
                 {
-                    for (int i = 0; i < values.Count; i++)
-                        result += values[++i];
+                    for (int i = 1; i < values.Count; i++)
+                        result += values[i];
                        break;
                  }
                 case "-":
                     {
-                        for (int i = 0; i < values.Count; i++)
-                            result -= values[++i];
+                        for (int i = 1; i < values.Count; i++)
+                            result -= values[i];
                         break;
                     }
                 case "*":
                     {
-                        for (int i = 0; i < values.Count; i++)
-                            result *= values[++i];
+                        for (int i = 1; i < values.Count; i++)
+                            result *= values[i];
                         break;
                     }
                 case "/":
                     {
-                        for (int i = 0; i < values.Count; i++)
+                        for (int i = 1; i < values.Count; i++)
                         { 
-                            if(++i == 0) { return result; }
+                            if(i == 0) { return result; }
                             result /= values[i];
                         }
                         break;
