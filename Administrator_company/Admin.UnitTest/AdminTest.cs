@@ -12,6 +12,29 @@ namespace Admin.UnitTest
     {
 
         [TestMethod]
+        public void GetQuerySearchTest()
+        {
+            //arrange
+            string nameDatabase = "supermarket",
+                nameTable = "info",
+                valueToSearch = "Краматорск";
+            string[] nameFields = {"id_info", "full_name", "passport_id", "age", "address", "phone", "photo"},
+                newNameFieldsAS = {"id", "Имя", "Серия и номер паспорта", "Возраст", "Адрес", "Телефон", "Фото"};
+
+            string WaitResult = " SELECT  id_info AS 'id', full_name AS 'Имя', passport_id AS 'Серия и номер паспорта', " +
+                                            "age AS 'Возраст', address AS 'Адрес', phone AS 'Телефон', photo AS 'photo' " +
+                                    " FROM supermarket.info" +
+                                    " WHERE CONCAT ( id_info, full_name, passport_id, age, address, phone, photo) " +
+                                    " LIKE '% Краматорск %'";
+            //act
+            Connection connection = new Connection();
+            string query = connection.GetQuerySearch(nameTable, nameFields, newNameFieldsAS, valueToSearch);
+
+            //assert
+            Assert.AreEqual(WaitResult.ToLower(), query.ToLower());
+        }
+
+        [TestMethod]
         public void GetSelectAllFieldTablesTest()
         {
             //arrange
