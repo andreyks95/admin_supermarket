@@ -294,7 +294,7 @@ namespace Administrator_supermarket
         //потому что, картинки могут быть и ненужны.
         //а может даже и переписать её, тем самым удалить старую версию ShowTable, а вместо поставить эту и протестировать
         //разница будет в Open and Close Connection
-        public void FillDataGridView(DataGridView dataGridView, string query="")
+       /* public void FillDataGridView(DataGridView dataGridView, string query="")
         {
 
              //string query = " SELECT * FROM supermarket.info " +
@@ -327,9 +327,10 @@ namespace Administrator_supermarket
              adapter.Fill(table); //Вставляем данные при выполнении команды в таблицу
              dataGridView.DataSource = table; //подключаем заполненную таблицу и отображаем
              }
-
+             */
         //для этой функции написать тест
         //учесть что может быть пустой массив nameNumericFields
+        //выбрать один из двох вариантов возвращения функции 
         public void GetQueryShowSearch(string nameTable, string[] nameFieldsAll,  string[] newNameFieldsAS, string[] nameNumericFields=null, string valueToSearh = "")
         {
             string query = "",
@@ -343,23 +344,34 @@ namespace Administrator_supermarket
 
         //и для этой тоже
         //дописать  WHERE и like
-        public void GetQuerySearch(string nameTable, string[] nameFields, string[] newNameFieldsAS, string valueToSearh = "")
+        public string GetQuerySearch(string nameTable, string[] nameFields, string[] newNameFieldsAS=null, string valueToSearh = "")
         {
             string select = " SELECT ",
-                   from  = " FROM ",
-            query = " SELECT id_info AS 'id', full_name AS 'Имя', passport_id AS 'Серия и номер паспорта', " +
-                    "age, address, phone, photo " +
-                    "FROM supermarket.info " +
-         " WHERE CONCAT(id_info, full_name, passport_id, age, address, phone, photo) " +
-         " LIKE '%" + value + "%'";
+                from = " FROM ",
+                where = " WHERE CONCAT (",
+                like = " LIKE ",
+                query = "";
 
             //сформировать часть запроса select
             for(int i =0; i < nameFields.Length; i++)
                 select += " " + nameFields[i] + " AS " + "'" + newNameFieldsAS[i] + "'" + ", ";
            select += select.Remove(select.Length - 2) + " ";
 
-           //сформировать часть запроса from
+            //сформировать часть запроса from
             from += NAME_DATABASE + "." + nameTable;
+
+            //сформировать часть запроса where 
+            for (int i = 0; i < nameFields.Length; i++)
+                where += " " + nameFields[i] + ", ";
+            where += select.Remove(select.Length - 2) + ") ";
+
+            //сформировать часть запроса
+            like += "'%" + valueToSearh + "%'";
+
+            //составляем полностью запрос
+            query += select + from + where + like;
+
+            return query;
         }
     }
 }
