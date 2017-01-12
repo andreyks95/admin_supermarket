@@ -353,17 +353,17 @@ namespace Administrator_supermarket
                 query = "";
 
             //сформировать часть запроса select
-            for(int i =0; i < nameFields.Length; i++)
+            for(int i =0; i < nameFields.GetLength(0); i++)
                 select += " " + nameFields[i] + " AS " + "'" + newNameFieldsAS[i] + "'" + ", ";
-           select += select.Remove(select.Length - 2) + " ";
+           select = select.Remove(select.Length - 2) + " ";
 
             //сформировать часть запроса from
             from += NAME_DATABASE + "." + nameTable;
 
             //сформировать часть запроса where 
-            for (int i = 0; i < nameFields.Length; i++)
+            for (int i = 0; i < nameFields.GetLength(0); i++)
                 where += " " + nameFields[i] + ", ";
-            where += select.Remove(select.Length - 2) + ") ";
+            where = where.Remove(where.Length - 2) + ") ";
 
             //сформировать часть запроса
             like += "'%" + valueToSearh + "%'";
