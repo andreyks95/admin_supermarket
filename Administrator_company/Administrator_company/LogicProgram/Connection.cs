@@ -286,71 +286,55 @@ namespace Administrator_supermarket
 
         //Новые методы 
 
-
-        
         //вытащить в отдельный функцию запрос с поиском 
         //и наверное лучше применять эту разбитую функцию по кусочкам, там где она будет работать. 
         //а не лепить всё сюда
         //потому что, картинки могут быть и ненужны.
         //а может даже и переписать её, тем самым удалить старую версию ShowTable, а вместо поставить эту и протестировать
         //разница будет в Open and Close Connection
-       /* public void FillDataGridView(DataGridView dataGridView, string query="")
+         public void FillDataGridView(DataGridView dataGridView, string query="")
+         {
+             try
+             {
+                 command = new MySqlCommand(query, connection); //Создаём запрос для поиска
+                 MySqlDataAdapter adapter = new MySqlDataAdapter(command); //Выполняем команду
+                 //Для отображения в таблице
+                 DataTable table = new DataTable(); //Создаём таблицу
+                 adapter.Fill(table); //Вставляем данные при выполнении команды в таблицу
+                 dataGridView.DataSource = table; //подключаем заполненную таблицу и отображаем
+             }
+             catch (Exception ex)
+             {
+                 MessageBox.Show(ex.Message);
+             }
+         }
+              
+        public string GetQueryShowSearch(string nameTable, string[] nameFieldsAll,  string[] newNameFieldsAS, string[] nameNumericFields=null, string valueToSearh = "")
         {
-
-             //string query = " SELECT * FROM supermarket.info " +
-              //              " WHERE CONCAT(id_info, full_name, passport_id, age, address, phone, photo) " +
-               //             " LIKE '%"+valueToSearch+"%'";
-
             string query = default(string),
-                value = valueToSearh;
-             uint valueNumber = 0;
-             if (value != "" && uint.TryParse(value, out valueNumber) == true)
-             {
-                 if (valueNumber > 0)
-                     query = " SELECT * " +
-                             "FROM supermarket.info " +
-                             " WHERE CONCAT(id_info, age) " +
-                             " LIKE '%" + valueNumber + "%'";
-             }
-             else
-             {
-                 query = " SELECT id_info AS 'id', full_name AS 'Имя', passport_id AS 'Серия и номер паспорта', age, address, phone, photo " +
-                         "FROM supermarket.info " +
-                          " WHERE CONCAT(id_info, full_name, passport_id, age, address, phone, photo) " +
-                          " LIKE '%" + value + "%'";
-             }
-
-             command = new MySqlCommand(query, connection); //Создаём запрос для поиска
-             MySqlDataAdapter adapter = new MySqlDataAdapter(command); //Выполняем команду
-             //Для отображения в таблице
-             DataTable table = new DataTable(); //Создаём таблицу
-             adapter.Fill(table); //Вставляем данные при выполнении команды в таблицу
-             dataGridView.DataSource = table; //подключаем заполненную таблицу и отображаем
-             }
-             */
-        //для этой функции написать тест
-        //учесть что может быть пустой массив nameNumericFields
-        //выбрать один из двох вариантов возвращения функции 
-        public void GetQueryShowSearch(string nameTable, string[] nameFieldsAll,  string[] newNameFieldsAS, string[] nameNumericFields=null, string valueToSearh = "")
-        {
-            string query = "",
                 value = valueToSearh;
             uint valueNumber = 0;
 
-            query = " SELECT * FROM supermarket.info " +
-        " WHERE CONCAT(id_info, age) " +
-        " LIKE '%" + valueNumber + "%'";
+                if (value != "" && uint.TryParse(value, out valueNumber) == true)
+                {
+                    if (valueNumber > 0 && nameNumericFields != null)
+                        query = GetQuerySearch(nameTable, nameFieldsAll, newNameFieldsAS, nameNumericFields, valueNumber.ToString());
+                }
+                else
+                    query = GetQuerySearch(nameTable, nameFieldsAll, newNameFieldsAS, valueToSearh: value);
+
+                return query;
         }
 
-        //и для этой тоже
-        //дописать  WHERE и like
-        public string GetQuerySearch(string nameTable, string[] nameFields, string[] newNameFieldsAS=null, string valueToSearh = "")
+
+        public string GetQuerySearch(string nameTable, string[] nameFields, string[] newNameFieldsAS, string[] nameNumericFields = null, string valueToSearh = "")
         {
             string select = " SELECT ",
                 from = " FROM ",
                 where = " WHERE CONCAT (",
                 like = " LIKE ",
                 query = "";
+
 
             //сформировать часть запроса select
             for(int i =0; i < nameFields.GetLength(0); i++)
@@ -360,10 +344,20 @@ namespace Administrator_supermarket
             //сформировать часть запроса from
             from += NAME_DATABASE + "." + nameTable;
 
-            //сформировать часть запроса where 
-            for (int i = 0; i < nameFields.GetLength(0); i++)
-                where += " " + nameFields[i] + ", ";
-            where = where.Remove(where.Length - 2) + ") ";
+            if (nameNumericFields != null)
+            {
+                //сформировать часть запроса where с полями в которых есть числовые значения
+                for (int i = 0; i < nameNumericFields.GetLength(0); i++)
+                    where += " " + nameNumericFields[i] + ", ";
+                where = where.Remove(where.Length - 2) + ") ";
+            }
+            else
+            {
+                //сформировать часть запроса where с со всеми полями
+                for (int i = 0; i < nameFields.GetLength(0); i++)
+                    where += " " + nameFields[i] + ", ";
+                where = where.Remove(where.Length - 2) + ") ";
+            }
 
             //сформировать часть запроса
             like += "'%" + valueToSearh + "%'";
@@ -372,6 +366,19 @@ namespace Administrator_supermarket
             query += select + from + where + like;
 
             return query;
+
+            //Примеры запроса:
+            //для полей которые содержат числовые значения
+                //   " SELECT id_info AS 'id', full_name AS 'Имя', passport_id AS 'Серия и номер паспорта', age, address, phone, photo " +
+                //   " FROM supermarket.info " +
+                //   " WHERE CONCAT(id_info, age) " +
+                //   " LIKE '%" + valueNumber + "%'";
+
+            //для всех остальных полей
+                // " SELECT id_info AS 'id', full_name AS 'Имя', passport_id AS 'Серия и номер паспорта', age, address, phone, photo " +
+                // " FROM supermarket.info " +
+                // " WHERE CONCAT(id_info, full_name, passport_id, age, address, phone, photo) " +
+                // " LIKE '%" + value + "%'";
         }
     }
 }

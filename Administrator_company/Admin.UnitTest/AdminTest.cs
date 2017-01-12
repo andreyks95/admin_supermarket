@@ -17,7 +17,7 @@ namespace Admin.UnitTest
             //arrange
             string nameDatabase = "supermarket",
                 nameTable = "info",
-                valueToSearch = "Краматорск";
+                value = "Краматорск";
             string[] nameFields = {"id_info", "full_name", "passport_id", "age", "address", "phone", "photo"},
                 newNameFieldsAS = {"id", "Имя", "Серия и номер паспорта", "Возраст", "Адрес", "Телефон", "Фото"};
 
@@ -28,7 +28,7 @@ namespace Admin.UnitTest
                                     " LIKE '%Краматорск%'";
             //act
             Connection connection = new Connection();
-            string query = connection.GetQuerySearch(nameTable, nameFields, newNameFieldsAS, valueToSearch);
+            string query = connection.GetQuerySearch(nameTable, nameFields, newNameFieldsAS, valueToSearh: value);
 
             //assert
             Assert.AreEqual(WaitResult.Length, query.Length);
