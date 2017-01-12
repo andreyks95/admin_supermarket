@@ -12,7 +12,7 @@ namespace Administrator_supermarket
             dataGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill; //Растягивать таблицу (колонки) под окно dataGridView
         }
 
-        public void GetViewImagesInCellTable(DataGridView dataGridView, int numberColumn)
+        public void GetViewImageInCellTable(DataGridView dataGridView, int numberColumn)
         {
             //Для отображения картинки в DataGridView
             DataGridViewImageColumn imgCol = new DataGridViewImageColumn();
