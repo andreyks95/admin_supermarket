@@ -286,13 +286,13 @@ namespace Administrator_supermarket
 
         //Новые методы 
 
-        //вытащить в отдельный функцию запрос с поиском 
-        //и наверное лучше применять эту разбитую функцию по кусочкам, там где она будет работать. 
-        //а не лепить всё сюда
-        //потому что, картинки могут быть и ненужны.
-        //а может даже и переписать её, тем самым удалить старую версию ShowTable, а вместо поставить эту и протестировать
-        //разница будет в Open and Close Connection
-         public void FillDataGridView(DataGridView dataGridView, string query="")
+        #region FillDataGridView. Отобразить таблицу с учётом поиска значения
+        /// <summary>
+        /// Отображает таблицу с учётом поиска значения (числового или строкового)
+        /// </summary>
+        /// <param name="dataGridView">текущий DataGridView для таблицы</param>
+        /// <param name="query">запрос, который содержит select с параметром поиска значения по столбцам (числовое или строковое)</param>
+        public void FillDataGridView(DataGridView dataGridView, string query="")
          {
              try
              {
@@ -308,25 +308,48 @@ namespace Administrator_supermarket
                  MessageBox.Show(ex.Message);
              }
          }
-              
+        #endregion
+
+        #region  GetQueryShowSearch. Получить запрос исходя из условия (числовых или строковых столбцов)
+        /// <summary>
+        /// Составляет запрос select в зависимости от условия, на которое влияет значения столбцов (с числовыми данными или строковы)
+        /// </summary>
+        /// <param name="nameTable">Название таблицы</param>
+        /// <param name="nameFieldsAll">Название столбцов для запроса</param>
+        /// <param name="newNameFieldsAS">Назвать столбцы как. Как они будут отображаться в таблице</param>
+        /// <param name="nameNumericFields">Название столбцов, которые содержат числовые значения</param>
+        /// <param name="valueToSearh">Значения для поиска</param>
+        /// <returns>Запрос SELECT</returns>
         public string GetQueryShowSearch(string nameTable, string[] nameFieldsAll,  string[] newNameFieldsAS, string[] nameNumericFields=null, string valueToSearh = "")
         {
-            string query = default(string),
-                value = valueToSearh;
+            string query = default(string), //для запроса
+                value = valueToSearh; //значение для поиска
             uint valueNumber = 0;
 
+                //если строковое значение поиска не пустое и числовое (можно попытаться с успехом превратить в число)
                 if (value != "" && uint.TryParse(value, out valueNumber) == true)
                 {
+                    //если искомое число больше нуля и есть числовые столбцы, где нужно отыскать это число
                     if (valueNumber > 0 && nameNumericFields != null)
-                        query = GetQuerySearch(nameTable, nameFieldsAll, newNameFieldsAS, nameNumericFields, valueNumber.ToString());
+                        query = GetQuerySearch(nameTable, nameFieldsAll, newNameFieldsAS, nameNumericFields, valueNumber.ToString()); //возвращаем запрос с учётом числовых полей
                 }
                 else
-                    query = GetQuerySearch(nameTable, nameFieldsAll, newNameFieldsAS, valueToSearh: value);
+                    query = GetQuerySearch(nameTable, nameFieldsAll, newNameFieldsAS, valueToSearh: value); //возвращаем запрос со всеми строковыми полями
 
                 return query;
         }
+        #endregion
 
-
+        #region GetQuerySearch. Получить Select запрос
+        /// <summary>
+        /// Составляет запрос select в зависимости от столбцов (с числовыми данными или без)
+        /// </summary>
+        /// <param name="nameTable">Название таблицы</param>
+        /// <param name="nameFields">Название столбцов для запроса</param>
+        /// <param name="newNameFieldsAS">Назвать столбцов как. Как они будут отображаться в таблице</param>
+        /// <param name="nameNumericFields">Название столбцов, которые содержат числовые значения</param>
+        /// <param name="valueToSearh">Значения для поиска</param>
+        /// <returns>Запрос SELECT</returns>
         public string GetQuerySearch(string nameTable, string[] nameFields, string[] newNameFieldsAS, string[] nameNumericFields = null, string valueToSearh = "")
         {
             string select = " SELECT ",
@@ -336,33 +359,34 @@ namespace Administrator_supermarket
                 query = "";
 
 
-            //сформировать часть запроса select
-            for(int i =0; i < nameFields.GetLength(0); i++)
-                select += " " + nameFields[i] + " AS " + "'" + newNameFieldsAS[i] + "'" + ", ";
-           select = select.Remove(select.Length - 2) + " ";
+            //сформировать часть запроса select со всех столбцов
+            for (int i =0; i < nameFields.GetLength(0); i++)
+                select += " " + nameFields[i] + " AS " + "'" + newNameFieldsAS[i] + "'" + ", "; //добавить "  price AS 'цена', "
+           select = select.Remove(select.Length - 2) + " "; //удалить перед from ", " 
 
             //сформировать часть запроса from
-            from += NAME_DATABASE + "." + nameTable;
+            from += NAME_DATABASE + "." + nameTable; //добавить " supermarket.stock"
 
+            //если есть столбцы в которых имеются числовые значения
             if (nameNumericFields != null)
             {
-                //сформировать часть запроса where с полями в которых есть числовые значения
+                //сформировать часть запроса where с столбцами в которых есть числовые значения
                 for (int i = 0; i < nameNumericFields.GetLength(0); i++)
-                    where += " " + nameNumericFields[i] + ", ";
-                where = where.Remove(where.Length - 2) + ") ";
+                    where += " " + nameNumericFields[i] + ", "; //добавить " id, price, "
+                where = where.Remove(where.Length - 2) + ") "; //удалить перед like ", " 
             }
             else
             {
-                //сформировать часть запроса where с со всеми полями
+                //сформировать часть запроса where со всеми столбцами
                 for (int i = 0; i < nameFields.GetLength(0); i++)
-                    where += " " + nameFields[i] + ", ";
-                where = where.Remove(where.Length - 2) + ") ";
+                    where += " " + nameFields[i] + ", ";  //добавить " name, address "
+                where = where.Remove(where.Length - 2) + ") ";  //удалить перед like ", " 
             }
 
             //сформировать часть запроса
-            like += "'%" + valueToSearh + "%'";
+            like += "'%" + valueToSearh + "%'"; //конец части запроса "'%краматорск%'"
 
-            //составляем полностью запрос
+            //составляем полностью запрос из частей
             query += select + from + where + like;
 
             return query;
@@ -380,5 +404,6 @@ namespace Administrator_supermarket
                 // " WHERE CONCAT(id_info, full_name, passport_id, age, address, phone, photo) " +
                 // " LIKE '%" + value + "%'";
         }
+        #endregion
     }
 }
