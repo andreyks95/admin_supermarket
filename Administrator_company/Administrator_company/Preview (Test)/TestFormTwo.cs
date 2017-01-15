@@ -177,6 +177,7 @@ namespace Administrator_company.Preview__Test_
             }
         }
 
+        //остановился здесь в класс Connection переместить
         private void Insert_Click(object sender, EventArgs e)
         {
             MemoryStream ms = new MemoryStream();
