@@ -414,7 +414,7 @@ namespace Administrator_supermarket
         /// <param name="FillDataGridView"></param>
         /// <param name="dataGridView">Текущая таблица на форме (DataGridView)</param>
         /// <param name="command">комманды которые нужно выполнить</param>
-        /// <param name = "query" > Запрос </ param >
+        /// <param name = "query" > Запрос</param >
        /// <param name = "showMessageBox" > Показать диалоговое сообщения или нет</param>
         public void ExecuteQuery(Action<DataGridView, string> FillDataGridView, DataGridView dataGridView, 
             MySqlCommand command,  string query = "", Boolean showMessageBox = true)
@@ -447,5 +447,7 @@ namespace Administrator_supermarket
             
         }
         #endregion
+
+
     }
 }
