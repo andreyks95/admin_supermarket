@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Drawing;
 using System.IO;
+using System.Reflection;
 using System.Windows.Forms;
+using MySql.Data.MySqlClient;
 
 namespace Administrator_supermarket
 {
@@ -209,5 +211,42 @@ namespace Administrator_supermarket
         #endregion
 
         #endregion
+
+        #region SaveImagesToBytes. Сохранить изображение в byte[] из pictureBox 
+        /// <summary>
+        /// Сохраняет Изображение которое есть в pictureBox в массив byte
+        /// </summary>
+        /// <param name="pictureBox">PictureBox с которого нужно выбрать изображение</param>
+        /// <returns>массив byte[]</returns>
+        public byte[] SaveImagesToBytes(PictureBox pictureBox)
+        {
+            MemoryStream ms = new MemoryStream();
+            pictureBox.Image.Save(ms, pictureBox.Image.RawFormat);
+            byte[] img = ms.ToArray();
+            return img;
+        }
+        #endregion
+
+        public void GetText(object obj)
+        {
+            if (typeof (object) == typeof (TextBox)) ;
+            TextBox textBox = new TextBox();
+            
+
+            //создаём свой тип
+            Type myType = obj.GetType();
+            //Присваиваем ему свойство если это textBox
+            PropertyInfo myPropertyInfo = myType.GetProperty("Text");
+            string text = myPropertyInfo.GetValue(obj).ToString(); 
+
+            MessageBox.Show(text);
+        }
+
+        public void AddParameters(MySqlCommand command, string[] values, MySqlDbType[] mySqlDbTypes, object[] valuesObjects)
+        {
+            for (int i = 0; i < values.Length; i++)
+                command.Parameters.Add(values[i], mySqlDbTypes[i]).Value = valuesObjects[i]; //GetText если есть текст, а остальное проверить
+        }
+
     }
 }
