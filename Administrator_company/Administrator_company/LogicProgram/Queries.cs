@@ -1,4 +1,11 @@
-﻿namespace Administrator_supermarket
+﻿using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Linq;
+using System.Windows.Forms;
+using MySql.Data.MySqlClient;
+
+namespace Administrator_supermarket
 {
     public class Queries
     {
@@ -132,7 +139,7 @@
     */
         #endregion
 
-
+        Connection connect = new Connection();
         //Старая версия. Методы для просчёта значения в ячейке с использованием "впайки" Запросов 
 
         #region Данные методы создают SELECT запрос(ы) только для значения в одной ТАБЛИЦЕ
