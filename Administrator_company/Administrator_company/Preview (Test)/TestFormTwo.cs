@@ -180,12 +180,18 @@ namespace Administrator_company.Preview__Test_
         //остановился здесь в класс Connection переместить
         private void Insert_Click(object sender, EventArgs e)
         {
+            //1-й этап
             MemoryStream ms = new MemoryStream();
             pictureBox1.Image.Save(ms,pictureBox1.Image.RawFormat);
             byte[] img = ms.ToArray();
+            
+            //2-й этап
             string query = "INSERT INTO supermarket.info (id_info, full_name, passport_id, age, address, phone, photo) " +
                            " VALUES(@id, @name, @passport, @age, @address, @phone, @photo)";
+
+            //3-й этап
             MySqlCommand command = new MySqlCommand(query,connection);
+
             command.Parameters.Add("@id",MySqlDbType.UInt32).Value = textBox1.Text;
             command.Parameters.Add("@name", MySqlDbType.VarChar).Value = textBox2.Text;
             command.Parameters.Add("@passport", MySqlDbType.VarChar).Value = textBox3.Text;
@@ -195,7 +201,12 @@ namespace Administrator_company.Preview__Test_
             command.Parameters.Add("@photo", MySqlDbType.LongBlob).Value = img;
 
             //для будущей функции
-            MySqlDbType[] mySqlDbTypes = { MySqlDbType.UInt32, MySqlDbType.VarChar };
+            //для типов
+            MySqlDbType[] mySqlDbTypes = { MySqlDbType.UInt32, MySqlDbType.VarChar, MySqlDbType.MediumText, MySqlDbType.LongBlob };
+            //для переменных
+            string[] value = {"@id", "@name"};
+            //для объектов
+            object values = new {textBox1, textBox2, textBox3, textBox4, img};
 
             ExecuteQuery(command, "Данные успешно добавлены!");
         }
