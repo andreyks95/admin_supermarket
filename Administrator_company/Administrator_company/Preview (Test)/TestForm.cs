@@ -61,7 +61,7 @@ namespace Administrator_company.Preview__Test_
                 }
 
                 connect.CloseConnection();
-
+                
 
                 //для comboBox2
                 connect.OpenConnection();
@@ -165,6 +165,10 @@ namespace Administrator_company.Preview__Test_
             managerBase.Position = managerBase.Count;
         }
 
-
+        private void button5_Click(object sender, EventArgs e)
+        {
+            Settings set = new Settings();
+            set.GetText(textBox10);
+        }
     }
 }
