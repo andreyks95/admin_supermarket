@@ -291,7 +291,8 @@ namespace Administrator_supermarket
         /// Отображает таблицу с учётом поиска значения (числового или строкового)
         /// </summary>
         /// <param name="dataGridView">текущий DataGridView для таблицы</param>
-        /// <param name="query">запрос, который содержит select с параметром поиска значения по столбцам (числовое или строковое)</param>
+        /// <param name="query">запрос, который содержит select с параметром поиска значения по столбцам (числовое или строковое)
+        /// Если нету, то просто отображаем таблицу</param>
         public void FillDataGridView(DataGridView dataGridView, string query="")
          {
              try
@@ -403,6 +404,47 @@ namespace Administrator_supermarket
                 // " FROM supermarket.info " +
                 // " WHERE CONCAT(id_info, full_name, passport_id, age, address, phone, photo) " +
                 // " LIKE '%" + value + "%'";
+        }
+        #endregion
+
+        #region ExecuteQuery - Перегруженный. Попытка выполнить запрос
+        /// <summary>
+        /// Попытаться добавить (выполнить) необходимый нам запрос
+        /// </summary>
+        /// <param name="FillDataGridView"></param>
+        /// <param name="dataGridView">Текущая таблица на форме (DataGridView)</param>
+        /// <param name="command">комманды которые нужно выполнить</param>
+        /// <param name = "query" > Запрос </ param >
+       /// <param name = "showMessageBox" > Показать диалоговое сообщения или нет</param>
+        public void ExecuteQuery(Action<DataGridView, string> FillDataGridView, DataGridView dataGridView, 
+            MySqlCommand command,  string query = "", Boolean showMessageBox = true)
+        {
+            try
+            {
+                connection.Open();
+                if (command.ExecuteNonQuery() == 1)
+                {
+                    if (showMessageBox == true)
+                        MessageBox.Show("Запрос успешно выполнен");
+                }
+                else
+                {
+                    if (showMessageBox == true)
+                        MessageBox.Show("Запрос не выполнен");
+                }
+                //как выполнилась функция сразу обновить dataGridView
+                FillDataGridView(dataGridView, query);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            finally
+            {
+                connection.Close();
+            }
+            
+            
         }
         #endregion
     }
