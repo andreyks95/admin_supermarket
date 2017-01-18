@@ -1,4 +1,5 @@
 ﻿using System;
+using System.CodeDom;
 using System.Drawing;
 using System.IO;
 using System.Reflection;
@@ -227,9 +228,13 @@ namespace Administrator_supermarket
         }
         #endregion
 
-
-        //возвращает текст из comboBox или textBox
-        //можно передать просто textBox или comboBox а дальше в свойствах он выбирет тип.
+        #region GetText. Получить текущий текст из TextBox, ComboBox
+        /// <summary>
+        /// возвращает текущий текст из comboBox или textBox
+        /// можно передать просто textBox или comboBox, а дальше из свойства объекта он вернёт текущий текст 
+        /// </summary>
+        /// <param name="obj">Объект который передаётся для выбора текста из его свойства</param>
+        /// <returns>Текущий текст объекта</returns>
         public string GetText(object obj)
         {
             string text = null;
@@ -253,22 +258,30 @@ namespace Administrator_supermarket
             
                 return text;
         }
+        #endregion
 
-
-        //сделать здесь или для текстовых значений (числа, текст, большой текст) или для бинарных (byte, longblob)
-        //НЕ возвращать command потому что добавлены объекты
-        public void AddParameters(MySqlCommand command, string[] values, MySqlDbType[] mySqlDbTypes,
-            object[] valuesObjects)
+        #region AddParameters. Выполняем добавление команды (записи) Parameters.Add в MySqlCommand
+        /// <summary>
+        /// Выполняем добавление команды (записи) Parameters.Add в MySqlCommand
+        /// </summary>
+        /// <param name="command">текущая MySqlCommand готова к выполнению</param>
+        /// <param name="variables">Переменные для добавление записи в таблицу</param>
+        /// <param name="mySqlDbTypes">Массив MySqlDbType MediumText, LongBlob, UInt32, VarChar</param>
+        /// <param name="objects">Объекты TextBox, ComboBox, byte[]</param>
+        public void AddParameters(MySqlCommand command, string[] variables, MySqlDbType[] mySqlDbTypes,
+            object[] objects)
         {
-            for (int i = 0; i < values.Length; i++)
+            //для всех переменных
+            for (int i = 0; i < variables.Length; i++)
             { 
-                if (valuesObjects[i] is ComboBox || valuesObjects[i] is TextBox)
-                    command.Parameters.Add(values[i], mySqlDbTypes[i]).Value = GetText(valuesObjects[i]); //GetText если есть текст, а остальное проверить
+                //если объект является ComboBox или TextBox
+                if (objects[i] is ComboBox || objects[i] is TextBox)
+                    command.Parameters.Add(variables[i], mySqlDbTypes[i]).Value = GetText(objects[i]); //GetText если есть текст в объектах
                 else
-                    command.Parameters.Add(values[i], mySqlDbTypes[i]).Value = valuesObjects[i];              
+                    command.Parameters.Add(variables[i], mySqlDbTypes[i]).Value = objects[i]; //Для других объектов           
             }
-    }
-
+        }
+        #endregion
 
     }
 }
