@@ -62,6 +62,7 @@
             this.label16 = new System.Windows.Forms.Label();
             this.textBox10 = new System.Windows.Forms.TextBox();
             this.button5 = new System.Windows.Forms.Button();
+            this.label17 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -355,11 +356,20 @@
             this.button5.UseVisualStyleBackColor = true;
             this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
+            // label17
+            // 
+            this.label17.Location = new System.Drawing.Point(411, 43);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(176, 28);
+            this.label17.TabIndex = 34;
+            this.label17.Text = "void";
+            // 
             // TestForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1162, 497);
+            this.Controls.Add(this.label17);
             this.Controls.Add(this.button5);
             this.Controls.Add(this.textBox10);
             this.Controls.Add(this.label16);
@@ -439,5 +449,6 @@
         private System.Windows.Forms.Label label16;
         private System.Windows.Forms.TextBox textBox10;
         private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.Label label17;
     }
 }

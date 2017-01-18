@@ -146,8 +146,7 @@ namespace Administrator_company.Preview__Test_
         private void button1_Click(object sender, EventArgs e)
         {
             managerBase.Position = 0;
-            //присвоить label текущий выбранные текст в comboBox
-            label16.Text = comboBox2.SelectedItem.ToString();
+
         }
         //Следующий
         private void button2_Click(object sender, EventArgs e)
@@ -168,7 +167,13 @@ namespace Administrator_company.Preview__Test_
         private void button5_Click(object sender, EventArgs e)
         {
             Settings set = new Settings();
-            set.GetText(textBox10);
+            //set.GetText(textBox10);
+
+            
+            //присвоить label текущий выбранные текст в comboBox
+            //использовать try catch если пользователь выбрал
+            //label16.Text = comboBox2.SelectedItem.ToString();
+            //label17.Text = comboBox2.SelectedText.ToString();
         }
     }
 }
