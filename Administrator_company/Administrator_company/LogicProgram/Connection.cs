@@ -448,6 +448,40 @@ namespace Administrator_supermarket
         }
         #endregion
 
+        #region GetQueryInsert. Получить Insert запрос
+        /// <summary>
+        /// Получить запрос Insert
+        /// </summary>
+        /// <param name="nameTable">Название таблицы</param>
+        /// <param name="fields">Массив полей таблицы</param>
+        /// <param name="variables">Переменные для вставки значений</param>
+        /// <returns>Query Insert</returns>
+        public string GetQueryInsert(string nameTable, string[] fields, string[] variables)
+        {
+            string query;
+
+            //Example: INSERT INTO supermarket.info
+            query = "ISERT INTO " + NAME_DATABASE + "." + nameTable + " (";
+
+            //Example: ( id_info, full_name, passport_id, age, address, phone, photo) 
+            for (int i = 0; i < fields.Length; i++)
+            {
+                query += " " + fields[i] + ", ";
+            }
+            query = query.Remove(query.Length - 2) + ") "; //удалить перед VALUES ", " 
+
+            //Example: VALUES(@id, @name, @passport, @age, @address, @phone, @photo)
+            query += " VALUES (";
+            
+            for (int i = 0; i < variables.Length; i++)
+            {
+                query += " " + variables[i] + ", ";
+            }
+            query = query.Remove(query.Length - 2) + ") ";
+
+            return query;
+        }
+        #endregion
 
     }
 }
