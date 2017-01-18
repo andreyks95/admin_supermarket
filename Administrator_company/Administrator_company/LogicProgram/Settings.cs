@@ -1,5 +1,6 @@
 ﻿using System;
 using System.CodeDom;
+using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Reflection;
@@ -228,6 +229,28 @@ namespace Administrator_supermarket
         }
         #endregion
 
+
+        public void InsertTextInTextBoxFromTable(DataTable table, int[] rows, params TextBox[] textBoxs)
+        {
+            for(int i=0; i< textBoxs.Length; i++)
+                textBoxs[i].Text = table.Rows[0][i].ToString();
+        }
+
+        public void InsertTextInComboBoxFromTable(DataTable table, int[] rows, params ComboBox[] comboBoxs)
+        {
+            for (int i = 0; i < comboBoxs.Length; i++)
+                comboBoxs[i].SelectedItem = table.Rows[0][i].ToString();
+        }
+
+        public void InsertImageInPictureBoxFromTable(DataTable table, int[] rows, params PictureBox[] pictureBoxs)
+        {
+            for (int i = 0; i < pictureBoxs.Length; i++)
+            {
+                byte[] img = (byte[]) table.Rows[0][i];
+                MemoryStream ms = new MemoryStream(img);
+                pictureBoxs[i].Image = Image.FromStream(ms);
+            }
+        }
 
     }
 }
