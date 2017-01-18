@@ -177,7 +177,7 @@ namespace Administrator_company.Preview__Test_
             }
         }
 
-        //остановился здесь в класс Connection переместить
+        
         private void Insert_Click(object sender, EventArgs e)
         {
             //1-й этап
@@ -248,6 +248,7 @@ namespace Administrator_company.Preview__Test_
             ExecuteQuery(command, "Данные успешно обновлены!");
         }
 
+
         private void Delete_Click(object sender, EventArgs e)
         {
             string query = "DELETE FROM supermarket.info WHERE id_info = @id";
@@ -284,6 +285,7 @@ namespace Administrator_company.Preview__Test_
             }
             else
             {
+                //не нужно 
                 textBox1.Text = table.Rows[0][0].ToString();
                 textBox2.Text = table.Rows[0][1].ToString();
                 textBox3.Text = table.Rows[0][2].ToString();
@@ -302,6 +304,7 @@ namespace Administrator_company.Preview__Test_
             ClearFields();
         }
 
+        //написать общую
         public void ClearFields()
         {
             textBox1.Text = "";
