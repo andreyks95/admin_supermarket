@@ -228,60 +228,6 @@ namespace Administrator_supermarket
         }
         #endregion
 
-        #region GetText. Получить текущий текст из TextBox, ComboBox
-        /// <summary>
-        /// возвращает текущий текст из comboBox или textBox
-        /// можно передать просто textBox или comboBox, а дальше из свойства объекта он вернёт текущий текст 
-        /// </summary>
-        /// <param name="obj">Объект который передаётся для выбора текста из его свойства</param>
-        /// <returns>Текущий текст объекта</returns>
-        public string GetText(object obj)
-        {
-            string text = null;
-            Type currentType; //создаём  тип
-            PropertyInfo property; //создаём свойство
-
-            if (obj is TextBox)
-            {
-               currentType = obj.GetType(); //получаем тип
-                property = currentType.GetProperty("Text");//Присваиваем ему свойство Text, если это textBox. Получить свойство text из этого типа                                            
-                text = property.GetValue(obj).ToString(); //в свойстве получить значение объекта
-            }
-            else if (obj is ComboBox)
-            {
-                currentType = obj.GetType(); //получаем тип
-                property = currentType.GetProperty("SelectedItem");//Присваиваем ему свойство SelectedItem, если это ComboBox. Получить свойство SelectedItem из этого типа                                            
-                text = property.GetValue(obj).ToString(); //в свойстве получить значение объекта
-            }
-            else
-                text = "";
-            
-                return text;
-        }
-        #endregion
-
-        #region AddParameters. Выполняем добавление команды (записи) Parameters.Add в MySqlCommand
-        /// <summary>
-        /// Выполняем добавление команды (записи) Parameters.Add в MySqlCommand
-        /// </summary>
-        /// <param name="command">текущая MySqlCommand готова к выполнению</param>
-        /// <param name="variables">Переменные для добавление записи в таблицу</param>
-        /// <param name="mySqlDbTypes">Массив MySqlDbType MediumText, LongBlob, UInt32, VarChar</param>
-        /// <param name="objects">Объекты TextBox, ComboBox, byte[]</param>
-        public void AddParameters(MySqlCommand command, string[] variables, MySqlDbType[] mySqlDbTypes,
-            object[] objects)
-        {
-            //для всех переменных
-            for (int i = 0; i < variables.Length; i++)
-            { 
-                //если объект является ComboBox или TextBox
-                if (objects[i] is ComboBox || objects[i] is TextBox)
-                    command.Parameters.Add(variables[i], mySqlDbTypes[i]).Value = GetText(objects[i]); //GetText если есть текст в объектах
-                else
-                    command.Parameters.Add(variables[i], mySqlDbTypes[i]).Value = objects[i]; //Для других объектов           
-            }
-        }
-        #endregion
 
     }
 }
