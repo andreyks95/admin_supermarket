@@ -232,6 +232,7 @@ namespace Administrator_company.Preview__Test_
             MemoryStream ms = new MemoryStream();
             pictureBox1.Image.Save(ms, pictureBox1.Image.RawFormat);
             byte[] img = ms.ToArray();
+            //сделать только это
             string query = "UPDATE supermarket.info " +
                            "SET full_name = @name, passport_id = @passport, age = @age, address = @address, phone = @phone, photo = @photo" +
                            " WHERE id_info = @id";
