@@ -227,26 +227,48 @@ namespace Administrator_supermarket
         }
         #endregion
 
-        public void GetText(object obj)
+
+        //возвращает текст из comboBox или textBox
+        //можно передать просто textBox или comboBox а дальше в свойствах он выбирет тип.
+        public string GetText(object obj)
         {
-            if (typeof (object) == typeof (TextBox)) ;
-            TextBox textBox = new TextBox();
+            string text = null;
+            Type currentType; //создаём  тип
+            PropertyInfo property; //создаём свойство
+
+            if (obj is TextBox)
+            {
+               currentType = obj.GetType(); //получаем тип
+                property = currentType.GetProperty("Text");//Присваиваем ему свойство Text, если это textBox. Получить свойство text из этого типа                                            
+                text = property.GetValue(obj).ToString(); //в свойстве получить значение объекта
+            }
+            else if (obj is ComboBox)
+            {
+                currentType = obj.GetType(); //получаем тип
+                property = currentType.GetProperty("SelectedItem");//Присваиваем ему свойство SelectedItem, если это ComboBox. Получить свойство SelectedItem из этого типа                                            
+                text = property.GetValue(obj).ToString(); //в свойстве получить значение объекта
+            }
+            else
+                text = "";
             
-
-            //создаём свой тип
-            Type myType = obj.GetType();
-            //Присваиваем ему свойство если это textBox
-            PropertyInfo myPropertyInfo = myType.GetProperty("Text");
-            string text = myPropertyInfo.GetValue(obj).ToString(); 
-
-            MessageBox.Show(text);
+                return text;
         }
 
-        public void AddParameters(MySqlCommand command, string[] values, MySqlDbType[] mySqlDbTypes, object[] valuesObjects)
+
+        //сделать здесь или для текстовых значений (числа, текст, большой текст) или для бинарных (byte, longblob)
+        //НЕ возвращать command потому что добавлены объекты
+        public void AddParameters(MySqlCommand command, string[] values, MySqlDbType[] mySqlDbTypes,
+            object[] valuesObjects)
         {
             for (int i = 0; i < values.Length; i++)
-                command.Parameters.Add(values[i], mySqlDbTypes[i]).Value = valuesObjects[i]; //GetText если есть текст, а остальное проверить
-        }
+            { 
+                if (valuesObjects[i] is ComboBox || valuesObjects[i] is TextBox)
+                    command.Parameters.Add(values[i], mySqlDbTypes[i]).Value = GetText(valuesObjects[i]); //GetText если есть текст, а остальное проверить
+                else
+                    command.Parameters.Add(values[i], mySqlDbTypes[i]).Value = valuesObjects[i];              
+            }
+    }
+
 
     }
 }
