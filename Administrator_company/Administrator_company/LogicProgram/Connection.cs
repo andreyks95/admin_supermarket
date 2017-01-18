@@ -483,5 +483,45 @@ namespace Administrator_supermarket
         }
         #endregion
 
+        #region GetQueryUpdate. Получить Update запрос
+        /// <summary>
+        /// Получить запрос Update
+        /// </summary>
+        /// <param name="nameTable">Название таблицы</param>
+        /// <param name="fields">Массив полей таблицы</param>
+        /// <param name="variables">Переменные для вставки значений</param>
+        /// <param name="id_field">id поле таблицы</param>
+        /// <returns>Query Update</returns>
+        public string GetQueryUpdate(string nameTable, string[] fields, string[] variables, string id_field)
+        {
+            string query;
+            //Example: "UPDATE supermarket.info " 
+            query = "UPDATE " + NAME_DATABASE + "." + nameTable + " ";
+            query += " SET ";
+            //Exmample:   "SET full_name = @name, passport_id = @passport, age = @age, address = @address, phone = @phone, photo = @photo"
+            for (int i = 0; i < fields.Length; i++)
+            {
+                query += " " + fields[i] + " = " + variables[i] + ", ";
+            }
+            query = query.Remove(query.Length - 2) + " "; //удалить перед WHERE ", "
+            //Example: " WHERE id_info = @id"
+            query += " WHERE ";
+            query += " " + id_field + " = @id";
+            return query;
+        }
+        #endregion
+
+        #region GetQueryDelete. Получить Delete запрос
+        /// <summary>
+        /// Получить Delete запрос
+        /// </summary>
+        /// <param name="nameTable">Название таблицы</param>
+        /// <param name="id_field">id поле таблицы</param>
+        /// <returns>Query Delete</returns>
+        public string GetQueryDelete(string nameTable, string id_field)
+        {
+            return "DELETE FROM " + NAME_DATABASE + "." + nameTable + " WHERE " + id_field + " = @id";  
+        }
+        #endregion
     }
 }
