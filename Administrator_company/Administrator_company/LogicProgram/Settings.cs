@@ -233,24 +233,41 @@ namespace Administrator_supermarket
         public void InsertTextInTextBoxFromTable(DataTable table, int[] rows, params TextBox[] textBoxs)
         {
             for(int i=0; i< textBoxs.Length; i++)
-                textBoxs[i].Text = table.Rows[0][i].ToString();
+                textBoxs[i].Text = table.Rows[0][rows[i]].ToString();
         }
 
         public void InsertTextInComboBoxFromTable(DataTable table, int[] rows, params ComboBox[] comboBoxs)
         {
             for (int i = 0; i < comboBoxs.Length; i++)
-                comboBoxs[i].SelectedItem = table.Rows[0][i].ToString();
+                comboBoxs[i].SelectedItem = table.Rows[0][rows[i]].ToString();
         }
 
         public void InsertImageInPictureBoxFromTable(DataTable table, int[] rows, params PictureBox[] pictureBoxs)
         {
             for (int i = 0; i < pictureBoxs.Length; i++)
             {
-                byte[] img = (byte[]) table.Rows[0][i];
+                byte[] img = (byte[]) table.Rows[0][rows[i]];
                 MemoryStream ms = new MemoryStream(img);
                 pictureBoxs[i].Image = Image.FromStream(ms);
             }
         }
 
+        public void ClearFields(TextBox[] textBoxs=null, ComboBox[] comboBoxs=null, PictureBox[] pictureBoxs=null)
+        {
+            //для textBox-ов
+            if(textBoxs != null)
+                foreach (var i in textBoxs)
+                    i.Text = "";
+
+            //для comboBox-ов
+            if(comboBoxs != null)
+                foreach (var i in comboBoxs)
+                    i.SelectedItem = "";
+                    
+            //для pictureBox-ов
+            if(pictureBoxs != null)
+                foreach (var i in pictureBoxs)
+                    i.Image = null;
+        }
     }
 }
