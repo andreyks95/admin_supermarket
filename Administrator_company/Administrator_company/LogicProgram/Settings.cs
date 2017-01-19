@@ -229,19 +229,41 @@ namespace Administrator_supermarket
         }
         #endregion
 
-
+        #region InsertTextInTextBoxFromTable. Вставить текст из таблицы в TextBox
+        /// <summary>
+        /// Вставляет текущий найденный текст из таблицы в TextBox
+        /// </summary>
+        /// <param name="table">Текущая таблица</param>
+        /// <param name="rows">Номера строк где находятся текст</param>
+        /// <param name="textBoxs">Все TextBox формы куда нужно вставить текст из таблицы</param>
         public void InsertTextInTextBoxFromTable(DataTable table, int[] rows, params TextBox[] textBoxs)
         {
             for(int i=0; i< textBoxs.Length; i++)
                 textBoxs[i].Text = table.Rows[0][rows[i]].ToString();
         }
+        #endregion
 
+        #region InsertTextInComboBoxFromTable. Вставить текст из таблицы в ComboBox
+        /// <summary>
+        /// Вставляет текущий найденный текст из таблицы в ComboBox
+        /// </summary>
+        /// <param name="table">Текущая таблица</param>
+        /// <param name="rows">Номера строк где находятся текст</param>
+        /// <param name="comboBoxs">Все ComboBox формы куда нужно вставить текст из таблицы</param>
         public void InsertTextInComboBoxFromTable(DataTable table, int[] rows, params ComboBox[] comboBoxs)
         {
             for (int i = 0; i < comboBoxs.Length; i++)
                 comboBoxs[i].SelectedItem = table.Rows[0][rows[i]].ToString();
         }
+        #endregion
 
+        #region InsertImageInPictureBoxFromTable. Вставить картинку из таблицы в PictureBox
+        /// <summary>
+        /// Вставляет текущее найденное изображение из таблицы в PictureBox
+        /// </summary>
+        /// <param name="table">Текущая таблица</param>
+        /// <param name="rows">Номера строк где находяться изображения</param>
+        /// <param name="pictureBoxs">Все PictureBox формы куда нужно вставить изображения из таблицы</param>
         public void InsertImageInPictureBoxFromTable(DataTable table, int[] rows, params PictureBox[] pictureBoxs)
         {
             for (int i = 0; i < pictureBoxs.Length; i++)
@@ -251,7 +273,15 @@ namespace Administrator_supermarket
                 pictureBoxs[i].Image = Image.FromStream(ms);
             }
         }
+        #endregion
 
+        #region ClearFields. Очистка TextBox, ComboBox, PictureBox таблицы
+        /// <summary>
+        /// Очищает все TextBox-ы, ComboBox-ы, PictureBox-ы текущей формы
+        /// </summary>
+        /// <param name="textBoxs">Все TextBox-ы на форме</param>
+        /// <param name="comboBoxs">Все ComboBox-ы на форме</param>
+        /// <param name="pictureBoxs">Все PictureBox-ы на форме</param>
         public void ClearFields(TextBox[] textBoxs=null, ComboBox[] comboBoxs=null, PictureBox[] pictureBoxs=null)
         {
             //для textBox-ов
@@ -269,5 +299,7 @@ namespace Administrator_supermarket
                 foreach (var i in pictureBoxs)
                     i.Image = null;
         }
+        #endregion
+
     }
 }

@@ -307,6 +307,7 @@ namespace Administrator_company.Preview__Test_
         //написать общую
         public void ClearFields()
         {
+            
             textBox1.Text = "";
             textBox2.Text = "";
             textBox3.Text = "";
