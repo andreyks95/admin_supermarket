@@ -229,23 +229,55 @@ namespace Administrator_supermarket
         }
         #endregion
 
+        #region InsertTextInTextBoxFromTable
+
         #region InsertTextInTextBoxFromTable. Вставить текст из таблицы в TextBox
         /// <summary>
         /// Вставляет текущий найденный текст из таблицы в TextBox
+        /// </summary>
+        /// <param name="table">Текущая таблица</param>
+        /// <param name="row">Номер строки где находятся текст</param>
+        /// <param name="textBox">TextBox формы куда нужно вставить текст из таблицы</param>
+        public void InsertTextInTextBoxFromTable(DataTable table, int row, TextBox textBox)
+        {
+            textBox.Text = table.Rows[0][row].ToString();
+        }
+        #endregion
+
+        #region InsertTextInTextBoxFromTable overload. Вставить текст из таблицы в TextBox-ы
+        /// <summary>
+        /// Вставляет текущий найденный текст из таблицы в TextBox-ы
         /// </summary>
         /// <param name="table">Текущая таблица</param>
         /// <param name="rows">Номера строк где находятся текст</param>
         /// <param name="textBoxs">Все TextBox формы куда нужно вставить текст из таблицы</param>
         public void InsertTextInTextBoxFromTable(DataTable table, int[] rows, params TextBox[] textBoxs)
         {
-            for(int i=0; i< textBoxs.Length; i++)
-                textBoxs[i].Text = table.Rows[0][rows[i]].ToString();
+            for (int i = 0; i < textBoxs.Length; i++)
+                InsertTextInTextBoxFromTable(table, rows[i], textBoxs[i]);
         }
         #endregion
+
+        #endregion
+
+        #region InsertTextInComboBoxFromTable
 
         #region InsertTextInComboBoxFromTable. Вставить текст из таблицы в ComboBox
         /// <summary>
         /// Вставляет текущий найденный текст из таблицы в ComboBox
+        /// </summary>
+        /// <param name="table">Текущая таблица</param>
+        /// <param name="row">Номер строки где находятся текст</param>
+        /// <param name="comboBox">ComboBox формы куда нужно вставить текст из таблицы</param>
+        public void InsertTextInComboBoxFromTable(DataTable table, int row, ComboBox comboBox)
+        {
+                comboBox.SelectedItem = table.Rows[0][row].ToString();
+        }
+        #endregion
+
+        #region InsertTextInComboBoxFromTable overload. Вставить текст из таблицы в ComboBox-ы
+        /// <summary>
+        /// Вставляет текущий найденный текст из таблицы в ComboBox-ы
         /// </summary>
         /// <param name="table">Текущая таблица</param>
         /// <param name="rows">Номера строк где находятся текст</param>
@@ -253,13 +285,32 @@ namespace Administrator_supermarket
         public void InsertTextInComboBoxFromTable(DataTable table, int[] rows, params ComboBox[] comboBoxs)
         {
             for (int i = 0; i < comboBoxs.Length; i++)
-                comboBoxs[i].SelectedItem = table.Rows[0][rows[i]].ToString();
+                InsertTextInComboBoxFromTable(table, rows[i], comboBoxs[i]);
         }
         #endregion
 
-        #region InsertImageInPictureBoxFromTable. Вставить картинку из таблицы в PictureBox
+        #endregion
+
+        #region InsertImageInPictureBoxFromTable
+
+        #region InsertImageInPictureBoxFromTable overload. Вставить картинку из таблицы в PictureBox
         /// <summary>
         /// Вставляет текущее найденное изображение из таблицы в PictureBox
+        /// </summary>
+        /// <param name="table">Текущая таблица</param>
+        /// <param name="row">Номер строки где находяться изображения</param>
+        /// <param name="pictureBox">PictureBox формы куда нужно вставить изображение из таблицы</param>
+        public void InsertImageInPictureBoxFromTable(DataTable table, int row, PictureBox pictureBox)
+        {
+            byte[] img = (byte[])table.Rows[0][row];
+            MemoryStream ms = new MemoryStream(img);
+            pictureBox.Image = Image.FromStream(ms);
+        }
+        #endregion
+
+        #region InsertImageInPictureBoxFromTable overload. Вставить картинки из таблицы в PictureBox-ы
+        /// <summary>
+        /// Вставляет текущие найденные изображения из таблицы в PictureBox-ы
         /// </summary>
         /// <param name="table">Текущая таблица</param>
         /// <param name="rows">Номера строк где находяться изображения</param>
@@ -267,12 +318,10 @@ namespace Administrator_supermarket
         public void InsertImageInPictureBoxFromTable(DataTable table, int[] rows, params PictureBox[] pictureBoxs)
         {
             for (int i = 0; i < pictureBoxs.Length; i++)
-            {
-                byte[] img = (byte[]) table.Rows[0][rows[i]];
-                MemoryStream ms = new MemoryStream(img);
-                pictureBoxs[i].Image = Image.FromStream(ms);
-            }
+                InsertImageInPictureBoxFromTable(table, rows[i], pictureBoxs[i]);
         }
+        #endregion
+
         #endregion
 
         #region ClearFields. Очистка TextBox, ComboBox, PictureBox таблицы
