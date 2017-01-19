@@ -412,12 +412,12 @@ namespace Administrator_supermarket
         /// <summary>
         /// Попытаться добавить (выполнить) необходимый нам запрос
         /// </summary>
-        /// <param name="FillDataGridView"></param>
+        /// <param name="FillDataGridView">Текущая таблица</param>
         /// <param name="dataGridView">Текущая таблица на форме (DataGridView)</param>
         /// <param name="command">комманды которые нужно выполнить</param>
         /// <param name = "query" > Запрос</param >
        /// <param name = "showMessageBox" > Показать диалоговое сообщения или нет</param>
-        public void ExecuteQuery(Action<DataGridView, string> FillDataGridView, DataGridView dataGridView, 
+        public void ExecuteQuery(/*Action<DataGridView, string> FillDataGridView,*/ DataGridView dataGridView, 
             MySqlCommand command,  string query = "", Boolean showMessageBox = true)
         {
             try
@@ -489,6 +489,24 @@ namespace Administrator_supermarket
         /// <param name="variables">Переменные для добавление записи в таблицу</param>
         /// <param name="mySqlDbTypes">Массив MySqlDbType MediumText, LongBlob, UInt32, VarChar</param>
         /// <param name="objects">Объекты TextBox, ComboBox, byte[]</param>
+        public void AddParameters(MySqlCommand command, string variables, MySqlDbType mySqlDbTypes, object objects)
+        {
+                //если объект является ComboBox или TextBox
+                if (objects is ComboBox || objects is TextBox)
+                    command.Parameters.Add(variables, mySqlDbTypes).Value = GetText(objects); //GetText если есть текст в объектах
+                else
+                    command.Parameters.Add(variables, mySqlDbTypes).Value = objects; //Для других объектов                
+        }
+        #endregion
+
+        #region AddParameters overload. Выполняем добавление команды (записи) Parameters.Add в MySqlCommand
+        /// <summary>
+        /// Выполняем добавление команды (записи) Parameters.Add в MySqlCommand для многих полей
+        /// </summary>
+        /// <param name="command">текущая MySqlCommand готова к выполнению</param>
+        /// <param name="variables">Переменные для добавление записи в таблицу</param>
+        /// <param name="mySqlDbTypes">Массив MySqlDbType MediumText, LongBlob, UInt32, VarChar</param>
+        /// <param name="objects">Объекты TextBox, ComboBox, byte[]</param>
         public void AddParameters(MySqlCommand command, string[] variables, MySqlDbType[] mySqlDbTypes,
             object[] objects)
         {
@@ -497,9 +515,11 @@ namespace Administrator_supermarket
             {
                 //если объект является ComboBox или TextBox
                 if (objects[i] is ComboBox || objects[i] is TextBox)
-                    command.Parameters.Add(variables[i], mySqlDbTypes[i]).Value = GetText(objects[i]); //GetText если есть текст в объектах
+                    AddParameters(command, variables[i], mySqlDbTypes[i], objects[i]);
+                    //command.Parameters.Add(variables[i], mySqlDbTypes[i]).Value = GetText(objects[i]); //GetText если есть текст в объектах
                 else
-                    command.Parameters.Add(variables[i], mySqlDbTypes[i]).Value = objects[i]; //Для других объектов           
+                    AddParameters(command, variables[i], mySqlDbTypes[i], objects[i]);
+                    //command.Parameters.Add(variables[i], mySqlDbTypes[i]).Value = objects[i]; //Для других объектов           
             }
         }
         #endregion
