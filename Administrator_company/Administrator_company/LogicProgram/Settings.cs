@@ -40,9 +40,10 @@ namespace Administrator_supermarket
         {
             //Для отображения картинки в DataGridView
             DataGridViewImageColumn imgCol = new DataGridViewImageColumn();
-            imgCol = (DataGridViewImageColumn) dataGridView.Columns[numberColumn];
-            //номер ячейки, где будет отоброжаться изображение
-            imgCol.ImageLayout = DataGridViewImageCellLayout.Stretch; //делает картинку пропорционально ячейке 
+            imgCol = (DataGridViewImageColumn)dataGridView.Columns[numberColumn];
+            imgCol.ImageLayout = DataGridViewImageCellLayout.Stretch;
+            //номер ячейки, где будет отоброжаться изображение    
+            
         }
         #endregion
 
@@ -223,9 +224,18 @@ namespace Administrator_supermarket
         public byte[] SaveImagesToBytes(PictureBox pictureBox)
         {
             MemoryStream ms = new MemoryStream();
-            pictureBox.Image.Save(ms, pictureBox.Image.RawFormat);
-            byte[] img = ms.ToArray();
-            return img;
+            NullReferenceException nullReference = new NullReferenceException();
+            byte[] img;
+            if (pictureBox.Image != null)
+            {
+                pictureBox.Image.Save(ms, pictureBox.Image.RawFormat);
+                img = ms.ToArray();
+                return img;
+            }
+            else
+            {
+                return img = null;
+            }
         }
         #endregion
 
