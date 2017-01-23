@@ -347,33 +347,6 @@ namespace Administrator_supermarket
         }
         #endregion
 
-        #region FillDataGridView overload. Отобразить таблицу с учётом поиска значения
-        /// <summary>
-        /// Отображает таблицу с учётом поиска значения (числового или строкового)
-        /// </summary>
-        /// <param name="dataGridView">текущий DataGridView для таблицы</param>
-        /// <param name="query">запрос, который содержит select с параметром поиска значения по столбцам (числовое или строковое)
-        /// Если нету, то просто отображаем таблицу</param>
-        public DataTable FillDataGridView(MySqlCommand sqlCommand)
-        {
-            try
-            {
-                //command = new MySqlCommand(query, connection); //Создаём запрос для поиска
-                adapter = new MySqlDataAdapter(sqlCommand); //Выполняем команду
-                //Для отображения в таблице
-                DataTable table = new DataTable(); //Создаём таблицу
-                adapter.Fill(table); //Вставляем данные при выполнении команды в таблицу
-                return table;
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-                DataTable table = new DataTable(); //Создаём таблицу
-                return table;
-            }
-        }
-        #endregion
-
         #region  GetQueryShowSearch. Получить запрос исходя из условия (числовых или строковых столбцов)
         /// <summary>
         /// Составляет запрос select в зависимости от условия, на которое влияет значения столбцов (с числовыми данными или строковы)
@@ -723,6 +696,8 @@ namespace Administrator_supermarket
 
             query = select + from + where;
             return query;
+           // return " SELECT * FROM supermarket.info " +
+            // " WHERE id_info = @id ";
         }
         #endregion
     }
