@@ -20,6 +20,7 @@ namespace Administrator_company.Preview__Test_
         public TestFormTwo()
         {
             InitializeComponent();
+            //dataGridView1.Columns["Фото"].DefaultCellStyle.NullValue = null;
         }
 
 
@@ -261,12 +262,12 @@ namespace Administrator_company.Preview__Test_
          {
              FillDataGridView(textBoxSearch.Text);
          }
-
+         
          private void Find_Click(object sender, EventArgs e)
          {
              string query = " SELECT * FROM supermarket.info " +
                             " WHERE id_info = @id ";
-             MySqlCommand command = new MySqlCommand(query, connection); //Создаём запрос для поиска
+             MySqlCommand command = new MySqlCommand(query, connection.connection); //Создаём запрос для поиска
              command.Parameters.Add("@id", MySqlDbType.UInt32).Value = textBox1.Text;
 
              MySqlDataAdapter adapter = new MySqlDataAdapter(command); //Выполняем команду
@@ -281,7 +282,7 @@ namespace Administrator_company.Preview__Test_
              }
              else
              {
-                 //не нужно 
+                
                  textBox1.Text = table.Rows[0][0].ToString();
                  textBox2.Text = table.Rows[0][1].ToString();
                  textBox3.Text = table.Rows[0][2].ToString();
@@ -295,10 +296,6 @@ namespace Administrator_company.Preview__Test_
              }
          }
 
-         private void Clear_Click(object sender, EventArgs e)
-         {
-             ClearFields();
-         }
 
          //написать общую
          public void ClearFields()
@@ -338,6 +335,7 @@ namespace Administrator_company.Preview__Test_
             //Для отображения картинки в DataGridView
             //settings.GetViewImageInCellTable(dataGridView1, 6);
             connection.FillDataGridView(dataGridView1, 100, new[] {6}, query);
+
         }
 
         //для выбора изображения 
@@ -451,15 +449,16 @@ namespace Administrator_company.Preview__Test_
         {
             FillDataGridView(textBoxSearch.Text);
         }
-
+        
         private void Find_Click(object sender, EventArgs e)
         {
             string nameTable = "info";
             string[] fields = { "id_info", "full_name", "passport_id", "age", "address", "phone", "photo" },
-                variables = { "@id", "@name", "@passport", "@age", "@address", "@phone", "@photo" }; //для переменных
+                variables = { "@id", "@name", "@passport", "@age", "@address", "@phone", "@photo" }, //для переменных
+                nameFieldsAS = { "ИД", "ФИО", "'Серия и номер паспорта'", "Возраст", "Адрес", "Телефон", "Фото" };
             string id_field = "id_info";
 
-            string query = connection.GetQueryFindSelect(nameTable, fields, variables, id_field);
+            string query = connection.GetQueryFindSelect(nameTable, fields, nameFieldsAS, id_field);
 
              connection.command = new MySqlCommand(query, connection.connection); //Создаём запрос для поиска
 
@@ -471,17 +470,16 @@ namespace Administrator_company.Preview__Test_
 
             connection.AddParameters(connection.command, variables[0], mySqlDbTypes[0], objects[0]);
 
-
             //connection.adapter = new MySqlDataAdapter(connection.command); //Выполняем команду
-
+            
             ///Для отображения в таблице
-            //DataTable table = new DataTable(); //Создаём таблицу
-            //connection.adapter.Fill(table); //Вставляем данные при выполнении команды в таблицу
-            DataTable table = new DataTable();
-               table = connection.FillDataGridView(connection.command);
+            DataTable table = new DataTable(); //Создаём таблицу
+            connection.adapter.SelectCommand = connection.command;
+            connection.adapter.Fill(table); //Вставляем данные при выполнении команды в таблицу
+
             if (table.Rows.Count <= 0)
             {
-                MessageBox.Show("Не найдено!");
+                MessageBox.Show("Указанная запись: " + textBox1.Text + " не найдена!");
 
                 TextBox[] textBoxs = { textBox1, textBox2, textBox3, textBox4, textBox5, textBox6 };
                 PictureBox[] pictureBoxs = { pictureBox1 };
@@ -489,14 +487,16 @@ namespace Administrator_company.Preview__Test_
             }
             else
             {
-                
+                MessageBox.Show("Указанная запись " + textBox1.Text + " найдена!");
                 TextBox[] textBoxs = {textBox1, textBox2, textBox3, textBox4, textBox5, textBox6};
                 int[] rows = {0, 1, 2, 3, 4, 5};
                 settings.InsertTextInTextBoxFromTable(table, rows, textBoxs);
                 settings.InsertImageInPictureBoxFromTable(table, 6, pictureBox1);
             }
-        }
 
+
+        }
+        
         private void Clear_Click(object sender, EventArgs e)
         {
 
@@ -504,6 +504,7 @@ namespace Administrator_company.Preview__Test_
             PictureBox[] pictureBoxs = { pictureBox1 };
             settings.ClearFields(textBoxs, pictureBoxs: pictureBoxs);
         }
+
 
     }
 }
