@@ -20,6 +20,8 @@ namespace Administrator_supermarket
         //для выполнения комманд в дальнейшем
         public MySqlCommand command;
 
+        public MySqlDataAdapter adapter;
+
         public const string NAME_DATABASE = "supermarket";
 
         //Открыть соединение для работы с БД
@@ -92,7 +94,7 @@ namespace Administrator_supermarket
             try
             {
                 //выбрать все поля с таблицы БД
-                MySqlDataAdapter adapter = new MySqlDataAdapter(query, connection);
+                adapter = new MySqlDataAdapter(query, connection);
                 connection.Open(); //открыть соединение
                 DataSet ds = new DataSet(); //создать новый DataSet
                 adapter.Fill(ds, "Table");//nameTable); //заполнить 
@@ -118,7 +120,7 @@ namespace Administrator_supermarket
             try
             {
                 //выбрать все поля с таблицы БД
-                MySqlDataAdapter adapter = new MySqlDataAdapter("SELECT * FROM " + nameDatabase + "." + nameTable, connection);
+                adapter = new MySqlDataAdapter("SELECT * FROM " + nameDatabase + "." + nameTable, connection);
                 connection.Open(); //открыть соединение
                 DataSet ds = new DataSet(); //создать новый DataSet
                 adapter.Fill(ds, nameTable); //заполнить 
@@ -299,7 +301,7 @@ namespace Administrator_supermarket
              try
              {
                  command = new MySqlCommand(query, connection); //Создаём запрос для поиска
-                 MySqlDataAdapter adapter = new MySqlDataAdapter(command); //Выполняем команду
+                 adapter = new MySqlDataAdapter(command); //Выполняем команду
                  //Для отображения в таблице
                  DataTable table = new DataTable(); //Создаём таблицу
                  adapter.Fill(table); //Вставляем данные при выполнении команды в таблицу
@@ -310,6 +312,66 @@ namespace Administrator_supermarket
                  MessageBox.Show(ex.Message);
              }
          }
+        #endregion
+
+        #region FillDataGridView overload. Отобразить таблицу с учётом поиска значения
+        /// <summary>
+        /// Отображает таблицу с учётом поиска значения (числового или строкового)
+        /// </summary>
+        /// <param name="dataGridView">текущий DataGridView для таблицы</param>
+        /// <param name="height">Высота ячеек в таблице</param>
+        /// <param name="cellsImages">Номера строк содержащих картинки</param>
+        /// <param name="query">запрос, который содержит select с параметром поиска значения по столбцам (числовое или строковое)
+        /// Если нету, то просто отображаем таблицу</param>
+        public void FillDataGridView(DataGridView dataGridView,  int height, int[] cellsImages, string query = "")
+        {
+            try
+            {
+                command = new MySqlCommand(query, connection); //Создаём запрос для поиска
+                adapter = new MySqlDataAdapter(command); //Выполняем команду
+                                                         //Для отображения в таблице
+                DataTable table = new DataTable(); //Создаём таблицу
+                adapter.Fill(table); //Вставляем данные при выполнении команды в таблицу
+               
+                Settings settings = new Settings();
+                //настраиваем отображение таблицы
+                settings.GetSettingDisplayTable(dataGridView, height);
+                dataGridView.DataSource = table; //подключаем заполненную таблицу и отображаем
+                //Для отображения картинки в DataGridView
+                settings.GetViewImageInCellTable(dataGridView, cellsImages);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+        #endregion
+
+        #region FillDataGridView overload. Отобразить таблицу с учётом поиска значения
+        /// <summary>
+        /// Отображает таблицу с учётом поиска значения (числового или строкового)
+        /// </summary>
+        /// <param name="dataGridView">текущий DataGridView для таблицы</param>
+        /// <param name="query">запрос, который содержит select с параметром поиска значения по столбцам (числовое или строковое)
+        /// Если нету, то просто отображаем таблицу</param>
+        public DataTable FillDataGridView(MySqlCommand sqlCommand)
+        {
+            try
+            {
+                //command = new MySqlCommand(query, connection); //Создаём запрос для поиска
+                adapter = new MySqlDataAdapter(sqlCommand); //Выполняем команду
+                //Для отображения в таблице
+                DataTable table = new DataTable(); //Создаём таблицу
+                adapter.Fill(table); //Вставляем данные при выполнении команды в таблицу
+                return table;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                DataTable table = new DataTable(); //Создаём таблицу
+                return table;
+            }
+        }
         #endregion
 
         #region  GetQueryShowSearch. Получить запрос исходя из условия (числовых или строковых столбцов)
@@ -408,22 +470,22 @@ namespace Administrator_supermarket
         }
         #endregion
 
-        #region ExecuteQuery - Перегруженный. Попытка выполнить запрос
+        #region ExecuteQuery overload - Перегруженный. Попытка выполнить запрос
         /// <summary>
         /// Попытаться добавить (выполнить) необходимый нам запрос
         /// </summary>
-        /// <param name="FillDataGridView">Текущая таблица</param>
+        
         /// <param name="dataGridView">Текущая таблица на форме (DataGridView)</param>
-        /// <param name="command">комманды которые нужно выполнить</param>
+        /// <param name="commandSql">комманды которые нужно выполнить</param>
         /// <param name = "query" > Запрос</param >
        /// <param name = "showMessageBox" > Показать диалоговое сообщения или нет</param>
         public void ExecuteQuery(/*Action<DataGridView, string> FillDataGridView,*/ DataGridView dataGridView, 
-            MySqlCommand command,  string query = "", Boolean showMessageBox = true)
+            MySqlCommand commandSql,  string query = "", Boolean showMessageBox = true)
         {
             try
             {
                 connection.Open();
-                if (command.ExecuteNonQuery() == 1)
+                if (commandSql.ExecuteNonQuery() == 1)
                 {
                     if (showMessageBox == true)
                         MessageBox.Show("Запрос успешно выполнен");
@@ -446,6 +508,42 @@ namespace Administrator_supermarket
             }
             
             
+        }
+        #endregion
+
+        #region ExecuteQuery overload - Перегруженный. Попытка выполнить запрос
+        /// <summary>
+        /// Попытаться добавить (выполнить) необходимый нам запрос
+        /// </summary>
+        /// <param name="commandSql">комманды которые нужно выполнить</param>
+        /// <param name = "query" > Запрос</param >
+        /// <param name = "showMessageBox" > Показать диалоговое сообщения или нет</param>
+        public void ExecuteQuery(MySqlCommand commandSql, string query = "", Boolean showMessageBox = true)
+        {
+            try
+            {
+                connection.Open();
+                if (commandSql.ExecuteNonQuery() == 1)
+                {
+                    if (showMessageBox == true)
+                        MessageBox.Show("Запрос успешно выполнен");
+                }
+                else
+                {
+                    if (showMessageBox == true)
+                        MessageBox.Show("Запрос не выполнен");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            finally
+            {
+                connection.Close();
+            }
+
+
         }
         #endregion
 
@@ -537,7 +635,7 @@ namespace Administrator_supermarket
             string query;
 
             //Example: INSERT INTO supermarket.info
-            query = "ISERT INTO " + NAME_DATABASE + "." + nameTable + " (";
+            query = "INSERT INTO " + NAME_DATABASE + "." + nameTable + " (";
 
             //Example: ( id_info, full_name, passport_id, age, address, phone, photo) 
             for (int i = 0; i < fields.Length; i++)
@@ -623,8 +721,8 @@ namespace Administrator_supermarket
 
             where = " WHERE " + id_field + " = @id";
 
-            query = select + from + where; 
-            return "";
+            query = select + from + where;
+            return query;
         }
         #endregion
     }
