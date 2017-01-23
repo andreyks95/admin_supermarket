@@ -332,12 +332,12 @@ namespace Administrator_company.Preview__Test_
             string[] numericFields = {"id_info","age"};
             string query = connection.GetQueryShowSearch(nameTable, nameFieldsAll, nameFieldsAS, numericFields, valueToSearch);
             //заполняем данные таблицы на основе запроса
-            connection.FillDataGridView(dataGridView1, query);
+           //connection.FillDataGridView(dataGridView1, query);
             //настраиваем отображение таблицы
-            settings.GetSettingDisplayTable(dataGridView1, 100);
+            //settings.GetSettingDisplayTable(dataGridView1, 100);
             //Для отображения картинки в DataGridView
-            settings.GetViewImageInCellTable(dataGridView1, 6);
-
+            //settings.GetViewImageInCellTable(dataGridView1, 6);
+            connection.FillDataGridView(dataGridView1, 100, new[] {6}, query);
         }
 
         //для выбора изображения 
@@ -393,7 +393,8 @@ namespace Administrator_company.Preview__Test_
             object[] objects =  { textBox1, textBox2, textBox3, textBox4, textBox5, textBox6, img };
             connection.AddParameters(connection.command,variables, mySqlDbTypes, objects);
 
-            connection.ExecuteQuery(dataGridView1, connection.command);
+            connection.ExecuteQuery(connection.command);
+            FillDataGridView("");
         }
 
         private void Update_Click(object sender, EventArgs e)
@@ -415,7 +416,8 @@ namespace Administrator_company.Preview__Test_
             object[] objects = { textBox1, textBox2, textBox3, textBox4, textBox5, textBox6, img };
             connection.AddParameters(connection.command, variables, mySqlDbTypes, objects);
 
-            connection.ExecuteQuery(dataGridView1, connection.command);
+            connection.ExecuteQuery(connection.command);
+            FillDataGridView("");
         }
 
 
@@ -425,7 +427,7 @@ namespace Administrator_company.Preview__Test_
             string id_field = "id_info";
             string query = connection.GetQueryDelete(nameTable, id_field);
             
-            MySqlCommand command = new MySqlCommand(query, connection.connection);
+            connection.command = new MySqlCommand(query, connection.connection);
 
             string[] variables = { "@id", "@name", "@passport", "@age", "@address", "@phone", "@photo" }; //для переменных
                                                                                                           //для типов
@@ -436,7 +438,8 @@ namespace Administrator_company.Preview__Test_
 
             connection.AddParameters(connection.command, variables[0], mySqlDbTypes[0], objects[0]);
 
-            connection.ExecuteQuery(dataGridView1, connection.command);
+            connection.ExecuteQuery(connection.command);
+            FillDataGridView("");
 
             TextBox[] textBoxs = { textBox1, textBox2, textBox3, textBox4, textBox5, textBox6 };
             PictureBox[] pictureBoxs = {pictureBox1};
@@ -458,7 +461,7 @@ namespace Administrator_company.Preview__Test_
 
             string query = connection.GetQueryFindSelect(nameTable, fields, variables, id_field);
 
-            MySqlCommand command = new MySqlCommand(query, connection.connection); //Создаём запрос для поиска
+             connection.command = new MySqlCommand(query, connection.connection); //Создаём запрос для поиска
 
             
             MySqlDbType[] mySqlDbTypes = { MySqlDbType.UInt32, MySqlDbType.VarChar, MySqlDbType.VarChar, MySqlDbType.UInt32,
@@ -468,11 +471,14 @@ namespace Administrator_company.Preview__Test_
 
             connection.AddParameters(connection.command, variables[0], mySqlDbTypes[0], objects[0]);
 
-            MySqlDataAdapter adapter = new MySqlDataAdapter(command); //Выполняем команду
 
-            //Для отображения в таблице
-            DataTable table = new DataTable(); //Создаём таблицу
-            adapter.Fill(table); //Вставляем данные при выполнении команды в таблицу
+            //connection.adapter = new MySqlDataAdapter(connection.command); //Выполняем команду
+
+            ///Для отображения в таблице
+            //DataTable table = new DataTable(); //Создаём таблицу
+            //connection.adapter.Fill(table); //Вставляем данные при выполнении команды в таблицу
+            DataTable table = new DataTable();
+               table = connection.FillDataGridView(connection.command);
             if (table.Rows.Count <= 0)
             {
                 MessageBox.Show("Не найдено!");
@@ -483,7 +489,7 @@ namespace Administrator_company.Preview__Test_
             }
             else
             {
-                //не нужно 
+                
                 TextBox[] textBoxs = {textBox1, textBox2, textBox3, textBox4, textBox5, textBox6};
                 int[] rows = {0, 1, 2, 3, 4, 5};
                 settings.InsertTextInTextBoxFromTable(table, rows, textBoxs);
