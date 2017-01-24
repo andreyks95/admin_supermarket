@@ -700,5 +700,30 @@ namespace Administrator_supermarket
             // " WHERE id_info = @id ";
         }
         #endregion
+
+        #region Find
+
+        public void Find(MySqlCommand commandLocal, TextBox[] textBoxs=null, ComboBox[] comboBoxs = null, PictureBox[] pictureBoxs= null,
+                        int[] rowsTextForTextBox=null, int[] rowsTextForComboBox = null, int[] rowsPictureForPictureBox = null)
+        {
+            ///Для отображения в таблице
+            DataTable table = new DataTable(); //Создаём таблицу
+            adapter.SelectCommand = commandLocal;
+            adapter.Fill(table); //Вставляем данные при выполнении команды в таблицу
+            Settings settings = new Settings();
+            if (table.Rows.Count <= 0)
+            {
+                MessageBox.Show("Указанная запись: " + textBoxs[0].Text + " не найдена!");//textBoxs[0] должен содержать id 
+                settings.ClearFields(textBoxs, comboBoxs, pictureBoxs);
+            }
+            else
+            {
+                MessageBox.Show("Указанная запись " + textBoxs[0].Text + " найдена!");
+                settings.InsertTextInTextBoxFromTable(table, rowsTextForTextBox, textBoxs);
+                settings.InsertTextInComboBoxFromTable(table, rowsTextForComboBox, comboBoxs);
+                settings.InsertImageInPictureBoxFromTable(table, rowsPictureForPictureBox, pictureBoxs);   
+            }
+        }
+        #endregion 
     }
 }

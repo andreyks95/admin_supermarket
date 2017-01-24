@@ -17,10 +17,30 @@ namespace Administrator_company.Preview__Test_
 {
     public partial class TestFormTwo : Form
     {
+        private class DataGridViewEmptyImageCell : DataGridViewImageCell
+        {
+            public override object DefaultNewRowValue { get { return null; } }
+        }
+
         public TestFormTwo()
         {
             InitializeComponent();
-            //dataGridView1.Columns["Фото"].DefaultCellStyle.NullValue = null;
+            dataGridView1.RowPrePaint += dataGridView1_RowPrePaint;
+            /*
+            var column1 = new DataGridViewImageColumn();
+            column1.DefaultCellStyle.NullValue = null;
+            column1.CellTemplate = new DataGridViewEmptyImageCell();*/
+            /*
+            Load += delegate
+            {
+                // remove default [x] image for data DataGridViewImageColumn columns
+                foreach (var column in dataGridView1.Columns)
+                {
+                    if (column is DataGridViewImageColumn)
+                        (column as DataGridViewImageColumn).DefaultCellStyle.NullValue = null;
+                }
+            };*/
+
         }
 
 
@@ -329,12 +349,14 @@ namespace Administrator_company.Preview__Test_
             string[] numericFields = {"id_info","age"};
             string query = connection.GetQueryShowSearch(nameTable, nameFieldsAll, nameFieldsAS, numericFields, valueToSearch);
             //заполняем данные таблицы на основе запроса
-           //connection.FillDataGridView(dataGridView1, query);
+            //connection.FillDataGridView(dataGridView1, query);
             //настраиваем отображение таблицы
             //settings.GetSettingDisplayTable(dataGridView1, 100);
             //Для отображения картинки в DataGridView
             //settings.GetViewImageInCellTable(dataGridView1, 6);
+            //((DataGridViewImageColumn)this.dataGridView1.Columns["info.photo"]).DefaultCellStyle.NullValue = null;
             connection.FillDataGridView(dataGridView1, 100, new[] {6}, query);
+
 
         }
 
@@ -469,9 +491,7 @@ namespace Administrator_company.Preview__Test_
             object[] objects = { textBox1, textBox2, textBox3, textBox4, textBox5, textBox6 };
 
             connection.AddParameters(connection.command, variables[0], mySqlDbTypes[0], objects[0]);
-
-            //connection.adapter = new MySqlDataAdapter(connection.command); //Выполняем команду
-            
+            /*
             ///Для отображения в таблице
             DataTable table = new DataTable(); //Создаём таблицу
             connection.adapter.SelectCommand = connection.command;
@@ -492,7 +512,12 @@ namespace Administrator_company.Preview__Test_
                 int[] rows = {0, 1, 2, 3, 4, 5};
                 settings.InsertTextInTextBoxFromTable(table, rows, textBoxs);
                 settings.InsertImageInPictureBoxFromTable(table, 6, pictureBox1);
-            }
+            }*/
+            TextBox[] textBoxs = { textBox1, textBox2, textBox3, textBox4, textBox5, textBox6 };
+            PictureBox[] pictureBoxs = { pictureBox1 };
+            int[] rowsTextForTextBox = { 0, 1, 2, 3, 4, 5 };
+            connection.Find(connection.command, textBoxs: textBoxs, rowsTextForTextBox: rowsTextForTextBox, 
+                                                pictureBoxs: pictureBoxs, rowsPictureForPictureBox: new []{6});
 
 
         }
@@ -505,6 +530,32 @@ namespace Administrator_company.Preview__Test_
             settings.ClearFields(textBoxs, pictureBoxs: pictureBoxs);
         }
 
-
+        private void dataGridView1_RowPrePaint(object sender, DataGridViewRowPrePaintEventArgs e)
+        {
+           /* for (int i = 0; i < dataGridView1.RowCount; i++)
+            {
+                foreach (DataGridViewCell cell in dataGridView1.Rows[i].Cells)
+                {
+                    if (cell.GetType() == typeof(DataGridViewImageCell))
+                    {
+                        cell.Value = DBNull.Value;
+                    }
+                }
+            }*/
+            var column1 = new DataGridViewImageColumn();
+            column1.DefaultCellStyle.NullValue = null;
+            column1.CellTemplate = new DataGridViewEmptyImageCell();
+            
+            /*
+        Load += delegate
+            {
+                // remove default [x] image for data DataGridViewImageColumn columns
+                foreach (var column in dataGridView1.Columns)
+                {
+                    if (column is DataGridViewImageColumn)
+                        (column as DataGridViewImageColumn).DefaultCellStyle.NullValue = null;
+                }
+            };*/
+        }
     }
 }
