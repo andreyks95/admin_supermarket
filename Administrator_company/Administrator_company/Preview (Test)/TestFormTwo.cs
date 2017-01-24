@@ -27,6 +27,7 @@ namespace Administrator_company.Preview__Test_
             InitializeComponent();
             dataGridView1.RowPrePaint += dataGridView1_RowPrePaint;
             /*
+            //
             var column1 = new DataGridViewImageColumn();
             column1.DefaultCellStyle.NullValue = null;
             column1.CellTemplate = new DataGridViewEmptyImageCell();*/
