@@ -40,10 +40,11 @@ namespace Administrator_supermarket
         {
             //Для отображения картинки в DataGridView
             DataGridViewImageColumn imgCol = new DataGridViewImageColumn();
-            imgCol = (DataGridViewImageColumn)dataGridView.Columns[numberColumn];
+            imgCol = (DataGridViewImageColumn) dataGridView.Columns[numberColumn];
             imgCol.ImageLayout = DataGridViewImageCellLayout.Stretch;
-            //номер ячейки, где будет отоброжаться изображение    
             
+            //номер ячейки, где будет отоброжаться изображение    
+
         }
         #endregion
 
@@ -263,8 +264,9 @@ namespace Administrator_supermarket
         /// <param name="textBoxs">Все TextBox формы куда нужно вставить текст из таблицы</param>
         public void InsertTextInTextBoxFromTable(DataTable table, int[] rows, params TextBox[] textBoxs)
         {
-            for (int i = 0; i < textBoxs.Length; i++)
-                InsertTextInTextBoxFromTable(table, rows[i], textBoxs[i]);
+            if (textBoxs != null)
+                for (int i = 0; i < textBoxs.Length; i++)
+                    InsertTextInTextBoxFromTable(table, rows[i], textBoxs[i]);
         }
         #endregion
 
@@ -294,8 +296,9 @@ namespace Administrator_supermarket
         /// <param name="comboBoxs">Все ComboBox формы куда нужно вставить текст из таблицы</param>
         public void InsertTextInComboBoxFromTable(DataTable table, int[] rows, params ComboBox[] comboBoxs)
         {
-            for (int i = 0; i < comboBoxs.Length; i++)
-                InsertTextInComboBoxFromTable(table, rows[i], comboBoxs[i]);
+            if(comboBoxs !=  null)
+                for (int i = 0; i < comboBoxs.Length; i++)
+                    InsertTextInComboBoxFromTable(table, rows[i], comboBoxs[i]);
         }
         #endregion
 
@@ -312,9 +315,15 @@ namespace Administrator_supermarket
         /// <param name="pictureBox">PictureBox формы куда нужно вставить изображение из таблицы</param>
         public void InsertImageInPictureBoxFromTable(DataTable table, int row, PictureBox pictureBox)
         {
-            byte[] img = (byte[])table.Rows[0][row];
-            MemoryStream ms = new MemoryStream(img);
-            pictureBox.Image = Image.FromStream(ms);
+            if (!DBNull.Value.Equals(table.Rows[0][row]))
+            {
+                byte[] img = (byte[]) table.Rows[0][row];
+                MemoryStream ms = new MemoryStream(img);
+                pictureBox.Image = Image.FromStream(ms);
+            }
+            else
+                pictureBox.Image = null;
+
         }
         #endregion
 
@@ -327,7 +336,8 @@ namespace Administrator_supermarket
         /// <param name="pictureBoxs">Все PictureBox формы куда нужно вставить изображения из таблицы</param>
         public void InsertImageInPictureBoxFromTable(DataTable table, int[] rows, params PictureBox[] pictureBoxs)
         {
-            for (int i = 0; i < pictureBoxs.Length; i++)
+            if (pictureBoxs != null)
+                for (int i = 0; i < pictureBoxs.Length; i++)
                 InsertImageInPictureBoxFromTable(table, rows[i], pictureBoxs[i]);
         }
         #endregion
@@ -359,6 +369,5 @@ namespace Administrator_supermarket
                     i.Image = null;
         }
         #endregion
-
     }
 }
