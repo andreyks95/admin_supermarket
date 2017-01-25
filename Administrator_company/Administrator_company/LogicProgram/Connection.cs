@@ -314,7 +314,7 @@ namespace Administrator_supermarket
          }
         #endregion
 
-        #region FillDataGridView overload. Отобразить таблицу с учётом поиска значения
+      /* #region FillDataGridView overload. Отобразить таблицу с учётом поиска значения
         /// <summary>
         /// Отображает таблицу с учётом поиска значения (числового или строкового)
         /// </summary>
@@ -343,6 +343,42 @@ namespace Administrator_supermarket
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
+            }
+        }
+        #endregion*/
+
+        #region FillDataGridView overload. Отобразить таблицу с учётом поиска значения
+        /// <summary>
+        /// Отображает таблицу с учётом поиска значения (числового или строкового)
+        /// </summary>
+        /// <param name="dataGridView">текущий DataGridView для таблицы</param>
+        /// <param name="height">Высота ячеек в таблице</param>
+        /// <param name="cellsImages">Номера строк содержащих картинки</param>
+        /// <param name="query">запрос, который содержит select с параметром поиска значения по столбцам (числовое или строковое)
+        /// Если нету, то просто отображаем таблицу</param>
+        public DataTable FillDataGridView(DataGridView dataGridView, int height, int[] cellsImages, string query = "")
+        {
+            try
+            {
+                command = new MySqlCommand(query, connection); //Создаём запрос для поиска
+                adapter = new MySqlDataAdapter(command); //Выполняем команду
+                                                         //Для отображения в таблице
+                DataTable table = new DataTable(); //Создаём таблицу
+                adapter.Fill(table); //Вставляем данные при выполнении команды в таблицу
+
+                Settings settings = new Settings();
+                //настраиваем отображение таблицы
+                settings.GetSettingDisplayTable(dataGridView, height);
+                dataGridView.DataSource = table; //подключаем заполненную таблицу и отображаем
+                //Для отображения картинки в DataGridView
+                settings.GetViewImageInCellTable(dataGridView, cellsImages);
+                return table;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                DataTable table = new DataTable();
+                return table;
             }
         }
         #endregion
@@ -700,9 +736,18 @@ namespace Administrator_supermarket
             // " WHERE id_info = @id ";
         }
         #endregion
-
-        #region Find
-
+        
+       /* #region Find. Найти данные по id поля
+        /// <summary>
+        /// Найти данные по id поля
+        /// </summary>
+        /// <param name="commandLocal">MySqlCommand с содержанием select запроса</param>
+        /// <param name="textBoxs">Если найденные данные нужно отобразить в textBoх-ах</param>
+        /// <param name="comboBoxs">Если найденные данные нужно отобразить в comboBox-ах</param>
+        /// <param name="pictureBoxs">Если найденные данные нужно отобразить в pictureBox-ах</param>
+        /// <param name="rowsTextForTextBox">Строки dataGridView которые содержать текстовые данные для TextBox-ов</param>
+        /// <param name="rowsTextForComboBox">Строки dataGridView которые содержать текстовые данные для comboBox-ов</param>
+        /// <param name="rowsPictureForPictureBox">Строки dataGridView которые содержать изображения для pictureBox-ов</param>
         public void Find(MySqlCommand commandLocal, TextBox[] textBoxs=null, ComboBox[] comboBoxs = null, PictureBox[] pictureBoxs= null,
                         int[] rowsTextForTextBox=null, int[] rowsTextForComboBox = null, int[] rowsPictureForPictureBox = null)
         {
@@ -723,6 +768,41 @@ namespace Administrator_supermarket
                 settings.InsertTextInComboBoxFromTable(table, rowsTextForComboBox, comboBoxs);
                 settings.InsertImageInPictureBoxFromTable(table, rowsPictureForPictureBox, pictureBoxs);   
             }
+        }
+        #endregion*/
+
+        #region Find. Найти данные по id поля
+        /// <summary>
+        /// Найти данные по id поля
+        /// </summary>
+        /// <param name="commandLocal">MySqlCommand с содержанием select запроса</param>
+        /// <param name="textBoxs">Если найденные данные нужно отобразить в textBoх-ах</param>
+        /// <param name="comboBoxs">Если найденные данные нужно отобразить в comboBox-ах</param>
+        /// <param name="pictureBoxs">Если найденные данные нужно отобразить в pictureBox-ах</param>
+        /// <param name="rowsTextForTextBox">Строки dataGridView которые содержать текстовые данные для TextBox-ов</param>
+        /// <param name="rowsTextForComboBox">Строки dataGridView которые содержать текстовые данные для comboBox-ов</param>
+        /// <param name="rowsPictureForPictureBox">Строки dataGridView которые содержать изображения для pictureBox-ов</param>
+        public DataTable Find(MySqlCommand commandLocal, TextBox[] textBoxs = null, ComboBox[] comboBoxs = null, PictureBox[] pictureBoxs = null,
+                        int[] rowsTextForTextBox = null, int[] rowsTextForComboBox = null, int[] rowsPictureForPictureBox = null)
+        {
+            ///Для отображения в таблице
+            DataTable table = new DataTable(); //Создаём таблицу
+            adapter.SelectCommand = commandLocal;
+            adapter.Fill(table); //Вставляем данные при выполнении команды в таблицу
+            Settings settings = new Settings();
+            if (table.Rows.Count <= 0)
+            {
+                MessageBox.Show("Указанная запись: " + textBoxs[0].Text + " не найдена!");//textBoxs[0] должен содержать id 
+                settings.ClearFields(textBoxs, comboBoxs, pictureBoxs);
+            }
+            else
+            {
+                MessageBox.Show("Указанная запись " + textBoxs[0].Text + " найдена!");
+                settings.InsertTextInTextBoxFromTable(table, rowsTextForTextBox, textBoxs);
+                settings.InsertTextInComboBoxFromTable(table, rowsTextForComboBox, comboBoxs);
+                settings.InsertImageInPictureBoxFromTable(table, rowsPictureForPictureBox, pictureBoxs);
+            }
+            return table;
         }
         #endregion 
     }
