@@ -80,6 +80,7 @@ namespace Administrator_supermarket
             {
                 pictureBox.Image = Image.FromFile(openFile.FileName);
             }
+
         }
         #endregion
 
@@ -174,7 +175,8 @@ namespace Administrator_supermarket
         /// <param name="dataGridView">текущий dataGridView</param>
         public void CurrentRowCellsTEXT(int number, TextBox textBox, DataGridView dataGridView)
         {
-            textBox.Text = dataGridView.CurrentRow.Cells[number].Value.ToString();
+            if(number != 0 || number != null)
+                textBox.Text = dataGridView.CurrentRow.Cells[number].Value.ToString();
         }
         #endregion
 
