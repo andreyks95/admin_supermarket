@@ -1,6 +1,6 @@
 ﻿namespace Administrator_company.Preview__Test_
 {
-    partial class TestFormTwo
+    partial class InfoForm
     {
         /// <summary>
         /// Required designer variable.
@@ -86,10 +86,10 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(364, 101);
+            this.dataGridView1.Location = new System.Drawing.Point(364, 83);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView1.Size = new System.Drawing.Size(621, 383);
+            this.dataGridView1.Size = new System.Drawing.Size(621, 401);
             this.dataGridView1.TabIndex = 18;
             this.dataGridView1.SelectionChanged += new System.EventHandler(this.dataGridView1_SelectionChanged);
             this.dataGridView1.Click += new System.EventHandler(this.dataGridView1_Click);
@@ -311,12 +311,12 @@
             this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel2.Location = new System.Drawing.Point(364, 0);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(621, 97);
+            this.panel2.Size = new System.Drawing.Size(621, 84);
             this.panel2.TabIndex = 24;
             // 
             // PreviousRecordButton
             // 
-            this.PreviousRecordButton.Location = new System.Drawing.Point(327, 54);
+            this.PreviousRecordButton.Location = new System.Drawing.Point(320, 41);
             this.PreviousRecordButton.Name = "PreviousRecordButton";
             this.PreviousRecordButton.Size = new System.Drawing.Size(147, 23);
             this.PreviousRecordButton.TabIndex = 16;
@@ -326,7 +326,7 @@
             // 
             // NextRecordButton
             // 
-            this.NextRecordButton.Location = new System.Drawing.Point(163, 54);
+            this.NextRecordButton.Location = new System.Drawing.Point(156, 41);
             this.NextRecordButton.Name = "NextRecordButton";
             this.NextRecordButton.Size = new System.Drawing.Size(147, 23);
             this.NextRecordButton.TabIndex = 15;
@@ -336,7 +336,7 @@
             // 
             // LastRecordButton
             // 
-            this.LastRecordButton.Location = new System.Drawing.Point(489, 54);
+            this.LastRecordButton.Location = new System.Drawing.Point(482, 41);
             this.LastRecordButton.Name = "LastRecordButton";
             this.LastRecordButton.Size = new System.Drawing.Size(112, 23);
             this.LastRecordButton.TabIndex = 17;
@@ -346,7 +346,7 @@
             // 
             // FirstRecordButton
             // 
-            this.FirstRecordButton.Location = new System.Drawing.Point(29, 54);
+            this.FirstRecordButton.Location = new System.Drawing.Point(22, 41);
             this.FirstRecordButton.Name = "FirstRecordButton";
             this.FirstRecordButton.Size = new System.Drawing.Size(112, 23);
             this.FirstRecordButton.TabIndex = 14;
@@ -354,7 +354,7 @@
             this.FirstRecordButton.UseVisualStyleBackColor = true;
             this.FirstRecordButton.Click += new System.EventHandler(this.FirstRecordButton_Click);
             // 
-            // TestFormTwo
+            // InfoForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -363,8 +363,8 @@
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.dataGridView1);
-            this.Name = "TestFormTwo";
-            this.Text = "TestFormTwo";
+            this.Name = "InfoForm";
+            this.Text = "Информация о сотрудниках";
             this.Load += new System.EventHandler(this.TestFormTwo_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
