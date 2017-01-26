@@ -12,6 +12,30 @@ namespace Admin.UnitTest
     {
 
         [TestMethod]
+        public void GetQuerySearchTest()
+        {
+            //arrange
+            string nameDatabase = "supermarket",
+                nameTable = "info",
+                value = "Краматорск";
+            string[] nameFields = {"id_info", "full_name", "passport_id", "age", "address", "phone", "photo"},
+                newNameFieldsAS = {"id", "Имя", "Серия и номер паспорта", "Возраст", "Адрес", "Телефон", "Фото"};
+
+            string WaitResult = " SELECT  id_info AS 'id',  full_name AS 'Имя',  passport_id AS 'Серия и номер паспорта',  " +
+                                            "age AS 'Возраст',  address AS 'Адрес',  phone AS 'Телефон',  photo AS 'Фото' " +
+                                    "FROM supermarket.info" +
+                                    " WHERE CONCAT ( id_info,  full_name,  passport_id,  age,  address,  phone,  photo ) " +
+                                    " LIKE '%Краматорск%'";
+            //act
+            Connection connection = new Connection();
+            string query = connection.GetQuerySearch(nameTable, nameFields, newNameFieldsAS, valueToSearh: value);
+
+            //assert
+            Assert.AreEqual(WaitResult.Length, query.Length);
+            // Assert.AreEqual(WaitResult.ToLower(), query.ToLower());
+        }
+
+        [TestMethod]
         public void GetSelectAllFieldTablesTest()
         {
             //arrange
@@ -233,15 +257,29 @@ namespace Admin.UnitTest
         {
             //arrange
             List<float> data = new List<float>() { 9.45f, 95.45f, 1.45f};
-            string mathOperation = "/";
-            float WaitResult = 9.45f  / 95.45f / 1.45f;
+            string mathDiv = "/",
+                   mathMult = "*",
+                   mathAdd = "+",
+                    mathSub = "-";
+
+            float WaitResultDiv = 9.45f  / 95.45f / 1.45f,
+                  WaitResultMult = 9.45f * 95.45f * 1.45f,
+                  WaitResultAdd = 9.45f + 95.45f + 1.45f,
+                  WaitResultSub = 9.45f - 95.45f - 1.45f;
+
 
             //act
             Administrator_supermarket.Сalculations calc = new Administrator_supermarket.Сalculations();
-            float result = calc.GetCalc(data, mathOperation);
+            float resultDiv = calc.GetCalc(data, mathDiv),
+                  resultMult = calc.GetCalc(data, mathMult),
+                  resultAdd = calc.GetCalc(data, mathAdd),
+                  resultSub = calc.GetCalc(data, mathSub);
 
             //assert
-            Assert.AreEqual(WaitResult, result);
+            Assert.AreEqual(WaitResultDiv, resultDiv);
+            Assert.AreEqual(WaitResultMult, resultMult);
+            Assert.AreEqual(WaitResultAdd, resultAdd);
+            Assert.AreEqual(WaitResultSub, resultSub);
         }
 
         [TestMethod]

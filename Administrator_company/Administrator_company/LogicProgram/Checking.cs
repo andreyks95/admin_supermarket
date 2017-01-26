@@ -14,7 +14,7 @@ namespace Administrator_supermarket
     public class Checking
     {
 
-        #region Данные методы проверяют поле(я) (textBox) на ввод вредных запросов
+        #region Данные методы проверяют поле(я) (textBox, ComboBox) на ввод вредных запросов
 
         #region Security 
         /// <summary>
@@ -30,6 +30,33 @@ namespace Administrator_supermarket
             string regex = @"SELECT  {1}?  | INSERT  {1}? | UPDATE  {1}? | UNION  {1}? | AND  {1}? | OR  {1}? |  group_concat  {1}? |  \'{1}? | \/\*{1}? | (--){1}? | \+ {1}? | \( {1}? | \;{1}? | (@@){1}?";
             Regex reg = new Regex(regex, RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.Singleline | RegexOptions.IgnorePatternWhitespace);
            // bool result = reg.IsMatch(data);
+            Match match = reg.Match(data);
+            bool result = match.Success;
+
+            //если строка пройшла регулярное выражение и в ней содержиться вредный SQL запрос
+            if (result == true)
+                //тогда не давать разрешение на вставку запроса в БД 
+                return false;
+            else
+                //дать разрешение на вставку запроса в БД
+                return true;
+        }
+        #endregion
+
+        #region Security ComboBox
+        /// <summary>
+        /// Проверяет безопасность ввода. Если в ComboBox есть sql-инъекция, то прервать ввод. 
+        /// </summary>
+        /// <param name="ComboBox">CombobBox который нужно проверить</param>
+        /// <returns>Можно добавлять запись или нет</returns>
+        public bool Security(ComboBox ComboBox)
+        {
+
+            string data = ComboBox.SelectedItem.ToString();
+            //регулярное выражение
+            string regex = @"SELECT  {1}?  | INSERT  {1}? | UPDATE  {1}? | UNION  {1}? | AND  {1}? | OR  {1}? |  group_concat  {1}? |  \'{1}? | \/\*{1}? | (--){1}? | \+ {1}? | \( {1}? | \;{1}? | (@@){1}?";
+            Regex reg = new Regex(regex, RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.Singleline | RegexOptions.IgnorePatternWhitespace);
+            // bool result = reg.IsMatch(data);
             Match match = reg.Match(data);
             bool result = match.Success;
 
@@ -90,6 +117,34 @@ namespace Administrator_supermarket
         }
         #endregion
 
+        #region SecurityAll ComboBox
+        /// <summary>
+        /// Проверяет каждый ComboBox таблицы на ввод sql-инъекции (вредный запрос)
+        /// Если есть хотя бы одно поле, которое содержит sql-инъекцию (вредный запрос)
+        /// тогда прервавть добавление данных в таблицу
+        /// </summary>
+        /// <param name="ComboBox">Массив ComboBox-ов таблицы</param>
+        /// <returns>Можно добавить данные или нет</returns>
+        public bool SecurityAll(params ComboBox[] ComboBox)
+        {
+            bool result = default(bool);
+            byte count = 0;
+
+            foreach (var i in ComboBox)
+            {
+                result = Security(i);
+                //если результат проверки вернул то, что нельзя добавлять данные увеличиваем счётчик
+                if (result == false)
+                    count++;
+            }
+            //Если вредных вводимых данных больше, чем одно тогда нельзя добавлять данные.
+            if (count >= 1)
+                return false;
+            else
+                return true;
+        }
+        #endregion
+
         #region SecurityAllString overload
         public bool SecurityAllString(string[] str)
         {
@@ -113,7 +168,7 @@ namespace Administrator_supermarket
 
         #endregion
 
-        #region  Данные методы проверяют поле(я) (textBox) на  ввод пустых данных
+        #region  Данные методы проверяют поле(я) (textBox, ComboBox) на  ввод пустых данных
 
         #region Void 
         /// <summary>
@@ -125,6 +180,23 @@ namespace Administrator_supermarket
         public bool Void(TextBox textBox)
         {
             string data = textBox.ToString();
+            if (data == null || data == "" || data == " " || data == "0")
+                return false;
+            else
+                return true;
+        }
+        #endregion
+
+        #region Void ComboBox
+        /// <summary>
+        /// Проверяет каждое поле (ComboBox) на ввод пустых значений 
+        /// Если пустое поле - то вернуть информацию о том, что это поле нельзя добавлять в БД
+        /// </summary>
+        /// <param name="ComboBox">ComboBox - который передаётся</param>
+        /// <returns>Можно это поле добавлять или нет</returns>
+        public bool Void(ComboBox ComboBox)
+        {
+            string data = ComboBox.SelectedItem.ToString();
             if (data == null || data == "" || data == " " || data == "0")
                 return false;
             else
@@ -156,6 +228,34 @@ namespace Administrator_supermarket
             byte count = 0;
 
             foreach (var i in textBoxs)
+            {
+                result = Void(i);
+                //если результат проверки вернул то, что нельзя добавлять данные увеличиваем счётчик
+                if (result == false)
+                    count++;
+            }
+            //Если есть пустые данные, которые необходимо добавить больше, чем одно тогда нельзя добавлять данные.
+            if (count >= 1)
+                return false;
+            else
+                return true;
+        }
+        #endregion
+
+        #region VoidAll ComboBox
+        /// <summary>
+        /// Проверяет все ComboBox-ы в таблице на ввод пустых значений
+        /// если хотя бы есть ОДНО пустое поле, которое нужно ОБЯЗАТЕЛЬНО заполнить
+        /// тогда возвращаем информацию о том, что поля нельзя добавлять в таблицу
+        /// </summary>
+        /// <param name="ComboBox">Массив ComboBox-ов таблицы</param>
+        /// <returns>Можно добавлять или нет</returns>
+        public bool VoidAll(params ComboBox[] ComboBoxs)
+        {
+            bool result = default(bool);
+            byte count = 0;
+
+            foreach (var i in ComboBoxs)
             {
                 result = Void(i);
                 //если результат проверки вернул то, что нельзя добавлять данные увеличиваем счётчик

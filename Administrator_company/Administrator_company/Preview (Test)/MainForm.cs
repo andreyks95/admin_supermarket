@@ -31,7 +31,7 @@ namespace Administrator_company.Preview__Test_
 
         private void TestFormTwo_Click(object sender, EventArgs e)
         {
-            TestFormTwo testFormTwo = new TestFormTwo();
+            InfoForm testFormTwo = new InfoForm();
             testFormTwo.Show();
         }
     }
