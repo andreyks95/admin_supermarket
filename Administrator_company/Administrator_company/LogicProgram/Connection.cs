@@ -24,6 +24,8 @@ namespace Administrator_supermarket
 
         public const string NAME_DATABASE = "supermarket";
 
+        DataTable table = new DataTable();  
+
         //Открыть соединение для работы с БД
         public void OpenConnection()
         {
@@ -302,8 +304,9 @@ namespace Administrator_supermarket
              {
                  command = new MySqlCommand(query, connection); //Создаём запрос для поиска
                  adapter = new MySqlDataAdapter(command); //Выполняем команду
+                 adapter.SelectCommand = command;
                  //Для отображения в таблице
-                 DataTable table = new DataTable(); //Создаём таблицу
+                 table.Clear();
                  adapter.Fill(table); //Вставляем данные при выполнении команды в таблицу
                  dataGridView.DataSource = table; //подключаем заполненную таблицу и отображаем
              }
@@ -314,38 +317,39 @@ namespace Administrator_supermarket
          }
         #endregion
 
-      /* #region FillDataGridView overload. Отобразить таблицу с учётом поиска значения
-        /// <summary>
-        /// Отображает таблицу с учётом поиска значения (числового или строкового)
-        /// </summary>
-        /// <param name="dataGridView">текущий DataGridView для таблицы</param>
-        /// <param name="height">Высота ячеек в таблице</param>
-        /// <param name="cellsImages">Номера строк содержащих картинки</param>
-        /// <param name="query">запрос, который содержит select с параметром поиска значения по столбцам (числовое или строковое)
-        /// Если нету, то просто отображаем таблицу</param>
-        public void FillDataGridView(DataGridView dataGridView,  int height, int[] cellsImages, string query = "")
-        {
-            try
-            {
-                command = new MySqlCommand(query, connection); //Создаём запрос для поиска
-                adapter = new MySqlDataAdapter(command); //Выполняем команду
-                                                         //Для отображения в таблице
-                DataTable table = new DataTable(); //Создаём таблицу
-                adapter.Fill(table); //Вставляем данные при выполнении команды в таблицу
-               
-                Settings settings = new Settings();
-                //настраиваем отображение таблицы
-                settings.GetSettingDisplayTable(dataGridView, height);
-                dataGridView.DataSource = table; //подключаем заполненную таблицу и отображаем
-                //Для отображения картинки в DataGridView
-                settings.GetViewImageInCellTable(dataGridView, cellsImages);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-        }
-        #endregion*/
+        /* #region FillDataGridView overload. Отобразить таблицу с учётом поиска значения
+          /// <summary>
+          /// Отображает таблицу с учётом поиска значения (числового или строкового)
+          /// </summary>
+          /// <param name="dataGridView">текущий DataGridView для таблицы</param>
+          /// <param name="height">Высота ячеек в таблице</param>
+          /// <param name="cellsImages">Номера строк содержащих картинки</param>
+          /// <param name="query">запрос, который содержит select с параметром поиска значения по столбцам (числовое или строковое)
+          /// Если нету, то просто отображаем таблицу</param>
+          public void FillDataGridView(DataGridView dataGridView,  int height, int[] cellsImages, string query = "")
+          {
+              try
+              {
+                  command = new MySqlCommand(query, connection); //Создаём запрос для поиска
+                  adapter = new MySqlDataAdapter(command); //Выполняем команду
+                  //Для отображения в таблице
+                  adapter.SelectCommand = command;
+                  table.Clear();
+                  adapter.Fill(table); //Вставляем данные при выполнении команды в таблицу
+
+                  Settings settings = new Settings();
+                  //настраиваем отображение таблицы
+                  settings.GetSettingDisplayTable(dataGridView, height);
+                  dataGridView.DataSource = table; //подключаем заполненную таблицу и отображаем
+                  //Для отображения картинки в DataGridView
+                  settings.GetViewImageInCellTable(dataGridView, cellsImages);
+              }
+              catch (Exception ex)
+              {
+                  MessageBox.Show(ex.Message);
+              }
+          }
+          #endregion*/
 
         #region FillDataGridView overload. Отобразить таблицу с учётом поиска значения
         /// <summary>
@@ -363,15 +367,20 @@ namespace Administrator_supermarket
                 command = new MySqlCommand(query, connection); //Создаём запрос для поиска
                 adapter = new MySqlDataAdapter(command); //Выполняем команду
                                                          //Для отображения в таблице
-                DataTable table = new DataTable(); //Создаём таблицу
+                //Создаём таблицу
+                adapter.SelectCommand = command;
+                table.Clear();
                 adapter.Fill(table); //Вставляем данные при выполнении команды в таблицу
-
+               /* dataView = new DataView(table);
+                dataView.Sort = value;*/
+                
                 Settings settings = new Settings();
                 //настраиваем отображение таблицы
                 settings.GetSettingDisplayTable(dataGridView, height);
                 dataGridView.DataSource = table; //подключаем заполненную таблицу и отображаем
                 //Для отображения картинки в DataGridView
                 settings.GetViewImageInCellTable(dataGridView, cellsImages);
+               
                 return table;
             }
             catch (Exception ex)
@@ -745,18 +754,18 @@ namespace Administrator_supermarket
         /// <param name="textBoxs">Если найденные данные нужно отобразить в textBoх-ах</param>
         /// <param name="comboBoxs">Если найденные данные нужно отобразить в comboBox-ах</param>
         /// <param name="pictureBoxs">Если найденные данные нужно отобразить в pictureBox-ах</param>
-        /// <param name="rowsTextForTextBox">Строки dataGridView которые содержать текстовые данные для TextBox-ов</param>
-        /// <param name="rowsTextForComboBox">Строки dataGridView которые содержать текстовые данные для comboBox-ов</param>
-        /// <param name="rowsPictureForPictureBox">Строки dataGridView которые содержать изображения для pictureBox-ов</param>
+        /// <param name="ColumnsTextForTextBox">Строки dataGridView которые содержать текстовые данные для TextBox-ов</param>
+        /// <param name="ColumnsTextForComboBox">Строки dataGridView которые содержать текстовые данные для comboBox-ов</param>
+        /// <param name="ColumnsPictureForPictureBox">Строки dataGridView которые содержать изображения для pictureBox-ов</param>
         public void Find(MySqlCommand commandLocal, TextBox[] textBoxs=null, ComboBox[] comboBoxs = null, PictureBox[] pictureBoxs= null,
-                        int[] rowsTextForTextBox=null, int[] rowsTextForComboBox = null, int[] rowsPictureForPictureBox = null)
+                        int[] ColumnsTextForTextBox=null, int[] ColumnsTextForComboBox = null, int[] ColumnsPictureForPictureBox = null)
         {
             ///Для отображения в таблице
             DataTable table = new DataTable(); //Создаём таблицу
             adapter.SelectCommand = commandLocal;
             adapter.Fill(table); //Вставляем данные при выполнении команды в таблицу
             Settings settings = new Settings();
-            if (table.Rows.Count <= 0)
+            if (table.Columns.Count <= 0)
             {
                 MessageBox.Show("Указанная запись: " + textBoxs[0].Text + " не найдена!");//textBoxs[0] должен содержать id 
                 settings.ClearFields(textBoxs, comboBoxs, pictureBoxs);
@@ -764,9 +773,9 @@ namespace Administrator_supermarket
             else
             {
                 MessageBox.Show("Указанная запись " + textBoxs[0].Text + " найдена!");
-                settings.InsertTextInTextBoxFromTable(table, rowsTextForTextBox, textBoxs);
-                settings.InsertTextInComboBoxFromTable(table, rowsTextForComboBox, comboBoxs);
-                settings.InsertImageInPictureBoxFromTable(table, rowsPictureForPictureBox, pictureBoxs);   
+                settings.InsertTextInTextBoxFromTable(table, ColumnsTextForTextBox, textBoxs);
+                settings.InsertTextInComboBoxFromTable(table, ColumnsTextForComboBox, comboBoxs);
+                settings.InsertImageInPictureBoxFromTable(table, ColumnsPictureForPictureBox, pictureBoxs);   
             }
         }
         #endregion*/
@@ -779,18 +788,18 @@ namespace Administrator_supermarket
         /// <param name="textBoxs">Если найденные данные нужно отобразить в textBoх-ах</param>
         /// <param name="comboBoxs">Если найденные данные нужно отобразить в comboBox-ах</param>
         /// <param name="pictureBoxs">Если найденные данные нужно отобразить в pictureBox-ах</param>
-        /// <param name="rowsTextForTextBox">Строки dataGridView которые содержать текстовые данные для TextBox-ов</param>
-        /// <param name="rowsTextForComboBox">Строки dataGridView которые содержать текстовые данные для comboBox-ов</param>
-        /// <param name="rowsPictureForPictureBox">Строки dataGridView которые содержать изображения для pictureBox-ов</param>
+        /// <param name="ColumnsTextForTextBox">Строки dataGridView которые содержать текстовые данные для TextBox-ов</param>
+        /// <param name="ColumnsTextForComboBox">Строки dataGridView которые содержать текстовые данные для comboBox-ов</param>
+        /// <param name="ColumnsPictureForPictureBox">Строки dataGridView которые содержать изображения для pictureBox-ов</param>
         public DataTable Find(MySqlCommand commandLocal, TextBox[] textBoxs = null, ComboBox[] comboBoxs = null, PictureBox[] pictureBoxs = null,
-                        int[] rowsTextForTextBox = null, int[] rowsTextForComboBox = null, int[] rowsPictureForPictureBox = null)
+                        int[] ColumnsTextForTextBox = null, int[] ColumnsTextForComboBox = null, int[] ColumnsPictureForPictureBox = null, DataGridView dataGrid=null)
         {
             ///Для отображения в таблице
-            DataTable table = new DataTable(); //Создаём таблицу
-            adapter.SelectCommand = commandLocal;
+            adapter.SelectCommand = commandLocal; //выполнить выборку. Select нужно новый создавать
+             DataTable table = new DataTable();
             adapter.Fill(table); //Вставляем данные при выполнении команды в таблицу
             Settings settings = new Settings();
-            if (table.Rows.Count <= 0)
+            if (table.Columns.Count <= 0)
             {
                 MessageBox.Show("Указанная запись: " + textBoxs[0].Text + " не найдена!");//textBoxs[0] должен содержать id 
                 settings.ClearFields(textBoxs, comboBoxs, pictureBoxs);
@@ -798,12 +807,13 @@ namespace Administrator_supermarket
             else
             {
                 MessageBox.Show("Указанная запись " + textBoxs[0].Text + " найдена!");
-                settings.InsertTextInTextBoxFromTable(table, rowsTextForTextBox, textBoxs);
-                settings.InsertTextInComboBoxFromTable(table, rowsTextForComboBox, comboBoxs);
-                settings.InsertImageInPictureBoxFromTable(table, rowsPictureForPictureBox, pictureBoxs);
+                settings.InsertTextInTextBoxFromTable(table, ColumnsTextForTextBox, textBoxs); //вставляем все значения из таблицы в text-Box так же для остальных
+                settings.InsertTextInComboBoxFromTable(table, ColumnsTextForComboBox, comboBoxs);
+                settings.InsertImageInPictureBoxFromTable(table, ColumnsPictureForPictureBox, pictureBoxs);
             }
             return table;
         }
-        #endregion 
+        #endregion
+
     }
 }
