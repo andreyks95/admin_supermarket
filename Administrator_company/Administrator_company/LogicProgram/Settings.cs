@@ -99,54 +99,54 @@ namespace Administrator_supermarket
 
         #endregion
 
-        #region CurrentRowCellsIMG
+        #region CurrentColumnCellsIMG
 
-        #region CurrentRowCellsIMG. Вставляет в PictureBox изображение из ячейки
+        #region CurrentColumnCellsIMG. Вставляет в PictureBox изображение из ячейки
         /// <summary>
         /// Отображает из текущей ячейки строки DataGridView картинку в PicureBox
         /// </summary>
         /// <param name="number">номер столбца (ячейки) DataGridView в котором содержиться картинка</param>
         /// <param name="pictureBox">pictureBox куда нужно вставить картинку</param>
         /// <param name="dataGridView">текущий dataGridView</param>
-        public void CurrentRowCellsIMG(int number, PictureBox pictureBox, DataGridView dataGridView)
+        public void CurrentColumnCellsIMG(int number, PictureBox pictureBox, DataGridView dataGridView)
         {
-            //Если ячейка пустая, то в pictureBox ничего не отображать
-            if (dataGridView.CurrentRow.Cells[number].Value == DBNull.Value)
+            try
             {
-                pictureBox.Image = null;
-            }
-            else
-            {
-                try
+                //Если ячейка пустая, то в pictureBox ничего не отображать
+                if (dataGridView.CurrentRow.Cells[number].Value == DBNull.Value)
                 {
-                    Byte[] img = (Byte[])dataGridView.CurrentRow.Cells[number].Value; //Получаем изображание
+                    pictureBox.Image = null;
+                }
+                else
+                {
+                    Byte[] img = (Byte[]) dataGridView.CurrentRow.Cells[number].Value; //Получаем изображание
                     MemoryStream ms = new MemoryStream(img);
                     pictureBox.Image = Image.FromStream(ms); // вставляем в pictureBox это изображение
                 }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message);
-                }
-
             }
+            catch (Exception ex)
+            {
+               // MessageBox.Show(ex.Message);
+            }
+
         }
         #endregion
 
-        #region CurrentRowCellsIMG overload. Вставляет в pictureBox-ы изображения из ячеек
+        #region CurrentColumnCellsIMG overload. Вставляет в pictureBox-ы изображения из ячеек
         /// <summary>
         /// Отображает все картинки в pictureBox-ы из ячеек таблицы в которых есть изображения 
         /// </summary>
         /// <param name="pictureBoxs">Все PictureBoxs на форме куда нужно вставить картинки</param>
         /// <param name="dataGridView">Текущий DataGridView где содержаться картинки</param>
-        public void CurrentRowCellsIMG(PictureBox[] pictureBoxs, DataGridView dataGridView)
+        public void CurrentColumnCellsIMG(PictureBox[] pictureBoxs, DataGridView dataGridView)
         {
             //Вставляем во все PictureBox-ы, которые есть изображения из ячеек таблицы DataGridView
             for(int i =0; i < pictureBoxs.Length; i++)
-                CurrentRowCellsIMG(i, pictureBoxs[i], dataGridView);
+                CurrentColumnCellsIMG(i, pictureBoxs[i], dataGridView);
         }
         #endregion
 
-        #region CurrentRowCellsIMG overload. Вставляет в pictureBox-ы изображения из ячеек
+        #region CurrentColumnCellsIMG overload. Вставляет в pictureBox-ы изображения из ячеек
         /// <summary>
         /// Отображает все картинки в pictureBox-ы из ячеек таблицы в которых есть изображения
         /// Если ячейки имеют разный порядковый номер в таблице 
@@ -154,50 +154,58 @@ namespace Administrator_supermarket
         /// <param name="numbers">Массив номеров ячеек, которые содержат изображение</param>
         /// <param name="pictureBoxs">Все PictureBoxs на форме куда нужно вставить картинки</param>
         /// <param name="dataGridView">Текущий DataGridView где содержаться картинки</param>
-        public void CurrentRowCellsIMG(int[] numbers, PictureBox[] pictureBoxs, DataGridView dataGridView)
+        public void CurrentColumnCellsIMG(int[] numbers, PictureBox[] pictureBoxs, DataGridView dataGridView)
         {
             //Вставляем во все PictureBox-ы, которые есть изображения из ячеек таблицы DataGridView
             for (int i = 0; i < pictureBoxs.Length; i++)
-                CurrentRowCellsIMG(numbers[i], pictureBoxs[i], dataGridView);
+                CurrentColumnCellsIMG(numbers[i], pictureBoxs[i], dataGridView);
         }
         #endregion
 
         #endregion
 
-        #region CurrentRowCellsText
+        #region CurrentColumnCellsText
 
-        #region CurrentRowCellsText. Вставка текста в textBox из ячейки таблицы 
+        #region CurrentColumnCellsText. Вставка текста в textBox из ячейки таблицы 
         /// <summary>
         /// Помещает в textBox значение с ячейки текущей строки DataGridView
         /// </summary>
         /// <param name="number">Номер столбца (ячейки) DataGridView в которой содержиться текстовое значение</param>
         /// <param name="textBox">textBox куда нужно вставить значение</param>
         /// <param name="dataGridView">текущий dataGridView</param>
-        public void CurrentRowCellsTEXT(int number, TextBox textBox, DataGridView dataGridView)
+        public void CurrentColumnCellsTEXT(int number, TextBox textBox, DataGridView dataGridView)
         {
-            if(number != 0 || number != null)
-                textBox.Text = dataGridView.CurrentRow.Cells[number].Value.ToString();
+            try
+            {
+                if (number != 0 || number != null)
+                    textBox.Text = dataGridView.CurrentRow.Cells[number].Value.ToString();
+            }
+            catch (Exception ex)
+            {
+                //MessageBox.Show(ex.Message);
+            }
+
         }
         #endregion
 
-        #region CurrentRowCellsText overload. Вставка текста в textBox-ы из ячеек таблицы 
+        #region CurrentColumnCellsText overload. Вставка текста в textBox-ы из ячеек таблицы 
         /// <summary>
         /// Помещает во ВСЕ textBox-ы значения из текущей строки DataGridView
         /// </summary>
         /// <param name="textBoxs">Массив textBox-ов куда нужно вставить значения</param>
         /// <param name="dataGridView">текущий dataGridView</param>
-        public void CurrentRowCellsTEXT(TextBox[] textBoxs, DataGridView dataGridView)
+        public void CurrentColumnCellsTEXT(TextBox[] textBoxs, DataGridView dataGridView)
         {
 
             for (var i = 0; i < textBoxs.Length; i++)
             {
                 //передаёт номер ячейки и сам textBox куда нужно вставить значения из строки DataGridView
-                CurrentRowCellsTEXT(i, textBoxs[i], dataGridView);
+                CurrentColumnCellsTEXT(i, textBoxs[i], dataGridView);
             }
         }
         #endregion
 
-        #region CurrentRowCellsText overload. Вставка текста в textBox-ы из ячеек таблицы в которых нумерация не попорядку
+        #region CurrentColumnCellsText overload. Вставка текста в textBox-ы из ячеек таблицы в которых нумерация не попорядку
         /// <summary>
         /// Помещает во ВСЕ textBox-ы значения из текущей строки DataGridView
         /// Для случая, если текстовые ячейки имеют разные номера (не попорядку)
@@ -205,13 +213,13 @@ namespace Administrator_supermarket
         /// <param name="numbers">массив содержащий номера ячеек с текстовым содержанием</param>
         /// <param name="textBoxs">Массив textBox-ов куда нужно вставить значения</param>
         /// <param name="dataGridView">текущий dataGridView</param>
-        public void CurrentRowCellsTEXT(int[] numbers, TextBox[] textBoxs, DataGridView dataGridView)
+        public void CurrentColumnCellsTEXT(int[] numbers, TextBox[] textBoxs, DataGridView dataGridView)
         {
 
             for (var i = 0; i < textBoxs.Length; i++)
             {
                 //передаёт номер ячейки и сам textBox куда нужно вставить значения из строки DataGridView
-                CurrentRowCellsTEXT(numbers[i], textBoxs[i], dataGridView);
+                CurrentColumnCellsTEXT(numbers[i], textBoxs[i], dataGridView);
             }
         }
         #endregion
@@ -249,11 +257,11 @@ namespace Administrator_supermarket
         /// Вставляет текущий найденный текст из таблицы в TextBox
         /// </summary>
         /// <param name="table">Текущая таблица</param>
-        /// <param name="row">Номер строки где находятся текст</param>
+        /// <param name="Column">Номер строки где находятся текст</param>
         /// <param name="textBox">TextBox формы куда нужно вставить текст из таблицы</param>
-        public void InsertTextInTextBoxFromTable(DataTable table, int row, TextBox textBox)
+        public void InsertTextInTextBoxFromTable(DataTable table, int Column, TextBox textBox)
         {
-            textBox.Text = table.Rows[0][row].ToString();
+            textBox.Text = table.Rows[0][Column].ToString();
         }
         #endregion
 
@@ -262,13 +270,13 @@ namespace Administrator_supermarket
         /// Вставляет текущий найденный текст из таблицы в TextBox-ы
         /// </summary>
         /// <param name="table">Текущая таблица</param>
-        /// <param name="rows">Номера строк где находятся текст</param>
+        /// <param name="Columns">Номера строк где находятся текст</param>
         /// <param name="textBoxs">Все TextBox формы куда нужно вставить текст из таблицы</param>
-        public void InsertTextInTextBoxFromTable(DataTable table, int[] rows, params TextBox[] textBoxs)
+        public void InsertTextInTextBoxFromTable(DataTable table, int[] Columns, params TextBox[] textBoxs)
         {
             if (textBoxs != null)
                 for (int i = 0; i < textBoxs.Length; i++)
-                    InsertTextInTextBoxFromTable(table, rows[i], textBoxs[i]);
+                    InsertTextInTextBoxFromTable(table, Columns[i], textBoxs[i]);
         }
         #endregion
 
@@ -281,11 +289,11 @@ namespace Administrator_supermarket
         /// Вставляет текущий найденный текст из таблицы в ComboBox
         /// </summary>
         /// <param name="table">Текущая таблица</param>
-        /// <param name="row">Номер строки где находятся текст</param>
+        /// <param name="Column">Номер строки где находятся текст</param>
         /// <param name="comboBox">ComboBox формы куда нужно вставить текст из таблицы</param>
-        public void InsertTextInComboBoxFromTable(DataTable table, int row, ComboBox comboBox)
+        public void InsertTextInComboBoxFromTable(DataTable table, int Column, ComboBox comboBox)
         {
-                comboBox.SelectedItem = table.Rows[0][row].ToString();
+                comboBox.SelectedItem = table.Rows[0][Column].ToString();
         }
         #endregion
 
@@ -294,13 +302,13 @@ namespace Administrator_supermarket
         /// Вставляет текущий найденный текст из таблицы в ComboBox-ы
         /// </summary>
         /// <param name="table">Текущая таблица</param>
-        /// <param name="rows">Номера строк где находятся текст</param>
+        /// <param name="Columns">Номера строк где находятся текст</param>
         /// <param name="comboBoxs">Все ComboBox формы куда нужно вставить текст из таблицы</param>
-        public void InsertTextInComboBoxFromTable(DataTable table, int[] rows, params ComboBox[] comboBoxs)
+        public void InsertTextInComboBoxFromTable(DataTable table, int[] Columns, params ComboBox[] comboBoxs)
         {
             if(comboBoxs !=  null)
                 for (int i = 0; i < comboBoxs.Length; i++)
-                    InsertTextInComboBoxFromTable(table, rows[i], comboBoxs[i]);
+                    InsertTextInComboBoxFromTable(table, Columns[i], comboBoxs[i]);
         }
         #endregion
 
@@ -313,13 +321,13 @@ namespace Administrator_supermarket
         /// Вставляет текущее найденное изображение из таблицы в PictureBox
         /// </summary>
         /// <param name="table">Текущая таблица</param>
-        /// <param name="row">Номер строки где находяться изображения</param>
+        /// <param name="Column">Номер строки где находяться изображения</param>
         /// <param name="pictureBox">PictureBox формы куда нужно вставить изображение из таблицы</param>
-        public void InsertImageInPictureBoxFromTable(DataTable table, int row, PictureBox pictureBox)
+        public void InsertImageInPictureBoxFromTable(DataTable table, int Column, PictureBox pictureBox)
         {
-            if (!DBNull.Value.Equals(table.Rows[0][row]))
+            if (!DBNull.Value.Equals(table.Rows[0][Column]))
             {
-                byte[] img = (byte[]) table.Rows[0][row];
+                byte[] img = (byte[]) table.Rows[0][Column];
                 MemoryStream ms = new MemoryStream(img);
                 pictureBox.Image = Image.FromStream(ms);
             }
@@ -334,13 +342,13 @@ namespace Administrator_supermarket
         /// Вставляет текущие найденные изображения из таблицы в PictureBox-ы
         /// </summary>
         /// <param name="table">Текущая таблица</param>
-        /// <param name="rows">Номера строк где находяться изображения</param>
+        /// <param name="Columns">Номера строк где находяться изображения</param>
         /// <param name="pictureBoxs">Все PictureBox формы куда нужно вставить изображения из таблицы</param>
-        public void InsertImageInPictureBoxFromTable(DataTable table, int[] rows, params PictureBox[] pictureBoxs)
+        public void InsertImageInPictureBoxFromTable(DataTable table, int[] Columns, params PictureBox[] pictureBoxs)
         {
             if (pictureBoxs != null)
                 for (int i = 0; i < pictureBoxs.Length; i++)
-                InsertImageInPictureBoxFromTable(table, rows[i], pictureBoxs[i]);
+                InsertImageInPictureBoxFromTable(table, Columns[i], pictureBoxs[i]);
         }
         #endregion
 
