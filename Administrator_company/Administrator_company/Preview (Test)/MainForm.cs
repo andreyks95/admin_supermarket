@@ -31,8 +31,14 @@ namespace Administrator_company.Preview__Test_
 
         private void TestFormTwo_Click(object sender, EventArgs e)
         {
-            InfoForm testFormTwo = new InfoForm();
-            testFormTwo.Show();
+            InfoForm infoForm = new InfoForm();
+            infoForm.Show();
+        }
+
+        private void PositionButton_Click(object sender, EventArgs e)
+        {
+            PositionForm positionForm = new PositionForm();
+            positionForm.Show();
         }
     }
 }
