@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel.Design.Serialization;
 using System.Data;
+using System.Linq;
 using System.Windows.Forms;
 using MySql.Data.MySqlClient;
 
@@ -14,7 +15,9 @@ namespace Administrator_supermarket
 
         Connection connect = new Connection();
 
-        #region Данные методы создают SELECT запрос(ы) только для ТАБЛИЦЫ
+        //Старая версия. Методы для просчёта значения в ячейке с использованием "впайки" Запросов 
+
+        #region Данные методы создают SELECT запрос(ы) только для значения в одной ТАБЛИЦЕ
 
         #region GetSelectFromOneFieldTable 
         /// <summary>
@@ -106,7 +109,7 @@ namespace Administrator_supermarket
 
         #endregion
 
-        #region Данные методы создают SET запрос(ы) только для ТАБЛИЦЫ
+        #region Данные методы создают SET запрос(ы) только для одной ТАБЛИЦЫ
 
         #region GetSet
 
@@ -187,7 +190,7 @@ namespace Administrator_supermarket
         
         #endregion
 
-        #region Метод - GetWhere который создаёт WHERE подзапрос для ТАБЛИЦЫ
+        #region Метод - GetWhere который создаёт WHERE подзапрос для одной ТАБЛИЦЫ
         /// <summary>
         /// Получаем одну строку запроса WHERE
         /// </summary>
@@ -202,7 +205,7 @@ namespace Administrator_supermarket
         }
         #endregion
 
-        #region Метод - GetUpdate который создаёт Update подзапрос для ТАБЛИЦЫ
+        #region Метод - GetUpdate который создаёт Update подзапрос для одной ТАБЛИЦЫ
         /// <summary>
         /// Получаем начало запроса UPDATE, где нужно обновить данные (посчитать значение для ячейки таблицы) 
         /// </summary>
@@ -306,6 +309,148 @@ namespace Administrator_supermarket
             connect.CloseConnection(); //закрываем соединение
             //Example: query = 15; max id field id_stock table stock database admin_company
             return result;
+        }
+        #endregion
+
+
+        //Новая версия. Новые методы для получения значения из ячейки с использование ExecuteScalar
+
+        #region GetSelectQuery. Запрос для получения значения ячейки
+        /// <summary>
+        /// Получить запрос для выбора числового значения (и не только) из ячейки поля таблицы
+        /// </summary>
+        /// <param name="nameDatabase">Название базы данных</param>
+        /// <param name="table">Название таблицы</param>
+        /// <param name="field">Название поля таблицы</param>
+        /// <param name="idField">Название id поля таблицы, по котором будет осуществляться выборка</param>
+        /// <param name="id">id поля с которого нужно получить значение</param>
+        /// <returns>Запрос SELECT</returns>
+        public string GetSelectQuery(string nameDatabase = "", string table =  "", string field = "", string idField = "", string id = "" )
+        {
+
+            return " SELECT " + field +
+                   " FROM " + nameDatabase + "." + table +
+                   " WHERE " + idField + " = " + id + "; ";
+        }
+        #endregion
+
+        #region GetSelectValue. Получить число с ячейки
+        /// <summary>
+        /// Получить числовое значение с ячейки  (с плавающей точкой) из запроса
+        /// </summary>
+        /// <param name="query">Запрос SELECT для получения значения из ячейки</param>
+        /// <returns>Вернуть значение ячейки (число с плавающей точкой)</returns>
+        public float GetSelectValue(string query)
+        {
+            connect.OpenConnection();
+            connect.command = new MySqlCommand(query, connect.connection);
+            var v = connect.command.ExecuteScalar();
+            connect.CloseConnection();
+            try
+            {
+                float value = Convert.ToSingle(v);
+                return value;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Не получено значение с ячейки: \n" + ex.Message);
+                return 0.0f;
+            }
+
+        }
+        #endregion
+
+        #region GetAllSelectValues. Получить список List<float>  всех значений из нужных ячеек таблиц
+        /// <summary>
+        /// Получить числовове значение из всех выбранных ячеек полей таблиц 
+        /// </summary>
+        /// <param name="nameDatabase">Название базы данных</param>
+        /// <param name="tables">Массив таблиц с которых нужно получить значения</param>
+        /// <param name="fields">Двумерный массив полей таблиц в котороых содержаться необходимые значения</param>
+        /// <param name="idFields">Массив названия id полей таблиц</param>
+        /// <param name="ids">Номера id записей в таблице</param>
+        /// <returns>Получить float List список всех числовых значений необходимых нам ячеек из таблиц</returns>
+        public List<float> GetAllSelectValues(string nameDatabase, string[] tables, string[][] fields, string[] idFields, string[] ids)
+        {
+            string query = default(string);
+            float value = default(float);
+            List<float> values = new List<float>();
+
+            for(int currentTable =0; currentTable < tables.Length; currentTable++)
+                for (int currentField = 0; currentField < fields[currentTable].Length; currentField++)
+                {
+                    query = GetSelectQuery(nameDatabase, tables[currentTable], fields[currentTable][currentField],
+                                        idFields[currentTable], ids[currentTable]);
+                    value = GetSelectValue(query);
+                    values.Add(value);
+                }
+            return values;
+        }
+        #endregion
+
+        #region GetCalc Получить результат вычисления значений
+        /// <summary>
+        ///Получение результата вычисления из списка числовых значений
+        /// </summary>
+        /// <param name="values">Списко всех числовых значений</param>
+        /// <param name="mathOperation">Мат. операция</param>
+        /// <returns>Результат вычисления</returns>
+        public float GetCalc(List<float> values, string mathOperation = "+")
+        {
+            float result = values.First();
+            switch (mathOperation)
+            {
+                case "+":
+                {
+                    for (int i = 1; i < values.Count; i++)
+                        result += values[i];
+                       break;
+                 }
+                case "-":
+                    {
+                        for (int i = 1; i < values.Count; i++)
+                            result -= values[i];
+                        break;
+                    }
+                case "*":
+                    {
+                        for (int i = 1; i < values.Count; i++)
+                            result *= values[i];
+                        break;
+                    }
+                case "/":
+                    {
+                        for (int i = 1; i < values.Count; i++)
+                        { 
+                            if(i == 0) { return result; }
+                            result /= values[i];
+                        }
+                        break;
+                    }
+                default: return 0.0f;      
+            }
+            return result;
+        }
+        #endregion
+
+        #region GetUpdateQuery. Получить update запрос для просчета значения в ячейке
+        /// <summary>
+        /// Update запрос для обновления данных (нового значения) в указанной ячейке таблицы
+        /// </summary>
+        /// <param name="nameDatabase">Название БД</param>
+        /// <param name="table">Название таблицы, где нужно применить запрос</param>
+        /// <param name="field">Поле таблицы, к которому относиться запрос</param>
+        /// <param name="idField">Название id поля табилцы</param>
+        /// <param name="id">Необходимая ячейка куда нужно вставить новое значение</param>
+        /// <param name="result">Числовое значение, результата вычисления</param>
+        /// <returns>Update запрос для вставки нового значения в ячейку</returns>
+        public string GetUpdateQuery(string nameDatabase, string table, string field, string idField, string id,
+            float result)
+        {
+            string updateQuery = " UPDATE " + nameDatabase + "." + table + " AS T1 " +
+                              " SET T1." + field + " = " + result.ToString() + " " +
+                              " WHERE T1." + idField + " = " + id + "; ";
+            return updateQuery;
         }
         #endregion
 
