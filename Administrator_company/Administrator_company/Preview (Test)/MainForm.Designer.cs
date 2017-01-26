@@ -57,9 +57,9 @@
             // 
             this.TestFormTwo.Location = new System.Drawing.Point(12, 110);
             this.TestFormTwo.Name = "TestFormTwo";
-            this.TestFormTwo.Size = new System.Drawing.Size(96, 23);
+            this.TestFormTwo.Size = new System.Drawing.Size(96, 38);
             this.TestFormTwo.TabIndex = 2;
-            this.TestFormTwo.Text = "Test Form Two";
+            this.TestFormTwo.Text = "Информация о сотрудниках";
             this.TestFormTwo.UseVisualStyleBackColor = true;
             this.TestFormTwo.Click += new System.EventHandler(this.TestFormTwo_Click);
             // 
@@ -67,7 +67,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(199, 145);
+            this.ClientSize = new System.Drawing.Size(233, 260);
             this.Controls.Add(this.TestFormTwo);
             this.Controls.Add(this.OpenTestForm);
             this.Controls.Add(this.OpenStock);
