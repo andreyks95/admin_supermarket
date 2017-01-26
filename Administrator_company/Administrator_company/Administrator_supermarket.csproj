@@ -113,6 +113,12 @@
     <Compile Include="Preview %28Test%29\MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Preview %28Test%29\PositionForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Preview %28Test%29\PositionForm.Designer.cs">
+      <DependentUpon>PositionForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Preview %28Test%29\Stock.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -125,11 +131,11 @@
     <Compile Include="Preview %28Test%29\TestForm.Designer.cs">
       <DependentUpon>TestForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Preview %28Test%29\TestFormTwo.cs">
+    <Compile Include="Preview %28Test%29\InfoForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Preview %28Test%29\TestFormTwo.Designer.cs">
-      <DependentUpon>TestFormTwo.cs</DependentUpon>
+    <Compile Include="Preview %28Test%29\InfoForm.Designer.cs">
+      <DependentUpon>InfoForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Preview %28Test%29\TestFunction.cs" />
     <Compile Include="Program.cs" />
@@ -168,14 +174,17 @@
     <EmbeddedResource Include="Preview %28Test%29\MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Preview %28Test%29\PositionForm.resx">
+      <DependentUpon>PositionForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Preview %28Test%29\Stock.resx">
       <DependentUpon>Stock.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Preview %28Test%29\TestForm.resx">
       <DependentUpon>TestForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Preview %28Test%29\TestFormTwo.resx">
-      <DependentUpon>TestFormTwo.cs</DependentUpon>
+    <EmbeddedResource Include="Preview %28Test%29\InfoForm.resx">
+      <DependentUpon>InfoForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

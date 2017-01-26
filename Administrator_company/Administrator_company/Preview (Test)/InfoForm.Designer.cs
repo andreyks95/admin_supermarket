@@ -89,7 +89,7 @@
             this.dataGridView1.Location = new System.Drawing.Point(364, 83);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView1.Size = new System.Drawing.Size(621, 401);
+            this.dataGridView1.Size = new System.Drawing.Size(625, 403);
             this.dataGridView1.TabIndex = 18;
             this.dataGridView1.SelectionChanged += new System.EventHandler(this.dataGridView1_SelectionChanged);
             this.dataGridView1.Click += new System.EventHandler(this.dataGridView1_Click);
@@ -238,7 +238,7 @@
             // 
             this.textBoxSearch.Location = new System.Drawing.Point(194, 12);
             this.textBoxSearch.Name = "textBoxSearch";
-            this.textBoxSearch.Size = new System.Drawing.Size(407, 20);
+            this.textBoxSearch.Size = new System.Drawing.Size(400, 20);
             this.textBoxSearch.TabIndex = 13;
             this.textBoxSearch.TextChanged += new System.EventHandler(this.textBoxSearch_TextChanged);
             // 
@@ -297,7 +297,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(364, 484);
+            this.panel1.Size = new System.Drawing.Size(364, 486);
             this.panel1.TabIndex = 23;
             // 
             // panel2
@@ -311,7 +311,7 @@
             this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel2.Location = new System.Drawing.Point(364, 0);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(621, 84);
+            this.panel2.Size = new System.Drawing.Size(625, 84);
             this.panel2.TabIndex = 24;
             // 
             // PreviousRecordButton
@@ -359,10 +359,11 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
-            this.ClientSize = new System.Drawing.Size(985, 484);
+            this.ClientSize = new System.Drawing.Size(989, 486);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.dataGridView1);
+            this.MinimumSize = new System.Drawing.Size(1005, 525);
             this.Name = "InfoForm";
             this.Text = "Информация о сотрудниках";
             this.Load += new System.EventHandler(this.TestFormTwo_Load);

@@ -31,6 +31,7 @@
             this.OpenStock = new System.Windows.Forms.Button();
             this.OpenTestForm = new System.Windows.Forms.Button();
             this.TestFormTwo = new System.Windows.Forms.Button();
+            this.PositionButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // OpenStock
@@ -63,11 +64,22 @@
             this.TestFormTwo.UseVisualStyleBackColor = true;
             this.TestFormTwo.Click += new System.EventHandler(this.TestFormTwo_Click);
             // 
+            // PositionButton
+            // 
+            this.PositionButton.Location = new System.Drawing.Point(12, 167);
+            this.PositionButton.Name = "PositionButton";
+            this.PositionButton.Size = new System.Drawing.Size(96, 23);
+            this.PositionButton.TabIndex = 3;
+            this.PositionButton.Text = "Должности";
+            this.PositionButton.UseVisualStyleBackColor = true;
+            this.PositionButton.Click += new System.EventHandler(this.PositionButton_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(233, 260);
+            this.Controls.Add(this.PositionButton);
             this.Controls.Add(this.TestFormTwo);
             this.Controls.Add(this.OpenTestForm);
             this.Controls.Add(this.OpenStock);
@@ -82,5 +94,6 @@
         private System.Windows.Forms.Button OpenStock;
         private System.Windows.Forms.Button OpenTestForm;
         private System.Windows.Forms.Button TestFormTwo;
+        private System.Windows.Forms.Button PositionButton;
     }
 }
