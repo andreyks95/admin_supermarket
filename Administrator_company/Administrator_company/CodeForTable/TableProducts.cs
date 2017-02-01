@@ -17,13 +17,17 @@ namespace Administrator_company
         {
             InitializeComponent();
         }
-        private readonly Connection connect = new Connection();
-        private readonly Checking checking = new Checking();
+        private readonly Connection connect = new Connection(); //Для отображения, вставки, обновления, удаления данных в таблице
+        private readonly Checking checking = new Checking(); //Для проверки ячеек на вредные запросы и пустоту значений
+
+        #region Загрузка формы и отображения таблицы 
         private void TableProducts_Load(object sender, EventArgs e)
         {
-            connect.ShowTable("sql7150982", "products", dataGridView1);//grocery_supermarket_manager
+            connect.ShowTable("grocery_supermarket_manager", "products", dataGridView1);//grocery_supermarket_manager //sql7150982
         }
+        #endregion
 
+        #region Вставка данных в таблицу
         private void InsertData_Click(object sender, EventArgs e)
         {
             //возвращаем результаты проверок всех полей
@@ -33,14 +37,16 @@ namespace Administrator_company
             if (resultSecurity == true && resultVoid == true)
             {
                 string[] fieldsTable = { "name", "category", "price_for_one" };
-                connect.InsertDataTable("sql7150982", "products", fieldsTable, textBox1, textBox2, textBox3);
-            }//grocery_supermarket_manager
+                connect.InsertDataTable("grocery_supermarket_manager", "products", fieldsTable, textBox1, textBox2, textBox3);
+            }//grocery_supermarket_manager //sql7150982
             else
             {
                 checking.ErrorMessage(this);
             }
         }
+        #endregion
 
+        #region Обновление данных в таблице
         private void button1_Click(object sender, EventArgs e)
         {
             
@@ -50,14 +56,16 @@ namespace Administrator_company
             if (resultSecurity == true && resultVoid == true)
             {
                 string[] fieldsTable = { "name", "category", "price_for_one", "id_products" };
-            connect.UpdateDataTable("sql7150982", "products", fieldsTable, textBox4, textBox5, textBox6, textBox7);
-            }//grocery_supermarket_manager
+            connect.UpdateDataTable("grocery_supermarket_manager", "products", fieldsTable, textBox4, textBox5, textBox6, textBox7);
+            }//grocery_supermarket_manager //sql7150982
             else
             {
                 checking.ErrorMessage(this);
             }
         }
+        #endregion
 
+        #region Удаление данных в таблице
         private void DeleteData_Click(object sender, EventArgs e)
         {
             bool resultSecurity = checking.SecurityAll(textBox8),
@@ -65,12 +73,13 @@ namespace Administrator_company
             if (resultSecurity == true && resultVoid == true)
             {
                 string[] fieldsTable = { "id_products" };
-            connect.DeleteDataTable("sql7150982", "products", fieldsTable, textBox8);
-            }//grocery_supermarket_manager
+            connect.DeleteDataTable("grocery_supermarket_manager", "products", fieldsTable, textBox8);
+            }//grocery_supermarket_manager //sql7150982
             else
             {
                 checking.ErrorMessage(this);
             }
         }
+        #endregion
     }
 }

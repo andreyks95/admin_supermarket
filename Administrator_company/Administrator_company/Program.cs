@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Administrator_company.Preview__Test_;
 
 namespace Administrator_supermarket
 {
@@ -16,9 +17,9 @@ namespace Administrator_supermarket
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            //Запустить сначала 2 форму
-            //Application.Run(new Form2());
-            Application.Run(new Form1());
+            //Запустить сначала эту форму
+            Application.Run(new MainForm());
+            //Application.Run(new Form1());
         }
     }
 }

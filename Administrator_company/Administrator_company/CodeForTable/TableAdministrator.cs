@@ -19,19 +19,20 @@ namespace Administrator_supermarket
         }
 
         //создаём объект класса Connection, где будем иметь доступ ко всем функциям 
-        private readonly Connection connect = new Connection();
-        private readonly Checking checking = new Checking();
-
-
-        // List<string> fieldsTable = new List<string> { "full_name", "passport_id", "experience", "address", "phone_number" }; 
+        private readonly Connection connect = new Connection(); //Для отображения, вставки, обновления, удаления данных в таблице
+        private readonly Checking checking = new Checking(); //Для проверки ячеек на вредные запросы и пустоту значений
 
         //public object DataGridViewDataSource => dataGridView1.DataSource;
+
+        #region Загрузка формы и отображения таблицы 
         //Отображение записей в таблице при загрузке
         private void TableAdministrator_Load(object sender, EventArgs e)
         {
-                connect.ShowTable("sql7150982", "administrator", dataGridView1);//grocery_supermarket_manager
+                connect.ShowTable("grocery_supermarket_manager", "administrator", dataGridView1);//grocery_supermarket_manager//sql7150982
         }
+        #endregion
 
+        #region Вставка данных в таблицу
         //Вставка записей в таблицу
         private void InsertData_Click(object sender, EventArgs e)
         {
@@ -43,14 +44,17 @@ namespace Administrator_supermarket
             {
                 //создаём массив из списка полей в таблице "administrator"
                 string[] fieldsTable = { "id_department", "full_name", "passport_id", "experience", "address", "phone_number", "age", "photo" };
-            connect.InsertDataTable("sql7150982", "administrator", fieldsTable, textBox1, textBox2, textBox3, textBox4, textBox5, textBox6, textBox7, textBox8);
-            }//grocery_supermarket_manager
+            connect.InsertDataTable("grocery_supermarket_manager", "administrator", fieldsTable, textBox1, textBox2, textBox3, textBox4, textBox5, textBox6, textBox7, textBox8);
+                //grocery_supermarket_manager//sql7150982
+            }
             else
             {
                 checking.ErrorMessage(this);
             }
-        }   
+        }
+        #endregion
 
+        #region Обновление данных в таблице
         private void button1_Click(object sender, EventArgs e)
         {
             //возвращаем результаты проверок всех полей
@@ -60,14 +64,17 @@ namespace Administrator_supermarket
             if (resultSecurity == true && resultVoid == true)
             {
                 string[] fieldsTable = { "id_department", "full_name", "passport_id", "experience", "address", "phone_number", "age", "photo", "id_administrator" };
-            connect.UpdateDataTable("sql7150982", "administrator", fieldsTable, textBox9, textBox10, textBox11, textBox12, textBox13, textBox14, textBox15, textBox16, textBox17);
-            }//grocery_supermarket_manager
+            connect.UpdateDataTable("grocery_supermarket_manager", "administrator", fieldsTable, textBox9, textBox10, textBox11, textBox12, textBox13, textBox14, textBox15, textBox16, textBox17);
+                //grocery_supermarket_manager//sql7150982
+            }
             else
             {
                 checking.ErrorMessage(this);
             }
         }
+        #endregion
 
+        #region Удаление данных в таблице
         private void buttonDeleteData_Click(object sender, EventArgs e)
         {
             //возвращаем результаты проверок всех полей
@@ -77,13 +84,15 @@ namespace Administrator_supermarket
             if (resultSecurity == true && resultVoid == true)
             {
                 string[] fieldsTable = {"id_administrator"};
-            connect.DeleteDataTable("sql7150982", "administrator", fieldsTable, textBoxDelete);
-            }//grocery_supermarket_manager
+                connect.DeleteDataTable("grocery_supermarket_manager", "administrator", fieldsTable, textBoxDelete);
+                //grocery_supermarket_manager //sql7150982
+            }
             else
             {
                 checking.ErrorMessage(this);
             }
-         }
+        }
+        #endregion
     }
 }
 
