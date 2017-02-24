@@ -42,10 +42,14 @@ namespace Administrator_company.Preview__Test_
 
         private void Insert_Click(object sender, EventArgs e)
         {
+            TextBox[] textBoxs = {textBox1, textBox2, textBox3};
+            ComboBox[] comboBoxs = {comboBox1, comboBox2, comboBox3 };
+            DateTimePicker[] dateTimePickers = {dateTimePicker1, dateTimePicker2 };
+
             //возвращаем результаты проверок всех полей
-            bool resultSecurity = checking.SecurityAll(textBox1, textBox2, textBox3),
-                resultVoid = checking.VoidAll(textBox1, textBox2, textBox3); //Проверяем только обязательные для ввода поля
-                                                                             //если результаты вернулись положительные, тогда можно добавить данные, иначе вывести ошибку
+            bool resultSecurity = checking.SecurityAll(textBoxs, comboBoxs, dateTimePickers),
+                resultVoid = checking.VoidAll(textBoxs, comboBoxs, dateTimePickers); //Проверяем только обязательные для ввода поля
+                                                                                     //если результаты вернулись положительные, тогда можно добавить данные, иначе вывести ошибку
             if (resultSecurity == true && resultVoid == true)
             {
                 //получить запрос для вставки Insert
@@ -53,7 +57,7 @@ namespace Administrator_company.Preview__Test_
                 //выполняить команду с Insert
                 connection.command = new MySqlCommand(query, connection.connection);
                 //для объектов, у них есть данные которые нужно вставить
-                object[] objects = { textBox1, textBox2, textBox3 };
+                object[] objects = { textBox1, textBox2, textBox3, comboBox1, comboBox2, comboBox3, dateTimePicker1, dateTimePicker2 };
                 //Добавляем данные 
                 connection.AddParameters(connection.command, variables, mySqlDbTypes, objects);
                 //попытаться выполнить запрос
@@ -69,7 +73,7 @@ namespace Administrator_company.Preview__Test_
 
         private void Update_Click(object sender, EventArgs e)
         {
-
+           
         }
 
         private void Delete_Click(object sender, EventArgs e)
