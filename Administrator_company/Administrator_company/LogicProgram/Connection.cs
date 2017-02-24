@@ -566,6 +566,15 @@ namespace Administrator_supermarket
         }
         #endregion
 
+        public string GetText(object obj, string nameProperty)
+        {
+            string text = null;
+            Type currentType = obj.GetType();//получаем тип
+            PropertyInfo property = currentType.GetProperty(nameProperty);//Присваиваем ему свойство, c определённым именем. Получить свойство из этого типа
+            text = property.GetValue(obj).ToString(); //в свойстве получить значение объекта
+            return text;
+        }
+
         #region GetText. Получить текущий текст из TextBox, ComboBox
         /// <summary>
         /// возвращает текущий текст из comboBox или textBox
@@ -581,21 +590,24 @@ namespace Administrator_supermarket
 
             if (obj is TextBox)
             {
-                currentType = obj.GetType(); //получаем тип
-                property = currentType.GetProperty("Text");//Присваиваем ему свойство Text, если это textBox. Получить свойство text из этого типа                                            
-                text = property.GetValue(obj).ToString(); //в свойстве получить значение объекта
+                text = GetText(obj, "Text");
+                //currentType = obj.GetType(); //получаем тип
+                //property = currentType.GetProperty("Text");//Присваиваем ему свойство Text, если это textBox. Получить свойство text из этого типа                                            
+                //text = property.GetValue(obj).ToString(); //в свойстве получить значение объекта
             }
             else if (obj is ComboBox)
             {
-                currentType = obj.GetType(); //получаем тип
-                property = currentType.GetProperty("SelectedItem");//Присваиваем ему свойство SelectedItem, если это ComboBox. Получить свойство SelectedItem из этого типа                                            
-                text = property.GetValue(obj).ToString(); //в свойстве получить значение объекта
+                text = GetText(obj, "SelectedItem");
+                //currentType = obj.GetType(); //получаем тип
+                //property = currentType.GetProperty("SelectedItem");//Присваиваем ему свойство SelectedItem, если это ComboBox. Получить свойство SelectedItem из этого типа                                            
+                //text = property.GetValue(obj).ToString(); //в свойстве получить значение объекта
             }
             else if (obj is DateTimePicker)
             {
-                currentType = obj.GetType(); //получаем тип
-                property = currentType.GetProperty("Value");//Присваиваем ему свойство SelectedItem, если это ComboBox. Получить свойство SelectedItem из этого типа                                            
-                text = property.GetValue(obj).ToString(); //в свойстве получить значение объекта
+                text = GetText(obj, "Value");
+                //currentType = obj.GetType(); //получаем тип
+                //property = currentType.GetProperty("Value");//Присваиваем ему свойство SelectedItem, если это ComboBox. Получить свойство SelectedItem из этого типа                                            
+                //text = property.GetValue(obj).ToString(); //в свойстве получить значение объекта
             }
             else
                 text = "";
@@ -615,7 +627,7 @@ namespace Administrator_supermarket
         public void AddParameters(MySqlCommand command, string variables, MySqlDbType mySqlDbTypes, object objects)
         {
                 //если объект является ComboBox или TextBox
-                if (objects is ComboBox || objects is TextBox)
+                if (objects is ComboBox || objects is TextBox || objects is DateTimePicker)
                     command.Parameters.Add(variables, mySqlDbTypes).Value = GetText(objects); //GetText если есть текст в объектах
                 else
                     command.Parameters.Add(variables, mySqlDbTypes).Value = objects; //Для других объектов                
@@ -802,11 +814,14 @@ namespace Administrator_supermarket
         public DataTable Find(MySqlCommand commandLocal, TextBox[] textBoxs = null, ComboBox[] comboBoxs = null, PictureBox[] pictureBoxs = null,
                         int[] ColumnsTextForTextBox = null, int[] ColumnsTextForComboBox = null, int[] ColumnsPictureForPictureBox = null, DataGridView dataGrid=null)
         {
-            ///Для отображения в таблице
+            //Для отображения в таблице
+            adapter = new MySqlDataAdapter(commandLocal); //Выполняем команду                
             adapter.SelectCommand = commandLocal; //выполнить выборку. Select нужно новый создавать
-             DataTable table = new DataTable();
+            DataTable table = new DataTable();
+            //table.Clear();
             adapter.Fill(table); //Вставляем данные при выполнении команды в таблицу
             Settings settings = new Settings();
+            //dataGrid.DataSource = table; //подключаем заполненную таблицу и отображаем
             if (table.Columns.Count <= 0)
             {
                 MessageBox.Show("Указанная запись: " + textBoxs[0].Text + " не найдена!");//textBoxs[0] должен содержать id 
