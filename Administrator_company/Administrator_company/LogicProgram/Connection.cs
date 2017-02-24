@@ -591,6 +591,12 @@ namespace Administrator_supermarket
                 property = currentType.GetProperty("SelectedItem");//Присваиваем ему свойство SelectedItem, если это ComboBox. Получить свойство SelectedItem из этого типа                                            
                 text = property.GetValue(obj).ToString(); //в свойстве получить значение объекта
             }
+            else if (obj is DateTimePicker)
+            {
+                currentType = obj.GetType(); //получаем тип
+                property = currentType.GetProperty("Value");//Присваиваем ему свойство SelectedItem, если это ComboBox. Получить свойство SelectedItem из этого типа                                            
+                text = property.GetValue(obj).ToString(); //в свойстве получить значение объекта
+            }
             else
                 text = "";
 
