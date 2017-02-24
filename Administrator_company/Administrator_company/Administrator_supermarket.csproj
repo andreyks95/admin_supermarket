@@ -107,11 +107,11 @@
     </Compile>
     <Compile Include="LogicProgram\Queries.cs" />
     <Compile Include="LogicProgram\Settings.cs" />
-    <Compile Include="Preview %28Test%29\Employees.cs">
+    <Compile Include="Preview %28Test%29\EmployeesForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Preview %28Test%29\Employees.Designer.cs">
-      <DependentUpon>Employees.cs</DependentUpon>
+    <Compile Include="Preview %28Test%29\EmployeesForm.Designer.cs">
+      <DependentUpon>EmployeesForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Preview %28Test%29\MainForm.cs">
       <SubType>Form</SubType>
@@ -177,8 +177,8 @@
     <EmbeddedResource Include="CodeForTable\TableAdministrator.resx">
       <DependentUpon>TableAdministrator.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Preview %28Test%29\Employees.resx">
-      <DependentUpon>Employees.cs</DependentUpon>
+    <EmbeddedResource Include="Preview %28Test%29\EmployeesForm.resx">
+      <DependentUpon>EmployeesForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Preview %28Test%29\MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
