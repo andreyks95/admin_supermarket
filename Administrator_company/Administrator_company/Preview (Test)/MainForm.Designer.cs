@@ -32,6 +32,8 @@
             this.OpenTestForm = new System.Windows.Forms.Button();
             this.TestFormTwo = new System.Windows.Forms.Button();
             this.PositionButton = new System.Windows.Forms.Button();
+            this.EmployeesButton = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // OpenStock
@@ -74,11 +76,32 @@
             this.PositionButton.UseVisualStyleBackColor = true;
             this.PositionButton.Click += new System.EventHandler(this.PositionButton_Click);
             // 
+            // EmployeesButton
+            // 
+            this.EmployeesButton.Location = new System.Drawing.Point(12, 206);
+            this.EmployeesButton.Name = "EmployeesButton";
+            this.EmployeesButton.Size = new System.Drawing.Size(96, 23);
+            this.EmployeesButton.TabIndex = 4;
+            this.EmployeesButton.Text = "Сотрудники";
+            this.EmployeesButton.UseVisualStyleBackColor = true;
+            this.EmployeesButton.Click += new System.EventHandler(this.EmployeesButton_Click);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(114, 211);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(72, 13);
+            this.label1.TabIndex = 5;
+            this.label1.Text = "подчинённая";
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(233, 260);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.EmployeesButton);
             this.Controls.Add(this.PositionButton);
             this.Controls.Add(this.TestFormTwo);
             this.Controls.Add(this.OpenTestForm);
@@ -86,6 +109,7 @@
             this.Name = "MainForm";
             this.Text = "MainForm";
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -95,5 +119,7 @@
         private System.Windows.Forms.Button OpenTestForm;
         private System.Windows.Forms.Button TestFormTwo;
         private System.Windows.Forms.Button PositionButton;
+        private System.Windows.Forms.Button EmployeesButton;
+        private System.Windows.Forms.Label label1;
     }
 }
