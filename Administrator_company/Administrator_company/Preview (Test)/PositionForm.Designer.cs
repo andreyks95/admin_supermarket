@@ -181,7 +181,7 @@
             this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel2.Location = new System.Drawing.Point(344, 0);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(599, 75);
+            this.panel2.Size = new System.Drawing.Size(600, 75);
             this.panel2.TabIndex = 7;
             // 
             // PreviousRecordButton
@@ -249,7 +249,7 @@
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Location = new System.Drawing.Point(344, 75);
             this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(599, 416);
+            this.dataGridView1.Size = new System.Drawing.Size(600, 416);
             this.dataGridView1.TabIndex = 8;
             this.dataGridView1.SelectionChanged += new System.EventHandler(this.dataGridView1_SelectionChanged);
             this.dataGridView1.Click += new System.EventHandler(this.dataGridView1_Click);
@@ -258,10 +258,11 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(943, 491);
+            this.ClientSize = new System.Drawing.Size(944, 491);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
+            this.MinimumSize = new System.Drawing.Size(960, 200);
             this.Name = "PositionForm";
             this.Text = "PositionForm";
             this.Load += new System.EventHandler(this.PositionForm_Load);
