@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
@@ -14,9 +15,9 @@ namespace Administrator_supermarket
     public class Checking
     {
 
-        #region Данные методы проверяют поле(я) (textBox, ComboBox) на ввод вредных запросов
+        #region Данные методы проверяют поле(я) (TextBox, ComboBox, DateTimePicker) на ввод вредных запросов
 
-        #region Security 
+        #region Security TextBox
         /// <summary>
         /// Проверяет безопасность ввода. Если в textBox есть sql-инъекция, то прервать ввод. 
         /// </summary>
@@ -70,6 +71,33 @@ namespace Administrator_supermarket
         }
         #endregion 
 
+        #region Security DateTimePicker
+        /// <summary>
+        /// Проверяет безопасность ввода. Если в DateTimePicker есть sql-инъекция, то прервать ввод. 
+        /// </summary>
+        /// <param name="DateTimePicker">DateTimePicker который нужно проверить</param>
+        /// <returns>Можно добавлять запись или нет</returns>
+        public bool Security(DateTimePicker DateTimePicker)
+        {
+
+            string data = DateTimePicker.Value.ToString();
+            //регулярное выражение
+            string regex = @"SELECT  {1}?  | INSERT  {1}? | UPDATE  {1}? | UNION  {1}? | AND  {1}? | OR  {1}? |  group_concat  {1}? |  \'{1}? | \/\*{1}? | (--){1}? | \+ {1}? | \( {1}? | \;{1}? | (@@){1}?";
+            Regex reg = new Regex(regex, RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.Singleline | RegexOptions.IgnorePatternWhitespace);
+            // bool result = reg.IsMatch(data);
+            Match match = reg.Match(data);
+            bool result = match.Success;
+
+            //если строка пройшла регулярное выражение и в ней содержиться вредный SQL запрос
+            if (result == true)
+                //тогда не давать разрешение на вставку запроса в БД 
+                return false;
+            else
+                //дать разрешение на вставку запроса в БД
+                return true;
+        }
+        #endregion 
+
         #region SecurityString overload 
         public bool SecurityString(string data)
         {
@@ -89,7 +117,53 @@ namespace Administrator_supermarket
         }
         #endregion
 
-        #region SecurityAll
+        #region Security
+        /// <summary>
+        /// Проверяет безопасность ввода. Если есть sql-инъекция хотя бы в одном из объектов, то прервать ввод. 
+        /// </summary>
+        /// <param name="textBox">TextBox который нужно проверить</param>
+        /// <param name="comboBox">ComboBox который нужно проверить</param>
+        /// <param name="dateTimePicker">DateTimePicker который нужно проверить</param>
+        /// <returns>Можно добавлять запись или нет</returns>
+        public bool Security(TextBox textBox = null, ComboBox comboBox = null, DateTimePicker dateTimePicker = null)
+        {
+            string data;
+            if (textBox != null || comboBox != null || dateTimePicker != null)
+            {
+                if (textBox != null)
+                    data = textBox.Text.ToString();
+                else
+                    data = "";
+                if (comboBox != null)
+                    data = comboBox.SelectedItem.ToString();
+                else
+                    data = "";
+                if (dateTimePicker != null)
+                    data = dateTimePicker.Value.ToString(CultureInfo.InvariantCulture);
+                else
+                    data = "";
+            }
+            else
+                return false;
+
+            //регулярное выражение
+            string regex = @"SELECT  {1}?  | INSERT  {1}? | UPDATE  {1}? | UNION  {1}? | AND  {1}? | OR  {1}? |  group_concat  {1}? |  \'{1}? | \/\*{1}? | (--){1}? | \+ {1}? | \( {1}? | \;{1}? | (@@){1}?";
+            Regex reg = new Regex(regex, RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.Singleline | RegexOptions.IgnorePatternWhitespace);
+            // bool result = reg.IsMatch(data);
+            Match match = reg.Match(data);
+            bool result = match.Success;
+
+            //если строка пройшла регулярное выражение и в ней содержиться вредный SQL запрос
+            if (result == true)
+                //тогда не давать разрешение на вставку запроса в БД 
+                return false;
+            else
+                //дать разрешение на вставку запроса в БД
+                return true;
+        }
+        #endregion
+
+        #region SecurityAll TextBox
         /// <summary>
         /// Проверяет каждый textBox таблицы на ввод sql-инъекции (вредный запрос)
         /// Если есть хотя бы одно поле, которое содержит sql-инъекцию (вредный запрос)
@@ -145,6 +219,34 @@ namespace Administrator_supermarket
         }
         #endregion
 
+        #region SecurityAll DateTimePicker
+        /// <summary>
+        /// Проверяет каждый DateTimePicker таблицы на ввод sql-инъекции (вредный запрос)
+        /// Если есть хотя бы одно поле, которое содержит sql-инъекцию (вредный запрос)
+        /// тогда прервавть добавление данных в таблицу
+        /// </summary>
+        /// <param name="DateTimePicker">Массив DateTimePicker-ов таблицы</param>
+        /// <returns>Можно добавить данные или нет</returns>
+        public bool SecurityAll(params DateTimePicker[] DateTimePicker)
+        {
+            bool result = default(bool);
+            byte count = 0;
+
+            foreach (var i in DateTimePicker)
+            {
+                result = Security(i);
+                //если результат проверки вернул то, что нельзя добавлять данные увеличиваем счётчик
+                if (result == false)
+                    count++;
+            }
+            //Если вредных вводимых данных больше, чем одно тогда нельзя добавлять данные.
+            if (count >= 1)
+                return false;
+            else
+                return true;
+        }
+        #endregion
+
         #region SecurityAllString overload
         public bool SecurityAllString(string[] str)
         {
@@ -158,6 +260,57 @@ namespace Administrator_supermarket
                 if (result == false)
                     count++;
             }
+            //Если вредных вводимых данных больше, чем одно тогда нельзя добавлять данные.
+            if (count >= 1)
+                return false;
+            else
+                return true;
+        }
+        #endregion
+
+        #region SecurityAll
+        /// <summary>
+        /// Проверяет каждые объекты формы таблицы на ввод sql-инъекции (вредный запрос)
+        /// Если есть хотя бы одно поле, которое содержит sql-инъекцию (вредный запрос)
+        /// тогда прервавть добавление данных в таблицу
+        /// </summary>
+        /// <param name="textBoxs">Массив textBox-ов таблицы</param>
+        /// <param name="comboBoxs">Массив comboBoxs-ов таблицы</param>
+        /// <param name="dateTimePickers">Массив dateTimePickers-ов таблицы</param>
+        /// <returns>Можно добавить данные или нет</returns>
+        public bool SecurityAll(TextBox[] textBoxs=null, ComboBox[] comboBoxs=null, DateTimePicker[] dateTimePickers=null)
+        {
+            bool result = default(bool);
+            byte count = 0;
+            if (textBoxs != null || comboBoxs != null || dateTimePickers != null)
+            {
+                if (textBoxs != null)
+                    foreach (var i in textBoxs)
+                    {
+                        result = Security(i);
+                        //если результат проверки вернул то, что нельзя добавлять данные увеличиваем счётчик
+                        if (result == false)
+                            count++;
+                    }
+                if (comboBoxs != null)
+                    foreach (var i in comboBoxs)
+                    {
+                        result = Security(i);
+                        //если результат проверки вернул то, что нельзя добавлять данные увеличиваем счётчик
+                        if (result == false)
+                            count++;
+                    }
+                if (dateTimePickers != null)
+                    foreach (var i in dateTimePickers)
+                    {
+                        result = Security(i);
+                        //если результат проверки вернул то, что нельзя добавлять данные увеличиваем счётчик
+                        if (result == false)
+                            count++;
+                    }
+            }
+            else
+                return false;
             //Если вредных вводимых данных больше, чем одно тогда нельзя добавлять данные.
             if (count >= 1)
                 return false;
