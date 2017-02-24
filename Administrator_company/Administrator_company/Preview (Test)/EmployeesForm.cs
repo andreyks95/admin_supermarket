@@ -18,13 +18,13 @@ namespace Administrator_company.Preview__Test_
         Checking checking = new Checking();
         BindingManagerBase managerBase; //для перемещения по таблице 
 
-        private static string nameTable = "position", //таблица
-                             id_field = "id_position"; //id поле таблицы
-        private static string[] nameFieldsAll = { "id_position", "position", "salary" }, //все поля
-                                 variables = { "@id", "@position", "@salary" }, //для переменных
-                                 nameFieldsAS = { "ИД", "Должность", "Зарплата" }, //как будут отображаться
-                                 numericFields = { "id_position", "salary" }; //для корректного поиска по числовым столбцам                                                    
-        private static MySqlDbType[] mySqlDbTypes = { MySqlDbType.UInt32, MySqlDbType.VarChar, MySqlDbType.UInt32 };//для типов в (AddParameters)
+        private static string nameTable = "employees", //таблица
+                             id_field = "id_employee"; //id поле таблицы
+        private static string[] nameFieldsAll = { "id_employee", "id_info", "id_position", "department", "experience", "salary", "started_work", "fired" }, //все поля
+                                variables =     { "@id_employee", "@id_info", "@id_position", "@department", "@experience", "@salary", "@started_work", "@fired" }, //для переменных
+                                nameFieldsAS =  { "ИД", "ФИО сотрудника", "Должность", "Отдел", "Опыт", "Зарплата", "Принят", "Уволен" }, //как будут отображаться
+                                numericFields = { "id_employee", "id_info", "id_position", "experience", "salary" }; //для корректного поиска по числовым столбцам                                                    
+        private static MySqlDbType[] mySqlDbTypes = { MySqlDbType.UInt32, MySqlDbType.UInt32, MySqlDbType.UInt32, MySqlDbType.Enum, MySqlDbType.UInt32, MySqlDbType.UInt32, MySqlDbType.Date, MySqlDbType.Date };//для типов в (AddParameters)
 
         private void EmployeesForm_Load(object sender, EventArgs e)
         {
@@ -42,7 +42,29 @@ namespace Administrator_company.Preview__Test_
 
         private void Insert_Click(object sender, EventArgs e)
         {
-
+            //возвращаем результаты проверок всех полей
+            bool resultSecurity = checking.SecurityAll(textBox1, textBox2, textBox3),
+                resultVoid = checking.VoidAll(textBox1, textBox2, textBox3); //Проверяем только обязательные для ввода поля
+                                                                             //если результаты вернулись положительные, тогда можно добавить данные, иначе вывести ошибку
+            if (resultSecurity == true && resultVoid == true)
+            {
+                //получить запрос для вставки Insert
+                string query = connection.GetQueryInsert(nameTable, nameFieldsAll, variables);
+                //выполняить команду с Insert
+                connection.command = new MySqlCommand(query, connection.connection);
+                //для объектов, у них есть данные которые нужно вставить
+                object[] objects = { textBox1, textBox2, textBox3 };
+                //Добавляем данные 
+                connection.AddParameters(connection.command, variables, mySqlDbTypes, objects);
+                //попытаться выполнить запрос
+                connection.ExecuteQuery(connection.command);
+                //отобразить новые данные 
+                FillDataGridView("");
+            }
+            else
+            {
+                checking.ErrorMessage(this); //вывести ошибку
+            }
         }
 
         private void Update_Click(object sender, EventArgs e)
