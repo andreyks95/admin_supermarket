@@ -182,12 +182,14 @@ namespace Administrator_company.Preview__Test_
             }
         }
 
+        //Очистить поля на форме для ввода
         private void Clear_Click(object sender, EventArgs e)
         {
             TextBox[] textBoxs = { textBox1, textBox2, textBox3};
             settings.ClearFields(textBoxs);
         }
 
+        //Поиск похожих записей
         private void textBoxSearch_TextChanged(object sender, EventArgs e)
         {
             FillDataGridView(textBoxSearch.Text);
