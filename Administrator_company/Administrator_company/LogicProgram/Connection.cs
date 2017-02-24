@@ -360,7 +360,7 @@ namespace Administrator_supermarket
         /// <param name="cellsImages">Номера строк содержащих картинки</param>
         /// <param name="query">запрос, который содержит select с параметром поиска значения по столбцам (числовое или строковое)
         /// Если нету, то просто отображаем таблицу</param>
-        public DataTable FillDataGridView(DataGridView dataGridView, int height, int[] cellsImages, string query = "")
+        public DataTable FillDataGridView(DataGridView dataGridView, int height, int[] cellsImages=null, string query = "")
         {
             try
             {
@@ -378,6 +378,7 @@ namespace Administrator_supermarket
                 //настраиваем отображение таблицы
                 settings.GetSettingDisplayTable(dataGridView, height);
                 dataGridView.DataSource = table; //подключаем заполненную таблицу и отображаем
+                if(cellsImages != null)
                 //Для отображения картинки в DataGridView
                 settings.GetViewImageInCellTable(dataGridView, cellsImages);
                
@@ -629,13 +630,14 @@ namespace Administrator_supermarket
             //для всех переменных
             for (int i = 0; i < variables.Length; i++)
             {
-                //если объект является ComboBox или TextBox
-                if (objects[i] is ComboBox || objects[i] is TextBox)
-                    AddParameters(command, variables[i], mySqlDbTypes[i], objects[i]);
-                    //command.Parameters.Add(variables[i], mySqlDbTypes[i]).Value = GetText(objects[i]); //GetText если есть текст в объектах
-                else
-                    AddParameters(command, variables[i], mySqlDbTypes[i], objects[i]);
-                    //command.Parameters.Add(variables[i], mySqlDbTypes[i]).Value = objects[i]; //Для других объектов           
+                AddParameters(command, variables[i], mySqlDbTypes[i], objects[i]);
+                ////если объект является ComboBox или TextBox
+                //if (objects[i] is ComboBox || objects[i] is TextBox)
+                //    AddParameters(command, variables[i], mySqlDbTypes[i], objects[i]);
+                //    //command.Parameters.Add(variables[i], mySqlDbTypes[i]).Value = GetText(objects[i]); //GetText если есть текст в объектах
+                //else
+                //    AddParameters(command, variables[i], mySqlDbTypes[i], objects[i]);
+                //    //command.Parameters.Add(variables[i], mySqlDbTypes[i]).Value = objects[i]; //Для других объектов        
             }
         }
         #endregion
