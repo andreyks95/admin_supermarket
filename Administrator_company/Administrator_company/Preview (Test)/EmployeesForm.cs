@@ -48,7 +48,7 @@ namespace Administrator_company.Preview__Test_
 
             //возвращаем результаты проверок всех полей
             bool resultSecurity = checking.SecurityAll(textBoxs, comboBoxs, dateTimePickers),
-                resultVoid = checking.VoidAll(textBoxs, comboBoxs, dateTimePickers); //Проверяем только обязательные для ввода поля
+                 resultVoid = checking.VoidAll(textBoxs, comboBoxs, dateTimePickers); //Проверяем только обязательные для ввода поля
                                                                                      //если результаты вернулись положительные, тогда можно добавить данные, иначе вывести ошибку
             if (resultSecurity == true && resultVoid == true)
             {
@@ -57,13 +57,18 @@ namespace Administrator_company.Preview__Test_
                 //выполняить команду с Insert
                 connection.command = new MySqlCommand(query, connection.connection);
                 //для объектов, у них есть данные которые нужно вставить
-                object[] objects = { textBox1, textBox2, textBox3, comboBox1, comboBox2, comboBox3, dateTimePicker1, dateTimePicker2 };
+                //ОБЯЗАТЕЛЬНО!
+                //Писать объекты подобно расположению на форме 
+                //В такой же последовательности
+                //Переменная должна соответствувать требуемому значению 
+                object[] objects = { textBox1, comboBox1, comboBox2, comboBox3, textBox2, textBox3, dateTimePicker1, dateTimePicker2 };
                 //Добавляем данные 
                 connection.AddParameters(connection.command, variables, mySqlDbTypes, objects);
                 //попытаться выполнить запрос
                 connection.ExecuteQuery(connection.command);
                 //отобразить новые данные 
                 FillDataGridView("");
+                
             }
             else
             {
