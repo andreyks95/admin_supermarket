@@ -52,8 +52,12 @@ namespace Administrator_supermarket
         /// <returns>Можно добавлять запись или нет</returns>
         public bool Security(ComboBox ComboBox)
         {
+            string data;
+            if (ComboBox.SelectedItem == null) //or if (string.IsNullOrEmpty(comboBox1.Text)) or if (comboBox1.SelectedIndex == -1)
+                data = ComboBox.Text.ToString();       
+            else
+                data = ComboBox.SelectedItem.ToString();
 
-            string data = ComboBox.SelectedItem.ToString();
             //регулярное выражение
             string regex = @"SELECT  {1}?  | INSERT  {1}? | UPDATE  {1}? | UNION  {1}? | AND  {1}? | OR  {1}? |  group_concat  {1}? |  \'{1}? | \/\*{1}? | (--){1}? | \+ {1}? | \( {1}? | \;{1}? | (@@){1}?";
             Regex reg = new Regex(regex, RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.Singleline | RegexOptions.IgnorePatternWhitespace);
@@ -349,7 +353,12 @@ namespace Administrator_supermarket
         /// <returns>Можно это поле добавлять или нет</returns>
         public bool Void(ComboBox ComboBox)
         {
-            string data = ComboBox.SelectedItem.ToString();
+            string data;
+            if (ComboBox.SelectedItem == null) //or if (string.IsNullOrEmpty(comboBox1.Text)) or if (comboBox1.SelectedIndex == -1)
+                data = ComboBox.Text.ToString();
+            else
+                data = ComboBox.SelectedItem.ToString();
+
             if (data == null || data == "" || data == " " || data == "0")
                 return false;
             else
