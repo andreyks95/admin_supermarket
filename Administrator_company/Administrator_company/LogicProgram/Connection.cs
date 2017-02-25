@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Globalization;
 using System.Reflection;
 using System.Windows.Forms;
 using MySql.Data.MySqlClient;
@@ -566,14 +567,63 @@ namespace Administrator_supermarket
         }
         #endregion
 
+        #region GetTextDate - Получить дату в виде текста для DateTimePicker
+        /// <summary>
+        /// Получить дату в виде текста для DateTimePicker
+        /// </summary>
+        /// <param name="obj">Объект DateTimePicker</param>
+        /// <returns>Дата в виде текста</returns>
+        public string GetTextDate(object obj)
+        {
+            string text;
+            Type currentType = obj.GetType();
+            PropertyInfo property = currentType.GetProperty("Value");
+            text= property.GetValue(obj).ToString();//в свойстве получить значение объекта
+
+            string inputFormat = "dd'.'MM'.'yyyy' 'HH':'mm':'ss", //Текущий формат ввода DateTimePicker
+                   outputFormat =  "yyyy'-'MM'-'dd"; //для конвертирования даты в формат Date MySQL 
+            DateTime dateTime = DateTime.ParseExact(text, inputFormat, null); //Превращаем текст в дату  
+            text = dateTime.ToString(outputFormat, null); //Конвертируем дату в текст с нужным форматом данных
+            return text;
+        }
+        #endregion
+
+        #region GetText overload - Перегруженный. Получить текст с свойства объекта WinForm (TextBox, ComboBox ...)
+        /// <summary>
+        /// Получить текст с свойства объекта WinForm (TextBox, ComboBox ...)
+        /// </summary>
+        /// <param name="obj">Объект WinForm (TextBox, ComboBox ...)</param>
+        /// <param name="nameProperty">Название свойства объекта</param>
+        /// <returns>Текст с свойства объекта</returns>
         public string GetText(object obj, string nameProperty)
         {
             string text = null;
             Type currentType = obj.GetType();//получаем тип
             PropertyInfo property = currentType.GetProperty(nameProperty);//Присваиваем ему свойство, c определённым именем. Получить свойство из этого типа
-            text = property.GetValue(obj).ToString(); //в свойстве получить значение объекта
+           // text = property.GetValue(obj).ToString(); //в свойстве получить значение объекта
+
+            //Если выбран ComboBox
+            if (nameProperty == "SelectedItem")
+            {
+                //если SelectedItem == null, то есть не выбран
+                //Берём значение того, что введено в ComboBox
+                if (currentType.GetProperty(nameProperty).GetValue(obj) == null)
+                    //or if (string.IsNullOrEmpty(comboBox1.Text)) or if (comboBox1.SelectedIndex == -1)
+                {
+                    //text = currentType.GetProperty("Text").GetValue(obj).ToString();
+                    property = currentType.GetProperty("Text");
+                    text=property.GetValue(obj).ToString();//
+                }
+                else
+                    text = property.GetValue(obj).ToString();
+            }
+            else
+            {
+                text = property.GetValue(obj).ToString(); //в свойстве получить значение объекта             
+            }
             return text;
         }
+        #endregion
 
         #region GetText. Получить текущий текст из TextBox, ComboBox
         /// <summary>
@@ -595,8 +645,13 @@ namespace Administrator_supermarket
                 //property = currentType.GetProperty("Text");//Присваиваем ему свойство Text, если это textBox. Получить свойство text из этого типа                                            
                 //text = property.GetValue(obj).ToString(); //в свойстве получить значение объекта
             }
+
+            //здесь нужно сделать если не selected item!
             else if (obj is ComboBox)
             {
+                //Выберает то свойство, в котором содержиться текст
+                //text = GetText(obj, "SelectedItem") ?? GetText(obj, "Text");
+                //text = GetText(obj, "Text");
                 text = GetText(obj, "SelectedItem");
                 //currentType = obj.GetType(); //получаем тип
                 //property = currentType.GetProperty("SelectedItem");//Присваиваем ему свойство SelectedItem, если это ComboBox. Получить свойство SelectedItem из этого типа                                            
@@ -604,7 +659,8 @@ namespace Administrator_supermarket
             }
             else if (obj is DateTimePicker)
             {
-                text = GetText(obj, "Value");
+                text = GetTextDate(obj);
+                //text = GetText(obj, "Value");
                 //currentType = obj.GetType(); //получаем тип
                 //property = currentType.GetProperty("Value");//Присваиваем ему свойство SelectedItem, если это ComboBox. Получить свойство SelectedItem из этого типа                                            
                 //text = property.GetValue(obj).ToString(); //в свойстве получить значение объекта
