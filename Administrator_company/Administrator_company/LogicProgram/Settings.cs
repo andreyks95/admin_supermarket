@@ -113,7 +113,7 @@ namespace Administrator_supermarket
             try
             {
                 //Если ячейка пустая, то в pictureBox ничего не отображать
-                if (dataGridView.CurrentRow.Cells[number].Value == DBNull.Value)
+                if (number < 0 || dataGridView.CurrentRow.Cells[number].Value == DBNull.Value)
                 {
                     pictureBox.Image = null;
                 }
@@ -177,8 +177,18 @@ namespace Administrator_supermarket
         {
             try
             {
-                if (number != 0 || number != null)
-                    textBox.Text = dataGridView.CurrentRow.Cells[number].Value.ToString();
+                //Если номера столбцов с откуда нужно вытащить данные не пустые и не отрецательные
+                if (!(number < 0) || number != null)
+                    //Если в ячейках нету пустого значения
+                    if (dataGridView.CurrentRow.Cells[number].Value != DBNull.Value ||
+                        dataGridView.CurrentRow.Cells[number].Value.ToString() != null)
+                        textBox.Text = dataGridView.CurrentRow.Cells[number].Value.ToString();
+                    else
+                        textBox.Text = "";
+                else
+                {
+                    textBox.Text = "";
+                }
             }
             catch (Exception ex)
             {
@@ -224,6 +234,151 @@ namespace Administrator_supermarket
         }
         #endregion
 
+        #region CurrentColumnCellsText. Вставка текста в comboBox из ячейки таблицы 
+        /// <summary>
+        /// Помещает в comboBox значение с ячейки текущей строки DataGridView
+        /// </summary>
+        /// <param name="number">Номер столбца (ячейки) DataGridView в которой содержиться текстовое значение</param>
+        /// <param name="comboBox">comboBox куда нужно вставить значение</param>
+        /// <param name="dataGridView">текущий dataGridView</param>
+        public void CurrentColumnCellsTEXT(int number, ComboBox comboBox, DataGridView dataGridView)
+        {
+            try
+            {
+                //Если номера столбцов с откуда нужно вытащить данные не пустые и не отрецательные
+                if (!(number < 0) || number != null)
+                {
+                    //Если в ячейках нету пустого значения
+                    if (dataGridView.CurrentRow.Cells[number].Value != DBNull.Value ||
+                        dataGridView.CurrentRow.Cells[number].Value.ToString() != null)
+                        comboBox.Text = dataGridView.CurrentRow.Cells[number].Value.ToString();
+                            //or comboBox.SelectedItem = dataGridView.CurrentRow.Cells[number].Value.ToString();
+                    else
+                        comboBox.Text = "";
+                }
+                else
+                {
+                    comboBox.Text = "";
+                }
+            }
+            catch (Exception ex)
+            {
+                //MessageBox.Show(ex.Message);
+            }
+
+        }
+        #endregion
+
+        #region CurrentColumnCellsText overload. Вставка текста в comboBox-ы из ячеек таблицы 
+        /// <summary>
+        /// Помещает во ВСЕ comboBox-ы значения из текущей строки DataGridView
+        /// </summary>
+        /// <param name="comboBoxs">Массив comboBox-ов куда нужно вставить значения</param>
+        /// <param name="dataGridView">текущий dataGridView</param>
+        public void CurrentColumnCellsTEXT(ComboBox[] comboBoxs, DataGridView dataGridView)
+        {
+
+            for (var i = 0; i < comboBoxs.Length; i++)
+            {
+                //передаёт номер ячейки и сам textBox куда нужно вставить значения из строки DataGridView
+                CurrentColumnCellsTEXT(i, comboBoxs[i], dataGridView);
+            }
+        }
+        #endregion
+
+        #region CurrentColumnCellsText overload. Вставка текста в comboBox-ы из ячеек таблицы в которых нумерация не попорядку
+        /// <summary>
+        /// Помещает во ВСЕ comboBox-ы значения из текущей строки DataGridView
+        /// Для случая, если текстовые ячейки имеют разные номера (не попорядку)
+        /// </summary>
+        /// <param name="numbers">массив содержащий номера ячеек с текстовым содержанием</param>
+        /// <param name="comboBoxs">Массив comboBox-ов куда нужно вставить значения</param>
+        /// <param name="dataGridView">текущий dataGridView</param>
+        public void CurrentColumnCellsTEXT(int[] numbers, ComboBox[] comboBoxs, DataGridView dataGridView)
+        {
+
+            for (var i = 0; i < comboBoxs.Length; i++)
+            {
+                //передаёт номер ячейки и сам textBox куда нужно вставить значения из строки DataGridView
+                CurrentColumnCellsTEXT(numbers[i], comboBoxs[i], dataGridView);
+            }
+        }
+        #endregion
+
+        #endregion
+
+        #region CurrentColumnCellDate
+
+        #region CurrentColumnCellsDate. Вставка текста в DateTimePicker из ячейки таблицы 
+        /// <summary>
+        /// Помещает в DateTimePicker значение с ячейки текущей строки DataGridView
+        /// </summary>
+        /// <param name="number">Номер столбца (ячейки) DataGridView в которой содержиться значение даты</param>
+        /// <param name="dateTimePicker">dateTimePicker куда нужно вставить значение</param>
+        /// <param name="dataGridView">текущий dataGridView</param>
+        public void CurrentColumnCellsDate(int number, DateTimePicker dateTimePicker, DataGridView dataGridView)
+        {
+            try
+            {
+                //Если номера столбцов с откуда нужно вытащить данные не пустые и не отрецательные
+                if (!(number < 0) || number != null)
+                {
+                    //Если в ячейках нету пустого значения
+                    if (dataGridView.CurrentRow.Cells[number].Value != DBNull.Value ||
+                        dataGridView.CurrentRow.Cells[number].Value.ToString() != null)
+                        dateTimePicker.Text = dataGridView.CurrentRow.Cells[number].Value.ToString();
+                    else
+                        dateTimePicker.Text = "";
+                }
+                else
+                {
+                    dateTimePicker.Text = "";
+                }
+            }
+            catch (Exception ex)
+            {
+                //MessageBox.Show(ex.Message);
+            }
+
+        }
+        #endregion
+
+        #region CurrentColumnCellsDate overload. Вставка текста в DateTimePicker-ы из ячеек таблицы 
+        /// <summary>
+        /// Помещает во ВСЕ DateTimePicker-ы значения из текущей строки DataGridView
+        /// </summary>
+        /// <param name="dateTimePickers">Массив DateTimePicker-ов куда нужно вставить значения</param>
+        /// <param name="dataGridView">текущий dataGridView</param>
+        public void CurrentColumnCellsDate(DateTimePicker[] dateTimePickers, DataGridView dataGridView)
+        {
+
+            for (var i = 0; i < dateTimePickers.Length; i++)
+            {
+                //передаёт номер ячейки и сам dateTimePickers куда нужно вставить значения из строки DataGridView
+                CurrentColumnCellsDate(i, dateTimePickers[i], dataGridView);
+            }
+        }
+        #endregion
+
+        #region CurrentColumnCellsDate overload. Вставка текста в DateTimePicker-ы из ячеек таблицы в которых нумерация не попорядку
+        /// <summary>
+        /// Помещает во ВСЕ DateTimePicker-ы значения из текущей строки DataGridView
+        /// Для случая, если текстовые ячейки имеют разные номера (не попорядку)
+        /// </summary>
+        /// <param name="numbers">массив содержащий номера ячеек с текстовым содержанием</param>
+        /// <param name="dateTimePickers">Массив DateTimePicker-ов куда нужно вставить значения</param>
+        /// <param name="dataGridView">текущий dataGridView</param>
+        public void CurrentColumnCellsDate(int[] numbers, DateTimePicker[] dateTimePickers, DataGridView dataGridView)
+        {
+
+            for (var i = 0; i < dateTimePickers.Length; i++)
+            {
+                //передаёт номер ячейки и сам textBox куда нужно вставить значения из строки DataGridView
+                CurrentColumnCellsDate(numbers[i], dateTimePickers[i], dataGridView);
+            }
+        }
+        #endregion
+
         #endregion
 
         #region SaveImagesToBytes. Сохранить изображение в byte[] из pictureBox 
@@ -257,7 +412,7 @@ namespace Administrator_supermarket
         /// Вставляет текущий найденный текст из таблицы в TextBox
         /// </summary>
         /// <param name="table">Текущая таблица</param>
-        /// <param name="Column">Номер строки где находятся текст</param>
+        /// <param name="Column">Номер столбца где находятся текст</param>
         /// <param name="textBox">TextBox формы куда нужно вставить текст из таблицы</param>
         public void InsertTextInTextBoxFromTable(DataTable table, int Column, TextBox textBox)
         {
@@ -270,7 +425,7 @@ namespace Administrator_supermarket
         /// Вставляет текущий найденный текст из таблицы в TextBox-ы
         /// </summary>
         /// <param name="table">Текущая таблица</param>
-        /// <param name="Columns">Номера строк где находятся текст</param>
+        /// <param name="Columns">Номера столбцов где находятся текст</param>
         /// <param name="textBoxs">Все TextBox формы куда нужно вставить текст из таблицы</param>
         public void InsertTextInTextBoxFromTable(DataTable table, int[] Columns, params TextBox[] textBoxs)
         {
@@ -289,7 +444,7 @@ namespace Administrator_supermarket
         /// Вставляет текущий найденный текст из таблицы в ComboBox
         /// </summary>
         /// <param name="table">Текущая таблица</param>
-        /// <param name="Column">Номер строки где находятся текст</param>
+        /// <param name="Column">Номер столбца где находятся текст</param>
         /// <param name="comboBox">ComboBox формы куда нужно вставить текст из таблицы</param>
         public void InsertTextInComboBoxFromTable(DataTable table, int Column, ComboBox comboBox)
         {
@@ -302,13 +457,46 @@ namespace Administrator_supermarket
         /// Вставляет текущий найденный текст из таблицы в ComboBox-ы
         /// </summary>
         /// <param name="table">Текущая таблица</param>
-        /// <param name="Columns">Номера строк где находятся текст</param>
+        /// <param name="Columns">Номера столбцов где находятся текст</param>
         /// <param name="comboBoxs">Все ComboBox формы куда нужно вставить текст из таблицы</param>
         public void InsertTextInComboBoxFromTable(DataTable table, int[] Columns, params ComboBox[] comboBoxs)
         {
             if(comboBoxs !=  null)
                 for (int i = 0; i < comboBoxs.Length; i++)
                     InsertTextInComboBoxFromTable(table, Columns[i], comboBoxs[i]);
+        }
+        #endregion
+
+        #endregion
+
+        #region InsertDateInDateTimePickerFromTable
+
+        #region InsertDateInDateTimePickerFromTable. Вставить дату из таблицы в DateTimePicker
+        /// <summary>
+        /// Вставляет текущий найденную дату из таблицы в DateTimePicker
+        /// </summary>
+        /// <param name="table">Текущая таблица</param>
+        /// <param name="Column">Номер столбца где находятся дата</param>
+        /// <param name="dateTimePicker">DateTimePicker формы куда нужно вставить дату из таблицы</param>
+        public void InsertDateInDateTimePickerFromTable(DataTable table, int Column, DateTimePicker dateTimePicker)
+        {
+            dateTimePicker.Text = table.Rows[0][Column].ToString(); //.ToString();
+            //or dateTimePicker.Value.Date = table.Rows[0][Column].ToString();
+        }
+        #endregion
+
+        #region InsertDateInDateTimePickerFromTable overload. Вставить дату из таблицы в DateTimePicker-ы
+        /// <summary>
+        /// Вставляет текущий найденную дату из таблицы в DateTimePicker-ы
+        /// </summary>
+        /// <param name="table">Текущая таблица</param>
+        /// <param name="Columns">Номера столбцов где находятся дата</param>
+        /// <param name="dateTimePickers">Все DateTimePicker формы куда нужно вставить даты из таблицы</param>
+        public void InsertDateInDateTimePickerFromTable(DataTable table, int[] Columns, params DateTimePicker[] dateTimePickers)
+        {
+            if (dateTimePickers != null)
+                for (int i = 0; i < dateTimePickers.Length; i++)
+                    InsertDateInDateTimePickerFromTable(table, Columns[i], dateTimePickers[i]);
         }
         #endregion
 
@@ -361,7 +549,9 @@ namespace Administrator_supermarket
         /// <param name="textBoxs">Все TextBox-ы на форме</param>
         /// <param name="comboBoxs">Все ComboBox-ы на форме</param>
         /// <param name="pictureBoxs">Все PictureBox-ы на форме</param>
-        public void ClearFields(TextBox[] textBoxs=null, ComboBox[] comboBoxs=null, PictureBox[] pictureBoxs=null)
+        /// <param name="dateTimePickers">Все DateTimePicker-ы на форме</param>
+        public void ClearFields(TextBox[] textBoxs=null, ComboBox[] comboBoxs=null, 
+                                PictureBox[] pictureBoxs=null, DateTimePicker[] dateTimePickers = null)
         {
             //для textBox-ов
             if(textBoxs != null)
@@ -371,12 +561,17 @@ namespace Administrator_supermarket
             //для comboBox-ов
             if(comboBoxs != null)
                 foreach (var i in comboBoxs)
-                    i.SelectedItem = "";
+                    i.Text = "";
                     
             //для pictureBox-ов
             if(pictureBoxs != null)
                 foreach (var i in pictureBoxs)
                     i.Image = null;
+
+            //для dateTimePicker-ов
+            if (dateTimePickers != null)
+                foreach (var i in dateTimePickers)  
+                    i.Text = null;
         }
         #endregion
     }
