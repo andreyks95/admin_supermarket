@@ -158,8 +158,6 @@ namespace Administrator_company.Preview__Test_
                    resultVoid = checking.VoidAll(textBox1);
             if (resultSecurity == true && resultVoid == true)
             {
-                //Как будут подписаны поля 
-                string[] nameFieldsAS = { "ИД", "Должность", "Зарплата" };
                 //получаем запрос для нахождения искомого значения
                 string query = connection.GetQueryFindSelect(nameTable, nameFieldsAll, nameFieldsAS, id_field);
                 //выполнить запрос
