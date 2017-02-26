@@ -543,6 +543,7 @@ namespace Administrator_supermarket
             try
             {
                 connection.Open();
+                //commandSql.ExecuteScalar();
                 if (commandSql.ExecuteNonQuery() == 1)
                 {
                     if (showMessageBox == true)
@@ -807,7 +808,7 @@ namespace Administrator_supermarket
             select = " SELECT ";
             for (int i = 0; i < nameFields.Length; i++)
             {
-                select += " " + nameFields[i] + " AS " + newNameFieldsAS[i] + ", ";
+                select += " " + nameFields[i] + " AS " + "'" + newNameFieldsAS[i] + "'" + ", ";
             }
             select = select.Remove(select.Length - 2) + " "; //удалить перед From ", "
 
@@ -867,8 +868,9 @@ namespace Administrator_supermarket
         /// <param name="ColumnsTextForTextBox">Строки dataGridView которые содержать текстовые данные для TextBox-ов</param>
         /// <param name="ColumnsTextForComboBox">Строки dataGridView которые содержать текстовые данные для comboBox-ов</param>
         /// <param name="ColumnsPictureForPictureBox">Строки dataGridView которые содержать изображения для pictureBox-ов</param>
-        public DataTable Find(MySqlCommand commandLocal, TextBox[] textBoxs = null, ComboBox[] comboBoxs = null, PictureBox[] pictureBoxs = null,
-                        int[] ColumnsTextForTextBox = null, int[] ColumnsTextForComboBox = null, int[] ColumnsPictureForPictureBox = null, DataGridView dataGrid=null)
+        public DataTable Find(MySqlCommand commandLocal, DataGridView dataGrid = null, 
+                              TextBox[] textBoxs = null, ComboBox[] comboBoxs = null, PictureBox[] pictureBoxs = null, DateTimePicker[] dateTimePickers =null,
+                              int[] ColumnsTextForTextBox = null, int[] ColumnsTextForComboBox = null, int[] ColumnsPictureForPictureBox = null, int[] ColumnsDateForDateDateTimePicker = null)
         {
             //Для отображения в таблице
             adapter = new MySqlDataAdapter(commandLocal); //Выполняем команду                
@@ -889,6 +891,7 @@ namespace Administrator_supermarket
                 settings.InsertTextInTextBoxFromTable(table, ColumnsTextForTextBox, textBoxs); //вставляем все значения из таблицы в text-Box так же для остальных
                 settings.InsertTextInComboBoxFromTable(table, ColumnsTextForComboBox, comboBoxs);
                 settings.InsertImageInPictureBoxFromTable(table, ColumnsPictureForPictureBox, pictureBoxs);
+                settings.InsertDateInDateTimePickerFromTable(table, ColumnsDateForDateDateTimePicker, dateTimePickers);
             }
             return table;
         }
