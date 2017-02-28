@@ -176,6 +176,7 @@
             this.Delete.TabIndex = 12;
             this.Delete.Text = "Удалить";
             this.Delete.UseVisualStyleBackColor = true;
+            this.Delete.Click += new System.EventHandler(this.Delete_Click);
             // 
             // Update
             // 
@@ -185,6 +186,7 @@
             this.Update.TabIndex = 11;
             this.Update.Text = "Обновить";
             this.Update.UseVisualStyleBackColor = true;
+            this.Update.Click += new System.EventHandler(this.Update_Click);
             // 
             // Clear
             // 
@@ -194,6 +196,7 @@
             this.Clear.TabIndex = 9;
             this.Clear.Text = "Очистить";
             this.Clear.UseVisualStyleBackColor = true;
+            this.Clear.Click += new System.EventHandler(this.Clear_Click);
             // 
             // Insert
             // 
@@ -203,6 +206,7 @@
             this.Insert.TabIndex = 10;
             this.Insert.Text = "Вставить";
             this.Insert.UseVisualStyleBackColor = true;
+            this.Insert.Click += new System.EventHandler(this.Insert_Click);
             // 
             // Find
             // 
@@ -212,6 +216,7 @@
             this.Find.TabIndex = 8;
             this.Find.Text = "Найти";
             this.Find.UseVisualStyleBackColor = true;
+            this.Find.Click += new System.EventHandler(this.Find_Click);
             // 
             // label3
             // 
@@ -269,6 +274,7 @@
             this.PreviousRecordButton.TabIndex = 16;
             this.PreviousRecordButton.Text = "Предыдущая запись";
             this.PreviousRecordButton.UseVisualStyleBackColor = true;
+            this.PreviousRecordButton.Click += new System.EventHandler(this.PreviousRecordButton_Click);
             // 
             // NextRecordButton
             // 
@@ -278,6 +284,7 @@
             this.NextRecordButton.TabIndex = 15;
             this.NextRecordButton.Text = "Следующая запись";
             this.NextRecordButton.UseVisualStyleBackColor = true;
+            this.NextRecordButton.Click += new System.EventHandler(this.NextRecordButton_Click);
             // 
             // LastRecordButton
             // 
@@ -287,6 +294,7 @@
             this.LastRecordButton.TabIndex = 17;
             this.LastRecordButton.Text = "Последняя запись";
             this.LastRecordButton.UseVisualStyleBackColor = true;
+            this.LastRecordButton.Click += new System.EventHandler(this.LastRecordButton_Click);
             // 
             // FirstRecordButton
             // 
@@ -296,6 +304,7 @@
             this.FirstRecordButton.TabIndex = 14;
             this.FirstRecordButton.Text = "Первая запись";
             this.FirstRecordButton.UseVisualStyleBackColor = true;
+            this.FirstRecordButton.Click += new System.EventHandler(this.FirstRecordButton_Click);
             // 
             // textBoxSearch
             // 
@@ -303,6 +312,7 @@
             this.textBoxSearch.Name = "textBoxSearch";
             this.textBoxSearch.Size = new System.Drawing.Size(400, 20);
             this.textBoxSearch.TabIndex = 13;
+            this.textBoxSearch.TextChanged += new System.EventHandler(this.textBoxSearch_TextChanged);
             // 
             // label6
             // 
@@ -323,6 +333,8 @@
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.Size = new System.Drawing.Size(574, 257);
             this.dataGridView1.TabIndex = 18;
+            this.dataGridView1.SelectionChanged += new System.EventHandler(this.dataGridView1_SelectionChanged);
+            this.dataGridView1.Click += new System.EventHandler(this.dataGridView1_Click);
             // 
             // StockForm
             // 
@@ -335,6 +347,7 @@
             this.MinimumSize = new System.Drawing.Size(960, 365);
             this.Name = "StockForm";
             this.Text = "StockForm";
+            this.Load += new System.EventHandler(this.StockForm_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.panel2.ResumeLayout(false);
