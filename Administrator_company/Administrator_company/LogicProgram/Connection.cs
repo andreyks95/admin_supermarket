@@ -581,9 +581,9 @@ namespace Administrator_supermarket
             PropertyInfo property = currentType.GetProperty("Value");
             text= property.GetValue(obj).ToString();//в свойстве получить значение объекта
 
-            string inputFormat = "dd'.'MM'.'yyyy' 'HH':'mm':'ss", //Текущий формат ввода DateTimePicker
+            string inputFormat = "dd'.'MM'.'yyyy' 'H':'mm':'ss", //Текущий формат ввода DateTimePicker //"dd'.'MM'.'yyyy' 'HH':'mm':'ss"
                    outputFormat =  "yyyy'-'MM'-'dd"; //для конвертирования даты в формат Date MySQL 
-            DateTime dateTime = DateTime.ParseExact(text, inputFormat, null); //Превращаем текст в дату  
+            DateTime dateTime = DateTime.ParseExact(text, inputFormat, CultureInfo.InvariantCulture);//null); //Превращаем текст в дату  
             text = dateTime.ToString(outputFormat, null); //Конвертируем дату в текст с нужным форматом данных
             return text;
         }
