@@ -136,6 +136,12 @@
     <Compile Include="Preview %28Test%29\Stock.Designer.cs">
       <DependentUpon>Stock.cs</DependentUpon>
     </Compile>
+    <Compile Include="Preview %28Test%29\StockForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Preview %28Test%29\StockForm.Designer.cs">
+      <DependentUpon>StockForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Preview %28Test%29\TestForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -196,6 +202,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Preview %28Test%29\Stock.resx">
       <DependentUpon>Stock.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Preview %28Test%29\StockForm.resx">
+      <DependentUpon>StockForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Preview %28Test%29\TestForm.resx">
       <DependentUpon>TestForm.cs</DependentUpon>
