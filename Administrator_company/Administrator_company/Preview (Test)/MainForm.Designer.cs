@@ -34,6 +34,7 @@
             this.PositionButton = new System.Windows.Forms.Button();
             this.EmployeesButton = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
+            this.ProductsButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // OpenStock
@@ -95,11 +96,22 @@
             this.label1.TabIndex = 5;
             this.label1.Text = "подчинённая";
             // 
+            // ProductsButton
+            // 
+            this.ProductsButton.Location = new System.Drawing.Point(12, 244);
+            this.ProductsButton.Name = "ProductsButton";
+            this.ProductsButton.Size = new System.Drawing.Size(96, 23);
+            this.ProductsButton.TabIndex = 6;
+            this.ProductsButton.Text = "Продукты";
+            this.ProductsButton.UseVisualStyleBackColor = true;
+            this.ProductsButton.Click += new System.EventHandler(this.ProductsButton_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(233, 260);
+            this.ClientSize = new System.Drawing.Size(233, 305);
+            this.Controls.Add(this.ProductsButton);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.EmployeesButton);
             this.Controls.Add(this.PositionButton);
@@ -121,5 +133,6 @@
         private System.Windows.Forms.Button PositionButton;
         private System.Windows.Forms.Button EmployeesButton;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button ProductsButton;
     }
 }

@@ -46,5 +46,11 @@ namespace Administrator_company.Preview__Test_
             EmployeesForm employeesForm = new EmployeesForm();
             employeesForm.Show();
         }
+
+        private void ProductsButton_Click(object sender, EventArgs e)
+        {
+            ProductsForm productsForm = new ProductsForm();
+            productsForm.Show();
+        }
     }
 }
