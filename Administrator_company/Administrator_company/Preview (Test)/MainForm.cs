@@ -52,5 +52,11 @@ namespace Administrator_company.Preview__Test_
             ProductsForm productsForm = new ProductsForm();
             productsForm.Show();
         }
+
+        private void stock_Click(object sender, EventArgs e)
+        {
+            StockForm stockForm = new StockForm();
+            stockForm.Show();
+        }
     }
 }

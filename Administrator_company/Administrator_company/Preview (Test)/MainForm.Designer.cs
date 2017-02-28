@@ -35,11 +35,13 @@
             this.EmployeesButton = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.ProductsButton = new System.Windows.Forms.Button();
+            this.stock = new System.Windows.Forms.Button();
+            this.label2 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // OpenStock
             // 
-            this.OpenStock.Location = new System.Drawing.Point(12, 12);
+            this.OpenStock.Location = new System.Drawing.Point(117, 12);
             this.OpenStock.Name = "OpenStock";
             this.OpenStock.Size = new System.Drawing.Size(96, 23);
             this.OpenStock.TabIndex = 0;
@@ -49,7 +51,7 @@
             // 
             // OpenTestForm
             // 
-            this.OpenTestForm.Location = new System.Drawing.Point(12, 55);
+            this.OpenTestForm.Location = new System.Drawing.Point(117, 53);
             this.OpenTestForm.Name = "OpenTestForm";
             this.OpenTestForm.Size = new System.Drawing.Size(96, 23);
             this.OpenTestForm.TabIndex = 1;
@@ -59,7 +61,7 @@
             // 
             // TestFormTwo
             // 
-            this.TestFormTwo.Location = new System.Drawing.Point(12, 110);
+            this.TestFormTwo.Location = new System.Drawing.Point(12, 13);
             this.TestFormTwo.Name = "TestFormTwo";
             this.TestFormTwo.Size = new System.Drawing.Size(96, 38);
             this.TestFormTwo.TabIndex = 2;
@@ -69,7 +71,7 @@
             // 
             // PositionButton
             // 
-            this.PositionButton.Location = new System.Drawing.Point(12, 167);
+            this.PositionButton.Location = new System.Drawing.Point(12, 70);
             this.PositionButton.Name = "PositionButton";
             this.PositionButton.Size = new System.Drawing.Size(96, 23);
             this.PositionButton.TabIndex = 3;
@@ -79,7 +81,7 @@
             // 
             // EmployeesButton
             // 
-            this.EmployeesButton.Location = new System.Drawing.Point(12, 206);
+            this.EmployeesButton.Location = new System.Drawing.Point(12, 109);
             this.EmployeesButton.Name = "EmployeesButton";
             this.EmployeesButton.Size = new System.Drawing.Size(96, 23);
             this.EmployeesButton.TabIndex = 4;
@@ -90,7 +92,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(114, 211);
+            this.label1.Location = new System.Drawing.Point(114, 109);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(72, 13);
             this.label1.TabIndex = 5;
@@ -98,7 +100,7 @@
             // 
             // ProductsButton
             // 
-            this.ProductsButton.Location = new System.Drawing.Point(12, 244);
+            this.ProductsButton.Location = new System.Drawing.Point(12, 147);
             this.ProductsButton.Name = "ProductsButton";
             this.ProductsButton.Size = new System.Drawing.Size(96, 23);
             this.ProductsButton.TabIndex = 6;
@@ -106,11 +108,32 @@
             this.ProductsButton.UseVisualStyleBackColor = true;
             this.ProductsButton.Click += new System.EventHandler(this.ProductsButton_Click);
             // 
+            // stock
+            // 
+            this.stock.Location = new System.Drawing.Point(12, 185);
+            this.stock.Name = "stock";
+            this.stock.Size = new System.Drawing.Size(96, 23);
+            this.stock.TabIndex = 7;
+            this.stock.Text = "Склад";
+            this.stock.UseVisualStyleBackColor = true;
+            this.stock.Click += new System.EventHandler(this.stock_Click);
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(114, 190);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(72, 13);
+            this.label2.TabIndex = 8;
+            this.label2.Text = "подчинённая";
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(233, 305);
+            this.ClientSize = new System.Drawing.Size(234, 231);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.stock);
             this.Controls.Add(this.ProductsButton);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.EmployeesButton);
@@ -118,6 +141,7 @@
             this.Controls.Add(this.TestFormTwo);
             this.Controls.Add(this.OpenTestForm);
             this.Controls.Add(this.OpenStock);
+            this.MinimumSize = new System.Drawing.Size(250, 270);
             this.Name = "MainForm";
             this.Text = "MainForm";
             this.ResumeLayout(false);
@@ -134,5 +158,7 @@
         private System.Windows.Forms.Button EmployeesButton;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button ProductsButton;
+        private System.Windows.Forms.Button stock;
+        private System.Windows.Forms.Label label2;
     }
 }
