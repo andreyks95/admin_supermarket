@@ -230,7 +230,5 @@ namespace Administrator_company.Preview__Test_
         {
             managerBase.Position = managerBase.Count;
         }
-
-
     }
 }
