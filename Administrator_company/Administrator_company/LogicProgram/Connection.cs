@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Globalization;
 using System.Reflection;
 using System.Windows.Forms;
 using MySql.Data.MySqlClient;
@@ -360,7 +361,7 @@ namespace Administrator_supermarket
         /// <param name="cellsImages">Номера строк содержащих картинки</param>
         /// <param name="query">запрос, который содержит select с параметром поиска значения по столбцам (числовое или строковое)
         /// Если нету, то просто отображаем таблицу</param>
-        public DataTable FillDataGridView(DataGridView dataGridView, int height, int[] cellsImages, string query = "")
+        public DataTable FillDataGridView(DataGridView dataGridView, int height, int[] cellsImages=null, string query = "")
         {
             try
             {
@@ -378,6 +379,7 @@ namespace Administrator_supermarket
                 //настраиваем отображение таблицы
                 settings.GetSettingDisplayTable(dataGridView, height);
                 dataGridView.DataSource = table; //подключаем заполненную таблицу и отображаем
+                if(cellsImages != null)
                 //Для отображения картинки в DataGridView
                 settings.GetViewImageInCellTable(dataGridView, cellsImages);
                
@@ -541,6 +543,7 @@ namespace Administrator_supermarket
             try
             {
                 connection.Open();
+                //commandSql.ExecuteScalar();
                 if (commandSql.ExecuteNonQuery() == 1)
                 {
                     if (showMessageBox == true)
@@ -565,6 +568,64 @@ namespace Administrator_supermarket
         }
         #endregion
 
+        #region GetTextDate - Получить дату в виде текста для DateTimePicker
+        /// <summary>
+        /// Получить дату в виде текста для DateTimePicker
+        /// </summary>
+        /// <param name="obj">Объект DateTimePicker</param>
+        /// <returns>Дата в виде текста</returns>
+        public string GetTextDate(object obj)
+        {
+            string text;
+            Type currentType = obj.GetType();
+            PropertyInfo property = currentType.GetProperty("Value");
+            text= property.GetValue(obj).ToString();//в свойстве получить значение объекта
+
+            string inputFormat = "dd'.'MM'.'yyyy' 'H':'mm':'ss", //Текущий формат ввода DateTimePicker //"dd'.'MM'.'yyyy' 'HH':'mm':'ss"
+                   outputFormat =  "yyyy'-'MM'-'dd"; //для конвертирования даты в формат Date MySQL 
+            DateTime dateTime = DateTime.ParseExact(text, inputFormat, CultureInfo.InvariantCulture);//null); //Превращаем текст в дату  
+            text = dateTime.ToString(outputFormat, null); //Конвертируем дату в текст с нужным форматом данных
+            return text;
+        }
+        #endregion
+
+        #region GetText overload - Перегруженный. Получить текст с свойства объекта WinForm (TextBox, ComboBox ...)
+        /// <summary>
+        /// Получить текст с свойства объекта WinForm (TextBox, ComboBox ...)
+        /// </summary>
+        /// <param name="obj">Объект WinForm (TextBox, ComboBox ...)</param>
+        /// <param name="nameProperty">Название свойства объекта</param>
+        /// <returns>Текст с свойства объекта</returns>
+        public string GetText(object obj, string nameProperty)
+        {
+            string text = null;
+            Type currentType = obj.GetType();//получаем тип
+            PropertyInfo property = currentType.GetProperty(nameProperty);//Присваиваем ему свойство, c определённым именем. Получить свойство из этого типа
+           // text = property.GetValue(obj).ToString(); //в свойстве получить значение объекта
+
+            //Если выбран ComboBox
+            if (nameProperty == "SelectedItem")
+            {
+                //если SelectedItem == null, то есть не выбран
+                //Берём значение того, что введено в ComboBox
+                if (currentType.GetProperty(nameProperty).GetValue(obj) == null)
+                    //or if (string.IsNullOrEmpty(comboBox1.Text)) or if (comboBox1.SelectedIndex == -1)
+                {
+                    //text = currentType.GetProperty("Text").GetValue(obj).ToString();
+                    property = currentType.GetProperty("Text");
+                    text=property.GetValue(obj).ToString();//
+                }
+                else
+                    text = property.GetValue(obj).ToString();
+            }
+            else
+            {
+                text = property.GetValue(obj).ToString(); //в свойстве получить значение объекта             
+            }
+            return text;
+        }
+        #endregion
+
         #region GetText. Получить текущий текст из TextBox, ComboBox
         /// <summary>
         /// возвращает текущий текст из comboBox или textBox
@@ -580,15 +641,30 @@ namespace Administrator_supermarket
 
             if (obj is TextBox)
             {
-                currentType = obj.GetType(); //получаем тип
-                property = currentType.GetProperty("Text");//Присваиваем ему свойство Text, если это textBox. Получить свойство text из этого типа                                            
-                text = property.GetValue(obj).ToString(); //в свойстве получить значение объекта
+                text = GetText(obj, "Text");
+                //currentType = obj.GetType(); //получаем тип
+                //property = currentType.GetProperty("Text");//Присваиваем ему свойство Text, если это textBox. Получить свойство text из этого типа                                            
+                //text = property.GetValue(obj).ToString(); //в свойстве получить значение объекта
             }
+
+            //здесь нужно сделать если не selected item!
             else if (obj is ComboBox)
             {
-                currentType = obj.GetType(); //получаем тип
-                property = currentType.GetProperty("SelectedItem");//Присваиваем ему свойство SelectedItem, если это ComboBox. Получить свойство SelectedItem из этого типа                                            
-                text = property.GetValue(obj).ToString(); //в свойстве получить значение объекта
+                //Выберает то свойство, в котором содержиться текст
+                //text = GetText(obj, "SelectedItem") ?? GetText(obj, "Text");
+                //text = GetText(obj, "Text");
+                text = GetText(obj, "SelectedItem");
+                //currentType = obj.GetType(); //получаем тип
+                //property = currentType.GetProperty("SelectedItem");//Присваиваем ему свойство SelectedItem, если это ComboBox. Получить свойство SelectedItem из этого типа                                            
+                //text = property.GetValue(obj).ToString(); //в свойстве получить значение объекта
+            }
+            else if (obj is DateTimePicker)
+            {
+                text = GetTextDate(obj);
+                //text = GetText(obj, "Value");
+                //currentType = obj.GetType(); //получаем тип
+                //property = currentType.GetProperty("Value");//Присваиваем ему свойство SelectedItem, если это ComboBox. Получить свойство SelectedItem из этого типа                                            
+                //text = property.GetValue(obj).ToString(); //в свойстве получить значение объекта
             }
             else
                 text = "";
@@ -608,7 +684,7 @@ namespace Administrator_supermarket
         public void AddParameters(MySqlCommand command, string variables, MySqlDbType mySqlDbTypes, object objects)
         {
                 //если объект является ComboBox или TextBox
-                if (objects is ComboBox || objects is TextBox)
+                if (objects is ComboBox || objects is TextBox || objects is DateTimePicker)
                     command.Parameters.Add(variables, mySqlDbTypes).Value = GetText(objects); //GetText если есть текст в объектах
                 else
                     command.Parameters.Add(variables, mySqlDbTypes).Value = objects; //Для других объектов                
@@ -629,13 +705,14 @@ namespace Administrator_supermarket
             //для всех переменных
             for (int i = 0; i < variables.Length; i++)
             {
-                //если объект является ComboBox или TextBox
-                if (objects[i] is ComboBox || objects[i] is TextBox)
-                    AddParameters(command, variables[i], mySqlDbTypes[i], objects[i]);
-                    //command.Parameters.Add(variables[i], mySqlDbTypes[i]).Value = GetText(objects[i]); //GetText если есть текст в объектах
-                else
-                    AddParameters(command, variables[i], mySqlDbTypes[i], objects[i]);
-                    //command.Parameters.Add(variables[i], mySqlDbTypes[i]).Value = objects[i]; //Для других объектов           
+                AddParameters(command, variables[i], mySqlDbTypes[i], objects[i]);
+                ////если объект является ComboBox или TextBox
+                //if (objects[i] is ComboBox || objects[i] is TextBox)
+                //    AddParameters(command, variables[i], mySqlDbTypes[i], objects[i]);
+                //    //command.Parameters.Add(variables[i], mySqlDbTypes[i]).Value = GetText(objects[i]); //GetText если есть текст в объектах
+                //else
+                //    AddParameters(command, variables[i], mySqlDbTypes[i], objects[i]);
+                //    //command.Parameters.Add(variables[i], mySqlDbTypes[i]).Value = objects[i]; //Для других объектов        
             }
         }
         #endregion
@@ -731,7 +808,7 @@ namespace Administrator_supermarket
             select = " SELECT ";
             for (int i = 0; i < nameFields.Length; i++)
             {
-                select += " " + nameFields[i] + " AS " + newNameFieldsAS[i] + ", ";
+                select += " " + nameFields[i] + " AS " + "'" + newNameFieldsAS[i] + "'" + ", ";
             }
             select = select.Remove(select.Length - 2) + " "; //удалить перед From ", "
 
@@ -791,14 +868,18 @@ namespace Administrator_supermarket
         /// <param name="ColumnsTextForTextBox">Строки dataGridView которые содержать текстовые данные для TextBox-ов</param>
         /// <param name="ColumnsTextForComboBox">Строки dataGridView которые содержать текстовые данные для comboBox-ов</param>
         /// <param name="ColumnsPictureForPictureBox">Строки dataGridView которые содержать изображения для pictureBox-ов</param>
-        public DataTable Find(MySqlCommand commandLocal, TextBox[] textBoxs = null, ComboBox[] comboBoxs = null, PictureBox[] pictureBoxs = null,
-                        int[] ColumnsTextForTextBox = null, int[] ColumnsTextForComboBox = null, int[] ColumnsPictureForPictureBox = null, DataGridView dataGrid=null)
+        public DataTable Find(MySqlCommand commandLocal, DataGridView dataGrid = null, 
+                              TextBox[] textBoxs = null, ComboBox[] comboBoxs = null, PictureBox[] pictureBoxs = null, DateTimePicker[] dateTimePickers =null,
+                              int[] ColumnsTextForTextBox = null, int[] ColumnsTextForComboBox = null, int[] ColumnsPictureForPictureBox = null, int[] ColumnsDateForDateDateTimePicker = null)
         {
-            ///Для отображения в таблице
+            //Для отображения в таблице
+            adapter = new MySqlDataAdapter(commandLocal); //Выполняем команду                
             adapter.SelectCommand = commandLocal; //выполнить выборку. Select нужно новый создавать
-             DataTable table = new DataTable();
+            DataTable table = new DataTable();
+            //table.Clear();
             adapter.Fill(table); //Вставляем данные при выполнении команды в таблицу
             Settings settings = new Settings();
+            //dataGrid.DataSource = table; //подключаем заполненную таблицу и отображаем
             if (table.Columns.Count <= 0)
             {
                 MessageBox.Show("Указанная запись: " + textBoxs[0].Text + " не найдена!");//textBoxs[0] должен содержать id 
@@ -810,6 +891,7 @@ namespace Administrator_supermarket
                 settings.InsertTextInTextBoxFromTable(table, ColumnsTextForTextBox, textBoxs); //вставляем все значения из таблицы в text-Box так же для остальных
                 settings.InsertTextInComboBoxFromTable(table, ColumnsTextForComboBox, comboBoxs);
                 settings.InsertImageInPictureBoxFromTable(table, ColumnsPictureForPictureBox, pictureBoxs);
+                settings.InsertDateInDateTimePickerFromTable(table, ColumnsDateForDateDateTimePicker, dateTimePickers);
             }
             return table;
         }
