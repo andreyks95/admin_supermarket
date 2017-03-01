@@ -40,5 +40,23 @@ namespace Administrator_company.Preview__Test_
             PositionForm positionForm = new PositionForm();
             positionForm.Show();
         }
+
+        private void EmployeesButton_Click(object sender, EventArgs e)
+        {
+            EmployeesForm employeesForm = new EmployeesForm();
+            employeesForm.Show();
+        }
+
+        private void ProductsButton_Click(object sender, EventArgs e)
+        {
+            ProductsForm productsForm = new ProductsForm();
+            productsForm.Show();
+        }
+
+        private void stock_Click(object sender, EventArgs e)
+        {
+            StockForm stockForm = new StockForm();
+            stockForm.Show();
+        }
     }
 }
