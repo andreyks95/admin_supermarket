@@ -106,6 +106,12 @@
       <DependentUpon>TableAdministrator.cs</DependentUpon>
     </Compile>
     <Compile Include="LogicProgram\Settings.cs" />
+    <Compile Include="Preview %28Test%29\AboutProgram.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Preview %28Test%29\AboutProgram.Designer.cs">
+      <DependentUpon>AboutProgram.cs</DependentUpon>
+    </Compile>
     <Compile Include="Preview %28Test%29\EmployeesForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -187,6 +193,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="CodeForTable\TableAdministrator.resx">
       <DependentUpon>TableAdministrator.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Preview %28Test%29\AboutProgram.resx">
+      <DependentUpon>AboutProgram.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Preview %28Test%29\EmployeesForm.resx">
       <DependentUpon>EmployeesForm.cs</DependentUpon>
