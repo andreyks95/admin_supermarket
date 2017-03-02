@@ -211,7 +211,7 @@
             <coveredLifelines>
               <lifelineMoniker
                 Id="e95ea6e3-c1d6-44a3-8353-133aa9d24404"
-                LastKnownName="Отдел"
+                LastKnownName="Должность"
                 LastKnownLocation="ModelingProject2.uml" />
             </coveredLifelines>
             <finish>
@@ -259,7 +259,7 @@
             <covered>
               <lifelineMoniker
                 Id="e95ea6e3-c1d6-44a3-8353-133aa9d24404"
-                LastKnownName="Отдел"
+                LastKnownName="Должность"
                 LastKnownLocation="ModelingProject2.uml" />
             </covered>
           </executionOccurrenceSpecification>
@@ -279,7 +279,7 @@
             <covered>
               <lifelineMoniker
                 Id="e95ea6e3-c1d6-44a3-8353-133aa9d24404"
-                LastKnownName="Отдел"
+                LastKnownName="Должность"
                 LastKnownLocation="ModelingProject2.uml" />
             </covered>
           </messageOccurrenceSpecification>
@@ -349,7 +349,7 @@
             <covered>
               <lifelineMoniker
                 Id="e95ea6e3-c1d6-44a3-8353-133aa9d24404"
-                LastKnownName="Отдел"
+                LastKnownName="Должность"
                 LastKnownLocation="ModelingProject2.uml" />
             </covered>
           </messageOccurrenceSpecification>
@@ -369,7 +369,7 @@
             <covered>
               <lifelineMoniker
                 Id="e95ea6e3-c1d6-44a3-8353-133aa9d24404"
-                LastKnownName="Отдел"
+                LastKnownName="Должность"
                 LastKnownLocation="ModelingProject2.uml" />
             </covered>
           </messageOccurrenceSpecification>
@@ -397,7 +397,7 @@
             <covered>
               <lifelineMoniker
                 Id="e95ea6e3-c1d6-44a3-8353-133aa9d24404"
-                LastKnownName="Отдел"
+                LastKnownName="Должность"
                 LastKnownLocation="ModelingProject2.uml" />
             </covered>
           </messageOccurrenceSpecification>
@@ -425,7 +425,7 @@
             <covered>
               <lifelineMoniker
                 Id="e95ea6e3-c1d6-44a3-8353-133aa9d24404"
-                LastKnownName="Отдел"
+                LastKnownName="Должность"
                 LastKnownLocation="ModelingProject2.uml" />
             </covered>
           </executionOccurrenceSpecification>
@@ -563,7 +563,7 @@
             <coveredLifelines>
               <lifelineMoniker
                 Id="e95ea6e3-c1d6-44a3-8353-133aa9d24404"
-                LastKnownName="Отдел"
+                LastKnownName="Должность"
                 LastKnownLocation="ModelingProject2.uml" />
             </coveredLifelines>
             <finish>
@@ -611,7 +611,7 @@
             <covered>
               <lifelineMoniker
                 Id="e95ea6e3-c1d6-44a3-8353-133aa9d24404"
-                LastKnownName="Отдел"
+                LastKnownName="Должность"
                 LastKnownLocation="ModelingProject2.uml" />
             </covered>
           </executionOccurrenceSpecification>
@@ -621,7 +621,7 @@
             <covered>
               <lifelineMoniker
                 Id="e95ea6e3-c1d6-44a3-8353-133aa9d24404"
-                LastKnownName="Отдел"
+                LastKnownName="Должность"
                 LastKnownLocation="ModelingProject2.uml" />
             </covered>
           </messageOccurrenceSpecification>
@@ -701,7 +701,7 @@
             <covered>
               <lifelineMoniker
                 Id="e95ea6e3-c1d6-44a3-8353-133aa9d24404"
-                LastKnownName="Отдел"
+                LastKnownName="Должность"
                 LastKnownLocation="ModelingProject2.uml" />
             </covered>
           </messageOccurrenceSpecification>
@@ -721,7 +721,7 @@
             <covered>
               <lifelineMoniker
                 Id="e95ea6e3-c1d6-44a3-8353-133aa9d24404"
-                LastKnownName="Отдел"
+                LastKnownName="Должность"
                 LastKnownLocation="ModelingProject2.uml" />
             </covered>
           </messageOccurrenceSpecification>
@@ -759,7 +759,7 @@
             <covered>
               <lifelineMoniker
                 Id="e95ea6e3-c1d6-44a3-8353-133aa9d24404"
-                LastKnownName="Отдел"
+                LastKnownName="Должность"
                 LastKnownLocation="ModelingProject2.uml" />
             </covered>
           </messageOccurrenceSpecification>
@@ -777,7 +777,7 @@
             <covered>
               <lifelineMoniker
                 Id="e95ea6e3-c1d6-44a3-8353-133aa9d24404"
-                LastKnownName="Отдел"
+                LastKnownName="Должность"
                 LastKnownLocation="ModelingProject2.uml" />
             </covered>
           </executionOccurrenceSpecification>
@@ -1007,7 +1007,7 @@
             <coveredLifelines>
               <lifelineMoniker
                 Id="e95ea6e3-c1d6-44a3-8353-133aa9d24404"
-                LastKnownName="Отдел"
+                LastKnownName="Должность"
                 LastKnownLocation="ModelingProject2.uml" />
             </coveredLifelines>
             <finish>
@@ -1055,7 +1055,7 @@
             <covered>
               <lifelineMoniker
                 Id="e95ea6e3-c1d6-44a3-8353-133aa9d24404"
-                LastKnownName="Отдел"
+                LastKnownName="Должность"
                 LastKnownLocation="ModelingProject2.uml" />
             </covered>
           </executionOccurrenceSpecification>
@@ -1075,7 +1075,7 @@
             <covered>
               <lifelineMoniker
                 Id="e95ea6e3-c1d6-44a3-8353-133aa9d24404"
-                LastKnownName="Отдел"
+                LastKnownName="Должность"
                 LastKnownLocation="ModelingProject2.uml" />
             </covered>
           </messageOccurrenceSpecification>
@@ -1135,7 +1135,7 @@
             <covered>
               <lifelineMoniker
                 Id="e95ea6e3-c1d6-44a3-8353-133aa9d24404"
-                LastKnownName="Отдел"
+                LastKnownName="Должность"
                 LastKnownLocation="ModelingProject2.uml" />
             </covered>
           </messageOccurrenceSpecification>
@@ -1165,7 +1165,7 @@
             <covered>
               <lifelineMoniker
                 Id="e95ea6e3-c1d6-44a3-8353-133aa9d24404"
-                LastKnownName="Отдел"
+                LastKnownName="Должность"
                 LastKnownLocation="ModelingProject2.uml" />
             </covered>
           </messageOccurrenceSpecification>
@@ -1193,7 +1193,7 @@
             <covered>
               <lifelineMoniker
                 Id="e95ea6e3-c1d6-44a3-8353-133aa9d24404"
-                LastKnownName="Отдел"
+                LastKnownName="Должность"
                 LastKnownLocation="ModelingProject2.uml" />
             </covered>
           </messageOccurrenceSpecification>
@@ -1221,7 +1221,7 @@
             <covered>
               <lifelineMoniker
                 Id="e95ea6e3-c1d6-44a3-8353-133aa9d24404"
-                LastKnownName="Отдел"
+                LastKnownName="Должность"
                 LastKnownLocation="ModelingProject2.uml" />
             </covered>
           </executionOccurrenceSpecification>
@@ -1231,7 +1231,7 @@
             <coveredLifelines>
               <lifelineMoniker
                 Id="e95ea6e3-c1d6-44a3-8353-133aa9d24404"
-                LastKnownName="Отдел"
+                LastKnownName="Должность"
                 LastKnownLocation="ModelingProject2.uml" />
             </coveredLifelines>
             <finish>
@@ -1279,7 +1279,7 @@
             <covered>
               <lifelineMoniker
                 Id="e95ea6e3-c1d6-44a3-8353-133aa9d24404"
-                LastKnownName="Отдел"
+                LastKnownName="Должность"
                 LastKnownLocation="ModelingProject2.uml" />
             </covered>
           </executionOccurrenceSpecification>
@@ -1299,7 +1299,7 @@
             <covered>
               <lifelineMoniker
                 Id="e95ea6e3-c1d6-44a3-8353-133aa9d24404"
-                LastKnownName="Отдел"
+                LastKnownName="Должность"
                 LastKnownLocation="ModelingProject2.uml" />
             </covered>
           </messageOccurrenceSpecification>
@@ -1369,7 +1369,7 @@
             <covered>
               <lifelineMoniker
                 Id="e95ea6e3-c1d6-44a3-8353-133aa9d24404"
-                LastKnownName="Отдел"
+                LastKnownName="Должность"
                 LastKnownLocation="ModelingProject2.uml" />
             </covered>
           </messageOccurrenceSpecification>
@@ -1389,7 +1389,7 @@
             <covered>
               <lifelineMoniker
                 Id="e95ea6e3-c1d6-44a3-8353-133aa9d24404"
-                LastKnownName="Отдел"
+                LastKnownName="Должность"
                 LastKnownLocation="ModelingProject2.uml" />
             </covered>
           </messageOccurrenceSpecification>
@@ -1417,7 +1417,7 @@
             <covered>
               <lifelineMoniker
                 Id="e95ea6e3-c1d6-44a3-8353-133aa9d24404"
-                LastKnownName="Отдел"
+                LastKnownName="Должность"
                 LastKnownLocation="ModelingProject2.uml" />
             </covered>
           </messageOccurrenceSpecification>
@@ -1445,7 +1445,7 @@
             <covered>
               <lifelineMoniker
                 Id="e95ea6e3-c1d6-44a3-8353-133aa9d24404"
-                LastKnownName="Отдел"
+                LastKnownName="Должность"
                 LastKnownLocation="ModelingProject2.uml" />
             </covered>
           </executionOccurrenceSpecification>
@@ -1667,7 +1667,7 @@
             <coveredLifelines>
               <lifelineMoniker
                 Id="e95ea6e3-c1d6-44a3-8353-133aa9d24404"
-                LastKnownName="Отдел"
+                LastKnownName="Должность"
                 LastKnownLocation="ModelingProject2.uml" />
             </coveredLifelines>
             <finish>
@@ -1715,7 +1715,7 @@
             <covered>
               <lifelineMoniker
                 Id="e95ea6e3-c1d6-44a3-8353-133aa9d24404"
-                LastKnownName="Отдел"
+                LastKnownName="Должность"
                 LastKnownLocation="ModelingProject2.uml" />
             </covered>
           </executionOccurrenceSpecification>
@@ -1725,7 +1725,7 @@
             <covered>
               <lifelineMoniker
                 Id="e95ea6e3-c1d6-44a3-8353-133aa9d24404"
-                LastKnownName="Отдел"
+                LastKnownName="Должность"
                 LastKnownLocation="ModelingProject2.uml" />
             </covered>
           </messageOccurrenceSpecification>
@@ -1795,7 +1795,7 @@
             <covered>
               <lifelineMoniker
                 Id="e95ea6e3-c1d6-44a3-8353-133aa9d24404"
-                LastKnownName="Отдел"
+                LastKnownName="Должность"
                 LastKnownLocation="ModelingProject2.uml" />
             </covered>
           </messageOccurrenceSpecification>
@@ -1825,7 +1825,7 @@
             <covered>
               <lifelineMoniker
                 Id="e95ea6e3-c1d6-44a3-8353-133aa9d24404"
-                LastKnownName="Отдел"
+                LastKnownName="Должность"
                 LastKnownLocation="ModelingProject2.uml" />
             </covered>
           </messageOccurrenceSpecification>
@@ -1863,7 +1863,7 @@
             <covered>
               <lifelineMoniker
                 Id="e95ea6e3-c1d6-44a3-8353-133aa9d24404"
-                LastKnownName="Отдел"
+                LastKnownName="Должность"
                 LastKnownLocation="ModelingProject2.uml" />
             </covered>
           </messageOccurrenceSpecification>
@@ -1881,7 +1881,7 @@
             <covered>
               <lifelineMoniker
                 Id="e95ea6e3-c1d6-44a3-8353-133aa9d24404"
-                LastKnownName="Отдел"
+                LastKnownName="Должность"
                 LastKnownLocation="ModelingProject2.uml" />
             </covered>
           </executionOccurrenceSpecification>
@@ -2201,9 +2201,9 @@
           </lifeline>
           <lifeline
             Id="e95ea6e3-c1d6-44a3-8353-133aa9d24404"
-            name="Отдел"
+            name="Должность"
             isActor="false"
-            lifelineDisplayName="Отдел">
+            lifelineDisplayName="Должность">
             <represents>
               <propertyMoniker
                 Id="c7d6cf3a-1c9f-4867-8785-3c1807f5d334"
@@ -2961,7 +2961,7 @@
             <type_NamedElement>
               <classMoniker
                 Id="b6a11564-72bd-4a9c-a112-7111fd0b0e75"
-                LastKnownName="Отдел"
+                LastKnownName="Должность"
                 LastKnownLocation="ModelingProject2.uml" />
             </type_NamedElement>
           </property>
@@ -2977,7 +2977,7 @@
             <type_NamedElement>
               <classMoniker
                 Id="b6a11564-72bd-4a9c-a112-7111fd0b0e75"
-                LastKnownName="Отдел"
+                LastKnownName="Должность"
                 LastKnownLocation="ModelingProject2.uml" />
             </type_NamedElement>
           </property>
@@ -3001,7 +3001,7 @@
             isAbstract="false">
             <classMoniker
               Id="b6a11564-72bd-4a9c-a112-7111fd0b0e75"
-              LastKnownName="Отдел"
+              LastKnownName="Должность"
               LastKnownLocation="ModelingProject2.uml" />
             <relationshipOwnedElementsInternal>
               <associationHasOwnedEnds>
@@ -3189,14 +3189,6 @@
           </association>
         </targetEnds>
         <ownedOperationsInternal>
-          <operation
-            Id="a0105fdb-cf73-48dd-a23b-23569fd39461"
-            name="ОтобразитьАдминистраторов"
-            isLeaf="false"
-            isStatic="false"
-            isAbstract="false"
-            concurrency="Sequential"
-            isQuery="false" />
           <operation
             Id="1ae8db9d-9342-465c-b9e6-6f8c8e54a2f5"
             name="ОтобразитьСотрудников"
@@ -3503,7 +3495,7 @@
     <packageHasNamedElement>
       <class
         Id="b6a11564-72bd-4a9c-a112-7111fd0b0e75"
-        name="Отдел"
+        name="Должность"
         isAbstract="false"
         isLeaf="false"
         isActiveClass="false">
