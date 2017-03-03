@@ -282,7 +282,7 @@ namespace Administrator_supermarket
         /// <param name="table">Название таблицы с которого нужно получить значение функции</param>
         /// <param name="field">Название поля таблицы с которого нужно получить значение функции</param>
         /// <param name="func">Название самой функции</param>
-        /// <returns>Вернуть значение выполненной фукнции в сроке, для вставки в запрос или другого использования</returns>
+        /// <returns>Вернуть значение выполненной фукнции в строке, для вставки в запрос или другого использования</returns>
         public string GetValueFromFieldTable(string nameDatabase, string table, string field, string func)
         {
             Connection connect = new Connection();
@@ -366,7 +366,7 @@ namespace Administrator_supermarket
         /// </summary>
         /// <param name="nameDatabase">Название базы данных</param>
         /// <param name="tables">Массив таблиц с которых нужно получить значения</param>
-        /// <param name="fields">Двумерный массив полей таблиц в котороых содержаться необходимые значения</param>
+        /// <param name="fields">Двумерный массив столбцов таблиц в которых содержаться необходимые значения</param>
         /// <param name="idFields">Массив названия id полей таблиц</param>
         /// <param name="ids">Номера id записей в таблице</param>
         /// <returns>Получить float List список всех числовых значений необходимых нам ячеек из таблиц</returns>
@@ -392,7 +392,7 @@ namespace Administrator_supermarket
         /// <summary>
         ///Получение результата вычисления из списка числовых значений
         /// </summary>
-        /// <param name="values">Списко всех числовых значений</param>
+        /// <param name="values">Список всех числовых значений</param>
         /// <param name="mathOperation">Мат. операция</param>
         /// <returns>Результат вычисления</returns>
         public float GetCalc(List<float> values, string mathOperation = "+")

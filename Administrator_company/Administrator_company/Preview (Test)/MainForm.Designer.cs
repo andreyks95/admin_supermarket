@@ -39,12 +39,12 @@
             this.label2 = new System.Windows.Forms.Label();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.таблицыToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.сервисToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.информацияОСотрудникахToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.должностиToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.сотрудникиToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.продуктыToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.складToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.сервисToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.оПрограммеToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -73,7 +73,7 @@
             // 
             // TestFormTwo
             // 
-            this.TestFormTwo.Location = new System.Drawing.Point(55, 27);
+            this.TestFormTwo.Location = new System.Drawing.Point(50, 27);
             this.TestFormTwo.Name = "TestFormTwo";
             this.TestFormTwo.Size = new System.Drawing.Size(140, 40);
             this.TestFormTwo.TabIndex = 2;
@@ -83,7 +83,7 @@
             // 
             // PositionButton
             // 
-            this.PositionButton.Location = new System.Drawing.Point(55, 73);
+            this.PositionButton.Location = new System.Drawing.Point(50, 73);
             this.PositionButton.Name = "PositionButton";
             this.PositionButton.Size = new System.Drawing.Size(140, 40);
             this.PositionButton.TabIndex = 3;
@@ -93,7 +93,7 @@
             // 
             // EmployeesButton
             // 
-            this.EmployeesButton.Location = new System.Drawing.Point(55, 119);
+            this.EmployeesButton.Location = new System.Drawing.Point(50, 119);
             this.EmployeesButton.Name = "EmployeesButton";
             this.EmployeesButton.Size = new System.Drawing.Size(140, 40);
             this.EmployeesButton.TabIndex = 4;
@@ -104,7 +104,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(9, 119);
+            this.label1.Location = new System.Drawing.Point(-3, 119);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(43, 26);
             this.label1.TabIndex = 5;
@@ -113,7 +113,7 @@
             // 
             // ProductsButton
             // 
-            this.ProductsButton.Location = new System.Drawing.Point(55, 165);
+            this.ProductsButton.Location = new System.Drawing.Point(50, 165);
             this.ProductsButton.Name = "ProductsButton";
             this.ProductsButton.Size = new System.Drawing.Size(140, 40);
             this.ProductsButton.TabIndex = 5;
@@ -123,7 +123,7 @@
             // 
             // stock
             // 
-            this.stock.Location = new System.Drawing.Point(55, 211);
+            this.stock.Location = new System.Drawing.Point(50, 211);
             this.stock.Name = "stock";
             this.stock.Size = new System.Drawing.Size(140, 40);
             this.stock.TabIndex = 6;
@@ -134,7 +134,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(9, 211);
+            this.label2.Location = new System.Drawing.Point(-3, 211);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(43, 26);
             this.label2.TabIndex = 8;
@@ -163,14 +163,6 @@
             this.таблицыToolStripMenuItem.Name = "таблицыToolStripMenuItem";
             this.таблицыToolStripMenuItem.Size = new System.Drawing.Size(69, 20);
             this.таблицыToolStripMenuItem.Text = "Таблицы";
-            // 
-            // сервисToolStripMenuItem
-            // 
-            this.сервисToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.оПрограммеToolStripMenuItem});
-            this.сервисToolStripMenuItem.Name = "сервисToolStripMenuItem";
-            this.сервисToolStripMenuItem.Size = new System.Drawing.Size(59, 20);
-            this.сервисToolStripMenuItem.Text = "Сервис";
             // 
             // информацияОСотрудникахToolStripMenuItem
             // 
@@ -207,10 +199,18 @@
             this.складToolStripMenuItem.Text = "Склад";
             this.складToolStripMenuItem.Click += new System.EventHandler(this.складToolStripMenuItem_Click);
             // 
+            // сервисToolStripMenuItem
+            // 
+            this.сервисToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.оПрограммеToolStripMenuItem});
+            this.сервисToolStripMenuItem.Name = "сервисToolStripMenuItem";
+            this.сервисToolStripMenuItem.Size = new System.Drawing.Size(59, 20);
+            this.сервисToolStripMenuItem.Text = "Сервис";
+            // 
             // оПрограммеToolStripMenuItem
             // 
             this.оПрограммеToolStripMenuItem.Name = "оПрограммеToolStripMenuItem";
-            this.оПрограммеToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.оПрограммеToolStripMenuItem.Size = new System.Drawing.Size(149, 22);
             this.оПрограммеToolStripMenuItem.Text = "О программе";
             this.оПрограммеToolStripMenuItem.Click += new System.EventHandler(this.оПрограммеToolStripMenuItem_Click);
             // 
