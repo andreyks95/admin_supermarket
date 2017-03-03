@@ -14,15 +14,22 @@ namespace Administrator_company.Preview__Test_
         public AboutProgram()
         {
             InitializeComponent();
-            this.Text = String.Format("О программе {0}", AssemblyTitle);
-            this.labelProductName.Text = AssemblyProduct;
-            this.labelVersion.Text = String.Format("Версия: {0}", AssemblyVersion);
-            this.labelCopyright.Text = AssemblyCopyright;
-            this.labelCompanyName.Text = AssemblyCompany;
-            this.textBoxDescription.Text = AssemblyDescription;
+            //this.Text = String.Format("О программе {0}", AssemblyTitle);
+            //this.labelProductName.Text = AssemblyProduct;
+            //this.labelVersion.Text = String.Format("Версия: {0}", AssemblyVersion);
+            //this.labelCopyright.Text = AssemblyCopyright;
+            //this.labelCompanyName.Text = AssemblyCompany;
+            //this.textBoxDescription.Text = AssemblyDescription;
+            Text = "Система администрирования продуктового супермаркета";
+            labelProductName.Text = "Система администрирования продуктового супермаркета";
+            labelVersion.Text = "1.5.20.75";
+            labelCopyright.Text = "Авторские права: ст.гр.ИТ - 15 - 1т Когута Андрея";
+            labelCompanyName.Text = "Название учебного заведения: ДГМА";
+            textBoxDescription.Text = "Данный программный продукт предназначен для легкого и быстрого управления базой данных для администрирования продуктового супермаркета.";
+
         }
 
-        #region Методы доступа к атрибутам сборки
+        /*#region Методы доступа к атрибутам сборки
 
         public string AssemblyTitle
         {
@@ -94,12 +101,11 @@ namespace Administrator_company.Preview__Test_
                 return ((AssemblyCompanyAttribute)attributes[0]).Company;
             }
         }
-        #endregion
+        #endregion*/
 
-        private void okButton_Click(object sender, EventArgs e)
-        {
-            AboutProgram aboutProgram = new AboutProgram();
-            aboutProgram.Close();
-        }
+        private void okButton_Click(object sender, EventArgs e) => Close();
+        /*{
+            Close();
+        }*/
     }
 }
