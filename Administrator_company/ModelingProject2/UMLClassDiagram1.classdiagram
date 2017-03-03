@@ -5,7 +5,7 @@
       <class Id="3155a982-24ca-4054-a1f4-a89bd85179ed" name="Продуктовый супермаркет" isAbstract="false" isLeaf="false" isActiveClass="false">
         <elementDefinition Id="00e02b5c-9476-4279-a259-d24bc98624b1" />
         <targetEnds>
-          <association Id="3a59d515-456f-4f2b-9076-a89ac3867d65" isDerived="false" sourceEndRoleName="Продуктовый супермаркет" targetEndRoleName="Отдел" isLeaf="false" isAbstract="false">
+          <association Id="3a59d515-456f-4f2b-9076-a89ac3867d65" isDerived="false" sourceEndRoleName="Продуктовый супермаркет" targetEndRoleName="Должность" isLeaf="false" isAbstract="false">
             <classMoniker Id="9d622c9e-395f-4612-806b-cc5b83d24336" LastKnownName="Должность" />
             <relationshipOwnedElementsInternal>
               <associationHasOwnedEnds>
@@ -14,7 +14,7 @@
                 </memberEnd>
               </associationHasOwnedEnds>
               <associationHasOwnedEnds>
-                <memberEnd Id="33d11063-c2f5-4dec-86c8-405f921e7d63" name="Отдел" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                <memberEnd Id="33d11063-c2f5-4dec-86c8-405f921e7d63" name="Должность" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
                   <elementDefinition Id="26b43a2c-227c-4dd2-8d40-3b454a969fc2" />
                 </memberEnd>
               </associationHasOwnedEnds>
@@ -69,12 +69,28 @@
             </relationshipOwnedElementsInternal>
             <elementDefinition Id="ae049daa-ef64-4d0a-8a12-07021f8f71a5" />
           </association>
+          <association Id="ea10b488-7f4d-4f54-a135-3446ec80c4b7" isDerived="false" sourceEndRoleName="Продуктовый супермаркет" targetEndRoleName="Информация о сотрудниках" isLeaf="false" isAbstract="false">
+            <classMoniker Id="5625374a-c8d7-4d7a-8b5a-aad9cbc52600" LastKnownName="Информация о сотрудниках" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="7f273338-ef80-4663-bd36-956af00b5516" name="Продуктовый супермаркет" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="Shared" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="1c7cf999-308f-4efd-acfd-7cf0e987930c" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="61197f2e-bffd-4e62-940b-5629d1834f41" name="Информация о сотрудниках" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="79e56f28-6f3e-4a69-88a4-09e916cccf07" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="3397b00f-870c-4ea9-9b73-cddb040d4237" />
+          </association>
         </targetEnds>
         <ownedOperationsInternal>
           <operation Id="5cdf4c43-bcd5-47b6-a788-1c2e35adbb62" name="ОтобразитьСотрудников" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
             <elementDefinition Id="1ae8db9d-9342-465c-b9e6-6f8c8e54a2f5" />
           </operation>
-          <operation Id="ea6b820c-88fb-46b0-9287-81fff06974e3" name="ОтобразитьОтдел" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+          <operation Id="ea6b820c-88fb-46b0-9287-81fff06974e3" name="ОтобразитьДолжность" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
             <elementDefinition Id="85c955df-8460-402d-a922-0b597301c385" />
           </operation>
           <operation Id="7a7cf203-0e28-4c1a-bd36-247b8359973c" name="ОтобразитьСклад" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
@@ -82,6 +98,9 @@
           </operation>
           <operation Id="1d8832b3-e1b2-434a-a41f-064321ee326b" name="ОтобразитьТовары" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
             <elementDefinition Id="625a54fb-d15a-4692-a607-db92a8f43517" />
+          </operation>
+          <operation Id="c318d7ae-ab19-4428-87d5-7d0425e8ec5d" name="ОтобразитьИнформациюОСотрудниках" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="d3e3f4db-a43a-4769-b701-35c0ca398dbf" />
           </operation>
         </ownedOperationsInternal>
       </class>
@@ -93,28 +112,25 @@
           <property Id="33eb801a-e556-4884-9de0-0d4501f5575d" name="int id" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
             <elementDefinition Id="60f0c599-5f86-4b87-8b8c-dc40dfc74770" />
           </property>
-          <property Id="14899020-3d9b-40aa-901b-6236a0428860" name="string ФИО" visibility="Private" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
-            <elementDefinition Id="c070496a-3a11-43c8-b300-a0063ffda8bc" />
-          </property>
-          <property Id="0179c78a-584f-41a2-8f11-e332e6fcaa41" name="enum должность" visibility="Private" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+          <property Id="0179c78a-584f-41a2-8f11-e332e6fcaa41" name="enum отдел" visibility="Private" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
             <elementDefinition Id="0ef82237-79a4-4942-b6f1-97d9247d9d72" />
           </property>
           <property Id="bbae3186-5cb7-4082-b0be-79dd5264210f" name="int стаж" visibility="Private" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
             <elementDefinition Id="de7c3246-8da2-4526-87f6-39c6cfe2aef8" />
           </property>
-          <property Id="4ed70e9f-532e-47a7-8371-bb3a31030bc5" name="string паспортные данные" visibility="Private" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+          <property Id="4ed70e9f-532e-47a7-8371-bb3a31030bc5" name="int id_инфо" visibility="Private" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
             <elementDefinition Id="cf1f7beb-a220-4ab5-89ef-eae36fb9dfc8" />
           </property>
-          <property Id="1c2e7de8-1cc8-498b-868c-b1f2305ee60f" name="string номер телефона" visibility="Private" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+          <property Id="1c2e7de8-1cc8-498b-868c-b1f2305ee60f" name="int id_должность" visibility="Private" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
             <elementDefinition Id="c03df186-95c3-4be7-bd77-d87ac558c6c2" />
           </property>
-          <property Id="48cbafcb-a225-4b8d-8e6c-37b17ff05800" name="string адрес" visibility="Private" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+          <property Id="48cbafcb-a225-4b8d-8e6c-37b17ff05800" name="int зарплата" visibility="Private" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
             <elementDefinition Id="f330988d-e76e-4a0d-b600-3edd61a363c6" />
           </property>
-          <property Id="35482e25-efb8-469c-bbdc-bc28e529b753" name="date устроился" visibility="Private" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+          <property Id="35482e25-efb8-469c-bbdc-bc28e529b753" name="date уволен" visibility="Private" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
             <elementDefinition Id="1e04ae9d-a917-44a1-9ba3-bb274d599936" />
           </property>
-          <property Id="f132ac8d-9a06-4fc5-9f0c-d8c8f0bbc0ee" name="date уволился" visibility="Private" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+          <property Id="f132ac8d-9a06-4fc5-9f0c-d8c8f0bbc0ee" name="date принят" visibility="Private" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
             <elementDefinition Id="3ff04e7b-f83f-4839-ab59-53c885f289cf" />
           </property>
         </ownedAttributesInternal>
@@ -138,11 +154,11 @@
       <class Id="9d622c9e-395f-4612-806b-cc5b83d24336" name="Должность" isAbstract="false" isLeaf="false" isActiveClass="false">
         <elementDefinition Id="b6a11564-72bd-4a9c-a112-7111fd0b0e75" />
         <targetEnds>
-          <association Id="57dee4eb-aef2-426c-9127-9d57f93f0aee" isDerived="false" sourceEndRoleName="Отдел" targetEndRoleName="Сотрудники" isLeaf="false" isAbstract="false">
+          <association Id="57dee4eb-aef2-426c-9127-9d57f93f0aee" isDerived="false" sourceEndRoleName="Должность" targetEndRoleName="Сотрудники" isLeaf="false" isAbstract="false">
             <classMoniker Id="ebe8b033-21f5-40a7-8af8-edf3b0d7ee7e" LastKnownName="Сотрудники" />
             <relationshipOwnedElementsInternal>
               <associationHasOwnedEnds>
-                <memberEnd Id="a98c5b4b-2635-4193-80df-89480cf28c4a" name="Отдел" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                <memberEnd Id="a98c5b4b-2635-4193-80df-89480cf28c4a" name="Должность" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
                   <lowerValueInternal>
                     <literalString Id="3a505e85-fd9d-4daf-b9dc-139b41b6e8f7" name="Lower" value="m">
                       <elementDefinition Id="1bf7fa87-af68-4a27-a9be-6be38ccd3918" />
@@ -179,14 +195,11 @@
           <property Id="41e3fde7-f51a-46c9-a36b-40827422a7e7" name="int id" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
             <elementDefinition Id="55b4fd51-413e-4d09-873d-44f2bb171f97" />
           </property>
-          <property Id="2815f191-527b-4d50-afe1-2851c197357c" name="int id_администратора" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
-            <elementDefinition Id="509ced62-63ba-4d58-a08e-8fdd66b99a80" />
+          <property Id="828b3e5c-390b-420e-af9e-a4520333e7d5" name="string должность" visibility="Private" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="bf45410d-0be9-4fba-8253-4d9920cc2f02" />
           </property>
-          <property Id="bc38edba-5a0a-47cd-ae2c-9611224d4028" name="int id_сотрудника" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
-            <elementDefinition Id="96462788-62ce-4145-8733-3fe7b681f92b" />
-          </property>
-          <property Id="3fa95875-0438-4435-9747-76702810f130" name="string названиее отдела" visibility="Private" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
-            <elementDefinition Id="0f9310bc-bc52-4c9c-8bb5-493ecdb9c531" />
+          <property Id="c207b0fa-f195-431d-925f-563d554daa69" name="int зарплата" visibility="Private" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="6da52f00-01cf-4c67-a5cd-8ba81bf7ec95" />
           </property>
         </ownedAttributesInternal>
         <ownedOperationsInternal>
@@ -212,7 +225,7 @@
           <property Id="6ce8bb28-5a9d-4ac2-8a3a-cfa2982f7174" name="int id" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
             <elementDefinition Id="5705b902-9339-459b-91a5-da83eb8c8227" />
           </property>
-          <property Id="fadfc05f-8973-457c-a184-09dc1bd5db7f" name="string наименование" visibility="Private" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+          <property Id="fadfc05f-8973-457c-a184-09dc1bd5db7f" name="string наименование товара" visibility="Private" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
             <elementDefinition Id="ee48a18d-6ca0-4092-831b-3def3ed3b2c3" />
           </property>
           <property Id="36bb3a82-97dc-4165-ace4-b78b4be989f4" name="enum категория" visibility="Private" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
@@ -220,6 +233,15 @@
           </property>
           <property Id="abe674c8-4027-4abc-a391-9832b95f0a4a" name="float ценаЗаЕдиницуИзмерения" visibility="Private" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
             <elementDefinition Id="d9664c2e-8fe0-45f3-a43a-3194851555e1" />
+          </property>
+          <property Id="f96788e2-6def-4788-aa10-8e0488c9d6c3" name="string вид товара" visibility="Private" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="d5c756ee-a149-42e3-91d4-d618e752b4d2" />
+          </property>
+          <property Id="a38d58c1-1505-4831-adff-b3386a003897" name="string подвид товара" visibility="Private" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="2ade7d5c-ac03-48f0-82f5-d252566af76c" />
+          </property>
+          <property Id="2e3ed37a-a67c-4e8d-993c-c6af0cf7d6c1" name="enum единица измерения" visibility="Private" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="037cfdf2-524e-4509-8b34-c88f8b562081" />
           </property>
         </ownedAttributesInternal>
         <ownedOperationsInternal>
@@ -270,7 +292,7 @@
           </association>
         </targetEnds>
         <ownedAttributesInternal>
-          <property Id="e2f49aca-ee3d-49e3-b497-96b91bdd7c79" name="bool в наличии" visibility="Private" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+          <property Id="e2f49aca-ee3d-49e3-b497-96b91bdd7c79" name="enum в наличии" visibility="Private" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
             <elementDefinition Id="dace0057-2c91-4dde-8ef8-2500b62f8cce" />
           </property>
           <property Id="3f318a29-6f19-4fc6-9165-ade05e55cf37" name="int id" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
@@ -282,10 +304,10 @@
           <property Id="0a159d8b-7856-4afa-98e1-d4adb1cba16a" name="float цена" visibility="Private" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
             <elementDefinition Id="6daefceb-0699-4e3a-bc95-3db707455fe3" />
           </property>
-          <property Id="d88ff908-bfd7-46a2-9f89-a55a98523735" name="date поступило" visibility="Private" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+          <property Id="d88ff908-bfd7-46a2-9f89-a55a98523735" name="date доставлен" visibility="Private" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
             <elementDefinition Id="d55292b6-07b2-4c21-921c-5a1b1cdcba9a" />
           </property>
-          <property Id="c704fcb8-c11b-4092-b44c-d63f18ee3e03" name="date убыло" visibility="Private" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+          <property Id="c704fcb8-c11b-4092-b44c-d63f18ee3e03" name="date продан" visibility="Private" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
             <elementDefinition Id="f1c02eb9-0088-41f3-a27b-7aac18c86e9c" />
           </property>
           <property Id="4044a836-273b-4e69-91b7-915f54c53562" name="int id_товара" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
@@ -306,6 +328,72 @@
             <elementDefinition Id="506e97fb-e50e-4c0b-a09d-4cc88e26441a" />
           </operation>
         </ownedOperationsInternal>
+      </class>
+    </logicalClassDesignerModelHasTypes>
+    <logicalClassDesignerModelHasTypes>
+      <class Id="5625374a-c8d7-4d7a-8b5a-aad9cbc52600" name="Информация о сотрудниках" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="2919ef36-f6b4-4266-8e0e-8a55dce94517" />
+        <targetEnds>
+          <association Id="aa690c3d-99b1-4d3d-9019-de8fd37195bf" isDerived="false" sourceEndRoleName="Информация о сотрудниках" targetEndRoleName="Сотрудники" isLeaf="false" isAbstract="false">
+            <classMoniker Id="ebe8b033-21f5-40a7-8af8-edf3b0d7ee7e" LastKnownName="Сотрудники" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="b81a93f8-cf08-4fd2-898b-dbbd4936d5f0" name="Информация о сотрудниках" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                  <lowerValueInternal>
+                    <literalString Id="2eb658cb-e5b9-4ab4-ac19-9a1638f20b86" name="Lower" value="m">
+                      <elementDefinition Id="d2a66bab-2963-4ece-8543-42d7885673b5" />
+                    </literalString>
+                  </lowerValueInternal>
+                  <upperValueInternal>
+                    <literalString Id="d6e8a801-5a92-4bd7-812e-fd5e0b29a035" name="Upper" value="m">
+                      <elementDefinition Id="96176942-8668-415c-a858-26561854f63b" />
+                    </literalString>
+                  </upperValueInternal>
+                  <elementDefinition Id="7a93dac3-eb2b-4639-969c-8aeb1028bf3a" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="ac7cc3d5-b8fe-4649-911a-f7950aa58b24" name="Сотрудники" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <lowerValueInternal>
+                    <literalString Id="1c784783-4ae8-40f1-babc-35630e6704c3" name="Lower" value="n">
+                      <elementDefinition Id="99014740-d496-4bc0-8f40-329e6657b523" />
+                    </literalString>
+                  </lowerValueInternal>
+                  <upperValueInternal>
+                    <literalString Id="bff879b7-1719-46cf-a4f5-05fa4ba2e112" name="Upper" value="n">
+                      <elementDefinition Id="cdc308d0-8052-4360-a32c-4ca0a579b632" />
+                    </literalString>
+                  </upperValueInternal>
+                  <elementDefinition Id="02859e98-0ed0-48d0-b6d7-f9f14ed66934" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="5c19579d-ff4c-4618-b295-ba1db66f664f" />
+          </association>
+        </targetEnds>
+        <ownedAttributesInternal>
+          <property Id="92a112f2-2f6e-45af-a6da-4b43708abfc8" name="int id" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="103394df-b9a3-4774-ba52-ec0b1056e8e4" />
+          </property>
+          <property Id="b60a589c-439c-4120-bcc9-2d53e0b23f84" name="string ФИО" visibility="Private" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="79ee190a-2264-41c0-b45e-10e648c7995b" />
+          </property>
+          <property Id="43c52c14-ebb2-4af0-95cf-3747fe35135a" name="string паспортные данные" visibility="Private" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="c382cd9f-46af-401a-b1cc-5288165e045d" />
+          </property>
+          <property Id="6f44db0e-d562-405a-88d9-989a5abd46d0" name="int возраст" visibility="Private" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="6ccba554-7daa-46d2-abf7-c9639f3351f8" />
+          </property>
+          <property Id="2d94667d-7007-4567-beae-6a8461e68695" name="string адрес" visibility="Private" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="328f8fb0-280d-4453-bdd2-d4f49ba5c253" />
+          </property>
+          <property Id="e8d73185-c37d-4d93-b6f5-76b72afa2ec0" name="string номер телефона" visibility="Private" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="ef99bdf8-a58f-472e-9dbc-f9295d71c697" />
+          </property>
+          <property Id="dbfa5f9e-2517-40d6-9795-99155fb52ba5" name="blob фото" visibility="Private" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="4fb0aefc-f1b4-4a31-981e-99421aa11836" />
+          </property>
+        </ownedAttributesInternal>
       </class>
     </logicalClassDesignerModelHasTypes>
   </packagedElements>
