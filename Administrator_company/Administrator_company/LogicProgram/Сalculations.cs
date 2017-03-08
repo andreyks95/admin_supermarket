@@ -283,7 +283,7 @@ namespace Administrator_supermarket
         /// <param name="field">Название поля таблицы с которого нужно получить значение функции</param>
         /// <param name="func">Название самой функции</param>
         /// <returns>Вернуть значение выполненной фукнции в строке, для вставки в запрос или другого использования</returns>
-        public string GetValueFromFieldTable(string nameDatabase, string table, string field, string func)
+        public string GetValueFromFieldTable(string table, string field, string func)
         {
             Connection connect = new Connection();
             string result = default(string),
@@ -291,7 +291,7 @@ namespace Administrator_supermarket
               //  AVG()  BIT_AND()  BIT_OR()   BIT_XOR()   COUNT() COUNT(DISTINCT) GROUP_CONCAT()  MAX()  MIN()  STD()  
               //  STDDEV()    STDDEV_POP()  STDDEV_SAMP()  SUM()  VAR_POP()   VAR_SAMP()  VARIANCE() 
             
-                query = "SELECT " + func + "(" + field + ")" + " FROM " + nameDatabase + "." + table + ";";
+                query = "SELECT " + func + "(" + field + ")" + " FROM " + connect.NAME_DATABASE + "." + table + ";";
 
             //передаём наш запрос и пытаемся выполнить команду.
             connect.command = new MySqlCommand(query, connect.connection);
@@ -325,11 +325,11 @@ namespace Administrator_supermarket
         /// <param name="idField">Название id поля таблицы, по котором будет осуществляться выборка</param>
         /// <param name="id">id поля с которого нужно получить значение</param>
         /// <returns>Запрос SELECT</returns>
-        public string GetSelectQuery(string nameDatabase = "", string table =  "", string field = "", string idField = "", string id = "" )
+        public string GetSelectQuery(string table =  "", string field = "", string idField = "", string id = "" )
         {
 
             return " SELECT " + field +
-                   " FROM " + nameDatabase + "." + table +
+                   " FROM " + connect.NAME_DATABASE + "." + table +
                    " WHERE " + idField + " = " + id + "; ";
         }
         #endregion
@@ -364,13 +364,12 @@ namespace Administrator_supermarket
         /// <summary>
         /// Получить числовове значение из всех выбранных ячеек полей таблиц 
         /// </summary>
-        /// <param name="nameDatabase">Название базы данных</param>
         /// <param name="tables">Массив таблиц с которых нужно получить значения</param>
         /// <param name="fields">Двумерный массив столбцов таблиц в которых содержаться необходимые значения</param>
         /// <param name="idFields">Массив названия id полей таблиц</param>
         /// <param name="ids">Номера id записей в таблице</param>
         /// <returns>Получить float List список всех числовых значений необходимых нам ячеек из таблиц</returns>
-        public List<float> GetAllSelectValues(string nameDatabase, string[] tables, string[][] fields, string[] idFields, string[] ids)
+        public List<float> GetAllSelectValues(string[] tables, string[][] fields, string[] idFields, string[] ids)
         {
             string query = default(string);
             float value = default(float);
@@ -379,7 +378,7 @@ namespace Administrator_supermarket
             for(int currentTable =0; currentTable < tables.Length; currentTable++)
                 for (int currentField = 0; currentField < fields[currentTable].Length; currentField++)
                 {
-                    query = GetSelectQuery(nameDatabase, tables[currentTable], fields[currentTable][currentField],
+                    query = GetSelectQuery(tables[currentTable], fields[currentTable][currentField],
                                         idFields[currentTable], ids[currentTable]);
                     value = GetSelectValue(query);
                     values.Add(value);
@@ -437,23 +436,36 @@ namespace Administrator_supermarket
         /// <summary>
         /// Update запрос для обновления данных (нового значения) в указанной ячейке таблицы
         /// </summary>
-        /// <param name="nameDatabase">Название БД</param>
         /// <param name="table">Название таблицы, где нужно применить запрос</param>
         /// <param name="field">Поле таблицы, к которому относиться запрос</param>
         /// <param name="idField">Название id поля табилцы</param>
         /// <param name="id">Необходимая ячейка куда нужно вставить новое значение</param>
         /// <param name="result">Числовое значение, результата вычисления</param>
         /// <returns>Update запрос для вставки нового значения в ячейку</returns>
-        public string GetUpdateQuery(string nameDatabase, string table, string field, string idField, string id,
-            float result)
+        public string GetUpdateQuery(string table, string field, string idField, string id, float result)
         {
-            string updateQuery = " UPDATE " + nameDatabase + "." + table + " AS T1 " +
-                              " SET T1." + field + " = " + result.ToString() + " " +
+            string updateQuery = " UPDATE " + connect.NAME_DATABASE + "." + table + " AS T1 " +
+                                 " SET T1." + field + " = " + result.ToString().Replace(',','.') + " " +
                               " WHERE T1." + idField + " = " + id + "; ";
             return updateQuery;
         }
         #endregion
 
+        public string GetUpdateQuery(Tuple<
+                                    Tuple<string[], string[][], string[], string[]>,
+                                    Tuple<string>,
+                                    Tuple<string, string, string, string>
+                            > dataCalculations)
+        {
+            //Получаем все числовые значения
+            List<float> values = GetAllSelectValues(dataCalculations.Item1.Item1, dataCalculations.Item1.Item2, dataCalculations.Item1.Item3, dataCalculations.Item1.Item4);
+            //Получаем расчёт всех значений
+            float result = GetCalc(values, dataCalculations.Item2.Item1);
+            //Получаем Полностью готовый Update запрос
+            string updateQuery = GetUpdateQuery(dataCalculations.Item3.Item1, dataCalculations.Item3.Item2, dataCalculations.Item3.Item3, dataCalculations.Item3.Item4, result);
+
+            return updateQuery;
+        }
     }
 
 }
