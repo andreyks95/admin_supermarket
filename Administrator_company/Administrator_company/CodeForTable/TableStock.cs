@@ -52,7 +52,7 @@ namespace Administrator_company
                 string idField = textBoxsIdField[0].Text; //вытаскиваем  id 
                 id_products = Convert.ToUInt32(idField); //конвертируем в число
                 //получаем последнее добавленное id в поле таблицы. "stock.id_stock"
-                idField = calculations.GetValueFromFieldTable(nameDatabase, nameTables[1], nameIdTables[1],"max"); 
+                idField = calculations.GetValueFromFieldTable(nameTables[1], nameIdTables[1],"max"); 
                 id_stock = Convert.ToUInt32(idField);
 
                 id[0] = id_products; // id для id_products
