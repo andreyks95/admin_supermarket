@@ -23,7 +23,7 @@ namespace Administrator_supermarket
 
         public MySqlDataAdapter adapter;
 
-        public const string NAME_DATABASE = "supermarket";
+        public string NAME_DATABASE = "supermarket";
 
         DataTable table = new DataTable();  
 
