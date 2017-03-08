@@ -1,6 +1,7 @@
 ﻿using Administrator_supermarket;
 using System;
 using System.Collections.Generic;
+using Administrator_company.Preview__Test_;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using MySql.Data.MySqlClient;
 
@@ -149,12 +150,12 @@ namespace Admin.UnitTest
                 nameTable = "stock",
                 nameField = "id_stock",
                 nameFunc = "max";
-            string WaitResult = "10";
+            string WaitResult = "5";
 
 
             //act
             Administrator_supermarket.Сalculations calc = new Administrator_supermarket.Сalculations();
-            string result = calc.GetValueFromFieldTable(nameDatabase, nameTable, nameField, nameFunc);
+            string result = calc.GetValueFromFieldTable(nameTable, nameField, nameFunc);
             
             //assert
             Assert.IsNotNull(result);
@@ -193,7 +194,7 @@ namespace Admin.UnitTest
 
             //act
             Administrator_supermarket.Сalculations calc = new Administrator_supermarket.Сalculations();
-            string select = calc.GetSelectQuery(nameDatabase, table, field, idField, id);
+            string select = calc.GetSelectQuery( table, field, idField, id);
 
             //assert
             Assert.AreEqual(WaitResult.ToLower(), select.ToLower());
@@ -240,7 +241,7 @@ namespace Admin.UnitTest
             Connection connect = new Connection();
             connect.OpenConnection();
             Administrator_supermarket.Сalculations calc = new Administrator_supermarket.Сalculations();
-            List<float> result = calc.GetAllSelectValues( nameDatabase, tables, fields, idFields, ids);
+            List<float> result = calc.GetAllSelectValues(tables, fields, idFields, ids);
             connect.CloseConnection();
             float sum = 0.0f;
             foreach (var i in result)
@@ -298,11 +299,11 @@ namespace Admin.UnitTest
 
             //act
             Administrator_supermarket.Сalculations calc = new Administrator_supermarket.Сalculations();
-            string query = calc.GetUpdateQuery(nameDatabase, table, field, idField, id, result);
+            string query = calc.GetUpdateQuery(table, field, idField, id, result);
 
             //assert
             Assert.AreEqual(WaitResult.ToLower(), query.ToLower());
-        }
+        }       
 
         /*
         [TestMethod]
