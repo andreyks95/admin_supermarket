@@ -22,6 +22,8 @@ namespace Administrator_company.Preview__Test_
         Connection connection = new Connection();
         Settings settings = new Settings();
         Checking checking = new Checking();
+        Сalculations calculations = new Сalculations();
+
         BindingManagerBase managerBase; //для перемещения по таблице
 
         private static string nameTable = "stock", //таблица
@@ -30,7 +32,52 @@ namespace Administrator_company.Preview__Test_
                                 variables = { "@id", "@id_products", "@available", "@entered", "@sold", "@quantity", "@price"}, //для переменных
                                 nameFieldsAS = { "ИД", "Название продукта", "Наличие", "Доставлен", "Продан", "Количество", "Цена" }, //как будут отображаться
                                 numericFields = { "id_stock", "id_products", "quantity", "price" }; //для корректного поиска по числовым столбцам                                                    
-        private static MySqlDbType[] mySqlDbTypes = { MySqlDbType.UInt32, MySqlDbType.UInt32, MySqlDbType.Enum, MySqlDbType.Date, MySqlDbType.Date, MySqlDbType.UInt32, MySqlDbType.Float};//для типов в (AddParameters)
+
+        private static MySqlDbType[] mySqlDbTypes =
+        {
+            MySqlDbType.UInt32, MySqlDbType.UInt32, MySqlDbType.Enum,
+            MySqlDbType.Date, MySqlDbType.Date, MySqlDbType.UInt32, MySqlDbType.Float
+        };//для типов в (AddParameters)
+
+        private Tuple<Tuple<string[], string[][], string[], string[]>,
+                  Tuple<string>,
+                  Tuple<string, string, string, string>>
+        SetTuple(TextBox textBoxsIdField, ComboBox comboBoxsIdField)
+            {
+                //Rest1
+                //Таблицы которые принимают участвие в вычислении
+                string[] nameTables = { "stock", "products" };
+                //Название полей выше указанных таблиц. У них есть значения для нужного нам вычисления
+                string[][] nameFields = new string[][]
+                {
+                    new string[] { "quantity"  },
+                    new string[] { "price_for_one" }
+                };
+                //Название полей id-ов выше указанных таблиц
+                string[] nameIdTables = { "id_stock", "id_products" };
+                string[] ids = { textBoxsIdField.Text, //id_stock
+                                 comboBoxsIdField.Text}; //id_products
+
+                //Rest2
+                string mathOperation = "*";
+
+                //Rest3
+                string resultTable = "stock";
+                string resultField = "price";
+                string resultIdFiedTable = "id_stock";
+                string resultNumberId = ids[0];
+
+                var dataCalculations = new Tuple<
+                                                Tuple<string[], string[][], string[], string[]>,
+                                                Tuple<string>,
+                                                Tuple<string, string, string, string>
+                                        >(
+                                          new Tuple<string[], string[][], string[], string[]>(nameTables, nameFields, nameIdTables, ids),
+                                          new Tuple<string>(mathOperation),
+                                          new Tuple<string, string, string, string>(resultTable, resultField, resultIdFiedTable, resultNumberId)
+                                        );
+                return dataCalculations;
+            }
 
         private void StockForm_Load(object sender, EventArgs e)
         {
@@ -71,6 +118,12 @@ namespace Administrator_company.Preview__Test_
                 connection.AddParameters(connection.command, variables, mySqlDbTypes, objects);
                 //попытаться выполнить запрос
                 connection.ExecuteQuery(connection.command);
+
+                //ТЕСТ ФУНКЦИИ
+                query = calculations.GetUpdateQuery(SetTuple(textBox1, comboBox1));
+                //cюда попытаться вставить запрос для выполнения вычисления
+                connection.FieldDateTableCalculation(query);
+
                 //отобразить новые данные 
                 FillDataGridView("");
 
@@ -104,6 +157,12 @@ namespace Administrator_company.Preview__Test_
                 connection.AddParameters(connection.command, variables, mySqlDbTypes, objects);
                 //попытаться выполнить запрос
                 connection.ExecuteQuery(connection.command);
+
+                //ТЕСТ ФУНКЦИИ
+                query = calculations.GetUpdateQuery(SetTuple(textBox1, comboBox1));
+                //cюда попытаться вставить запрос для выполнения вычисления
+                connection.FieldDateTableCalculation(query);
+
                 //отобразить новые данные 
                 FillDataGridView("");
             }
