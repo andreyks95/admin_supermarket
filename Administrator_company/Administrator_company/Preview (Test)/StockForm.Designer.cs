@@ -85,7 +85,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(370, 326);
+            this.panel1.Size = new System.Drawing.Size(370, 281);
             this.panel1.TabIndex = 0;
             // 
             // dateTimePicker2
@@ -104,10 +104,12 @@
             // 
             // textBox3
             // 
-            this.textBox3.Location = new System.Drawing.Point(104, 227);
+            this.textBox3.Location = new System.Drawing.Point(104, 260);
             this.textBox3.Name = "textBox3";
             this.textBox3.Size = new System.Drawing.Size(148, 20);
             this.textBox3.TabIndex = 7;
+            this.textBox3.Text = "0";
+            this.textBox3.Visible = false;
             // 
             // label9
             // 
@@ -130,11 +132,12 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(21, 227);
+            this.label7.Location = new System.Drawing.Point(22, 263);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(33, 13);
             this.label7.TabIndex = 55;
             this.label7.Text = "Цена";
+            this.label7.Visible = false;
             // 
             // label5
             // 
@@ -170,7 +173,7 @@
             // 
             // Delete
             // 
-            this.Delete.Location = new System.Drawing.Point(269, 269);
+            this.Delete.Location = new System.Drawing.Point(267, 231);
             this.Delete.Name = "Delete";
             this.Delete.Size = new System.Drawing.Size(75, 23);
             this.Delete.TabIndex = 12;
@@ -180,7 +183,7 @@
             // 
             // Update
             // 
-            this.Update.Location = new System.Drawing.Point(188, 269);
+            this.Update.Location = new System.Drawing.Point(186, 231);
             this.Update.Name = "Update";
             this.Update.Size = new System.Drawing.Size(75, 23);
             this.Update.TabIndex = 11;
@@ -190,7 +193,7 @@
             // 
             // Clear
             // 
-            this.Clear.Location = new System.Drawing.Point(25, 269);
+            this.Clear.Location = new System.Drawing.Point(23, 231);
             this.Clear.Name = "Clear";
             this.Clear.Size = new System.Drawing.Size(75, 23);
             this.Clear.TabIndex = 9;
@@ -200,7 +203,7 @@
             // 
             // Insert
             // 
-            this.Insert.Location = new System.Drawing.Point(106, 269);
+            this.Insert.Location = new System.Drawing.Point(104, 231);
             this.Insert.Name = "Insert";
             this.Insert.Size = new System.Drawing.Size(75, 23);
             this.Insert.TabIndex = 10;
@@ -331,7 +334,7 @@
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Location = new System.Drawing.Point(370, 69);
             this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(574, 257);
+            this.dataGridView1.Size = new System.Drawing.Size(574, 212);
             this.dataGridView1.TabIndex = 18;
             this.dataGridView1.SelectionChanged += new System.EventHandler(this.dataGridView1_SelectionChanged);
             this.dataGridView1.Click += new System.EventHandler(this.dataGridView1_Click);
@@ -340,11 +343,11 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(944, 326);
+            this.ClientSize = new System.Drawing.Size(944, 281);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
-            this.MinimumSize = new System.Drawing.Size(960, 365);
+            this.MinimumSize = new System.Drawing.Size(960, 320);
             this.Name = "StockForm";
             this.Text = "StockForm";
             this.Load += new System.EventHandler(this.StockForm_Load);
