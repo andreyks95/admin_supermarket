@@ -1,4 +1,4 @@
-﻿namespace Administrator_company.Preview__Test_
+﻿namespace Administrator_company
 {
     partial class MainForm
     {
@@ -28,14 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.OpenStock = new System.Windows.Forms.Button();
-            this.OpenTestForm = new System.Windows.Forms.Button();
-            this.TestFormTwo = new System.Windows.Forms.Button();
+            this.InfoButton = new System.Windows.Forms.Button();
             this.PositionButton = new System.Windows.Forms.Button();
             this.EmployeesButton = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.ProductsButton = new System.Windows.Forms.Button();
-            this.stock = new System.Windows.Forms.Button();
+            this.StockButton = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.таблицыToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -49,37 +47,15 @@
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
-            // OpenStock
+            // InfoButton
             // 
-            this.OpenStock.Location = new System.Drawing.Point(12, 257);
-            this.OpenStock.Name = "OpenStock";
-            this.OpenStock.Size = new System.Drawing.Size(96, 23);
-            this.OpenStock.TabIndex = 0;
-            this.OpenStock.Text = "Склад";
-            this.OpenStock.UseVisualStyleBackColor = true;
-            this.OpenStock.Visible = false;
-            this.OpenStock.Click += new System.EventHandler(this.OpenStock_Click);
-            // 
-            // OpenTestForm
-            // 
-            this.OpenTestForm.Location = new System.Drawing.Point(114, 257);
-            this.OpenTestForm.Name = "OpenTestForm";
-            this.OpenTestForm.Size = new System.Drawing.Size(96, 23);
-            this.OpenTestForm.TabIndex = 1;
-            this.OpenTestForm.Text = "Test Form";
-            this.OpenTestForm.UseVisualStyleBackColor = true;
-            this.OpenTestForm.Visible = false;
-            this.OpenTestForm.Click += new System.EventHandler(this.OpenTestForm_Click);
-            // 
-            // TestFormTwo
-            // 
-            this.TestFormTwo.Location = new System.Drawing.Point(50, 27);
-            this.TestFormTwo.Name = "TestFormTwo";
-            this.TestFormTwo.Size = new System.Drawing.Size(140, 40);
-            this.TestFormTwo.TabIndex = 2;
-            this.TestFormTwo.Text = "Информация о сотрудниках";
-            this.TestFormTwo.UseVisualStyleBackColor = true;
-            this.TestFormTwo.Click += new System.EventHandler(this.TestFormTwo_Click);
+            this.InfoButton.Location = new System.Drawing.Point(50, 27);
+            this.InfoButton.Name = "InfoButton";
+            this.InfoButton.Size = new System.Drawing.Size(140, 40);
+            this.InfoButton.TabIndex = 2;
+            this.InfoButton.Text = "Информация о сотрудниках";
+            this.InfoButton.UseVisualStyleBackColor = true;
+            this.InfoButton.Click += new System.EventHandler(this.InfoButton_Click);
             // 
             // PositionButton
             // 
@@ -121,15 +97,15 @@
             this.ProductsButton.UseVisualStyleBackColor = true;
             this.ProductsButton.Click += new System.EventHandler(this.ProductsButton_Click);
             // 
-            // stock
+            // StockButton
             // 
-            this.stock.Location = new System.Drawing.Point(50, 211);
-            this.stock.Name = "stock";
-            this.stock.Size = new System.Drawing.Size(140, 40);
-            this.stock.TabIndex = 6;
-            this.stock.Text = "Склад";
-            this.stock.UseVisualStyleBackColor = true;
-            this.stock.Click += new System.EventHandler(this.stock_Click);
+            this.StockButton.Location = new System.Drawing.Point(50, 211);
+            this.StockButton.Name = "StockButton";
+            this.StockButton.Size = new System.Drawing.Size(140, 40);
+            this.StockButton.TabIndex = 6;
+            this.StockButton.Text = "Склад";
+            this.StockButton.UseVisualStyleBackColor = true;
+            this.StockButton.Click += new System.EventHandler(this.StockButton_Click);
             // 
             // label2
             // 
@@ -218,20 +194,18 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(234, 291);
+            this.ClientSize = new System.Drawing.Size(234, 271);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.stock);
+            this.Controls.Add(this.StockButton);
             this.Controls.Add(this.ProductsButton);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.EmployeesButton);
             this.Controls.Add(this.PositionButton);
-            this.Controls.Add(this.TestFormTwo);
-            this.Controls.Add(this.OpenTestForm);
-            this.Controls.Add(this.OpenStock);
+            this.Controls.Add(this.InfoButton);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
             this.MaximizeBox = false;
-            this.MinimumSize = new System.Drawing.Size(250, 330);
+            this.MinimumSize = new System.Drawing.Size(250, 310);
             this.Name = "MainForm";
             this.ShowIcon = false;
             this.Text = "Супермаркет";
@@ -243,15 +217,12 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.Button OpenStock;
-        private System.Windows.Forms.Button OpenTestForm;
-        private System.Windows.Forms.Button TestFormTwo;
+        private System.Windows.Forms.Button InfoButton;
         private System.Windows.Forms.Button PositionButton;
         private System.Windows.Forms.Button EmployeesButton;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button ProductsButton;
-        private System.Windows.Forms.Button stock;
+        private System.Windows.Forms.Button StockButton;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem таблицыToolStripMenuItem;

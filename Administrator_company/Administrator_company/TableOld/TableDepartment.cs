@@ -1,16 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using Administrator_supermarket;
-using MySql.Data.MySqlClient;
+using Administrator_company.LogicProgram;
 
-namespace Administrator_company
+namespace Administrator_company.TableOld
 {
     public partial class TableDepartment : Form
     {

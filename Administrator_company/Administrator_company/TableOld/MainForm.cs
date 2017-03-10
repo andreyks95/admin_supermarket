@@ -1,37 +1,17 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using Administrator_company;
-using MySql.Data.MySqlClient;
+using Administrator_company.LogicProgram;
 
-namespace Administrator_supermarket
+namespace Administrator_company.TableOld
 {
-    public partial class Form1 : Form
+    public partial class MainForm : Form
     {
-        public Form1()
+        public MainForm()
         {
             InitializeComponent();
         }
         Connection Connect = new Connection();
-        //Connection connection = new Connection();
-
-        /* private void Form1_Load(object sender, EventArgs e)
-         {
-             try
-             {
-                 Connection.connection.Open();
-             }
-             catch (Exception ex)
-             {
-                 MessageBox.Show(ex.Message);
-             }
-         }*/
 
         private void OpenConnection_Button_Click(object sender, EventArgs e)
         {

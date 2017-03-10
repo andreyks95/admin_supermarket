@@ -1,4 +1,4 @@
-﻿namespace Administrator_company.Preview__Test_
+﻿namespace Administrator_company
 {
     partial class AboutProgram
     {

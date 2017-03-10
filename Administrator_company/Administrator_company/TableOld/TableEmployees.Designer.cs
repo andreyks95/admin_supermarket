@@ -1,4 +1,4 @@
-﻿namespace Administrator_company
+﻿namespace Administrator_company.TableOld
 {
     partial class TableEmployees
     {

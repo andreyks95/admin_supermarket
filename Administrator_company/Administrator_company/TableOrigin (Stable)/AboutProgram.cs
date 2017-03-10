@@ -1,13 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Linq;
-using System.Reflection;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Administrator_company.Preview__Test_
+namespace Administrator_company
 {
     partial class AboutProgram : Form
     {

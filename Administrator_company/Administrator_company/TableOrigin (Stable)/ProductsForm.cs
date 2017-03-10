@@ -1,16 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using Administrator_supermarket;
+using Administrator_company.LogicProgram;
 using MySql.Data.MySqlClient;
 
-namespace Administrator_company.Preview__Test_
+namespace Administrator_company
 {
     public partial class ProductsForm : Form
     {

@@ -1,6 +1,6 @@
-﻿namespace Administrator_supermarket
+﻿namespace Administrator_company.TableOld
 {
-    partial class Form1
+    partial class MainForm
     {
         /// <summary>
         /// Обязательная переменная конструктора.
@@ -107,7 +107,7 @@
             this.button4.UseVisualStyleBackColor = true;
             this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
-            // Form1
+            // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -119,7 +119,7 @@
             this.Controls.Add(this.TableAdministrator);
             this.Controls.Add(this.CloseConnection_Button);
             this.Controls.Add(this.OpenConnection_Button);
-            this.Name = "Form1";
+            this.Name = "MainForm";
             this.Text = "АРМ администратора продуктового супермаркета";
             this.ResumeLayout(false);
 
