@@ -142,12 +142,6 @@
     <Compile Include="TableOrigin %28Stable%29\ProductsForm.Designer.cs">
       <DependentUpon>ProductsForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Preview %28Test%29\Stock.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Preview %28Test%29\Stock.Designer.cs">
-      <DependentUpon>Stock.cs</DependentUpon>
-    </Compile>
     <Compile Include="TableOrigin %28Stable%29\StockForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -217,9 +211,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="TableOrigin %28Stable%29\ProductsForm.resx">
       <DependentUpon>ProductsForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Preview %28Test%29\Stock.resx">
-      <DependentUpon>Stock.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="TableOrigin %28Stable%29\StockForm.resx">
       <DependentUpon>StockForm.cs</DependentUpon>

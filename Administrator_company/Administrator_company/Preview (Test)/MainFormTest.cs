@@ -16,10 +16,5 @@ namespace Administrator_company
             testForm.Show();
         }
 
-        private void OpenStock_Click(object sender, EventArgs e)
-        {
-            Stock stock = new Stock();
-            stock.Show();
-        }
     }
 }
