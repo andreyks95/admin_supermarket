@@ -1,12 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data;
 using System.Globalization;
 using System.Reflection;
 using System.Windows.Forms;
 using MySql.Data.MySqlClient;
 
-namespace Administrator_supermarket
+namespace Administrator_company.LogicProgram
 {
     //В этот класс будет скидываться все общие переменные (константы) и методы, которые будут использоваться для работы с таблицами
     public class Connection

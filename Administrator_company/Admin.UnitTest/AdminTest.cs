@@ -1,7 +1,6 @@
-﻿using Administrator_supermarket;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using Administrator_company.Preview__Test_;
+using Administrator_company.LogicProgram;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using MySql.Data.MySqlClient;
 
@@ -56,7 +55,7 @@ namespace Admin.UnitTest
                                 " ( SELECT quantity FROM grocery_supermarket_manager.stock WHERE id_stock = 5 ) AS T3 ";
 
             //act
-            Administrator_supermarket.Сalculations calc = new Administrator_supermarket.Сalculations();
+            Сalculations calc = new Сalculations();
             string SELECT = calc.GetSelectAllFieldTables(nameDatabase, nameTables, nameFields, nameIdFieldTables, id, nameTable_AS);
 
 
@@ -85,7 +84,7 @@ namespace Admin.UnitTest
                                 " ( SELECT quantity FROM grocery_supermarket_manager.stock WHERE id_stock = 5 ) AS T3 ";
 
             //act
-            Administrator_supermarket.Сalculations calc = new Administrator_supermarket.Сalculations();
+            Сalculations calc = new Сalculations();
             string SELECT = calc.GetSelectAllFieldTables(nameDatabase, nameTables, nameFields, nameIdFieldTables, id, nameTable_AS);
 
 
@@ -111,7 +110,7 @@ namespace Admin.UnitTest
             string WaitResult = " SET ResultTable.price = T2.price_for_one * T3.quantity ";
 
             //act
-            Administrator_supermarket.Сalculations calc = new Administrator_supermarket.Сalculations();
+            Сalculations calc = new Сalculations();
             string SET = calc.GetSet(nameTableResult_AS, nameFieldResult, nameTables_AS, nameFields, mathOperation);
 
             //assert
@@ -135,7 +134,7 @@ namespace Admin.UnitTest
             string WaitResult = " SET ResultTable.price = T2.price_for_one * T3.quantity ";
 
             //act
-            Administrator_supermarket.Сalculations calc = new Administrator_supermarket.Сalculations();
+            Сalculations calc = new Сalculations();
             string SET = calc.GetSet(nameTableResult_AS, nameFieldResult, nameTables_AS, nameFields, mathOperation);
 
             //assert
@@ -154,7 +153,7 @@ namespace Admin.UnitTest
 
 
             //act
-            Administrator_supermarket.Сalculations calc = new Administrator_supermarket.Сalculations();
+            Сalculations calc = new Сalculations();
             string result = calc.GetValueFromFieldTable(nameTable, nameField, nameFunc);
             
             //assert
@@ -170,7 +169,7 @@ namespace Admin.UnitTest
             bool waitResult = false; //не давать разрешение на ввод строки
 
             //act
-            Administrator_supermarket.Checking check = new Checking();
+            Checking check = new Checking();
             bool result = check.SecurityAllString(data);
 
             //assert
@@ -193,7 +192,7 @@ namespace Admin.UnitTest
                                 " WHERE id_products = 2; ";
 
             //act
-            Administrator_supermarket.Сalculations calc = new Administrator_supermarket.Сalculations();
+            Сalculations calc = new Сalculations();
             string select = calc.GetSelectQuery( table, field, idField, id);
 
             //assert
@@ -212,7 +211,7 @@ namespace Admin.UnitTest
             //act
             Connection connect = new Connection();
             connect.OpenConnection();
-            Administrator_supermarket.Сalculations calc = new Administrator_supermarket.Сalculations();
+            Сalculations calc = new Сalculations();
             Single result = calc.GetSelectValue(query);
             connect.CloseConnection();
 
@@ -240,7 +239,7 @@ namespace Admin.UnitTest
             //act
             Connection connect = new Connection();
             connect.OpenConnection();
-            Administrator_supermarket.Сalculations calc = new Administrator_supermarket.Сalculations();
+            Сalculations calc = new Сalculations();
             List<float> result = calc.GetAllSelectValues(tables, fields, idFields, ids);
             connect.CloseConnection();
             float sum = 0.0f;
@@ -270,7 +269,7 @@ namespace Admin.UnitTest
 
 
             //act
-            Administrator_supermarket.Сalculations calc = new Administrator_supermarket.Сalculations();
+            Сalculations calc = new Сalculations();
             float resultDiv = calc.GetCalc(data, mathDiv),
                   resultMult = calc.GetCalc(data, mathMult),
                   resultAdd = calc.GetCalc(data, mathAdd),
@@ -298,7 +297,7 @@ namespace Admin.UnitTest
             float result = 10.0f;
 
             //act
-            Administrator_supermarket.Сalculations calc = new Administrator_supermarket.Сalculations();
+            Сalculations calc = new Сalculations();
             string query = calc.GetUpdateQuery(table, field, idField, id, result);
 
             //assert

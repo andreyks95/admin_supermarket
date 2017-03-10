@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
+﻿using System.Globalization;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
-namespace Administrator_supermarket
+namespace Administrator_company.LogicProgram
 {
     /// <summary>
     /// Этот класс содержит методы для:

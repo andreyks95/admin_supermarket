@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Administrator_supermarket.Properties
+namespace Administrator_company.Properties
 {
 
 

@@ -1,11 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using Administrator_company.Preview__Test_;
 
-namespace Administrator_supermarket
+namespace Administrator_company
 {
     static class Program
     {
@@ -18,8 +14,9 @@ namespace Administrator_supermarket
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             //Запустить сначала эту форму
-            Application.Run(new MainForm());
-            //Application.Run(new Form1());
+            Application.Run(new MainFormTest());
+            //Application.Run(new Administrator_company.TableOld.MainForm());
+            //Application.Run(new MainForm());
         }
     }
 }

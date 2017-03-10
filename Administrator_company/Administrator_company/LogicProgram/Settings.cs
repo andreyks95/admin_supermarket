@@ -1,13 +1,10 @@
 ﻿using System;
-using System.CodeDom;
 using System.Data;
 using System.Drawing;
 using System.IO;
-using System.Reflection;
 using System.Windows.Forms;
-using MySql.Data.MySqlClient;
 
-namespace Administrator_supermarket
+namespace Administrator_company.LogicProgram
 {
     public class Settings
     {
