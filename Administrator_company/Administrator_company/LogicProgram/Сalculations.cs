@@ -1,13 +1,10 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.ComponentModel.Design.Serialization;
-using System.Data;
 using System.Linq;
 using System.Windows.Forms;
 using MySql.Data.MySqlClient;
 
-namespace Administrator_supermarket
+namespace Administrator_company.LogicProgram
 {
 
     public class Сalculations
@@ -432,6 +429,21 @@ namespace Administrator_supermarket
         }
         #endregion
 
+        public float GetCalcSalary(List<float> values)
+        {
+            if (values.Count > 2)
+                return 0.0f;
+            else
+            {
+                float experience = values.First(),
+                    salary = values[1],
+                    result = default(float);
+                //Формула начисления зароботной платы от стажа
+                result = ((experience*0.01f)*salary) + salary;
+                return result;
+            }
+        }
+
         #region GetUpdateQuery. Получить update запрос для просчета значения в ячейке
         /// <summary>
         /// Update запрос для обновления данных (нового значения) в указанной ячейке таблицы
@@ -463,6 +475,21 @@ namespace Administrator_supermarket
             float result = GetCalc(values, dataCalculations.Item2.Item1);
             //Получаем Полностью готовый Update запрос
             string updateQuery = GetUpdateQuery(dataCalculations.Item3.Item1, dataCalculations.Item3.Item2, dataCalculations.Item3.Item3, dataCalculations.Item3.Item4, result);
+
+            return updateQuery;
+        }
+
+        public string GetUpdateQuerySalary(Tuple<
+                            Tuple<string[], string[][], string[], string[]>,
+                            Tuple<string, string, string, string>
+                    > dataCalculations)
+        {
+            //Получаем все числовые значения
+            List<float> values = GetAllSelectValues(dataCalculations.Item1.Item1, dataCalculations.Item1.Item2, dataCalculations.Item1.Item3, dataCalculations.Item1.Item4);
+            //Получаем расчёт всех значений
+            float result = GetCalcSalary(values);
+            //Получаем Полностью готовый Update запрос
+            string updateQuery = GetUpdateQuery(dataCalculations.Item2.Item1, dataCalculations.Item2.Item2, dataCalculations.Item2.Item3, dataCalculations.Item2.Item4, result);
 
             return updateQuery;
         }
