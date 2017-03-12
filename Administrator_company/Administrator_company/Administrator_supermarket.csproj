@@ -93,6 +93,12 @@
   <ItemGroup>
     <Compile Include="LogicProgram\Checking.cs" />
     <Compile Include="LogicProgram\Connection.cs" />
+    <Compile Include="Preview %28Test%29\EmployeesTestForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Preview %28Test%29\EmployeesTestForm.Designer.cs">
+      <DependentUpon>EmployeesTestForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Preview %28Test%29\MainFormTest.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -188,6 +194,9 @@
       <DependentUpon>TableStock.cs</DependentUpon>
     </Compile>
     <Compile Include="LogicProgram\Сalculations.cs" />
+    <EmbeddedResource Include="Preview %28Test%29\EmployeesTestForm.resx">
+      <DependentUpon>EmployeesTestForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Preview %28Test%29\MainFormTest.resx">
       <DependentUpon>MainFormTest.cs</DependentUpon>
     </EmbeddedResource>
