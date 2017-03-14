@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Administrator_company.Preview__Test_;
+using System;
 using System.Windows.Forms;
 
 namespace Administrator_company
@@ -16,5 +17,10 @@ namespace Administrator_company
             testForm.Show();
         }
 
+        private void button1_Click(object sender, EventArgs e)
+        {
+            EmployeesTestForm employeesTF = new EmployeesTestForm();
+            employeesTF.Show();
+        }
     }
 }
