@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Globalization;
 using System.Reflection;
@@ -1015,12 +1016,61 @@ namespace Administrator_company.LogicProgram
             for (int i = 0; i < primaryTables.GetLength(0); i++)
             {
                 partQuery += " " + secondaryTables + "." + secondaryIdField[i] + " = " +
-                             primaryTables[i] + "." + primaryIdField + " " + "AND";
+                             primaryTables[i] + "." + primaryIdField[i] + " " + "AND";
             }
             partQuery = partQuery.Remove(partQuery.Length - 3) + " "; 
             //WHERE employees.id_position = position.id_position
             //AND employees.id_info = info.id_info
             return partQuery;
+        }
+
+        public void FillComboBox(ComboBox comboBox, string query)
+        {            
+            OpenConnection();
+            command = new MySqlCommand(query, connection);
+            string value; //= command.ExecuteScalar().ToString(); //вид перечислений будет таким 'text','text2'
+            List<string> values = new List<string>();
+            //Create a data reader and Execute the command
+            MySqlDataReader dataReader = command.ExecuteReader();
+            while (dataReader.Read())
+            {
+                values.Add(dataReader[0].ToString());
+            }
+            //char delimiter = '\'';
+            //string[] substrings = enumCategory.Split(delimiter); //массив строк будет таким "text" "," "text2"
+            //enumCategory = "";
+            //foreach (var str in substrings)
+            //    enumCategory += str; //объединяем массив в строку чтобы потом удалить , будет таким  "text,text2"
+            //delimiter = ',';
+            //substrings = enumCategory.Split(delimiter); //массив строк будет таки "text" "text2"
+            //foreach (var x in substrings)
+            //    comboBox.Items.Add(x); //Получаем все значения products.name
+            CloseConnection();
+        }
+
+        public string GetQueryConcat(string[] nameTables, string[] fields)
+        {
+            string query = "SELECT ",
+                concat = " CONCAT( ",
+                from = " FROM ",
+                orderBy = " ORDER BY " + fields[0];
+
+            for (int i = 0; i < fields.GetLength(0); i++)
+            {
+                concat += " " + fields[i] + ", " + "'   ', ";
+            }
+            concat = concat.Remove(concat.Length - 9) + " ) ";
+
+            //сформировать часть запроса from
+            for (int i = 0; i < nameTables.GetLength(0); i++)
+                from += " " + NAME_DATABASE + "." + nameTables[i] + ", "; //добавить " supermarket.stock"
+            from = from.Remove(from.Length - 2) + " "; 
+
+            query += concat + " AS 'Field' " + from + orderBy;
+
+            return query;
+            //Select concat(info.id_info, '   ', info.full_name) AS 'Номер и ФИО'
+            //from info
         }
     }
 }
