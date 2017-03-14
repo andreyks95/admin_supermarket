@@ -27,12 +27,48 @@ namespace Administrator_company.Preview__Test_
 
         BindingManagerBase managerBase; //для перемещения по таблице 
 
-        private static string nameTable = "employees", //таблица
-                             id_field = "id_employee"; //id поле таблицы
-        private static string[] nameFieldsAll = { "id_employee", "id_info", "id_position", "department", "experience", "salary", "started_work", "fired" }, //все поля
-                                variables = { "@id", "@id_info", "@id_position", "@department", "@experience", "@salary", "@started_work", "@fired" }, //для переменных
-                                nameFieldsAS = { "ИД", "ФИО сотрудника", "Должность", "Отдел", "Опыт", "Зарплата", "Принят", "Уволен" }, //как будут отображаться
-                                numericFields = { "id_employee", "id_info", "id_position", "experience", "salary" }; //для корректного поиска по числовым столбцам                                                    
+        private static string 
+            //таблица
+            nameTable = "employees",
+            id_field = "id_employee",
+            //id поле таблицы
+            secondaryTables = "employees";
+            
+
+        private static string[]
+            nameTables =
+            {
+                "employees",
+                "position",
+                "info"
+            },
+            nameFieldsAll =
+            {
+                "employees.id_employee", "info.full_name", "position.position",
+                "employees.department", "employees.experience", "employees.salary", "employees.started_work",
+                "employees.fired"
+            },
+            //nameFieldsAll = { "id_employee", "id_info", "id_position", "department", "experience", "salary", "started_work", "fired" }, //все поля
+            //для переменных
+            variables =
+            {
+                "@id", "@id_info", "@id_position", "@department", "@experience", "@salary", "@started_work",
+                "@fired"
+            },
+            //как будут отображаться
+            nameFieldsAS = {"ИД", "ФИО", "Должность", "Отдел", "Опыт", "Зарплата", "Принят", "Уволен"},
+            //для корректного поиска по числовым столбцам 
+            numericFields = { "employees.id_employee", "employees.experience", "employees.salary" },
+            //numericFields = { "id_employee", "id_info", "id_position", "experience", "salary"},
+            //Главные таблицы для части запроса where
+            primaryTables = { "position","info" },
+            primaryIdField = { "id_position", "id_info" },
+            secondaryIdField = { "id_position", "id_info" };
+            
+
+
+
+
         private static MySqlDbType[] mySqlDbTypes = { MySqlDbType.UInt32, MySqlDbType.UInt32, MySqlDbType.UInt32, MySqlDbType.Enum, MySqlDbType.UInt32, MySqlDbType.UInt32, MySqlDbType.Date, MySqlDbType.Date };//для типов в (AddParameters)
 
         private Tuple<Tuple<string[], string[][], string[], string[]>,
@@ -87,8 +123,14 @@ namespace Administrator_company.Preview__Test_
             DateTimePicker[] dateTimePickers = { dateTimePicker1, dateTimePicker2 };
             settings.CurrentColumnCellsDate(ColumnsDateForDateDateTimePicker, dateTimePickers, dataGridView1);
         }
+
         private void EmployeesTestForm_Load(object sender, EventArgs e)
         {
+
+            string[] nameTables = {"info"},
+                nameFields = { "id_info", "full_name"};
+            string concat = connection.GetQueryConcat(nameTables, nameFields);
+            connection.FillComboBox(comboBox1, concat);
             FillDataGridView(""); //при загрузке отображаем таблицу
         }
 
@@ -96,7 +138,9 @@ namespace Administrator_company.Preview__Test_
         public void FillDataGridView(string valueToSearch)
         {
             //получаем запрос на отображение данных с поиском
-            string query = connection.GetQueryShowSearch(nameTable, nameFieldsAll, nameFieldsAS, numericFields, valueToSearch);
+            string query = connection.GetQueryShowSearch(nameTables, nameFieldsAll, nameFieldsAS,
+                primaryTables, secondaryTables, primaryIdField, secondaryIdField,
+                numericFields, valueToSearch);
             DataTable table = connection.FillDataGridView(dataGridView1, 20, query: query); //заполняем таблицу данными с запроса и настраиваем
             managerBase = this.BindingContext[table]; //подключаем таблицу для передвижения по ней
         }
