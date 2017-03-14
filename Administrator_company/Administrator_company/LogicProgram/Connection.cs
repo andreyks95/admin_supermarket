@@ -896,5 +896,131 @@ namespace Administrator_company.LogicProgram
         }
         #endregion
 
+
+        //------- тестим новые функции ------//
+
+
+        #region  GetQueryShowSearch. Получить запрос исходя из условия (числовых или строковых столбцов)
+        /// <summary>
+        /// Составляет запрос select в зависимости от условия, на которое влияет значения столбцов (с числовыми данными или строковы)
+        /// </summary>
+        /// <param name="nameTable">Название таблицы</param>
+        /// <param name="nameFieldsAll">Название столбцов для запроса</param>
+        /// <param name="newNameFieldsAS">Назвать столбцы как. Как они будут отображаться в таблице</param>
+        /// <param name="nameNumericFields">Название столбцов, которые содержат числовые значения</param>
+        /// <param name="valueToSearh">Значения для поиска</param>
+        /// <returns>Запрос SELECT</returns>
+        public string GetQueryShowSearch(string[] nameTables, string[] nameFieldsAll, string[] newNameFieldsAS,
+             string[] primaryTables, string secondaryTables, string[] primaryIdField, string[] secondaryIdField,
+            string[] nameNumericFields = null, string valueToSearh = "")
+        {
+            string query = default(string), //для запроса
+                value = valueToSearh; //значение для поиска
+            uint valueNumber = 0;
+
+            //если строковое значение поиска не пустое и числовое (можно попытаться с успехом превратить в число)
+            if (value != "" && uint.TryParse(value, out valueNumber) == true)
+            {
+                //если искомое число больше нуля и есть числовые столбцы, где нужно отыскать это число
+                if (valueNumber > 0 && nameNumericFields != null)
+                    query = GetQuerySearch(nameTables, nameFieldsAll, newNameFieldsAS,
+                        primaryTables, secondaryTables, primaryIdField, secondaryIdField,
+                        nameNumericFields, valueNumber.ToString()); //возвращаем запрос с учётом числовых полей
+            }
+            else
+                query = GetQuerySearch(nameTables, nameFieldsAll, newNameFieldsAS,
+                    primaryTables, secondaryTables, primaryIdField, secondaryIdField,
+                    valueToSearh: value); //возвращаем запрос со всеми строковыми полями
+
+            return query;
+        }
+        #endregion
+
+        #region GetQuerySearch. Получить Select запрос
+        /// <summary>
+        /// Составляет запрос select в зависимости от столбцов (с числовыми данными или без)
+        /// </summary>
+        /// <param name="nameTable">Название таблицы</param>
+        /// <param name="nameFields">Название столбцов для запроса</param>
+        /// <param name="newNameFieldsAS">Назвать столбцов как. Как они будут отображаться в таблице</param>
+        /// <param name="nameNumericFields">Название столбцов, которые содержат числовые значения</param>
+        /// <param name="valueToSearh">Значения для поиска</param>
+        /// <returns>Запрос SELECT</returns>
+        public string GetQuerySearch(string[] nameTables, string[] nameFields, string[] newNameFieldsAS,
+            string[] primaryTables, string secondaryTables, string[] primaryIdField, string[] secondaryIdField,
+            string[] nameNumericFields = null, string valueToSearh = "")
+        {
+            string select = " SELECT ",
+                from = " FROM ",
+                where = " WHERE ",
+                concat = " (CONCAT( ",
+                like = " LIKE ",
+                query = "";
+
+
+            //сформировать часть запроса select со всех столбцов
+            for (int i = 0; i < nameFields.GetLength(0); i++)
+                select += " " + nameFields[i] + " AS " + "'" + newNameFieldsAS[i] + "'" + ", "; //добавить "  price AS 'цена', "
+            select = select.Remove(select.Length - 2) + " "; //удалить перед from ", " 
+
+            //сформировать часть запроса from
+            for(int i= 0; i < nameTables.GetLength(0); i++)
+                from += " " + NAME_DATABASE + "." + nameTables[i] + ", "; //добавить " supermarket.stock"
+            from = from.Remove(from.Length - 2) + " "; //удалить перед where ", " 
+
+            //вытаскиваем primary.idfields = secondary.ifields
+            where += GetWherePrimarySecondary(primaryTables, secondaryTables, primaryIdField, secondaryIdField) + "AND";
+
+            //тестим здесь
+            //если есть столбцы в которых имеются числовые значения
+            if (nameNumericFields != null)
+            {
+                //сформировать часть запроса where с столбцами в которых есть числовые значения
+                for (int i = 0; i < nameNumericFields.GetLength(0); i++)
+                    concat += " " + nameNumericFields[i] + ", "; //добавить " id, price, "
+                concat = concat.Remove(concat.Length - 2) + ") "; //удалить перед like ", " 
+            }
+            else
+            {
+                //сформировать часть запроса where со всеми столбцами
+                for (int i = 0; i < nameFields.GetLength(0); i++)
+                    concat += " " + nameFields[i] + ", ";  //добавить " name, address "
+                concat = concat.Remove(concat.Length - 2) + ") ";  //удалить перед like ", " 
+            }
+
+            //сформировать часть запроса
+            like += "'%" + valueToSearh + "%'" + ")"; //конец части запроса "'%краматорск%'"
+
+            //составляем полностью запрос из частей
+            query += select + from + where + concat + like;
+
+            return query;
+
+            //SELECT employees.id_employee AS 'ИД', info.full_name AS 'ФИО', position.position AS 'Должность', 
+            //employees.department AS 'Отдел', employees.experience AS 'Опыт работы', employees.salary AS 'Зарплата', 
+            //employees.started_work AS 'Принят', employees.fired AS 'Уволен'
+            //FROM employees, position, info
+            //WHERE employees.id_position = position.id_position
+            //AND employees.id_info = info.id_info
+            //AND
+            //(concat(employees.id_employee, info.full_name, position.position,
+            //    employees.department, employees.experience, employees.salary, employees.started_work, employees.fired)
+            //like '%повар%');
+        }
+        #endregion
+
+        public string GetWherePrimarySecondary(string[] primaryTables, string secondaryTables, string[] primaryIdField,  string[] secondaryIdField)
+        {
+            string partQuery = default(string);
+            for (int i = 0; i < primaryTables.GetLength(0); i++)
+            {
+                partQuery += " " + secondaryTables + "." + secondaryIdField[i] + " = " +
+                             primaryTables[i] + "." + primaryIdField + " " + "AND";
+            }
+            partQuery = partQuery.Remove(partQuery.Length - 3) + " "; 
+            //WHERE employees.id_position = position.id_position
+            //AND employees.id_info = info.id_info
+            return partQuery;
+        }
     }
 }
