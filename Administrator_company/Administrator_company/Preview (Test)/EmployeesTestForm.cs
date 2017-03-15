@@ -42,13 +42,13 @@ namespace Administrator_company.Preview__Test_
                 "position",
                 "info"
             },
-            nameFieldsAll =
+            nameFields =
             {
                 "employees.id_employee", "info.full_name", "position.position",
                 "employees.department", "employees.experience", "employees.salary", "employees.started_work",
                 "employees.fired"
             },
-            //nameFieldsAll = { "id_employee", "id_info", "id_position", "department", "experience", "salary", "started_work", "fired" }, //все поля
+            nameFieldsAll = { "id_employee", "id_info", "id_position", "department", "experience", "salary", "started_work", "fired" }, //все поля
             //для переменных
             variables =
             {
@@ -126,25 +126,43 @@ namespace Administrator_company.Preview__Test_
 
         private void EmployeesTestForm_Load(object sender, EventArgs e)
         {
+            //Заполняем значениями все ComboBox-ы распаложены на форме
+            List<string> values = new List<string>();
 
+            //Заполняем ComboBox1 всеми значениями из двух столбцов id (для ориентировки) и нужные нам значения
             string[] nameTables = {"info"},
                 nameFields = { "id_info", "full_name"};
-            string concat = connection.GetQueryConcat(nameTables, nameFields);
-            connection.FillComboBox(comboBox1, concat);
-            FillDataGridView(""); //при загрузке отображаем таблицу
+            values = connection.GetValuesColumn(nameTables, nameFields);
+            settings.FillComboBox(comboBox1, values);
+
+            //Заполняем ComboBox2 как ComboBox1
+            nameTables[0] = "position";
+            nameFields[0] = "id_position";
+            nameFields[1] = "position";
+            values = connection.GetValuesColumn(nameTables, nameFields);
+            settings.FillComboBox(comboBox2, values);
+
+            //Заполняем ComboBox3 всеми значениями Enum которые могут принимать ячейки в столбце  
+            values = connection.GetEnum("products", "category");
+            settings.FillComboBox(comboBox3, values);
+
+            //при загрузке отображаем таблицу
+            FillDataGridView(""); 
         }
 
         //Заполняем DataGridView и корректируем её
         public void FillDataGridView(string valueToSearch)
         {
             //получаем запрос на отображение данных с поиском
-            string query = connection.GetQueryShowSearch(nameTables, nameFieldsAll, nameFieldsAS,
+            string query = connection.GetQueryShowSearch(nameTables, nameFields, nameFieldsAS,
                 primaryTables, secondaryTables, primaryIdField, secondaryIdField,
                 numericFields, valueToSearch);
             DataTable table = connection.FillDataGridView(dataGridView1, 20, query: query); //заполняем таблицу данными с запроса и настраиваем
             managerBase = this.BindingContext[table]; //подключаем таблицу для передвижения по ней
         }
 
+        //ДЛЯ ТЕСТА
+        //ЗДЕСЬ ТАКЖЕ НУЖНО ВЫТАЩИТЬ ЗНАЧЕНИЯ ИЗ COMBOBOXA И ВСТАВИТЬ их в строку
         private void Insert_Click(object sender, EventArgs e)
         {
             TextBox[] textBoxs = { textBox1, textBox2, textBox3 };
@@ -167,6 +185,9 @@ namespace Administrator_company.Preview__Test_
                 //В такой же последовательности
                 //Переменная должна соответствувать требуемому значению 
                 object[] objects = { textBox1, comboBox1, comboBox2, comboBox3, textBox2, textBox3, dateTimePicker1, dateTimePicker2 };
+                
+                
+                //СДЕЛАТЬ ЕЩЁ ОДИН перегрузочный метод
                 //Добавляем данные 
                 connection.AddParameters(connection.command, variables, mySqlDbTypes, objects);
                 //попытаться выполнить запрос
@@ -186,6 +207,8 @@ namespace Administrator_company.Preview__Test_
             }
         }
 
+        //ДЛЯ ТЕСТА
+        //ЗДЕСЬ ТАКЖЕ НУЖНО ВЫТАЩИТЬ ЗНАЧЕНИЯ ИЗ COMBOBOXA И ВСТАВИТЬ их в строку
         private void Update_Click(object sender, EventArgs e)
         {
             TextBox[] textBoxs = { textBox1, textBox2, textBox3 };
@@ -205,6 +228,8 @@ namespace Administrator_company.Preview__Test_
                 connection.command = new MySqlCommand(query, connection.connection);
                 //для объектов, у них есть данные которые нужно вставить
                 object[] objects = { textBox1, comboBox1, comboBox2, comboBox3, textBox2, textBox3, dateTimePicker1, dateTimePicker2 };
+                
+                //СДЕЛАТЬ ЕЩЁ ОДИН перегрузочный метод
                 //Добавляем данные 
                 connection.AddParameters(connection.command, variables, mySqlDbTypes, objects);
                 //попытаться выполнить запрос

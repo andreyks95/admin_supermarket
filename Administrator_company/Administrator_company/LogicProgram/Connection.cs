@@ -1024,28 +1024,76 @@ namespace Administrator_company.LogicProgram
             return partQuery;
         }
 
-        public void FillComboBox(ComboBox comboBox, string query)
-        {            
+        public List<string> GetValuesColumn(string query)
+        {
             OpenConnection();
             command = new MySqlCommand(query, connection);
             string value; //= command.ExecuteScalar().ToString(); //вид перечислений будет таким 'text','text2'
-            List<string> values = new List<string>();
             //Create a data reader and Execute the command
             MySqlDataReader dataReader = command.ExecuteReader();
+            List<string> valuesEnum = new List<string>();
             while (dataReader.Read())
             {
-                values.Add(dataReader[0].ToString());
+                valuesEnum.Add(dataReader[0].ToString());
             }
-            //char delimiter = '\'';
-            //string[] substrings = enumCategory.Split(delimiter); //массив строк будет таким "text" "," "text2"
-            //enumCategory = "";
-            //foreach (var str in substrings)
-            //    enumCategory += str; //объединяем массив в строку чтобы потом удалить , будет таким  "text,text2"
-            //delimiter = ',';
-            //substrings = enumCategory.Split(delimiter); //массив строк будет таки "text" "text2"
-            //foreach (var x in substrings)
-            //    comboBox.Items.Add(x); //Получаем все значения products.name
             CloseConnection();
+            return valuesEnum;
+        }
+
+        public List<string> GetValuesColumn(string[] nameTables, string[] fields)
+        {
+            OpenConnection();
+            string query = GetQueryConcat(nameTables, fields);
+            command = new MySqlCommand(query, connection);
+            string value; //= command.ExecuteScalar().ToString(); //вид перечислений будет таким 'text','text2'
+            //Create a data reader and Execute the command
+            MySqlDataReader dataReader = command.ExecuteReader();
+            List<string> valuesEnum = new List<string>();
+            while (dataReader.Read())
+            {
+                valuesEnum.Add(dataReader[0].ToString());
+            }
+            CloseConnection();
+            return valuesEnum;
+        }
+
+        public List<string> GetEnum(string query)
+        {
+            OpenConnection();
+            command = new MySqlCommand(query, connection);
+            string enumCategory = command.ExecuteScalar().ToString(); //вид перечислений будет таким 'text','text2'
+            char delimiter = '\'';
+            string[] substrings = enumCategory.Split(delimiter); //массив строк будет таким "text" "," "text2"
+            enumCategory = "";
+            foreach (var str in substrings)
+                enumCategory += str; //объединяем массив в строку чтобы потом удалить , будет таким  "text,text2"
+            delimiter = ',';
+            substrings = enumCategory.Split(delimiter); //массив строк будет таки "text" "text2"
+            List<string> valuesEnum = new List<string>();
+            foreach (var x in substrings)
+                valuesEnum.Add(x); //Получаем все значения products.name  
+            CloseConnection();
+            return valuesEnum;
+        }
+
+        public List<string> GetEnum(string tableName, string columnName)
+        {
+            OpenConnection();
+            string query = GetQueryConcat(tableName, columnName);
+            command = new MySqlCommand(query, connection);
+            string enumCategory = command.ExecuteScalar().ToString(); //вид перечислений будет таким 'text','text2'
+            char delimiter = '\'';
+            string[] substrings = enumCategory.Split(delimiter); //массив строк будет таким "text" "," "text2"
+            enumCategory = "";
+            foreach (var str in substrings)
+                enumCategory += str; //объединяем массив в строку чтобы потом удалить , будет таким  "text,text2"
+            delimiter = ',';
+            substrings = enumCategory.Split(delimiter); //массив строк будет таки "text" "text2"
+            List<string> valuesEnum = new List<string>();
+            foreach (var x in substrings)
+                valuesEnum.Add(x); //Получаем все значения products.name  
+            CloseConnection();
+            return valuesEnum;
         }
 
         public string GetQueryConcat(string[] nameTables, string[] fields)
@@ -1071,6 +1119,18 @@ namespace Administrator_company.LogicProgram
             return query;
             //Select concat(info.id_info, '   ', info.full_name) AS 'Номер и ФИО'
             //from info
+        }
+
+        public string GetQueryConcat(string tableName, string columnName)
+        {
+           return "select trim(trailing ')'                       " +
+                          "    from trim(leading '('                            " +
+                          "    from trim(leading 'enum'                         " +
+                          "    from column_type))) column_type                  " +
+                          "    from information_schema.COLUMNS                  " +
+                          "    where TABLE_SCHEMA = " + "'" + NAME_DATABASE + "'" +
+                          "    AND TABLE_NAME = " + "'" + tableName + "'        " +
+                          "    AND COLUMN_NAME = " + "'" + columnName + "';      ";           
         }
     }
 }

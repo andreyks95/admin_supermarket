@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
 using System.IO;
@@ -571,5 +572,24 @@ namespace Administrator_company.LogicProgram
                     i.Text = null;
         }
         #endregion
+
+        #region FillComboBox. Заполнение значениями (Items) ComboBox
+        /// <summary>
+        /// аполнение значениями (Items) ComboBox
+        /// </summary>
+        /// <param name="comboBox">ComboBox формы, куда будут добавляться данные</param>
+        /// <param name="values">Список значений для Items ComboBox-a</param>
+        public void FillComboBox(ComboBox comboBox, List<string> values)
+        {
+            Connection connection = new Connection();
+            connection.OpenConnection();
+            foreach (var i in values)
+            {
+                comboBox.Items.Add(i);
+            }
+            connection.CloseConnection();
+        }
+        #endregion
+
     }
 }
