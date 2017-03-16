@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Globalization;
+using System.IO;
+using System.Linq;
 using System.Reflection;
 using System.Windows.Forms;
 using MySql.Data.MySqlClient;
@@ -568,111 +570,6 @@ namespace Administrator_company.LogicProgram
         }
         #endregion
 
-        #region GetTextDate - Получить дату в виде текста для DateTimePicker
-        /// <summary>
-        /// Получить дату в виде текста для DateTimePicker
-        /// </summary>
-        /// <param name="obj">Объект DateTimePicker</param>
-        /// <returns>Дата в виде текста</returns>
-        public string GetTextDate(object obj)
-        {
-            string text;
-            Type currentType = obj.GetType();
-            PropertyInfo property = currentType.GetProperty("Value");
-            text= property.GetValue(obj).ToString();//в свойстве получить значение объекта
-
-            string inputFormat = "dd'.'MM'.'yyyy' 'H':'mm':'ss", //Текущий формат ввода DateTimePicker //"dd'.'MM'.'yyyy' 'HH':'mm':'ss"
-                   outputFormat =  "yyyy'-'MM'-'dd"; //для конвертирования даты в формат Date MySQL 
-            DateTime dateTime = DateTime.ParseExact(text, inputFormat, CultureInfo.InvariantCulture);//null); //Превращаем текст в дату  
-            text = dateTime.ToString(outputFormat, null); //Конвертируем дату в текст с нужным форматом данных
-            return text;
-        }
-        #endregion
-
-        #region GetText overload - Перегруженный. Получить текст с свойства объекта WinForm (TextBox, ComboBox ...)
-        /// <summary>
-        /// Получить текст с свойства объекта WinForm (TextBox, ComboBox ...)
-        /// </summary>
-        /// <param name="obj">Объект WinForm (TextBox, ComboBox ...)</param>
-        /// <param name="nameProperty">Название свойства объекта</param>
-        /// <returns>Текст с свойства объекта</returns>
-        public string GetText(object obj, string nameProperty)
-        {
-            string text = null;
-            Type currentType = obj.GetType();//получаем тип
-            PropertyInfo property = currentType.GetProperty(nameProperty);//Присваиваем ему свойство, c определённым именем. Получить свойство из этого типа
-           // text = property.GetValue(obj).ToString(); //в свойстве получить значение объекта
-
-            //Если выбран ComboBox
-            if (nameProperty == "SelectedItem")
-            {
-                //если SelectedItem == null, то есть не выбран
-                //Берём значение того, что введено в ComboBox
-                if (currentType.GetProperty(nameProperty).GetValue(obj) == null)
-                    //or if (string.IsNullOrEmpty(comboBox1.Text)) or if (comboBox1.SelectedIndex == -1)
-                {
-                    //text = currentType.GetProperty("Text").GetValue(obj).ToString();
-                    property = currentType.GetProperty("Text");
-                    text=property.GetValue(obj).ToString();//
-                }
-                else
-                    text = property.GetValue(obj).ToString();
-            }
-            else
-            {
-                text = property.GetValue(obj).ToString(); //в свойстве получить значение объекта             
-            }
-            return text;
-        }
-        #endregion
-
-        #region GetText. Получить текущий текст из TextBox, ComboBox
-        /// <summary>
-        /// возвращает текущий текст из comboBox или textBox
-        /// можно передать просто textBox или comboBox, а дальше из свойства объекта он вернёт текущий текст 
-        /// </summary>
-        /// <param name="obj">Объект который передаётся для выбора текста из его свойства</param>
-        /// <returns>Текущий текст объекта</returns>
-        public string GetText(object obj)
-        {
-            string text = null;
-            Type currentType; //создаём  тип
-            PropertyInfo property; //создаём свойство
-
-            if (obj is TextBox)
-            {
-                text = GetText(obj, "Text");
-                //currentType = obj.GetType(); //получаем тип
-                //property = currentType.GetProperty("Text");//Присваиваем ему свойство Text, если это textBox. Получить свойство text из этого типа                                            
-                //text = property.GetValue(obj).ToString(); //в свойстве получить значение объекта
-            }
-
-            //здесь нужно сделать если не selected item!
-            else if (obj is ComboBox)
-            {
-                //Выберает то свойство, в котором содержиться текст
-                //text = GetText(obj, "SelectedItem") ?? GetText(obj, "Text");
-                //text = GetText(obj, "Text");
-                text = GetText(obj, "SelectedItem");
-                //currentType = obj.GetType(); //получаем тип
-                //property = currentType.GetProperty("SelectedItem");//Присваиваем ему свойство SelectedItem, если это ComboBox. Получить свойство SelectedItem из этого типа                                            
-                //text = property.GetValue(obj).ToString(); //в свойстве получить значение объекта
-            }
-            else if (obj is DateTimePicker)
-            {
-                text = GetTextDate(obj);
-                //text = GetText(obj, "Value");
-                //currentType = obj.GetType(); //получаем тип
-                //property = currentType.GetProperty("Value");//Присваиваем ему свойство SelectedItem, если это ComboBox. Получить свойство SelectedItem из этого типа                                            
-                //text = property.GetValue(obj).ToString(); //в свойстве получить значение объекта
-            }
-            else
-                text = "";
-
-            return text;
-        }
-        #endregion
-
         #region AddParameters. Выполняем добавление команды (записи) Parameters.Add в MySqlCommand
         /// <summary>
         /// Выполняем добавление команды (записи) Parameters.Add в MySqlCommand
@@ -683,9 +580,10 @@ namespace Administrator_company.LogicProgram
         /// <param name="objects">Объекты TextBox, ComboBox, byte[]</param>
         public void AddParameters(MySqlCommand command, string variables, MySqlDbType mySqlDbTypes, object objects)
         {
+                GetTextObjectsForm getText = new GetTextObjectsForm();
                 //если объект является ComboBox или TextBox
                 if (objects is ComboBox || objects is TextBox || objects is DateTimePicker)
-                    command.Parameters.Add(variables, mySqlDbTypes).Value = GetText(objects); //GetText если есть текст в объектах
+                    command.Parameters.Add(variables, mySqlDbTypes).Value = getText.GetText(objects); //GetText если есть текст в объектах
                 else
                     command.Parameters.Add(variables, mySqlDbTypes).Value = objects; //Для других объектов                
         }
@@ -1132,5 +1030,11 @@ namespace Administrator_company.LogicProgram
                           "    AND TABLE_NAME = " + "'" + tableName + "'        " +
                           "    AND COLUMN_NAME = " + "'" + columnName + "';      ";           
         }
-    }
+
+        /*public string[] GetValuesObjects()
+        {
+
+            return 
+        }*/
+     }
 }
