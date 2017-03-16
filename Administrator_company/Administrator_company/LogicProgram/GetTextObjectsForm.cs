@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Reflection;
@@ -114,13 +115,13 @@ namespace Administrator_company.LogicProgram
 
         #region GetTextPicture
 
-        #region GetTextPicture. Получить значение с PictureBox и конвертировать в текст.
+        #region GetTextPictureBox. Получить значение с PictureBox и конвертировать в текст.
         /// <summary>
         /// Получить изображение с PictureBox в виде строки
         /// </summary>
         /// <param name="pictureBox"></param>
         /// <returns>Вернуть изображение в виде строки</returns>
-        public string GetTextPicture(PictureBox pictureBox)
+        public string GetTextPictureBox(PictureBox pictureBox)
         {
             Settings settings = new Settings();
             //Сохранить изображение из pictureBox в массив byte[]
@@ -133,18 +134,18 @@ namespace Administrator_company.LogicProgram
         }
         #endregion
 
-        #region GetTextPicture overload. Получить все значения с PictureBox-оф формы
+        #region GetTextPictureBox overload. Получить все значения с PictureBox-оф формы
         /// <summary>
         /// Получить все значения с PictureBox-оф формы
         /// </summary>
         /// <param name="pictureBoxs">все PictureBox-ы формы</param>
         /// <returns>Массив значений</returns>
-        public string[] GetTextPicture(PictureBox[] pictureBoxs)
+        public string[] GetTextPictureBox(PictureBox[] pictureBoxs)
         {
             string[] values = new string[pictureBoxs.Length];
             for (int i = 0; i < pictureBoxs.Length; i++)
             {
-                values[i] = GetTextPicture(pictureBoxs[i]);
+                values[i] = GetTextPictureBox(pictureBoxs[i]);
             }
             return values;
         }
@@ -285,36 +286,72 @@ namespace Administrator_company.LogicProgram
         /// возвращает текущий текст из ComboBox, TextBox, DateTimePicker, PictureBox
         /// можно передать просто textBox или comboBox, а дальше из свойства объекта он вернёт текущий текст 
         /// </summary>
-        /// <param name="textBoxs"></param>
-        /// <param name="comboBoxs"></param>
-        /// <param name="dateTimePickers"></param>
-        ///  <param name="pictureBoxs"></param>
+        /// <param name="textBoxs">Все TextBox-ы формы</param>
+        /// <param name="comboBoxs">Все ComboBox-ы формы</param>
+        /// <param name="dateTimePickers">Все DateTimePicker-ы формы</param>
+        ///  <param name="pictureBoxs">Все PictureBox-ы формы</param>
         /// <returns>Все значения объектов</returns>
         public string[] GetText(TextBox[] textBoxs = null, ComboBox[] comboBoxs = null,
             DateTimePicker[] dateTimePickers = null, PictureBox[] pictureBoxs = null)
         {
-           
+            string[] currentValue = null,
+                  allValues = null;
+            int sizeArray = 0,
+                currentIndex = 0;
+            if (textBoxs != null)
+            {
+                currentValue = GetTextTextBox(textBoxs);
+                GetNewArray(currentValue, ref allValues, ref sizeArray, ref currentIndex);
+            }
+            if (comboBoxs != null)
+            {
+                currentValue = GetTextComboBox(comboBoxs);
+                GetNewArray(currentValue, ref allValues, ref sizeArray, ref currentIndex);
+            }
+            if (dateTimePickers != null)
+            {
+                currentValue = GetTextDateTimePicker(dateTimePickers);
+                GetNewArray(currentValue, ref allValues, ref sizeArray, ref currentIndex);
+
+            }
+            if (pictureBoxs != null)
+            {
+                currentValue = GetTextPictureBox(pictureBoxs);
+                GetNewArray(currentValue, ref allValues, ref sizeArray, ref currentIndex);
+
+            }
+            return allValues;
         }
         #endregion
 
         #region GetText overload. Получить текст из всех объектов формы
         /// <summary>
-        /// возвращает текущий текст из ComboBox, TextBox, DateTimePicker, PictureBox
-        /// можно передать просто textBox или comboBox, а дальше из свойства объекта он вернёт текущий текст 
+        /// возвращает массив значений из ComboBox, TextBox, DateTimePicker, PictureBox
         /// </summary>
-        /// <param name="objects">Объект которые передаются для выбора текста из его свойства</param>
-        /// /// <param name="textBoxs"></param>
-        /// <param name="comboBoxs"></param>
-        /// <param name="dateTimePickers"></param>
-        ///  <param name="pictureBoxs"></param>
+        /// <param name="objects">Объекты которые передаются для выбора текста из их свойств</param>
+        /// <param name="textBoxs">Все TextBox-ы формы</param>
+        /// <param name="comboBoxs">Все ComboBox-ы формы</param>
+        /// <param name="dateTimePickers">Все DateTimePicker-ы формы</param>
+        ///  <param name="pictureBoxs">Все PictureBox-ы формы</param>
         /// <returns>Все значения объектов</returns>
         public string[] GetText(object[] objects = null, TextBox[] textBoxs = null, ComboBox[] comboBoxs = null,
             DateTimePicker[] dateTimePickers = null, PictureBox[] pictureBoxs = null)
         {
-            
-
+            if (objects != null)
+                GetText(objects);
+            if (textBoxs != null || comboBoxs != null || dateTimePickers != null || pictureBoxs != null)
+                GetText(textBoxs, comboBoxs, dateTimePickers, pictureBoxs);
         }
         #endregion
+
+        public string[] GetNewArray(string[] currentArray, ref string[] allValues, ref int sizeArray, ref int currentIndex)
+        {
+            sizeArray += currentArray.Length;
+            Array.Resize(ref allValues, sizeArray);
+            foreach (string i in currentArray)
+                allValues[currentIndex++] = i;
+            return allValues;
+        }
 
     }
 }
