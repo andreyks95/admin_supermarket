@@ -10,6 +10,21 @@ namespace Admin.UnitTest
     [TestClass]
     public class AdminTest 
     {
+        [TestMethod]
+        public void GetIdFromComboBoxTest()
+        {
+            //arrange
+            string data = "127 Text";
+            string WaitResult = "127";
+            
+            //act
+            Settings settings = new Settings();
+            string result = settings.GetIdFromComboBox(value:data);
+
+            //assert
+            Assert.AreEqual(WaitResult, result);
+            
+        }
 
         [TestMethod]
         public void GetQuerySearchTest()
@@ -149,7 +164,7 @@ namespace Admin.UnitTest
                 nameTable = "stock",
                 nameField = "id_stock",
                 nameFunc = "max";
-            string WaitResult = "5";
+            string WaitResult = "6";
 
 
             //act
