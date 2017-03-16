@@ -591,5 +591,50 @@ namespace Administrator_company.LogicProgram
         }
         #endregion
 
+        #region GetIdFromComboBox
+
+        #region GetIdFromComboBox. Получить Id столбца из ComboBox
+        /// <summary>
+        /// Получить Id столбца из ComboBox
+        /// </summary>
+        /// <param name="comboBox">Текущий ComboBox с которого нужно получить id</param>
+        /// <returns>Id </returns>
+        public string GetIdFromComboBox(ComboBox comboBox)
+        {
+            string currentText = comboBox.Text,
+                   valueNumber = "";
+            foreach (char ch in currentText)
+            {
+                if (char.IsNumber(ch))
+                    valueNumber += ch;
+                else
+                    break;
+            }
+            return valueNumber;
+        }
+        #endregion
+
+        #region GetIdFromComboBox overload. Получить Id столбца из ComboBox. 
+        /// <summary>
+        /// Получить Id столбца из ComboBox
+        /// </summary>
+        /// <param name="value">Текущий ComboBox.Text с которого нужно получить id</param>
+        /// <returns>Id </returns>
+        public string GetIdFromComboBox(string value)
+        {
+            string currentText = value,
+                   valueNumber = "";
+            foreach (char ch in currentText)
+            {
+                if (char.IsNumber(ch))
+                    valueNumber += ch;
+                else
+                    break;
+            }
+            return valueNumber;
+        }
+        #endregion
+
+        #endregion
     }
 }
