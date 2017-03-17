@@ -337,13 +337,34 @@ namespace Administrator_company.LogicProgram
         public string[] GetText(object[] objects = null, TextBox[] textBoxs = null, ComboBox[] comboBoxs = null,
             DateTimePicker[] dateTimePickers = null, PictureBox[] pictureBoxs = null)
         {
+            string[] currentValue = null,
+                  allValues = null;
+            int sizeArray = 0,
+                currentIndex = 0;
+
             if (objects != null)
-                GetText(objects);
+            {
+                currentValue = GetText(objects);
+                GetNewArray(currentValue, ref allValues, ref sizeArray, ref currentIndex);
+            }
             if (textBoxs != null || comboBoxs != null || dateTimePickers != null || pictureBoxs != null)
-                GetText(textBoxs, comboBoxs, dateTimePickers, pictureBoxs);
+            {
+                currentValue = GetText(textBoxs, comboBoxs, dateTimePickers, pictureBoxs);
+                GetNewArray(currentValue, ref allValues, ref sizeArray, ref currentIndex);
+            }
+            return allValues;
         }
         #endregion
 
+        #region GetNewArray. Создание нового массива (изминение размера) и присвоение ему значений.
+        /// <summary>
+        /// Создание нового массива (изминение размера) и присвоение ему значений.
+        /// </summary>
+        /// <param name="currentArray">Текущий массив значений</param>
+        /// <param name="allValues">Массив, который нужно изменить</param>
+        /// <param name="sizeArray">Размер нового массива</param>
+        /// <param name="currentIndex">Текущий индекс</param>
+        /// <returns>Новый массив</returns>
         public string[] GetNewArray(string[] currentArray, ref string[] allValues, ref int sizeArray, ref int currentIndex)
         {
             sizeArray += currentArray.Length;
@@ -352,6 +373,7 @@ namespace Administrator_company.LogicProgram
                 allValues[currentIndex++] = i;
             return allValues;
         }
+        #endregion
 
     }
 }
