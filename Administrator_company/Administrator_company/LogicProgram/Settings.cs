@@ -635,6 +635,22 @@ namespace Administrator_company.LogicProgram
         }
         #endregion
 
+        #region GetIdFromComboBox overload. Получить массив всех id с ComboBox-ов
+        /// <summary>
+        /// Получить массив всех id с ComboBox-ов
+        /// </summary>
+        /// <param name="comboBoxs">Все переданные ComboBox-ы из которых можно получить id</param>
+        /// <returns>все значения id</returns>
+        public string[] GetIdFromComboBox(ComboBox[] comboBoxs)
+        {
+            string[] allValues = new string[comboBoxs.Length];
+            int i = 0;
+            foreach (var element in comboBoxs)
+                allValues[i++] = GetIdFromComboBox(element);
+            return allValues;
+        }
+        #endregion
+
         #endregion
     }
 }
