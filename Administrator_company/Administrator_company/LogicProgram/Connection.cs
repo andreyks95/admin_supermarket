@@ -795,10 +795,8 @@ namespace Administrator_company.LogicProgram
         }
         #endregion
 
-
         //------- тестим новые функции ------//
-
-
+        
         #region  GetQueryShowSearch. Получить запрос исходя из условия (числовых или строковых столбцов)
         /// <summary>
         /// Составляет запрос select в зависимости от условия, на которое влияет значения столбцов (с числовыми данными или строковы)
@@ -908,6 +906,16 @@ namespace Administrator_company.LogicProgram
         }
         #endregion
 
+        #region GetWherePrimarySecondary
+        /// <summary>
+        /// Получить часть запроса для Where отношение между id
+        /// Главной и зависимой таблицы
+        /// </summary>
+        /// <param name="primaryTables">Главные табицы</param>
+        /// <param name="secondaryTables">Зависимая таблица</param>
+        /// <param name="primaryIdField">Главные ID поля таблиц</param>
+        /// <param name="secondaryIdField">Зависимые ID поля таблицы</param>
+        /// <returns></returns>
         public string GetWherePrimarySecondary(string[] primaryTables, string secondaryTables, string[] primaryIdField,  string[] secondaryIdField)
         {
             string partQuery = default(string);
@@ -921,7 +929,16 @@ namespace Administrator_company.LogicProgram
             //AND employees.id_info = info.id_info
             return partQuery;
         }
+        #endregion
 
+        #region GetValuesColumn. Получить все значения столбца таблицы
+
+        #region GetValuesColumn. Получить все значения столбца таблицы
+        /// <summary>
+        /// Получить все значения столбца таблицы с запроса
+        /// </summary>
+        /// <param name="query">Запрос, для получения значений</param>
+        /// <returns>Список значений </returns>
         public List<string> GetValuesColumn(string query)
         {
             OpenConnection();
@@ -937,7 +954,15 @@ namespace Administrator_company.LogicProgram
             CloseConnection();
             return valuesEnum;
         }
+        #endregion
 
+        #region GetValuesColumn overload. Получить все значения столбца таблицы
+        /// <summary>
+        /// Получить все значения столбца таблицы
+        /// </summary>
+        /// <param name="nameTables">Название таблиц для concat</param>
+        /// <param name="fields">Название полей для concat</param>
+        /// <returns>Список значений</returns>
         public List<string> GetValuesColumn(string[] nameTables, string[] fields)
         {
             OpenConnection();
@@ -954,7 +979,18 @@ namespace Administrator_company.LogicProgram
             CloseConnection();
             return valuesEnum;
         }
+        #endregion
 
+        #endregion
+
+        #region GetEnum
+
+        #region GetEnum. Получить все значения enum столбца таблицы
+        /// <summary>
+        /// Получить все значения enum, которое может принимать значения столбца таблицы
+        /// </summary>
+        /// <param name="query">Запрос для получения значений enum</param>
+        /// <returns>Значения enum</returns>
         public List<string> GetEnum(string query)
         {
             OpenConnection();
@@ -973,7 +1009,15 @@ namespace Administrator_company.LogicProgram
             CloseConnection();
             return valuesEnum;
         }
+        #endregion
 
+        #region GetEnum overload. Получить все значения enum столбца таблицы
+        /// <summary>
+        /// Получить все значения enum, которое может принимать значения столбца таблицы
+        /// </summary>
+        /// <param name="tableName">Название таблицы</param>
+        /// <param name="columnName">Название поля (столбца) таблицы</param>
+        /// <returns>Значения enum</returns>
         public List<string> GetEnum(string tableName, string columnName)
         {
             OpenConnection();
@@ -993,7 +1037,20 @@ namespace Administrator_company.LogicProgram
             CloseConnection();
             return valuesEnum;
         }
+        #endregion
 
+        #endregion
+
+        #region GetQueryConcat
+
+        #region GetQueryConcat
+        /// <summary>
+        /// Данный метод подойдёт для получения запроса объединенного в один столбец concat
+        ///  значений с разных столбцов разных таблиц
+        /// </summary>
+        /// <param name="nameTables">Название таблиц</param>
+        /// <param name="fields">Поля (столбцы) таблицы</param>
+        /// <returns>Запрос concat с содержанием значений в одном столбце</returns>
         public string GetQueryConcat(string[] nameTables, string[] fields)
         {
             string query = "SELECT ",
@@ -1015,10 +1072,19 @@ namespace Administrator_company.LogicProgram
             query += concat + " AS 'Field' " + from + orderBy;
 
             return query;
-            //Select concat(info.id_info, '   ', info.full_name) AS 'Номер и ФИО'
+            //Select concat(info.id_info, '   ', info.full_name) AS 'Field'
             //from info
         }
+        #endregion
 
+        #region GetQueryConcat
+        /// <summary>
+        /// Данный метод подойдёт для получения значений enum
+        ///  которое может принимать запись столбца таблицы
+        /// </summary>
+        /// <param name="tableName">Название таблицы</param>
+        /// <param name="columnName">Название столбца, содержащий enum значения</param>
+        /// <returns>Запрос concat с содержанием enum значений в одном столбце</returns>
         public string GetQueryConcat(string tableName, string columnName)
         {
            return "select trim(trailing ')'                       " +
@@ -1030,11 +1096,9 @@ namespace Administrator_company.LogicProgram
                           "    AND TABLE_NAME = " + "'" + tableName + "'        " +
                           "    AND COLUMN_NAME = " + "'" + columnName + "';      ";           
         }
+        #endregion
 
-        /*public string[] GetValuesObjects()
-        {
+        #endregion
 
-            return 
-        }*/
-     }
+    }
 }
