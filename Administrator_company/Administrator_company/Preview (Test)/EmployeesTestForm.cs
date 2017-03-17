@@ -169,7 +169,7 @@ namespace Administrator_company.Preview__Test_
             ComboBox[] comboBoxs = { comboBox1, comboBox2, comboBox3 };
             DateTimePicker[] dateTimePickers = { dateTimePicker1, dateTimePicker2 };
 
-            //возвращаем результаты проверок всех полей
+           //возвращаем результаты проверок всех полей
             bool resultSecurity = checking.SecurityAll(textBoxs, comboBoxs, dateTimePickers),
                  resultVoid = checking.VoidAll(textBoxs, comboBoxs, dateTimePickers); //Проверяем только обязательные для ввода поля
                                                                                       //если результаты вернулись положительные, тогда можно добавить данные, иначе вывести ошибку
@@ -179,6 +179,10 @@ namespace Administrator_company.Preview__Test_
                 string query = connection.GetQueryInsert(nameTable, nameFieldsAll, variables);
                 //выполняить команду с Insert
                 connection.command = new MySqlCommand(query, connection.connection);
+
+                //Получить значения id для вставки
+                string[] idsFromComboBox = settings.GetIdFromComboBox(new [] {comboBox1,comboBox2});
+                
                 //для объектов, у них есть данные которые нужно вставить
                 //ОБЯЗАТЕЛЬНО!
                 //Писать объекты подобно расположению на форме 
