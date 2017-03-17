@@ -309,7 +309,6 @@ namespace Administrator_company.LogicProgram
         }
         #endregion
 
-
         //Новая версия. Новые методы для получения значения из ячейки с использование ExecuteScalar
 
         #region GetSelectQuery. Запрос для получения значения ячейки
@@ -429,20 +428,27 @@ namespace Administrator_company.LogicProgram
         }
         #endregion
 
+        #region GetCalcSalary. Расчёт зарплаты.
+        /// <summary>
+        /// Расчёт зарплаты. В зависимости от стажа работы. 
+        /// </summary>
+        /// <param name="values">Список значений</param>
+        /// <returns>Запралата</returns>
         public float GetCalcSalary(List<float> values)
         {
             if (values.Count > 2)
                 return 0.0f;
             else
             {
-                float experience = values.First(),
-                    salary = values[1],
+                float experience = values.First(), //Опыт
+                    salary = values[1], //Зарплата без стажа
                     result = default(float);
                 //Формула начисления зароботной платы от стажа
                 result = ((experience*0.01f)*salary) + salary;
                 return result;
             }
         }
+        #endregion
 
         #region GetUpdateQuery. Получить update запрос для просчета значения в ячейке
         /// <summary>
@@ -463,6 +469,12 @@ namespace Administrator_company.LogicProgram
         }
         #endregion
 
+        #region GetUpdateQuery
+        /// <summary>
+        /// Получает Update SQL-запрос для обновления данных в таблице
+        /// </summary>
+        /// <param name="dataCalculations">Кортеж данных для получения числовых значений => расчёт => запрос для обновления</param>
+        /// <returns>Update SQL-запрос</returns>
         public string GetUpdateQuery(Tuple<
                                     Tuple<string[], string[][], string[], string[]>,
                                     Tuple<string>,
@@ -478,7 +490,14 @@ namespace Administrator_company.LogicProgram
 
             return updateQuery;
         }
+        #endregion
 
+        #region GetUpdateQuerySalary. Для расчёта зарплаты
+        /// <summary>
+        /// Получает Update SQL-запрос для обновления данных в таблице
+        /// </summary>
+        /// <param name="dataCalculations">Кортеж данных для получения числовых значений => расчёт => запрос для обновления</param>
+        /// <returns>Update SQL-запрос</returns>
         public string GetUpdateQuerySalary(Tuple<
                             Tuple<string[], string[][], string[], string[]>,
                             Tuple<string, string, string, string>
@@ -493,6 +512,7 @@ namespace Administrator_company.LogicProgram
 
             return updateQuery;
         }
+        #endregion
     }
 
 }
