@@ -591,6 +591,22 @@ namespace Administrator_company.LogicProgram
 
         #region AddParameters overload. Выполняем добавление команды (записи) Parameters.Add в MySqlCommand
         /// <summary>
+        /// Выполняем добавление команды (записи) Parameters.Add в MySqlCommand
+        /// </summary>
+        /// <param name="command">текущая MySqlCommand готова к выполнению</param>
+        /// <param name="variables">Переменные для добавление записи в таблицу</param>
+        /// <param name="mySqlDbTypes">Массив MySqlDbType MediumText, LongBlob, UInt32, VarChar</param>
+        /// <param name="values">Значения, необходимые для добавления</param>
+        public void AddParameters(MySqlCommand command, string variables, MySqlDbType mySqlDbTypes, string[] values)
+        {
+            foreach (string i in values)
+                command.Parameters.Add(variables, mySqlDbTypes).Value = i;
+            }
+
+        #endregion
+
+        #region AddParameters overload. Выполняем добавление команды (записи) Parameters.Add в MySqlCommand
+        /// <summary>
         /// Выполняем добавление команды (записи) Parameters.Add в MySqlCommand для многих полей
         /// </summary>
         /// <param name="command">текущая MySqlCommand готова к выполнению</param>
