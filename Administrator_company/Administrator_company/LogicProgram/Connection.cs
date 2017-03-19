@@ -597,10 +597,11 @@ namespace Administrator_company.LogicProgram
         /// <param name="variables">Переменные для добавление записи в таблицу</param>
         /// <param name="mySqlDbTypes">Массив MySqlDbType MediumText, LongBlob, UInt32, VarChar</param>
         /// <param name="values">Значения, необходимые для добавления</param>
-        public void AddParameters(MySqlCommand command, string variables, MySqlDbType mySqlDbTypes, string[] values)
+        public void AddParameters(MySqlCommand command, string[] variables, MySqlDbType mySqlDbTypes, string[] values)
         {
+            int index = 0;
             foreach (string i in values)
-                command.Parameters.Add(variables, mySqlDbTypes).Value = i;
+                command.Parameters.Add(variables[index++], mySqlDbTypes).Value = i;
             }
 
         #endregion
@@ -628,6 +629,31 @@ namespace Administrator_company.LogicProgram
                 //    AddParameters(command, variables[i], mySqlDbTypes[i], objects[i]);
                 //    //command.Parameters.Add(variables[i], mySqlDbTypes[i]).Value = objects[i]; //Для других объектов        
             }
+        }
+        #endregion
+
+        #region AddParameters overload. Выполняем добавление команды (записи) Parameters.Add в MySqlCommand
+        /// <summary>
+        /// Выполняем добавление команды (записи) Parameters.Add в MySqlCommand для многих полей
+        /// </summary>
+        /// <param name="command">текущая MySqlCommand готова к выполнению</param>
+        /// <param name="variables">Переменные для добавление записи в таблицу</param>
+        /// <param name="mySqlDbTypes">Массив MySqlDbType MediumText, LongBlob, UInt32, VarChar</param>
+        /// <param name="objects">Объекты TextBox, ComboBox, byte[]</param>
+        /// <param name="textBoxs">TextBox-ы на форме</param>
+        /// <param name="comboBoxs">ComboBox-ы на форме</param>
+        /// <param name="dateTimePickers">DateTimePikcer-ы на форме</param>
+        /// <param name="pictureBoxs">PictureBox-ы на форме</param>
+        public void AddParameters(MySqlCommand command, string[] variables, MySqlDbType[] mySqlDbTypes,
+            object[] objects=null, TextBox[] textBoxs = null, ComboBox[] comboBoxs = null,
+            DateTimePicker[] dateTimePickers = null, PictureBox[] pictureBoxs = null)
+        {
+            GetTextObjectsForm getText = new GetTextObjectsForm();
+            //Получить все строковые значения 
+            string[] allValues = getText.GetText(objects, textBoxs, comboBoxs, dateTimePickers, pictureBoxs);
+            //добавить
+            AddParameters(command, variables, mySqlDbTypes, allValues);      
+            
         }
         #endregion
 
