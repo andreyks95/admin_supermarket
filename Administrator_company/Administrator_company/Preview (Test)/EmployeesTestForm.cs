@@ -23,6 +23,7 @@ namespace Administrator_company.Preview__Test_
         Settings settings = new Settings();
         Checking checking = new Checking();
         Сalculations calculations = new Сalculations();
+        GetTextObjectsForm getText = new GetTextObjectsForm();
 
 
         BindingManagerBase managerBase; //для перемещения по таблице 
@@ -182,8 +183,11 @@ namespace Administrator_company.Preview__Test_
 
                 //Получить значения id для вставки
                 string[] idsFromComboBox = settings.GetIdFromComboBox(new [] {comboBox1,comboBox2});
-                
-                //для объектов, у них есть данные которые нужно вставить
+
+                object[] objects = {textBox1, comboBox3, textBox2, textBox3, dateTimePicker1, dateTimePicker2};
+                string[] allValuesFromObjects = getText.GetText(objects);
+
+                /*//для объектов, у них есть данные которые нужно вставить
                 //ОБЯЗАТЕЛЬНО!
                 //Писать объекты подобно расположению на форме 
                 //В такой же последовательности
@@ -193,7 +197,8 @@ namespace Administrator_company.Preview__Test_
                 
                 //СДЕЛАТЬ ЕЩЁ ОДИН перегрузочный метод
                 //Добавляем данные 
-                connection.AddParameters(connection.command, variables, mySqlDbTypes, objects);
+                connection.AddParameters(connection.command, variables, mySqlDbTypes, objects);*/
+                
                 //попытаться выполнить запрос
                 connection.ExecuteQuery(connection.command);
 
