@@ -74,7 +74,7 @@ namespace Administrator_company.Preview__Test_
 
         private Tuple<Tuple<string[], string[][], string[], string[]>,
                   Tuple<string, string, string, string>>
-        SetTuple(TextBox textBoxsIdField, ComboBox comboBoxsIdField)
+        SetTuple(string[] values=null, TextBox textBoxsIdField=null, ComboBox comboBoxsIdField=null)
         {
             //Rest1
             //Таблицы которые принимают участвие в вычислении
@@ -87,8 +87,18 @@ namespace Administrator_company.Preview__Test_
             };
             //Название полей id-ов выше указанных таблиц
             string[] nameIdTables = { "id_employee", "id_position" };
-            string[] ids = { textBoxsIdField.Text, //id_stock
-                                 comboBoxsIdField.Text}; //id_products
+            string[] ids = new string[2];
+            if(textBoxsIdField !=null)
+                    ids[0] = textBoxsIdField.Text; //id_stock
+            if(comboBoxsIdField != null)
+                ids[1] = comboBoxsIdField.Text; //id_products
+            if (values != null)
+            {
+                ids[0] = values[0];
+                ids[1] = values[1];
+            }
+            
+
             //Rest2
             string resultTable = "employees";
             string resultField = "salary";
@@ -125,6 +135,17 @@ namespace Administrator_company.Preview__Test_
             settings.CurrentColumnCellsDate(ColumnsDateForDateDateTimePicker, dateTimePickers, dataGridView1);
         }
 
+        //Заполняем DataGridView и корректируем её
+        public void FillDataGridView(string valueToSearch)
+        {
+            //получаем запрос на отображение данных с поиском
+            string query = connection.GetQueryShowSearch(nameTables, nameFields, nameFieldsAS,
+                primaryTables, secondaryTables, primaryIdField, secondaryIdField,
+                numericFields, valueToSearch);
+            DataTable table = connection.FillDataGridView(dataGridView1, 20, query: query); //заполняем таблицу данными с запроса и настраиваем
+            managerBase = this.BindingContext[table]; //подключаем таблицу для передвижения по ней
+        }
+
         private void EmployeesTestForm_Load(object sender, EventArgs e)
         {
             //Заполняем значениями все ComboBox-ы распаложены на форме
@@ -151,19 +172,27 @@ namespace Administrator_company.Preview__Test_
             FillDataGridView(""); 
         }
 
-        //Заполняем DataGridView и корректируем её
-        public void FillDataGridView(string valueToSearch)
+        private string[] GetAllValuesDataFromElementsForm()
         {
-            //получаем запрос на отображение данных с поиском
-            string query = connection.GetQueryShowSearch(nameTables, nameFields, nameFieldsAS,
-                primaryTables, secondaryTables, primaryIdField, secondaryIdField,
-                numericFields, valueToSearch);
-            DataTable table = connection.FillDataGridView(dataGridView1, 20, query: query); //заполняем таблицу данными с запроса и настраиваем
-            managerBase = this.BindingContext[table]; //подключаем таблицу для передвижения по ней
+            //Получить значения id для вставки
+            string[] idsFromComboBox = settings.GetIdFromComboBox(new[] { comboBox1, comboBox2 });
+
+            object[] objects = { textBox1, comboBox3, textBox2, textBox3, dateTimePicker1, dateTimePicker2 };
+            //Получить значения всех объектов
+            string[] allValuesFromObjects = getText.GetText(objects);
+
+            string[] allValues = new string[idsFromComboBox.Length + allValuesFromObjects.Length];
+
+            //вставляем первый элемент - это будет id
+            Array.Copy(allValuesFromObjects, 0, allValues, 0, 1);
+            //вставляем id подчинённых таблиц, которые получили
+            Array.Copy(idsFromComboBox, 0, allValues, 1, 2);
+            //вставляем оставшиеся элементы
+            Array.Copy(allValuesFromObjects, 1, allValues, 3, 5);
+            return allValuesFromObjects;
         }
 
-        //ДЛЯ ТЕСТА
-        //ЗДЕСЬ ТАКЖЕ НУЖНО ВЫТАЩИТЬ ЗНАЧЕНИЯ ИЗ COMBOBOXA И ВСТАВИТЬ их в строку
+     
         private void Insert_Click(object sender, EventArgs e)
         {
             TextBox[] textBoxs = { textBox1, textBox2, textBox3 };
@@ -181,28 +210,16 @@ namespace Administrator_company.Preview__Test_
                 //выполняить команду с Insert
                 connection.command = new MySqlCommand(query, connection.connection);
 
-                //Получить значения id для вставки
-                string[] idsFromComboBox = settings.GetIdFromComboBox(new [] {comboBox1,comboBox2});
+                //Получить значения всех объектов формы для вставки
+                string[] allValues = GetAllValuesDataFromElementsForm();
 
-                object[] objects = {textBox1, comboBox3, textBox2, textBox3, dateTimePicker1, dateTimePicker2};
-                string[] allValuesFromObjects = getText.GetText(objects);
-
-                /*//для объектов, у них есть данные которые нужно вставить
-                //ОБЯЗАТЕЛЬНО!
-                //Писать объекты подобно расположению на форме 
-                //В такой же последовательности
-                //Переменная должна соответствувать требуемому значению 
-                object[] objects = { textBox1, comboBox1, comboBox2, comboBox3, textBox2, textBox3, dateTimePicker1, dateTimePicker2 };
-                
-                
-                //СДЕЛАТЬ ЕЩЁ ОДИН перегрузочный метод
                 //Добавляем данные 
-                connection.AddParameters(connection.command, variables, mySqlDbTypes, objects);*/
+                connection.AddParametersString(connection.command, variables, mySqlDbTypes, allValues);
                 
                 //попытаться выполнить запрос
                 connection.ExecuteQuery(connection.command);
 
-                query = calculations.GetUpdateQuerySalary(SetTuple(textBox1, comboBox2));
+                query = calculations.GetUpdateQuerySalary(SetTuple(allValues));
                 //cюда попытаться вставить запрос для выполнения вычисления
                 connection.FieldDateTableCalculation(query);
 
@@ -215,9 +232,7 @@ namespace Administrator_company.Preview__Test_
                 checking.ErrorMessage(this); //вывести ошибку
             }
         }
-
-        //ДЛЯ ТЕСТА
-        //ЗДЕСЬ ТАКЖЕ НУЖНО ВЫТАЩИТЬ ЗНАЧЕНИЯ ИЗ COMBOBOXA И ВСТАВИТЬ их в строку
+        
         private void Update_Click(object sender, EventArgs e)
         {
             TextBox[] textBoxs = { textBox1, textBox2, textBox3 };
@@ -235,16 +250,17 @@ namespace Administrator_company.Preview__Test_
                 string query = connection.GetQueryUpdate(nameTable, nameFieldsAll, variables, id_field);
                 //выполнить команду
                 connection.command = new MySqlCommand(query, connection.connection);
-                //для объектов, у них есть данные которые нужно вставить
-                object[] objects = { textBox1, comboBox1, comboBox2, comboBox3, textBox2, textBox3, dateTimePicker1, dateTimePicker2 };
                 
-                //СДЕЛАТЬ ЕЩЁ ОДИН перегрузочный метод
+                //Получить значения всех объектов формы для вставки
+                string[] allValues = GetAllValuesDataFromElementsForm();
+
                 //Добавляем данные 
-                connection.AddParameters(connection.command, variables, mySqlDbTypes, objects);
+                connection.AddParametersString(connection.command, variables, mySqlDbTypes, allValues);
+
                 //попытаться выполнить запрос
                 connection.ExecuteQuery(connection.command);
 
-                query = calculations.GetUpdateQuerySalary(SetTuple(textBox1, comboBox2));
+                query = calculations.GetUpdateQuerySalary(SetTuple(allValues));
                 //cюда попытаться вставить запрос для выполнения вычисления
                 connection.FieldDateTableCalculation(query);
 
