@@ -339,11 +339,10 @@ namespace Administrator_company.LogicProgram
         public float GetSelectValue(string query)
         {
             connect.OpenConnection();
-            connect.command = new MySqlCommand(query, connect.connection);
-            var v = connect.command.ExecuteScalar();
-            connect.CloseConnection();
             try
             {
+                connect.command = new MySqlCommand(query, connect.connection);
+                var v = connect.command.ExecuteScalar();
                 float value = Convert.ToSingle(v);
                 return value;
             }
@@ -351,6 +350,10 @@ namespace Administrator_company.LogicProgram
             {
                 MessageBox.Show("Не получено значение с ячейки: \n" + ex.Message);
                 return 0.0f;
+            }
+            finally
+            {
+                connect.CloseConnection();
             }
 
         }
