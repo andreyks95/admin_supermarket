@@ -597,12 +597,13 @@ namespace Administrator_company.LogicProgram
         /// <param name="variables">Переменные для добавление записи в таблицу</param>
         /// <param name="mySqlDbTypes">Массив MySqlDbType MediumText, LongBlob, UInt32, VarChar</param>
         /// <param name="values">Значения, необходимые для добавления</param>
-        public void AddParametersString(MySqlCommand command, string[] variables, MySqlDbType[] mySqlDbTypes, string[] values)
+        public void AddParametersString(MySqlCommand command, string[] variables,  MySqlDbType[] mySqlDbTypes, string[] values)
         {
             int  i = 0, j=0;
             foreach (string val in values)
                 command.Parameters.Add(variables[i++], mySqlDbTypes[j++]).Value = val;
-            }
+                //command.Parameters.AddWithValue(variables[i++],val);
+        }
 
         #endregion
 
