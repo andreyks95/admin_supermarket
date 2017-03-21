@@ -29,13 +29,10 @@
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.label9 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.comboBox3 = new System.Windows.Forms.ComboBox();
@@ -51,13 +48,14 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
+            this.panel2 = new System.Windows.Forms.Panel();
             this.PreviousRecordButton = new System.Windows.Forms.Button();
             this.NextRecordButton = new System.Windows.Forms.Button();
             this.LastRecordButton = new System.Windows.Forms.Button();
             this.FirstRecordButton = new System.Windows.Forms.Button();
             this.textBoxSearch = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
-            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -67,10 +65,8 @@
             // 
             this.panel1.Controls.Add(this.dateTimePicker2);
             this.panel1.Controls.Add(this.dateTimePicker1);
-            this.panel1.Controls.Add(this.textBox3);
             this.panel1.Controls.Add(this.label9);
             this.panel1.Controls.Add(this.label8);
-            this.panel1.Controls.Add(this.label7);
             this.panel1.Controls.Add(this.label5);
             this.panel1.Controls.Add(this.textBox2);
             this.panel1.Controls.Add(this.comboBox3);
@@ -91,33 +87,6 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(341, 328);
             this.panel1.TabIndex = 0;
-            // 
-            // panel2
-            // 
-            this.panel2.Controls.Add(this.PreviousRecordButton);
-            this.panel2.Controls.Add(this.NextRecordButton);
-            this.panel2.Controls.Add(this.LastRecordButton);
-            this.panel2.Controls.Add(this.FirstRecordButton);
-            this.panel2.Controls.Add(this.textBoxSearch);
-            this.panel2.Controls.Add(this.label6);
-            this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel2.Location = new System.Drawing.Point(341, 0);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(585, 77);
-            this.panel2.TabIndex = 1;
-            // 
-            // dataGridView1
-            // 
-            this.dataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(341, 76);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(585, 252);
-            this.dataGridView1.TabIndex = 2;
-            this.dataGridView1.SelectionChanged += new System.EventHandler(this.dataGridView1_SelectionChanged);
-            this.dataGridView1.Click += new System.EventHandler(this.dataGridView1_Click);
             // 
             // dateTimePicker2
             // 
@@ -150,16 +119,6 @@
             this.label8.Size = new System.Drawing.Size(44, 13);
             this.label8.TabIndex = 56;
             this.label8.Text = "Принят";
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(9, 298);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(55, 13);
-            this.label7.TabIndex = 55;
-            this.label7.Text = "Зарплата";
-            this.label7.Visible = false;
             // 
             // label5
             // 
@@ -294,6 +253,20 @@
             this.textBox1.Size = new System.Drawing.Size(148, 20);
             this.textBox1.TabIndex = 37;
             // 
+            // panel2
+            // 
+            this.panel2.Controls.Add(this.PreviousRecordButton);
+            this.panel2.Controls.Add(this.NextRecordButton);
+            this.panel2.Controls.Add(this.LastRecordButton);
+            this.panel2.Controls.Add(this.FirstRecordButton);
+            this.panel2.Controls.Add(this.textBoxSearch);
+            this.panel2.Controls.Add(this.label6);
+            this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel2.Location = new System.Drawing.Point(341, 0);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(585, 77);
+            this.panel2.TabIndex = 1;
+            // 
             // PreviousRecordButton
             // 
             this.PreviousRecordButton.Location = new System.Drawing.Point(299, 35);
@@ -351,14 +324,18 @@
             this.label6.TabIndex = 37;
             this.label6.Text = "Введите значение для поиска:";
             // 
-            // textBox3
+            // dataGridView1
             // 
-            this.textBox3.Location = new System.Drawing.Point(81, 295);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(148, 20);
-            this.textBox3.TabIndex = 42;
-            this.textBox3.Text = "0";
-            this.textBox3.Visible = false;
+            this.dataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Location = new System.Drawing.Point(341, 76);
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.Size = new System.Drawing.Size(585, 252);
+            this.dataGridView1.TabIndex = 2;
+            this.dataGridView1.SelectionChanged += new System.EventHandler(this.dataGridView1_SelectionChanged);
+            this.dataGridView1.Click += new System.EventHandler(this.dataGridView1_Click);
             // 
             // EmployeesTestForm
             // 
@@ -389,7 +366,6 @@
         private System.Windows.Forms.DateTimePicker dateTimePicker1;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.ComboBox comboBox3;
@@ -411,6 +387,5 @@
         private System.Windows.Forms.Button FirstRecordButton;
         private System.Windows.Forms.TextBox textBoxSearch;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.TextBox textBox3;
     }
 }

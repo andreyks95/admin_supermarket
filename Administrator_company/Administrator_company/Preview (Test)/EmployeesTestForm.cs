@@ -28,13 +28,13 @@ namespace Administrator_company.Preview__Test_
 
         BindingManagerBase managerBase; //для перемещения по таблице 
 
-        private static string 
+        private static string
             //таблица
             nameTable = "employees",
             id_field = "id_employee",
             //id поле таблицы
             secondaryTables = "employees";
-            
+
 
         private static string[]
             nameTables =
@@ -49,29 +49,31 @@ namespace Administrator_company.Preview__Test_
                 "employees.department", "employees.experience", "employees.salary", "employees.started_work",
                 "employees.fired"
             },
-            nameFieldsAll = { "id_employee", "id_info", "id_position", "department", "experience", "salary", "started_work", "fired" }, //все поля
+            nameFieldsAll =
+            {
+                "id_employee", "id_info", "id_position", "department", "experience", /*"salary",*/
+                "started_work", "fired"
+            },
+            //все поля
             //для переменных
             variables =
             {
-                "@id", "@id_info", "@id_position", "@department", "@experience", "@salary", "@started_work",
+                "@id", "@id_info", "@id_position", "@department", "@experience", /*"@salary",*/ "@started_work",
                 "@fired"
             },
             //как будут отображаться
             nameFieldsAS = {"ИД", "ФИО", "Должность", "Отдел", "Опыт", "Зарплата", "Принят", "Уволен"},
             //для корректного поиска по числовым столбцам 
-            numericFields = { "employees.id_employee", "employees.experience", "employees.salary" },
-            //numericFields = { "id_employee", "id_info", "id_position", "experience", "salary"},
+            numericFields = {"employees.id_employee", "employees.experience", "employees.salary"},
             //Главные таблицы для части запроса where
-            primaryTables = { "position","info" },
-            primaryIdField = { "id_position", "id_info" },
-            secondaryIdField = { "id_position", "id_info" };
-            
+            primaryTables = {"position", "info"},
+            primaryIdField = {"id_position", "id_info"},
+            secondaryIdField = {"id_position", "id_info"};
 
-
-
-
-        private static MySqlDbType[] mySqlDbTypes = { MySqlDbType.UInt32, MySqlDbType.UInt32, MySqlDbType.UInt32, MySqlDbType.Enum, MySqlDbType.UInt32, MySqlDbType.UInt32, MySqlDbType.Date, MySqlDbType.Date };//для типов в (AddParameters)
-
+        //для типов в (AddParameters)
+        private static MySqlDbType[] mySqlDbTypes = { MySqlDbType.UInt32, MySqlDbType.UInt32, MySqlDbType.UInt32,
+                                MySqlDbType.Enum, MySqlDbType.UInt32, /*MySqlDbType.UInt32,*/ MySqlDbType.Date, MySqlDbType.Date };
+         
         private Tuple<Tuple<string[], string[][], string[], string[]>,
                   Tuple<string, string, string, string>>
         SetTuple(string[] values=null, TextBox textBoxsIdField=null, ComboBox comboBoxsIdField=null)
@@ -100,6 +102,7 @@ namespace Administrator_company.Preview__Test_
             
 
             //Rest2
+            //Результат вычисление куда необходимо вставить
             string resultTable = "employees";
             string resultField = "salary";
             string resultIdFiedTable = "id_employee";
@@ -122,7 +125,7 @@ namespace Administrator_company.Preview__Test_
                   ColumnsDateForDateDateTimePicker = { 6, 7 };//столбцы таблицы с которых нужно взять данные и вставить в DateTimePicker-ы
 
             //Массив куда будут (в textBox-ы) отображаться значения текущей строки из DataGridView
-            TextBox[] textBoxs = { textBox1, textBox2, textBox3 };
+            TextBox[] textBoxs = { textBox1, textBox2};
             //отображаем все текстовые записи из DataGridView в textBox-ы
             settings.CurrentColumnCellsTEXT(ColumnsTextForTextBox, textBoxs, dataGridView1);
 
@@ -133,6 +136,26 @@ namespace Administrator_company.Preview__Test_
             //Массив куда будут(в dateTimePickers - ы) отображаться значения текущей строки из DataGridView
             DateTimePicker[] dateTimePickers = { dateTimePicker1, dateTimePicker2 };
             settings.CurrentColumnCellsDate(ColumnsDateForDateDateTimePicker, dateTimePickers, dataGridView1);
+        }
+
+        private string[] GetAllValuesDataFromElementsForm()
+        {
+            //Получить значения id для вставки
+            string[] idsFromComboBox = settings.GetIdFromComboBox(new[] { comboBox1, comboBox2 });
+
+            object[] objects = { textBox1, comboBox3, textBox2, /*textBox3,*/ dateTimePicker1, dateTimePicker2 };
+            //Получить значения всех объектов
+            string[] allValuesFromObjects = getText.GetText(objects);
+
+            string[] allValues = new string[idsFromComboBox.Length + allValuesFromObjects.Length];
+
+            //вставляем первый элемент - это будет id
+            Array.Copy(allValuesFromObjects, 0, allValues, 0, 1);
+            //вставляем id подчинённых таблиц, которые получили
+            Array.Copy(idsFromComboBox, 0, allValues, 1, 2);
+            //вставляем оставшиеся элементы
+            Array.Copy(allValuesFromObjects, 1, allValues, 3, 4);
+            return allValues;
         }
 
         //Заполняем DataGridView и корректируем её
@@ -165,37 +188,16 @@ namespace Administrator_company.Preview__Test_
             settings.FillComboBox(comboBox2, values);
 
             //Заполняем ComboBox3 всеми значениями Enum которые могут принимать ячейки в столбце  
-            values = connection.GetEnum("products", "category");
+            values = connection.GetEnum("employees", "department");
             settings.FillComboBox(comboBox3, values);
 
             //при загрузке отображаем таблицу
             FillDataGridView(""); 
         }
-
-        private string[] GetAllValuesDataFromElementsForm()
-        {
-            //Получить значения id для вставки
-            string[] idsFromComboBox = settings.GetIdFromComboBox(new[] { comboBox1, comboBox2 });
-
-            object[] objects = { textBox1, comboBox3, textBox2, textBox3, dateTimePicker1, dateTimePicker2 };
-            //Получить значения всех объектов
-            string[] allValuesFromObjects = getText.GetText(objects);
-
-            string[] allValues = new string[idsFromComboBox.Length + allValuesFromObjects.Length];
-
-            //вставляем первый элемент - это будет id
-            Array.Copy(allValuesFromObjects, 0, allValues, 0, 1);
-            //вставляем id подчинённых таблиц, которые получили
-            Array.Copy(idsFromComboBox, 0, allValues, 1, 2);
-            //вставляем оставшиеся элементы
-            Array.Copy(allValuesFromObjects, 1, allValues, 3, 5);
-            return allValuesFromObjects;
-        }
-
-     
+        
         private void Insert_Click(object sender, EventArgs e)
         {
-            TextBox[] textBoxs = { textBox1, textBox2, textBox3 };
+            TextBox[] textBoxs = { textBox1, textBox2 };
             ComboBox[] comboBoxs = { comboBox1, comboBox2, comboBox3 };
             DateTimePicker[] dateTimePickers = { dateTimePicker1, dateTimePicker2 };
 
@@ -211,7 +213,7 @@ namespace Administrator_company.Preview__Test_
                 connection.command = new MySqlCommand(query, connection.connection);
 
                 //Получить значения всех объектов формы для вставки
-                string[] allValues = GetAllValuesDataFromElementsForm();
+                var allValues = GetAllValuesDataFromElementsForm();
 
                 //Добавляем данные 
                 connection.AddParametersString(connection.command, variables, mySqlDbTypes, allValues);
@@ -235,7 +237,7 @@ namespace Administrator_company.Preview__Test_
         
         private void Update_Click(object sender, EventArgs e)
         {
-            TextBox[] textBoxs = { textBox1, textBox2, textBox3 };
+            TextBox[] textBoxs = { textBox1, textBox2};
             ComboBox[] comboBoxs = { comboBox1, comboBox2, comboBox3 };
             DateTimePicker[] dateTimePickers = { dateTimePicker1, dateTimePicker2 };
 
@@ -252,7 +254,7 @@ namespace Administrator_company.Preview__Test_
                 connection.command = new MySqlCommand(query, connection.connection);
                 
                 //Получить значения всех объектов формы для вставки
-                string[] allValues = GetAllValuesDataFromElementsForm();
+                var allValues = GetAllValuesDataFromElementsForm();
 
                 //Добавляем данные 
                 connection.AddParametersString(connection.command, variables, mySqlDbTypes, allValues);
@@ -286,7 +288,7 @@ namespace Administrator_company.Preview__Test_
                 //выполняем запрос
                 connection.command = new MySqlCommand(query, connection.connection);
                 //для объектов, у них есть данные которые нужно вставить
-                object[] objects = { textBox1, comboBox1, comboBox2, comboBox3, textBox2, textBox3, dateTimePicker1, dateTimePicker2 };
+                object[] objects = { textBox1, comboBox1, comboBox2, comboBox3, textBox2,  dateTimePicker1, dateTimePicker2 };
                 // Добавляем данные
                 connection.AddParameters(connection.command, variables[0], mySqlDbTypes[0], objects[0]);
                 //попытаться выполнить запрос
@@ -294,7 +296,7 @@ namespace Administrator_company.Preview__Test_
                 //отобразить новые данные 
                 FillDataGridView("");
                 //Что есть на форме
-                TextBox[] textBoxs = { textBox1, textBox2, textBox3 };
+                TextBox[] textBoxs = { textBox1, textBox2 };
                 ComboBox[] comboBoxs = { comboBox1, comboBox2, comboBox3 };
                 DateTimePicker[] dateTimePickers = { dateTimePicker1, dateTimePicker2 };
                 //Очищяем поля
@@ -320,7 +322,7 @@ namespace Administrator_company.Preview__Test_
                 object[] objects = { textBox1 };
                 connection.AddParameters(connection.command, variables[0], mySqlDbTypes[0], objects[0]);
 
-                TextBox[] textBoxs = { textBox1, textBox2, textBox3 };
+                TextBox[] textBoxs = { textBox1, textBox2 };
                 ComboBox[] comboBoxs = { comboBox1, comboBox2, comboBox3 };
                 DateTimePicker[] dateTimePickers = { dateTimePicker1, dateTimePicker2 };
                 int[] ColumnsTextForTextBox = { 0, 4, 5 },//столбцы таблицы с которых нужно взять данные и вставить в TextBox-ы
@@ -345,7 +347,7 @@ namespace Administrator_company.Preview__Test_
 
         private void Clear_Click(object sender, EventArgs e)
         {
-            TextBox[] textBoxs = { textBox1, textBox2, textBox3 };
+            TextBox[] textBoxs = { textBox1, textBox2};
             ComboBox[] comboBoxs = { comboBox1, comboBox2, comboBox3 };
             DateTimePicker[] dateTimePickers = { dateTimePicker1, dateTimePicker2 };
             settings.ClearFields(textBoxs, comboBoxs, dateTimePickers: dateTimePickers);
