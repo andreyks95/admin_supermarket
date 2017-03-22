@@ -839,19 +839,24 @@ namespace Administrator_company.LogicProgram
         #endregion
 
         //------- тестим новые функции ------//
-        
+
         #region  GetQueryShowSearch. Получить запрос исходя из условия (числовых или строковых столбцов)
+
         /// <summary>
         /// Составляет запрос select в зависимости от условия, на которое влияет значения столбцов (с числовыми данными или строковы)
         /// </summary>
-        /// <param name="nameTable">Название таблицы</param>
+        /// <param name="nameTables">Название таблиц</param>
         /// <param name="nameFieldsAll">Название столбцов для запроса</param>
         /// <param name="newNameFieldsAS">Назвать столбцы как. Как они будут отображаться в таблице</param>
+        /// <param name="primaryTables">Главные таблицы</param>
+        /// <param name="secondaryTable">Подчинённая таблица</param>
+        /// <param name="primaryIdField">Главные id поля</param>
+        /// <param name="secondaryIdField">Подчинённые id поля</param>
         /// <param name="nameNumericFields">Название столбцов, которые содержат числовые значения</param>
         /// <param name="valueToSearh">Значения для поиска</param>
         /// <returns>Запрос SELECT</returns>
         public string GetQueryShowSearch(string[] nameTables, string[] nameFieldsAll, string[] newNameFieldsAS,
-             string[] primaryTables, string secondaryTables, string[] primaryIdField, string[] secondaryIdField,
+             string[] primaryTables, string secondaryTable, string[] primaryIdField, string[] secondaryIdField,
             string[] nameNumericFields = null, string valueToSearh = "")
         {
             string query = default(string), //для запроса
@@ -864,12 +869,12 @@ namespace Administrator_company.LogicProgram
                 //если искомое число больше нуля и есть числовые столбцы, где нужно отыскать это число
                 if (valueNumber > 0 && nameNumericFields != null)
                     query = GetQuerySearch(nameTables, nameFieldsAll, newNameFieldsAS,
-                        primaryTables, secondaryTables, primaryIdField, secondaryIdField,
+                        primaryTables, secondaryTable, primaryIdField, secondaryIdField,
                         nameNumericFields, valueNumber.ToString()); //возвращаем запрос с учётом числовых полей
             }
             else
                 query = GetQuerySearch(nameTables, nameFieldsAll, newNameFieldsAS,
-                    primaryTables, secondaryTables, primaryIdField, secondaryIdField,
+                    primaryTables, secondaryTable, primaryIdField, secondaryIdField,
                     valueToSearh: value); //возвращаем запрос со всеми строковыми полями
 
             return query;
@@ -880,14 +885,18 @@ namespace Administrator_company.LogicProgram
         /// <summary>
         /// Составляет запрос select в зависимости от столбцов (с числовыми данными или без)
         /// </summary>
-        /// <param name="nameTable">Название таблицы</param>
+        /// <param name="nameTables">Название таблицы</param>
         /// <param name="nameFields">Название столбцов для запроса</param>
         /// <param name="newNameFieldsAS">Назвать столбцов как. Как они будут отображаться в таблице</param>
+        /// <param name="primaryTables">Главные таблицы</param>
+        /// <param name="secondaryTable">Подчинённая таблица</param>
+        /// <param name="primaryIdField">Главные id поля</param>
+        /// <param name="secondaryIdField">Подчинённые id поля</param>
         /// <param name="nameNumericFields">Название столбцов, которые содержат числовые значения</param>
         /// <param name="valueToSearh">Значения для поиска</param>
         /// <returns>Запрос SELECT</returns>
         public string GetQuerySearch(string[] nameTables, string[] nameFields, string[] newNameFieldsAS,
-            string[] primaryTables, string secondaryTables, string[] primaryIdField, string[] secondaryIdField,
+            string[] primaryTables, string secondaryTable, string[] primaryIdField, string[] secondaryIdField,
             string[] nameNumericFields = null, string valueToSearh = "")
         {
             string select = " SELECT ",
@@ -909,7 +918,7 @@ namespace Administrator_company.LogicProgram
             from = from.Remove(from.Length - 2) + " "; //удалить перед where ", " 
 
             //вытаскиваем primary.idfields = secondary.ifields
-            where += GetWherePrimarySecondary(primaryTables, secondaryTables, primaryIdField, secondaryIdField) + "AND";
+            where += GetWherePrimarySecondary(primaryTables, secondaryTable, primaryIdField, secondaryIdField) + "AND";
 
             //тестим здесь
             //если есть столбцы в которых имеются числовые значения
