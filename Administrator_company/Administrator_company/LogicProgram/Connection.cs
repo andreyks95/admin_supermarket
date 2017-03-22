@@ -738,11 +738,11 @@ namespace Administrator_company.LogicProgram
         /// <summary>
         /// Получить Select запрос поиска по ид поля таблицы
         /// </summary>
-        /// <param name="nameTable"></param>
-        /// <param name="nameFields"></param>
-        /// <param name="newNameFieldsAS"></param>
-        /// <param name="id_field"></param>
-        /// <returns></returns>
+        /// <param name="nameTable">Название таблицы</param>
+        /// <param name="nameFields">Название полей таблицы</param>
+        /// <param name="newNameFieldsAS">Подписать их "как"</param>
+        /// <param name="id_field">Ид поле таблицы</param>
+        /// <returns>Запрос для поиска по ид</returns>
         public string GetQueryFindSelect(string nameTable, string[] nameFields, string[] newNameFieldsAS, string id_field)
         {
             string query, select, from, where;
@@ -763,40 +763,90 @@ namespace Administrator_company.LogicProgram
             // " WHERE id_info = @id ";
         }
         #endregion
-        
-       /* #region Find. Найти данные по id поля
+
+        #region GetQueryFindSelect overload. Получить Select запрос по ид поля таблицы
         /// <summary>
-        /// Найти данные по id поля
+        /// Получить Select запрос поиска по ид поля таблицы
         /// </summary>
-        /// <param name="commandLocal">MySqlCommand с содержанием select запроса</param>
-        /// <param name="textBoxs">Если найденные данные нужно отобразить в textBoх-ах</param>
-        /// <param name="comboBoxs">Если найденные данные нужно отобразить в comboBox-ах</param>
-        /// <param name="pictureBoxs">Если найденные данные нужно отобразить в pictureBox-ах</param>
-        /// <param name="ColumnsTextForTextBox">Строки dataGridView которые содержать текстовые данные для TextBox-ов</param>
-        /// <param name="ColumnsTextForComboBox">Строки dataGridView которые содержать текстовые данные для comboBox-ов</param>
-        /// <param name="ColumnsPictureForPictureBox">Строки dataGridView которые содержать изображения для pictureBox-ов</param>
-        public void Find(MySqlCommand commandLocal, TextBox[] textBoxs=null, ComboBox[] comboBoxs = null, PictureBox[] pictureBoxs= null,
-                        int[] ColumnsTextForTextBox=null, int[] ColumnsTextForComboBox = null, int[] ColumnsPictureForPictureBox = null)
+        /// <param name="nameTables">Название таблиц</param>
+        /// <param name="nameFields">Название полей таблиц</param>
+        /// <param name="newNameFieldsAS">Подписать их "как"</param>
+        /// <param name="primaryTables">Главные таблицы</param>
+        /// <param name="secondaryTable">Подчинённая таблица</param>
+        /// <param name="primaryIdField">Главные id поля</param>
+        /// <param name="secondaryIdField">Подчинённые id поля</param>
+        /// <param name="id_field">Ид поле таблицы</param>
+        /// <returns>Запрос для поиска по ид</returns>
+        public string GetQueryFindSelect(string[] nameTables, string[] nameFields, string[] newNameFieldsAS,
+            string[] primaryTables, string secondaryTable, string[] primaryIdField, string[] secondaryIdField, string id_field)
         {
-            ///Для отображения в таблице
-            DataTable table = new DataTable(); //Создаём таблицу
-            adapter.SelectCommand = commandLocal;
-            adapter.Fill(table); //Вставляем данные при выполнении команды в таблицу
-            Settings settings = new Settings();
-            if (table.Columns.Count <= 0)
-            {
-                MessageBox.Show("Указанная запись: " + textBoxs[0].Text + " не найдена!");//textBoxs[0] должен содержать id 
-                settings.ClearFields(textBoxs, comboBoxs, pictureBoxs);
-            }
-            else
-            {
-                MessageBox.Show("Указанная запись " + textBoxs[0].Text + " найдена!");
-                settings.InsertTextInTextBoxFromTable(table, ColumnsTextForTextBox, textBoxs);
-                settings.InsertTextInComboBoxFromTable(table, ColumnsTextForComboBox, comboBoxs);
-                settings.InsertImageInPictureBoxFromTable(table, ColumnsPictureForPictureBox, pictureBoxs);   
-            }
+            string select = " SELECT ",
+                            from = " FROM ",
+                            where = " WHERE ",
+                            query = "";
+
+
+            //сформировать часть запроса select со всех столбцов
+            for (int i = 0; i < nameFields.GetLength(0); i++)
+                select += " " + nameFields[i] + " AS " + "'" + newNameFieldsAS[i] + "'" + ", "; //добавить "  price AS 'цена', "
+            select = select.Remove(select.Length - 2) + " "; //удалить перед from ", " 
+
+            //сформировать часть запроса from
+            for (int i = 0; i < nameTables.GetLength(0); i++)
+                from += " " + NAME_DATABASE + "." + nameTables[i] + ", "; //добавить " supermarket.stock"
+            from = from.Remove(from.Length - 2) + " "; //удалить перед where ", " 
+
+            //вытаскиваем primary.idfields = secondary.ifields
+            where += GetWherePrimarySecondary(primaryTables, secondaryTable, primaryIdField, secondaryIdField) + "AND";
+            //Добавляем нахождение по id
+            where += " " + id_field + " = @id";
+
+            //составляем полностью запрос из частей
+            query += select + from + where;
+
+            return query;
+
+            //SELECT employees.id_employee AS 'ИД', info.full_name AS 'ФИО', position.position AS 'Должность', 
+            //employees.department AS 'Отдел', employees.experience AS 'Опыт работы', employees.salary AS 'Зарплата', 
+            //employees.started_work AS 'Принят', employees.fired AS 'Уволен'
+            //FROM employees, position, info
+            //WHERE employees.id_position = @id
         }
-        #endregion*/
+        #endregion
+
+        /* #region Find. Найти данные по id поля
+         /// <summary>
+         /// Найти данные по id поля
+         /// </summary>
+         /// <param name="commandLocal">MySqlCommand с содержанием select запроса</param>
+         /// <param name="textBoxs">Если найденные данные нужно отобразить в textBoх-ах</param>
+         /// <param name="comboBoxs">Если найденные данные нужно отобразить в comboBox-ах</param>
+         /// <param name="pictureBoxs">Если найденные данные нужно отобразить в pictureBox-ах</param>
+         /// <param name="ColumnsTextForTextBox">Строки dataGridView которые содержать текстовые данные для TextBox-ов</param>
+         /// <param name="ColumnsTextForComboBox">Строки dataGridView которые содержать текстовые данные для comboBox-ов</param>
+         /// <param name="ColumnsPictureForPictureBox">Строки dataGridView которые содержать изображения для pictureBox-ов</param>
+         public void Find(MySqlCommand commandLocal, TextBox[] textBoxs=null, ComboBox[] comboBoxs = null, PictureBox[] pictureBoxs= null,
+                         int[] ColumnsTextForTextBox=null, int[] ColumnsTextForComboBox = null, int[] ColumnsPictureForPictureBox = null)
+         {
+             ///Для отображения в таблице
+             DataTable table = new DataTable(); //Создаём таблицу
+             adapter.SelectCommand = commandLocal;
+             adapter.Fill(table); //Вставляем данные при выполнении команды в таблицу
+             Settings settings = new Settings();
+             if (table.Columns.Count <= 0)
+             {
+                 MessageBox.Show("Указанная запись: " + textBoxs[0].Text + " не найдена!");//textBoxs[0] должен содержать id 
+                 settings.ClearFields(textBoxs, comboBoxs, pictureBoxs);
+             }
+             else
+             {
+                 MessageBox.Show("Указанная запись " + textBoxs[0].Text + " найдена!");
+                 settings.InsertTextInTextBoxFromTable(table, ColumnsTextForTextBox, textBoxs);
+                 settings.InsertTextInComboBoxFromTable(table, ColumnsTextForComboBox, comboBoxs);
+                 settings.InsertImageInPictureBoxFromTable(table, ColumnsPictureForPictureBox, pictureBoxs);   
+             }
+         }
+         #endregion*/
 
         #region Find. Найти данные по id поля
         /// <summary>
@@ -813,27 +863,33 @@ namespace Administrator_company.LogicProgram
                               TextBox[] textBoxs = null, ComboBox[] comboBoxs = null, PictureBox[] pictureBoxs = null, DateTimePicker[] dateTimePickers =null,
                               int[] ColumnsTextForTextBox = null, int[] ColumnsTextForComboBox = null, int[] ColumnsPictureForPictureBox = null, int[] ColumnsDateForDateDateTimePicker = null)
         {
-            //Для отображения в таблице
-            adapter = new MySqlDataAdapter(commandLocal); //Выполняем команду                
-            adapter.SelectCommand = commandLocal; //выполнить выборку. Select нужно новый создавать
             DataTable table = new DataTable();
-            //table.Clear();
-            adapter.Fill(table); //Вставляем данные при выполнении команды в таблицу
-            Settings settings = new Settings();
-            //dataGrid.DataSource = table; //подключаем заполненную таблицу и отображаем
-            if (table.Columns.Count <= 0)
+            try
             {
-                MessageBox.Show("Указанная запись: " + textBoxs[0].Text + " не найдена!");//textBoxs[0] должен содержать id 
-                settings.ClearFields(textBoxs, comboBoxs, pictureBoxs);
-            }
-            else
-            {
-                MessageBox.Show("Указанная запись " + textBoxs[0].Text + " найдена!");
-                settings.InsertTextInTextBoxFromTable(table, ColumnsTextForTextBox, textBoxs); //вставляем все значения из таблицы в text-Box так же для остальных
-                settings.InsertTextInComboBoxFromTable(table, ColumnsTextForComboBox, comboBoxs);
-                settings.InsertImageInPictureBoxFromTable(table, ColumnsPictureForPictureBox, pictureBoxs);
-                settings.InsertDateInDateTimePickerFromTable(table, ColumnsDateForDateDateTimePicker, dateTimePickers);
-            }
+                //Для отображения в таблице
+                adapter = new MySqlDataAdapter(commandLocal); //Выполняем команду                
+                adapter.SelectCommand = commandLocal; //выполнить выборку. Select нужно новый создавать
+                table.Clear();
+                adapter.Fill(table); //Вставляем данные при выполнении команды в таблицу
+                Settings settings = new Settings();
+                //dataGrid.DataSource = table; //подключаем заполненную таблицу и отображаем
+                if (table.Columns.Count <= 0)
+                {
+                    MessageBox.Show("Указанная запись: " + textBoxs[0].Text + " не найдена!");
+                    //textBoxs[0] должен содержать id 
+                    settings.ClearFields(textBoxs, comboBoxs, pictureBoxs);
+                }
+                else
+                {
+                    MessageBox.Show("Указанная запись " + textBoxs[0].Text + " найдена!");
+                    settings.InsertTextInTextBoxFromTable(table, ColumnsTextForTextBox, textBoxs);
+                    //вставляем все значения из таблицы в text-Box так же для остальных
+                    settings.InsertTextInComboBoxFromTable(table, ColumnsTextForComboBox, comboBoxs);
+                    settings.InsertImageInPictureBoxFromTable(table, ColumnsPictureForPictureBox, pictureBoxs);
+                    settings.InsertDateInDateTimePickerFromTable(table, ColumnsDateForDateDateTimePicker,
+                        dateTimePickers);
+                }
+            } catch (Exception ex){ MessageBox.Show(ex.Message);}
             return table;
         }
         #endregion
