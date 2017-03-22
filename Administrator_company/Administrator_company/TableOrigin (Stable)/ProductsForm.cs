@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Windows.Forms;
 using Administrator_company.LogicProgram;
@@ -30,6 +31,14 @@ namespace Administrator_company
 
         private void ProductsForm_Load(object sender, EventArgs e)
         {
+            //Заполняем значениями все ComboBox-ы распаложены на форме
+            List<string> values = new List<string>();
+            //Заполняем ComboBox1 всеми значениями Enum которые могут принимать ячейки в столбце  
+            values = connection.GetEnum("products", "category");
+            settings.FillComboBox(comboBox1, values);
+            //Заполняем ComboBox2 всеми значениями Enum которые могут принимать ячейки в столбце  
+            values = connection.GetEnum("products", "measurement");
+            settings.FillComboBox(comboBox2, values);
             FillDataGridView("");
         }
 
