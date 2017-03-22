@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Windows.Forms;
 using Administrator_company.LogicProgram;
@@ -17,26 +18,44 @@ namespace Administrator_company
         Settings settings = new Settings();
         Checking checking = new Checking();
         Сalculations calculations = new Сalculations();
+        GetTextObjectsForm getText = new GetTextObjectsForm();
 
         BindingManagerBase managerBase; //для перемещения по таблице
 
         private static string nameTable = "stock", //таблица
-                             id_field = "id_stock"; //id поле таблицы
-        private static string[] nameFieldsAll = { "id_stock", "id_products", "available", "entered", "sold", "quantity", "price"}, //все поля
-                                variables = { "@id", "@id_products", "@available", "@entered", "@sold", "@quantity", "@price"}, //для переменных
-                                nameFieldsAS = { "ИД", "Название продукта", "Наличие", "Доставлен", "Продан", "Количество", "Цена" }, //как будут отображаться
-                                numericFields = { "id_stock", "id_products", "quantity", "price" }; //для корректного поиска по числовым столбцам                                                    
+                             id_field = "id_stock", //id поле таблицы
+                             secondaryTable = "stock";
+
+        private static string[]
+            nameTables = {"stock", "products"},
+            nameFields =
+            {
+                "stock.id_stock", "products.name", "stock.available", "stock.entered", "stock.sold",
+                "stock.quantity", "stock.price"
+            },
+            nameFieldsAll = {"id_stock", "id_products", "available", "entered", "sold", "quantity"},
+            //, "price"}, //все поля
+            variables = {"@id", "@id_products", "@available", "@entered", "@sold", "@quantity"},
+            //, "@price"}, //для переменных
+            nameFieldsAS = {"ИД", "Название продукта", "Наличие", "Доставлен", "Продан", "Количество", "Цена"},
+            //как будут отображаться
+            numericFields = {"stock.id_stock", "stock.quantity", "stock.price"},
+            //для корректного поиска по числовым столбцам                                                    
+            //Главные таблицы для части запроса where
+            primaryTables = {"products"},
+            primaryIdField = {"id_products"},
+            secondaryIdField = { "id_products" };
 
         private static MySqlDbType[] mySqlDbTypes =
         {
             MySqlDbType.UInt32, MySqlDbType.UInt32, MySqlDbType.Enum,
-            MySqlDbType.Date, MySqlDbType.Date, MySqlDbType.UInt32, MySqlDbType.Float
+            MySqlDbType.Date, MySqlDbType.Date, MySqlDbType.UInt32 //, MySqlDbType.Float
         };//для типов в (AddParameters)
 
         private Tuple<Tuple<string[], string[][], string[], string[]>,
                   Tuple<string>,
                   Tuple<string, string, string, string>>
-        SetTuple(TextBox textBoxsIdField, ComboBox comboBoxsIdField)
+        SetTuple(string[] values = null, TextBox textBoxsIdField = null, ComboBox comboBoxsIdField = null)
             {
                 //Rest1
                 //Таблицы которые принимают участвие в вычислении
@@ -49,8 +68,17 @@ namespace Administrator_company
                 };
                 //Название полей id-ов выше указанных таблиц
                 string[] nameIdTables = { "id_stock", "id_products" };
-                string[] ids = { textBoxsIdField.Text, //id_stock
-                                 comboBoxsIdField.Text}; //id_products
+
+                string[] ids = new string[2];
+                if (textBoxsIdField != null)
+                    ids[0] = textBoxsIdField.Text; //id_stock
+                if (comboBoxsIdField != null)
+                    ids[1] = comboBoxsIdField.Text; //id_products
+                if (values != null)
+                {
+                    ids[0] = values[0];
+                    ids[1] = values[1];
+                }
 
                 //Rest2
                 string mathOperation = "*";
@@ -73,22 +101,76 @@ namespace Administrator_company
                 return dataCalculations;
             }
 
-        private void StockForm_Load(object sender, EventArgs e)
+        private void ChangedInDataGridView()
         {
-            FillDataGridView(""); //при загрузке отображаем таблицу
+            int[] ColumnsTextForTextBox = { 0, 5 },//столбцы таблицы с которых нужно взять данные и вставить в TextBox-ы
+                ColumnsTextForComboBox = { 1, 2 },//столбцы таблицы с которых нужно взять данные и вставить в ComboBox-ы
+                ColumnsDateForDateDateTimePicker = { 3, 4 };//столбцы таблицы с которых нужно взять данные и вставить в DateTimePicker-ы
+                                            //Массив куда будут (в textBox-ы) отображаться значения текущей строки из DataGridView
+            TextBox[] textBoxs = { textBox1, textBox2 };
+            //отображаем все текстовые записи из DataGridView в textBox-ы
+            settings.CurrentColumnCellsTEXT(ColumnsTextForTextBox, textBoxs, dataGridView1);
+
+            //Массив куда будут (в comboBoxs-ы) отображаться значения текущей строки из DataGridView
+            ComboBox[] comboBoxs = { comboBox1, comboBox2 };
+            settings.CurrentColumnCellsTEXT(ColumnsTextForComboBox, comboBoxs, dataGridView1);
+
+            //Массив куда будут(в dateTimePickers - ы) отображаться значения текущей строки из DataGridView
+            DateTimePicker[] dateTimePickers = { dateTimePicker1, dateTimePicker2 };
+            settings.CurrentColumnCellsDate(ColumnsDateForDateDateTimePicker, dateTimePickers, dataGridView1);
         }
 
         public void FillDataGridView(string valueToSearch)
         {
             //получаем запрос на отображение данных с поиском
-            string query = connection.GetQueryShowSearch(nameTable, nameFieldsAll, nameFieldsAS, numericFields, valueToSearch);
+            string query = connection.GetQueryShowSearch(nameTables, nameFields, nameFieldsAS,
+                primaryTables, secondaryTable, primaryIdField, secondaryIdField,
+                numericFields, valueToSearch);
             DataTable table = connection.FillDataGridView(dataGridView1, 20, query: query); //заполняем таблицу данными с запроса и настраиваем
             managerBase = this.BindingContext[table]; //подключаем таблицу для передвижения по ней
         }
 
+        private string[] GetAllValuesDataFromElementsForm()
+        {
+            //Получить значения id для вставки
+            string[] idsFromComboBox = settings.GetIdFromComboBox(new[] { comboBox1 });
+
+            object[] objects = { textBox1, comboBox2, dateTimePicker1, dateTimePicker2, textBox2 };
+            //Получить значения всех объектов
+            string[] allValuesFromObjects = getText.GetText(objects);
+
+            string[] allValues = new string[idsFromComboBox.Length + allValuesFromObjects.Length];
+
+            //вставляем первый элемент - это будет id
+            Array.Copy(allValuesFromObjects, 0, allValues, 0, 1);
+            //вставляем id подчинённых таблиц, которые получили
+            Array.Copy(idsFromComboBox, 0, allValues, 1, 1);
+            //вставляем оставшиеся элементы
+            Array.Copy(allValuesFromObjects, 1, allValues, 2, 4);
+            return allValues;
+        }
+
+        private void StockForm_Load(object sender, EventArgs e)
+        {
+            //Заполняем значениями все ComboBox-ы распаложены на форме
+            List<string> values = new List<string>();
+
+            //Заполняем ComboBox1 всеми значениями из двух столбцов id (для ориентировки) и нужные нам значения
+            string[] nameTables = { "products" },
+                nameFields = { "id_products", "name" };
+            values = connection.GetValuesColumn(nameTables, nameFields);
+            settings.FillComboBox(comboBox1, values);
+
+            //Заполняем ComboBox2 всеми значениями Enum которые могут принимать ячейки в столбце  
+            values = connection.GetEnum("stock", "available");
+            settings.FillComboBox(comboBox2, values);
+
+            FillDataGridView(""); //при загрузке отображаем таблицу
+        }
+
         private void Insert_Click(object sender, EventArgs e)
         {
-            TextBox[] textBoxs = {textBox1, textBox2, textBox3 };
+            TextBox[] textBoxs = {textBox1, textBox2};
             ComboBox[] comboBoxs = {comboBox1, comboBox2};
             DateTimePicker[] dateTimePickers = {dateTimePicker1, dateTimePicker2};
 
@@ -102,25 +184,17 @@ namespace Administrator_company
                 string query = connection.GetQueryInsert(nameTable, nameFieldsAll, variables);
                 //выполняить команду с Insert
                 connection.command = new MySqlCommand(query, connection.connection);
-                //для объектов, у них есть данные которые нужно вставить
-                //ОБЯЗАТЕЛЬНО!
-                //Писать объекты подобно расположению на форме 
-                //В такой же последовательности
-                //Переменная должна соответствувать требуемому значению 
-                object[] objects = { textBox1, comboBox1, comboBox2, dateTimePicker1, dateTimePicker2, textBox2, textBox3 };
+                //Получить значения всех объектов формы для вставки
+                var allValues = GetAllValuesDataFromElementsForm();
                 //Добавляем данные 
-                connection.AddParameters(connection.command, variables, mySqlDbTypes, objects);
+                connection.AddParametersString(connection.command, variables, mySqlDbTypes, allValues);
                 //попытаться выполнить запрос
                 connection.ExecuteQuery(connection.command);
-
-                //ТЕСТ ФУНКЦИИ
-                query = calculations.GetUpdateQuery(SetTuple(textBox1, comboBox1));
+                query = calculations.GetUpdateQuery(SetTuple(allValues));
                 //cюда попытаться вставить запрос для выполнения вычисления
                 connection.FieldDateTableCalculation(query);
-
                 //отобразить новые данные 
                 FillDataGridView("");
-
             }
             else
             {
@@ -130,7 +204,7 @@ namespace Administrator_company
 
         private void Update_Click(object sender, EventArgs e)
         {
-            TextBox[] textBoxs = { textBox1, textBox2, textBox3 };
+            TextBox[] textBoxs = { textBox1, textBox2 };
             ComboBox[] comboBoxs = { comboBox1, comboBox2 };
             DateTimePicker[] dateTimePickers = { dateTimePicker1, dateTimePicker2 };
 
@@ -140,23 +214,20 @@ namespace Administrator_company
                                                                                      //если результаты вернулись положительные, тогда можно добавить данные, иначе вывести ошибку
             if (resultSecurity == true && resultVoid == true)
             {
-
                 //Получаем запрос для обновления Update
                 string query = connection.GetQueryUpdate(nameTable, nameFieldsAll, variables, id_field);
                 //выполнить команду
                 connection.command = new MySqlCommand(query, connection.connection);
-                //для объектов, у них есть данные которые нужно вставить
-                object[] objects = { textBox1, comboBox1, comboBox2, dateTimePicker1, dateTimePicker2, textBox2, textBox3 };
+                //Получить значения всех объектов формы для вставки
+                var allValues = GetAllValuesDataFromElementsForm();
                 //Добавляем данные 
-                connection.AddParameters(connection.command, variables, mySqlDbTypes, objects);
+                connection.AddParametersString(connection.command, variables, mySqlDbTypes, allValues);
                 //попытаться выполнить запрос
                 connection.ExecuteQuery(connection.command);
-
-                //ТЕСТ ФУНКЦИИ
-                query = calculations.GetUpdateQuery(SetTuple(textBox1, comboBox1));
+                //Получаем запрос для обновления
+                query = calculations.GetUpdateQuery(SetTuple(allValues));
                 //cюда попытаться вставить запрос для выполнения вычисления
                 connection.FieldDateTableCalculation(query);
-
                 //отобразить новые данные 
                 FillDataGridView("");
             }
@@ -179,7 +250,7 @@ namespace Administrator_company
                 //выполняем запрос
                 connection.command = new MySqlCommand(query, connection.connection);
                 //для объектов, у них есть данные которые нужно вставить
-                object[] objects = { textBox1, comboBox1, comboBox2, dateTimePicker1, dateTimePicker2, textBox2, textBox3 };
+                object[] objects = { textBox1, comboBox1, comboBox2, dateTimePicker1, dateTimePicker2, textBox2 };
                 // Добавляем данные
                 connection.AddParameters(connection.command, variables[0], mySqlDbTypes[0], objects[0]);
                 //попытаться выполнить запрос
@@ -187,7 +258,7 @@ namespace Administrator_company
                 //отобразить новые данные 
                 FillDataGridView("");
                 //Что есть на форме
-                TextBox[] textBoxs = { textBox1, textBox2, textBox3 };
+                TextBox[] textBoxs = { textBox1, textBox2 };
                 ComboBox[] comboBoxs = { comboBox1, comboBox2 };
                 DateTimePicker[] dateTimePickers = { dateTimePicker1, dateTimePicker2 };
                 //Очищяем поля
@@ -206,14 +277,15 @@ namespace Administrator_company
             if (resultSecurity == true && resultVoid == true)
             {
                 //получаем запрос для нахождения искомого значения
-                string query = connection.GetQueryFindSelect(nameTable, nameFieldsAll, nameFieldsAS, id_field);
+                string query = connection.GetQueryFindSelect(nameTables, nameFields, nameFieldsAS,
+                            primaryTables, secondaryTable, primaryIdField, secondaryIdField, id_field);
                 //выполнить запрос
                 connection.command = new MySqlCommand(query, connection.connection); //Создаём запрос для поиска
                 //для объектов, у них есть данные которые нужно вставить
                 object[] objects = { textBox1 };
                 connection.AddParameters(connection.command, variables[0], mySqlDbTypes[0], objects[0]);
 
-                TextBox[] textBoxs = { textBox1, textBox2, textBox3 };
+                TextBox[] textBoxs = { textBox1, textBox2 };
                 ComboBox[] comboBoxs = { comboBox1, comboBox2 };
                 DateTimePicker[] dateTimePickers = { dateTimePicker1, dateTimePicker2 };
                 int[] ColumnsTextForTextBox = { 0, 5, 6 },//столбцы таблицы с которых нужно взять данные и вставить в TextBox-ы
@@ -238,7 +310,7 @@ namespace Administrator_company
 
         private void Clear_Click(object sender, EventArgs e)
         {
-            TextBox[] textBoxs = { textBox1, textBox2, textBox3 };
+            TextBox[] textBoxs = { textBox1, textBox2 };
             ComboBox[] comboBoxs = { comboBox1, comboBox2 };
             DateTimePicker[] dateTimePickers = { dateTimePicker1, dateTimePicker2 };
             settings.ClearFields(textBoxs, comboBoxs, dateTimePickers: dateTimePickers);
@@ -250,41 +322,12 @@ namespace Administrator_company
 
         private void dataGridView1_Click(object sender, EventArgs e)
         {
-            int[] ColumnsTextForTextBox = { 0, 5, 6 },//столбцы таблицы с которых нужно взять данные и вставить в TextBox-ы
-                    ColumnsTextForComboBox = { 1, 2 },//столбцы таблицы с которых нужно взять данные и вставить в ComboBox-ы
-                    ColumnsDateForDateDateTimePicker = { 3, 4 };//столбцы таблицы с которых нужно взять данные и вставить в DateTimePicker-ы
-                                                                //Массив куда будут (в textBox-ы) отображаться значения текущей строки из DataGridView
-            TextBox[] textBoxs = { textBox1, textBox2, textBox3 };
-            //отображаем все текстовые записи из DataGridView в textBox-ы
-            settings.CurrentColumnCellsTEXT(ColumnsTextForTextBox, textBoxs, dataGridView1);
-
-            //Массив куда будут (в comboBoxs-ы) отображаться значения текущей строки из DataGridView
-            ComboBox[] comboBoxs = { comboBox1, comboBox2 };
-            settings.CurrentColumnCellsTEXT(ColumnsTextForComboBox, comboBoxs, dataGridView1);
-
-            //Массив куда будут(в dateTimePickers - ы) отображаться значения текущей строки из DataGridView
-            DateTimePicker[] dateTimePickers = { dateTimePicker1, dateTimePicker2 };
-            settings.CurrentColumnCellsDate(ColumnsDateForDateDateTimePicker, dateTimePickers, dataGridView1);
+            ChangedInDataGridView();
         }
 
         private void dataGridView1_SelectionChanged(object sender, EventArgs e)
         {
-            int[] ColumnsTextForTextBox = { 0, 5, 6 },//столбцы таблицы с которых нужно взять данные и вставить в TextBox-ы
-        ColumnsTextForComboBox = { 1, 2 },//столбцы таблицы с которых нужно взять данные и вставить в ComboBox-ы
-        ColumnsDateForDateDateTimePicker = { 3, 4 };//столбцы таблицы с которых нужно взять данные и вставить в DateTimePicker-ы
-                                                    //Массив куда будут (в textBox-ы) отображаться значения текущей строки из DataGridView
-            TextBox[] textBoxs = { textBox1, textBox2, textBox3 };
-            //отображаем все текстовые записи из DataGridView в textBox-ы
-            settings.CurrentColumnCellsTEXT(ColumnsTextForTextBox, textBoxs, dataGridView1);
-
-            //Массив куда будут (в comboBoxs-ы) отображаться значения текущей строки из DataGridView
-            ComboBox[] comboBoxs = { comboBox1, comboBox2 };
-            settings.CurrentColumnCellsTEXT(ColumnsTextForComboBox, comboBoxs, dataGridView1);
-
-            //Массив куда будут(в dateTimePickers - ы) отображаться значения текущей строки из DataGridView
-            DateTimePicker[] dateTimePickers = { dateTimePicker1, dateTimePicker2 };
-            settings.CurrentColumnCellsDate(ColumnsDateForDateDateTimePicker, dateTimePickers, dataGridView1);
-            //dataGridView1_Click(this, e);
+            ChangedInDataGridView();
         }
 
         private void FirstRecordButton_Click(object sender, EventArgs e)
