@@ -478,9 +478,12 @@ namespace Administrator_company.LogicProgram
         /// <param name="dateTimePicker">DateTimePicker формы куда нужно вставить дату из таблицы</param>
         public void InsertDateInDateTimePickerFromTable(DataTable table, int Column, DateTimePicker dateTimePicker)
         {
-            dateTimePicker.Text = table.Rows[0][Column].ToString(); //.ToString();
-            //or dateTimePicker.Value.Date = table.Rows[0][Column].ToString();
-        }
+            try {
+                dateTimePicker.Text = table.Rows[0][Column].ToString(); //.ToString();
+                //or dateTimePicker.Value.Date = table.Rows[0][Column].ToString();
+            }
+            catch (Exception ex) { MessageBox.Show(ex.Message);}
+           }
         #endregion
 
         #region InsertDateInDateTimePickerFromTable overload. Вставить дату из таблицы в DateTimePicker-ы
