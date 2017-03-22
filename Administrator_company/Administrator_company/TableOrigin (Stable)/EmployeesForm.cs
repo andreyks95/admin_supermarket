@@ -31,9 +31,8 @@ namespace Administrator_company
         private static string
             //таблица
             nameTable = "employees",
-            id_field = "id_employee",
-            //id поле таблицы
-            secondaryTables = "employees";
+            id_field = "id_employee",//id поле таблицы
+            secondaryTable = "employees";
 
 
         private static string[]
@@ -49,13 +48,13 @@ namespace Administrator_company
                 "employees.department", "employees.experience", "employees.salary", "employees.started_work",
                 "employees.fired"
             },
+            //для Insert, Update запросов 
             nameFieldsAll =
             {
                 "id_employee", "id_info", "id_position", "department", "experience", /*"salary",*/
                 "started_work", "fired"
             },
-            //все поля
-            //для переменных
+            //все поля для переменных
             variables =
             {
                 "@id", "@id_info", "@id_position", "@department", "@experience", /*"@salary",*/ "@started_work",
@@ -91,9 +90,9 @@ namespace Administrator_company
             string[] nameIdTables = { "id_employee", "id_position" };
             string[] ids = new string[2];
             if (textBoxsIdField != null)
-                ids[0] = textBoxsIdField.Text; //id_stock
+                ids[0] = textBoxsIdField.Text; 
             if (comboBoxsIdField != null)
-                ids[1] = comboBoxsIdField.Text; //id_products
+                ids[1] = comboBoxsIdField.Text;
             if (values != null)
             {
                 ids[0] = values[0];
@@ -120,7 +119,7 @@ namespace Administrator_company
 
         private void ChangedInDataGridView()
         {
-            int[] ColumnsTextForTextBox = { 0, 4, 5 },//столбцы таблицы с которых нужно взять данные и вставить в TextBox-ы
+            int[] ColumnsTextForTextBox = { 0, 4 },//столбцы таблицы с которых нужно взять данные и вставить в TextBox-ы
                   ColumnsTextForComboBox = { 1, 2, 3 },//столбцы таблицы с которых нужно взять данные и вставить в ComboBox-ы
                   ColumnsDateForDateDateTimePicker = { 6, 7 };//столбцы таблицы с которых нужно взять данные и вставить в DateTimePicker-ы
 
@@ -163,7 +162,7 @@ namespace Administrator_company
         {
             //получаем запрос на отображение данных с поиском
             string query = connection.GetQueryShowSearch(nameTables, nameFields, nameFieldsAS,
-                primaryTables, secondaryTables, primaryIdField, secondaryIdField,
+                primaryTables, secondaryTable, primaryIdField, secondaryIdField,
                 numericFields, valueToSearch);
             DataTable table = connection.FillDataGridView(dataGridView1, 20, query: query); //заполняем таблицу данными с запроса и настраиваем
             managerBase = this.BindingContext[table]; //подключаем таблицу для передвижения по ней
@@ -315,7 +314,8 @@ namespace Administrator_company
             if (resultSecurity == true && resultVoid == true)
             {
                 //получаем запрос для нахождения искомого значения
-                string query = connection.GetQueryFindSelect(nameTable, nameFieldsAll, nameFieldsAS, id_field);
+                string query = connection.GetQueryFindSelect(nameTables, nameFields, nameFieldsAS,
+                                primaryTables, secondaryTable, primaryIdField, secondaryIdField, id_field);
                 //выполнить запрос
                 connection.command = new MySqlCommand(query, connection.connection); //Создаём запрос для поиска
                 //для объектов, у них есть данные которые нужно вставить
@@ -325,7 +325,7 @@ namespace Administrator_company
                 TextBox[] textBoxs = { textBox1, textBox2 };
                 ComboBox[] comboBoxs = { comboBox1, comboBox2, comboBox3 };
                 DateTimePicker[] dateTimePickers = { dateTimePicker1, dateTimePicker2 };
-                int[] ColumnsTextForTextBox = { 0, 4, 5 },//столбцы таблицы с которых нужно взять данные и вставить в TextBox-ы
+                int[] ColumnsTextForTextBox = { 0, 4 },//столбцы таблицы с которых нужно взять данные и вставить в TextBox-ы
                     ColumnsTextForComboBox = { 1, 2, 3 },//столбцы таблицы с которых нужно взять данные и вставить в ComboBox-ы
                     ColumnsDateForDateDateTimePicker = { 6, 7 };//столбцы таблицы с которых нужно взять данные и вставить в DateTimePicker-ы
 
