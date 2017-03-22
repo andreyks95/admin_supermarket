@@ -31,10 +31,8 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
-            this.textBox3 = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.comboBox2 = new System.Windows.Forms.ComboBox();
@@ -65,10 +63,8 @@
             // 
             this.panel1.Controls.Add(this.dateTimePicker2);
             this.panel1.Controls.Add(this.dateTimePicker1);
-            this.panel1.Controls.Add(this.textBox3);
             this.panel1.Controls.Add(this.label9);
             this.panel1.Controls.Add(this.label8);
-            this.panel1.Controls.Add(this.label7);
             this.panel1.Controls.Add(this.label5);
             this.panel1.Controls.Add(this.textBox2);
             this.panel1.Controls.Add(this.comboBox2);
@@ -85,7 +81,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(370, 281);
+            this.panel1.Size = new System.Drawing.Size(370, 266);
             this.panel1.TabIndex = 0;
             // 
             // dateTimePicker2
@@ -101,15 +97,6 @@
             this.dateTimePicker1.Name = "dateTimePicker1";
             this.dateTimePicker1.Size = new System.Drawing.Size(148, 20);
             this.dateTimePicker1.TabIndex = 4;
-            // 
-            // textBox3
-            // 
-            this.textBox3.Location = new System.Drawing.Point(104, 260);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(148, 20);
-            this.textBox3.TabIndex = 7;
-            this.textBox3.Text = "0";
-            this.textBox3.Visible = false;
             // 
             // label9
             // 
@@ -128,16 +115,6 @@
             this.label8.Size = new System.Drawing.Size(63, 13);
             this.label8.TabIndex = 56;
             this.label8.Text = "Доставлен";
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(22, 263);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(33, 13);
-            this.label7.TabIndex = 55;
-            this.label7.Text = "Цена";
-            this.label7.Visible = false;
             // 
             // label5
             // 
@@ -266,7 +243,7 @@
             this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel2.Location = new System.Drawing.Point(370, 0);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(574, 68);
+            this.panel2.Size = new System.Drawing.Size(579, 68);
             this.panel2.TabIndex = 1;
             // 
             // PreviousRecordButton
@@ -334,7 +311,7 @@
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Location = new System.Drawing.Point(370, 69);
             this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(574, 212);
+            this.dataGridView1.Size = new System.Drawing.Size(579, 197);
             this.dataGridView1.TabIndex = 18;
             this.dataGridView1.SelectionChanged += new System.EventHandler(this.dataGridView1_SelectionChanged);
             this.dataGridView1.Click += new System.EventHandler(this.dataGridView1_Click);
@@ -343,11 +320,11 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(944, 281);
+            this.ClientSize = new System.Drawing.Size(949, 266);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
-            this.MinimumSize = new System.Drawing.Size(960, 320);
+            this.MinimumSize = new System.Drawing.Size(965, 305);
             this.Name = "StockForm";
             this.Text = "StockForm";
             this.Load += new System.EventHandler(this.StockForm_Load);
@@ -367,10 +344,8 @@
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.DateTimePicker dateTimePicker2;
         private System.Windows.Forms.DateTimePicker dateTimePicker1;
-        private System.Windows.Forms.TextBox textBox3;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.ComboBox comboBox2;

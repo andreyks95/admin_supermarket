@@ -117,7 +117,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(344, 491);
+            this.panel1.Size = new System.Drawing.Size(344, 161);
             this.panel1.TabIndex = 6;
             // 
             // Delete
@@ -249,7 +249,7 @@
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Location = new System.Drawing.Point(344, 75);
             this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(600, 416);
+            this.dataGridView1.Size = new System.Drawing.Size(600, 86);
             this.dataGridView1.TabIndex = 8;
             this.dataGridView1.SelectionChanged += new System.EventHandler(this.dataGridView1_SelectionChanged);
             this.dataGridView1.Click += new System.EventHandler(this.dataGridView1_Click);
@@ -258,7 +258,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(944, 491);
+            this.ClientSize = new System.Drawing.Size(944, 161);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
