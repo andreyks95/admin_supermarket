@@ -446,7 +446,7 @@ namespace Administrator_company.LogicProgram
         /// <param name="comboBox">ComboBox формы куда нужно вставить текст из таблицы</param>
         public void InsertTextInComboBoxFromTable(DataTable table, int Column, ComboBox comboBox)
         {
-                comboBox.SelectedItem = table.Rows[0][Column].ToString();
+                comboBox.Text = table.Rows[0][Column].ToString();
         }
         #endregion
 
@@ -457,7 +457,7 @@ namespace Administrator_company.LogicProgram
         /// <param name="table">Текущая таблица</param>
         /// <param name="Columns">Номера столбцов где находятся текст</param>
         /// <param name="comboBoxs">Все ComboBox формы куда нужно вставить текст из таблицы</param>
-        public void InsertTextInComboBoxFromTable(DataTable table, int[] Columns, params ComboBox[] comboBoxs)
+        public void InsertTextInComboBoxFromTable(DataTable table, int[] Columns, ComboBox[] comboBoxs)
         {
             if(comboBoxs !=  null)
                 for (int i = 0; i < comboBoxs.Length; i++)
