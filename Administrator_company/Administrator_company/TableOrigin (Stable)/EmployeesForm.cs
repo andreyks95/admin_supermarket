@@ -202,9 +202,11 @@ namespace Administrator_company
 
             //возвращаем результаты проверок всех полей
             bool resultSecurity = checking.SecurityAll(textBoxs, comboBoxs, dateTimePickers),
-                 resultVoid = checking.VoidAll(textBoxs, comboBoxs, dateTimePickers); //Проверяем только обязательные для ввода поля
-                                                                                      //если результаты вернулись положительные, тогда можно добавить данные, иначе вывести ошибку
-            if (resultSecurity == true && resultVoid == true)
+                 resultVoid = checking.VoidAll(textBoxs, comboBoxs, dateTimePickers), //Проверяем только обязательные для ввода поля
+                 resultDate = checking.CheckDate(dateTimePicker1, dateTimePicker2);
+
+            //если результаты вернулись положительные, тогда можно добавить данные, иначе вывести ошибку
+            if (resultSecurity && resultVoid && resultDate)
             {
                 //получить запрос для вставки Insert
                 string query = connection.GetQueryInsert(nameTable, nameFieldsAll, variables);
@@ -242,9 +244,11 @@ namespace Administrator_company
 
             //возвращаем результаты проверок всех полей
             bool resultSecurity = checking.SecurityAll(textBoxs, comboBoxs, dateTimePickers),
-                resultVoid = checking.VoidAll(textBoxs, comboBoxs, dateTimePickers); //Проверяем только обязательные для ввода поля
-                                                                                     //если результаты вернулись положительные, тогда можно добавить данные, иначе вывести ошибку
-            if (resultSecurity == true && resultVoid == true)
+                resultVoid = checking.VoidAll(textBoxs, comboBoxs, dateTimePickers), //Проверяем только обязательные для ввода поля
+                 resultDate = checking.CheckDate(dateTimePicker1, dateTimePicker2);
+
+            //если результаты вернулись положительные, тогда можно добавить данные, иначе вывести ошибку
+            if (resultSecurity && resultVoid && resultDate)
             {
 
                 //Получаем запрос для обновления Update
