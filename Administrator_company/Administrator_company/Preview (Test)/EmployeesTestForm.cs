@@ -275,6 +275,15 @@ namespace Administrator_company.Preview__Test_
             }
         }
 
+        private void ReportButton_Click(object sender, EventArgs e)
+        {
+            //ReportTestForm report = new ReportTestForm();
+            //report.Show();
+            TestFunction testFunction = new TestFunction();
+            testFunction.CreatePDFDocument();
+            MessageBox.Show("Создан pdf  файл!");
+        }
+
         private void Delete_Click(object sender, EventArgs e)
         {
             //возвращаем результаты проверок всех полей
