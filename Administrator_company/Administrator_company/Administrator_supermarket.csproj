@@ -102,7 +102,9 @@
   <ItemGroup>
     <Compile Include="LogicProgram\Checking.cs" />
     <Compile Include="LogicProgram\Connection.cs" />
+    <Compile Include="LogicProgram\DocumentPDF.cs" />
     <Compile Include="LogicProgram\GetTextObjectsForm.cs" />
+    <Compile Include="LogicProgram\Report.cs" />
     <Compile Include="Preview %28Test%29\EmployeesTestForm.cs">
       <SubType>Form</SubType>
     </Compile>

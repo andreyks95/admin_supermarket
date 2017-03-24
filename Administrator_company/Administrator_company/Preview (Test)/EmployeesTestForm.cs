@@ -277,11 +277,18 @@ namespace Administrator_company.Preview__Test_
 
         private void ReportButton_Click(object sender, EventArgs e)
         {
-            //ReportTestForm report = new ReportTestForm();
-            //report.Show();
-            TestFunction testFunction = new TestFunction();
-            testFunction.CreatePDFDocument();
-            MessageBox.Show("Создан pdf  файл!");
+            try
+            {
+                //ReportTestForm report = new ReportTestForm();
+                //report.Show();
+                TestFunction testFunction = new TestFunction();
+                testFunction.CreatePDFDocument(dataGridView1, saveFileDialog1);
+                MessageBox.Show("Создан pdf  файл!");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         private void Delete_Click(object sender, EventArgs e)

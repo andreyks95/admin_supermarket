@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
+            this.ReportButton = new System.Windows.Forms.Button();
             this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.label9 = new System.Windows.Forms.Label();
@@ -56,7 +57,7 @@
             this.textBoxSearch = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.ReportButton = new System.Windows.Forms.Button();
+            this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -89,6 +90,16 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(341, 328);
             this.panel1.TabIndex = 0;
+            // 
+            // ReportButton
+            // 
+            this.ReportButton.Location = new System.Drawing.Point(255, 40);
+            this.ReportButton.Name = "ReportButton";
+            this.ReportButton.Size = new System.Drawing.Size(75, 23);
+            this.ReportButton.TabIndex = 58;
+            this.ReportButton.Text = "Report";
+            this.ReportButton.UseVisualStyleBackColor = true;
+            this.ReportButton.Click += new System.EventHandler(this.ReportButton_Click);
             // 
             // dateTimePicker2
             // 
@@ -339,16 +350,6 @@
             this.dataGridView1.SelectionChanged += new System.EventHandler(this.dataGridView1_SelectionChanged);
             this.dataGridView1.Click += new System.EventHandler(this.dataGridView1_Click);
             // 
-            // ReportButton
-            // 
-            this.ReportButton.Location = new System.Drawing.Point(255, 40);
-            this.ReportButton.Name = "ReportButton";
-            this.ReportButton.Size = new System.Drawing.Size(75, 23);
-            this.ReportButton.TabIndex = 58;
-            this.ReportButton.Text = "Report";
-            this.ReportButton.UseVisualStyleBackColor = true;
-            this.ReportButton.Click += new System.EventHandler(this.ReportButton_Click);
-            // 
             // EmployeesTestForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -400,5 +401,6 @@
         private System.Windows.Forms.TextBox textBoxSearch;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Button ReportButton;
+        private System.Windows.Forms.SaveFileDialog saveFileDialog1;
     }
 }
