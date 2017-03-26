@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
+using System.Globalization;
 using System.IO;
 using System.Windows.Forms;
 
@@ -654,6 +655,10 @@ namespace Administrator_company.LogicProgram
         }
         #endregion
 
+        #endregion
+
+        #region GetDateTimeNow
+        public string GetDateTimeNow() => DateTime.Now.ToString(CultureInfo.InvariantCulture);
         #endregion
     }
 }
