@@ -330,11 +330,11 @@ namespace Administrator_company.LogicProgram
         }
         #endregion
 
-        #region GetSelectValue. Получить число с ячейки
+        #region GetSelectValue. Получить число с ячейки или запроса 
         /// <summary>
         /// Получить числовое значение с ячейки  (с плавающей точкой) из запроса
         /// </summary>
-        /// <param name="query">Запрос SELECT для получения значения из ячейки</param>
+        /// <param name="query">Запрос SELECT для получения значения из ячейки или запроса</param>
         /// <returns>Вернуть значение ячейки (число с плавающей точкой)</returns>
         public float GetSelectValue(string query)
         {
@@ -348,7 +348,7 @@ namespace Administrator_company.LogicProgram
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Не получено значение с ячейки: \n" + ex.Message);
+                MessageBox.Show("Не получено значение с запроса: \n" + ex.Message);
                 return 0.0f;
             }
             finally
