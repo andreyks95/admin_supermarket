@@ -8,14 +8,13 @@ namespace Administrator_company.LogicProgram
 {
     class DocumentPDF
     {
-
         #region Создание документа
         /// <summary>
         /// Создание документа
         /// </summary>
         /// <param name="saveFileDialog">Путь и имя файла для хранения</param>
         /// <returns>Созданный документ</returns>
-        public iTextSharp.text.Document CreateDocument(SaveFileDialog saveFileDialog)
+        public static iTextSharp.text.Document CreateDocument(SaveFileDialog saveFileDialog)
         {
             //Document doc = new Document(iTextSharp.text.PageSize.LETTER, 10, 10, 45, 35);
             Document doc = new Document(iTextSharp.text.PageSize.A4, 15, 15, 10, 15);
@@ -93,11 +92,15 @@ namespace Administrator_company.LogicProgram
         /// <param name="text">Текст параграфа</param>
         /// <param name="font">Информация о шрифте</param>
         /// <returns>Изменённый документ</returns>
-        public iTextSharp.text.Document InsertParagraph(iTextSharp.text.Document doc, string text, Font font=null)
+        public iTextSharp.text.Document InsertParagraph(iTextSharp.text.Document doc, string text=null, Font font=null)
         {
             //Font verdanaFont = FontFactory.GetFont("Verdana", 7f, Font.BOLD);
             //Создать параграф
-            Paragraph paragraph = new Paragraph(text) {Alignment = Element.ALIGN_CENTER};
+            Paragraph paragraph = null;
+            if (text != null)
+               paragraph = new Paragraph(text) {Alignment = Element.ALIGN_CENTER};
+            else 
+             paragraph  = new Paragraph("\n") { Alignment = Element.ALIGN_CENTER };
             if(font!=null)
                 paragraph.Font = font;
             //Добавить параграф в документ
