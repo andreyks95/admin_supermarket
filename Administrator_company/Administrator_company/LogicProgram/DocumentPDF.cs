@@ -98,7 +98,7 @@ namespace Administrator_company.LogicProgram
             //Создать параграф
             Paragraph paragraph = null;
             if (text != null)
-               paragraph = new Paragraph(text) {Alignment = Element.ALIGN_CENTER};
+               paragraph = new Paragraph(text, font) {Alignment = Element.ALIGN_CENTER};
             else 
              paragraph  = new Paragraph("\n") { Alignment = Element.ALIGN_CENTER };
             if(font!=null)
