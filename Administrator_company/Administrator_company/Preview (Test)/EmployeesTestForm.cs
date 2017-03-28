@@ -2,13 +2,14 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Administrator_company.LogicProgram;
+using iTextSharp.text;
 using MySql.Data.MySqlClient;
+using Font = System.Drawing.Font;
 
 namespace Administrator_company.Preview__Test_
 {
@@ -281,8 +282,16 @@ namespace Administrator_company.Preview__Test_
             {
                 //ReportTestForm report = new ReportTestForm();
                 //report.Show();
-                TestFunction testFunction = new TestFunction();
-                testFunction.CreatePDFDocument(dataGridView1, saveFileDialog1);
+                //TestFunction testFunction = new TestFunction();
+                //testFunction.CreatePDFDocument(dataGridView1, saveFileDialog1);
+                //MessageBox.Show("Создан pdf  файл!");
+                Report report = new Report();
+                iTextSharp.text.Document doc = report.CreateReport(saveFileDialog1);
+                iTextSharp.text.Font font = report.SetFont();
+                doc.Open();
+                doc = report.CreateHeader(doc, "Сотрудники", font);
+                doc = report.CreateTable(doc, dataGridView1, font);
+                doc.Close();
                 MessageBox.Show("Создан pdf  файл!");
             }
             catch (Exception ex)
