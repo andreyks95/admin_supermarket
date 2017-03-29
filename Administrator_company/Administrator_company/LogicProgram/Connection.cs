@@ -1014,6 +1014,9 @@ namespace Administrator_company.LogicProgram
         }
         #endregion
 
+
+        #region GetWhere
+
         #region GetWherePrimarySecondary
         /// <summary>
         /// Получить часть запроса для Where отношение между id
@@ -1037,6 +1040,20 @@ namespace Administrator_company.LogicProgram
             //AND employees.id_info = info.id_info
             return partQuery;
         }
+        #endregion
+
+
+        #region GetPartWhereFuncValue
+        public string GetPartWhereFuncValue(string table, string field, string selectTable, string selectField, string func = "AVG")
+        {
+            return "";
+            //employees.salary = (SELECT MAX(employees.salary) from employees);
+        }
+        #endregion
+
+        //Слепить перегруженный метод GetPartWhereFuncValue
+        //Найти для получения запроса с функцией
+
         #endregion
 
         #region GetValuesColumn. Получить все значения столбца таблицы
@@ -1206,7 +1223,22 @@ namespace Administrator_company.LogicProgram
         }
         #endregion
 
+        #region GetConcatReport
+        public string GetSelectConcatReport(string[] nameFullFields)
+        {
+            string partQuery = "SELECT CONCAT( ";
+            for (int i = 0; i < nameFullFields.Length; i++)
+            {
+                partQuery += nameFullFields[i] + ", \" \", ";
+            }
+            partQuery = partQuery.Remove(partQuery.Length - 7) + " ) AS result";
+            return partQuery;
+            //select concat(info.full_name, " ", position.position, " ", employees.department, " ", employees.salary ) AS result
+        }
         #endregion
+
+        #endregion
+
 
     }
 }
