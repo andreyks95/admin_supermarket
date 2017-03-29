@@ -658,7 +658,7 @@ namespace Administrator_company.LogicProgram
         #endregion
 
         #region GetDateTimeNow
-        public static string GetDateTimeNow() => DateTime.Now.ToString(CultureInfo.InvariantCulture);
+        public static string GetDateTimeNow() => DateTime.Now.ToString("dd'.'MM'.'yyyy' 'HH':'mm':'ss", CultureInfo.InvariantCulture);
         #endregion
     }
 }
