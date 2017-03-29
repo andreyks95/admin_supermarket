@@ -290,7 +290,9 @@ namespace Administrator_company.Preview__Test_
                 iTextSharp.text.Font font = report.SetFont();
                 doc.Open();
                 doc = report.CreateHeader(doc, "Сотрудники", font);
+                doc = report.CreateParagraph(doc);
                 doc = report.CreateTable(doc, dataGridView1, font);
+                doc = report.CreateParagraph(doc);
                 doc.Close();
                 MessageBox.Show("Создан pdf  файл!");
             }
