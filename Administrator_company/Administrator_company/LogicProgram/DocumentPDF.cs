@@ -85,13 +85,13 @@ namespace Administrator_company.LogicProgram
         #endregion
 
         #region Добавление параграфа
-
         /// <summary>
-        /// Добавление параграфа и выравнивание по центру
+        /// Добавление параграфа
         /// </summary>
         /// <param name="doc">Текущий документ</param>
         /// <param name="text">Текст параграфа</param>
         /// <param name="font">Информация о шрифте</param>
+        /// <param name="align">Выравнивание текста</param>
         /// <returns>Изменённый документ</returns>
         public iTextSharp.text.Document InsertParagraph(iTextSharp.text.Document doc, string text=null, Font font=null, int align = 1)
         {
@@ -99,12 +99,43 @@ namespace Administrator_company.LogicProgram
             //Создать параграф
             Paragraph paragraph = null;
             if (text != null)
-               paragraph = new Paragraph(text, font) {Alignment = align };
+               paragraph = new Paragraph(text, font) {Alignment = align};
             else 
-             paragraph  = new Paragraph("\n") { Alignment = align };
-            if (font != null)
-                paragraph.Font = font;
+                paragraph  = new Paragraph("\n") { Alignment = align };
+            //if (font != null)
+            //    paragraph.Font = font;
             //Добавить параграф в документ
+            doc.Add(paragraph);
+            return doc;
+        }
+        #endregion
+
+        #region Добавление параграфа
+        /// <summary>
+        /// Добавление параграфа
+        /// </summary>
+        /// <param name="doc">Текущий документ</param>
+        /// <param name="text">Текст параграфа</param>
+        /// <param name="font">Информация о шрифте</param>
+        /// <param name="align">Выравнивание текста</param>
+        /// <param name="side">Отступ 0 - слева, 2 - справа</param>
+        /// <param name="indent">Еденицы отступа</param>
+        /// <returns>Изменённый документ</returns>
+        public iTextSharp.text.Document InsertParagraph(iTextSharp.text.Document doc, string text = null, Font font = null, int align = 1, int side = 0, float indent = 10f )
+        {
+            //Font verdanaFont = FontFactory.GetFont("Verdana", 7f, Font.BOLD);
+            //Создать параграф
+            Paragraph paragraph = null;
+            if (text != null)
+                paragraph = new Paragraph(text, font) { Alignment = align };
+            else
+                paragraph = new Paragraph("\n") { Alignment = align };
+
+            //Добавить параграф в документ
+            if(side == 0) 
+                paragraph.IndentationLeft = indent;
+            else if(side == 2)
+                paragraph.IndentationRight = indent;
             doc.Add(paragraph);
             return doc;
         }

@@ -1042,17 +1042,53 @@ namespace Administrator_company.LogicProgram
         }
         #endregion
 
-
         #region GetPartWhereFuncValue
+        /// <summary>
+        /// Получить часть запроса Where. Examples:
+        /// employees.salary = (SELECT MAX(employees.salary) from employees);
+        /// </summary>
+        /// <param name="table">Название таблицы для выборки</param>
+        /// <param name="field">Название поля таблицы для выборки</param>
+        /// <param name="selectTable">Выбранная таблица для получения значения</param>
+        /// <param name="selectField">Выбранное поле для получния значения</param>
+        /// <param name="func">Функция для получения значения</param>
+        /// <returns>Часть запроса Where</returns>
         public string GetPartWhereFuncValue(string table, string field, string selectTable, string selectField, string func = "AVG")
         {
-            return "";
+            string partQuery = default(string);
+            partQuery = " " + table + "." + field + " = (" + GetSelectFunc(selectTable, selectField, func) + ") ";
+            return partQuery;
             //employees.salary = (SELECT MAX(employees.salary) from employees);
         }
         #endregion
 
-        //Слепить перегруженный метод GetPartWhereFuncValue
-        //Найти для получения запроса с функцией
+        #region GetPartWhereFuncValue overload
+        /// <summary>
+        /// Получить часть запроса Where. Examples:
+        /// employees.salary = (SELECT MAX(employees.salary) from employees) 
+        /// AND stock.price = (SELECT MIN(stock.price) from stock)
+        /// </summary>
+        /// <param name="table">Таблицы</param>
+        /// <param name="field">Поля таблиц</param>
+        /// <param name="selectTable">Выбранные таблицы для получения значений</param>
+        /// <param name="selectField">Выбранные поля для получния значения</param>
+        /// <param name="func">Функции для получения значения</param>
+        /// <returns>Часть запроса Where</returns>
+        public string GetPartWhereFuncValue(string[] table, string[][] field, string[] selectTable, string[][] selectField, string[] func = null)
+        {
+            string partQuery = default(string);
+            for (int i = 0; i < table.Length; i++)
+            {
+                for (int j = 0; j < field[i].Length; j++)
+                {
+                    partQuery += GetPartWhereFuncValue(table[i], field[i][j], selectTable[i], selectField[i][j], func[i]) + " AND ";
+                }
+            }
+            partQuery = partQuery.Remove(partQuery.Length - 5) + " ";
+            return partQuery;
+            //employees.salary = (SELECT MAX(employees.salary) from employees) AND stock.price = (SELECT MIN(stock.price) from stock)
+        }
+        #endregion
 
         #endregion
 
@@ -1229,9 +1265,9 @@ namespace Administrator_company.LogicProgram
             string partQuery = "SELECT CONCAT( ";
             for (int i = 0; i < nameFullFields.Length; i++)
             {
-                partQuery += nameFullFields[i] + ", \" \", ";
+                partQuery += nameFullFields[i] + ", \", \", ";
             }
-            partQuery = partQuery.Remove(partQuery.Length - 7) + " ) AS result";
+            partQuery = partQuery.Remove(partQuery.Length - 8) + " ) AS result";
             return partQuery;
             //select concat(info.full_name, " ", position.position, " ", employees.department, " ", employees.salary ) AS result
         }
@@ -1239,6 +1275,129 @@ namespace Administrator_company.LogicProgram
 
         #endregion
 
+        #region GetFromPartQuery
 
+        public string GetFromPartQuery(string[] nameTables)
+        {
+            string from = " FROM ";
+            for (int i = 0; i < nameTables.Length; i++)
+            {
+                from += " " + NAME_DATABASE + "." + nameTables[i] + ", ";
+            }
+            from = from.Remove(from.Length - 2) + " ";
+            return from; 
+            //from supermarket.employees, supermarket.info, supermarket.position
+        }
+
+        #endregion
+
+        #region GetSelectFunc
+        //  Support functions 
+        //  AVG()  BIT_AND()  BIT_OR()   BIT_XOR()   COUNT() COUNT(DISTINCT) GROUP_CONCAT()  MAX()  MIN()  STD()  
+        //  STDDEV()    STDDEV_POP()  STDDEV_SAMP()  SUM()  VAR_POP()   VAR_SAMP()  VARIANCE() 
+        public string GetSelectFunc(string table, string field, string func = "AVG")
+        {
+            return " SELECT " + func + "(" + field + ")" + " FROM " + NAME_DATABASE + "." + table;
+        }
+        #endregion
+
+        #region GetQueryResultLineReport
+        /// <summary>
+        /// Получить запрос для выбора одной объединённой записи в таблице с результатом
+        ///Examples:
+        ///select concat(info.full_name, " ", position.position, " ", employees.department, " ", employees.salary ) AS result
+        ///from supermarket.employees, supermarket.info, supermarket.position
+        ///where  employees.id_position = position.id_position AND
+        ///employees.id_info = info.id_info AND
+        ///  employees.salary = (SELECT MAX(employees.salary) from employees);
+        /// </summary>
+        /// <param name="nameFullFields">Название всех полей в SELECT которые будут отображаться как одно с помощью CONCAT </param>
+        /// <param name="nameTables">Название всех таблиц для FROM</param>
+        /// <param name="primaryTables">Главные табицы</param>
+        /// <param name="secondaryTables">Зависимая таблица</param>
+        /// <param name="primaryIdField">Главные ID поля таблиц</param>
+        /// <param name="secondaryIdField">Зависимые ID поля таблицы</param>
+        /// <param name="table">Таблицы для получения части where с вычисляемыми подзапросами</param>
+        /// <param name="field">Поля таблиц для получения части where с вычисляемыми подзапросами</param>
+        /// <param name="selectTable">Выбранные таблицы для получения значений</param>
+        /// <param name="selectField">Выбранные поля для получния значения</param>
+        /// <param name="func">Функции для получения значения</param>
+        /// <returns>Запрос</returns>
+        public string GetQueryResultLineReport(string[] nameFullFields, string[] nameTables,
+            string[] primaryTables, string secondaryTables, string[] primaryIdField, string[] secondaryIdField,
+            string[] table, string[][] field, string[] selectTable, string[][] selectField, string[] func = null)
+        {
+            string selectConcat = GetSelectConcatReport(nameFullFields),
+                from = GetFromPartQuery(nameTables),
+                wherePrimarySecondary = GetWherePrimarySecondary(primaryTables, secondaryTables, primaryIdField,secondaryIdField),
+                whereFuncValue = GetPartWhereFuncValue(table, field, selectTable, selectField, func),
+                query = default(string);
+            query = selectConcat + from + " WHERE "+wherePrimarySecondary + " AND " + whereFuncValue + " ; ";
+            return query;
+            //Examples:
+            //select concat(info.full_name, " ", position.position, " ", employees.department, " ", employees.salary ) AS result
+            //from supermarket.employees, supermarket.info, supermarket.position
+            //where  employees.id_position = position.id_position AND
+            //employees.id_info = info.id_info AND
+            //  employees.salary = (SELECT MAX(employees.salary) from employees);
+        }
+        #endregion
+
+        #region GetResultLineReport
+        /// <summary>
+        /// Позволяет получить результат с запроса в виде:
+        /// 'Шулишина М.С. продавец Хлебо-булочный 6000'
+        /// </summary>
+        /// <param name="query">Запрос для получения значения</param>
+        /// <returns>Вернуть строку с значением</returns>
+        public string GetResultLineReport(string query)
+        {
+            OpenConnection();
+            try
+            {
+                command = new MySqlCommand(query, connection);
+                var v = command.ExecuteScalar();
+                string value = Convert.ToString(v);
+                return value;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Не получено значение с запроса: \n" + ex.Message);
+                return "";
+            }
+            finally
+            {
+                CloseConnection();
+            }
+        }
+        #endregion
+
+        #region GetLineResult
+        /// <summary>
+        /// Позволяет получить результат с созданного запроса в виде:
+        /// 'Шулишина М.С. продавец Хлебо-булочный 6000'
+        /// </summary>
+        /// <param name="nameFullFields">Название всех полей в SELECT которые будут отображаться как одно с помощью CONCAT </param>
+        /// <param name="nameTables">Название всех таблиц для FROM</param>
+        /// <param name="primaryTables">Главные табицы</param>
+        /// <param name="secondaryTables">Зависимая таблица</param>
+        /// <param name="primaryIdField">Главные ID поля таблиц</param>
+        /// <param name="secondaryIdField">Зависимые ID поля таблицы</param>
+        /// <param name="table">Таблицы для получения части where с вычисляемыми подзапросами</param>
+        /// <param name="field">Поля таблиц для получения части where с вычисляемыми подзапросами</param>
+        /// <param name="selectTable">Выбранные таблицы для получения значений</param>
+        /// <param name="selectField">Выбранные поля для получния значения</param>
+        /// <param name="func">Функции для получения значения</param>
+        /// <returns>Вернуть строку с значением</returns>
+        public string GetLineResult(string[] nameFullFields, string[] nameTables,
+            string[] primaryTables, string secondaryTables, string[] primaryIdField, string[] secondaryIdField,
+            string[] table, string[][] field, string[] selectTable, string[][] selectField, string[] func = null)
+        {
+            string query = GetQueryResultLineReport(nameFullFields, nameTables,
+                primaryTables, secondaryTables, primaryIdField, secondaryIdField,
+                table, field, selectTable, selectField, func);
+            return GetResultLineReport(query);
+        }
+        #endregion
     }
 }

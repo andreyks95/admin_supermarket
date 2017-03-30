@@ -276,32 +276,6 @@ namespace Administrator_company.Preview__Test_
             }
         }
 
-        private void ReportButton_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                //ReportTestForm report = new ReportTestForm();
-                //report.Show();
-                //TestFunction testFunction = new TestFunction();
-                //testFunction.CreatePDFDocument(dataGridView1, saveFileDialog1);
-                //MessageBox.Show("Создан pdf  файл!");
-                Report report = new Report();
-                iTextSharp.text.Document doc = report.CreateReport(saveFileDialog1);
-                iTextSharp.text.Font font = report.SetFont();
-                doc.Open();
-                doc = report.CreateHeader(doc, "Сотрудники", font);
-                doc = report.CreateParagraph(doc);
-                doc = report.CreateTable(doc, dataGridView1, font);
-                doc = report.CreateParagraph(doc);
-                doc.Close();
-                MessageBox.Show("Создан pdf  файл!");
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-        }
-
         private void Delete_Click(object sender, EventArgs e)
         {
             //возвращаем результаты проверок всех полей
@@ -413,6 +387,68 @@ namespace Administrator_company.Preview__Test_
         private void LastRecordButton_Click(object sender, EventArgs e)
         {
             managerBase.Position = managerBase.Count;
+        }
+
+        private void ReportButton_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                //ReportTestForm report = new ReportTestForm();
+                //report.Show();
+                //TestFunction testFunction = new TestFunction();
+                //testFunction.CreatePDFDocument(dataGridView1, saveFileDialog1);
+                //MessageBox.Show("Создан pdf  файл!");
+                Report report = new Report();
+                iTextSharp.text.Document doc = report.CreateReport(saveFileDialog1);
+                iTextSharp.text.Font font = report.SetFont();
+                doc.Open();
+                doc = report.CreateHeader(doc, "Сотрудники", font);
+                doc = report.CreateParagraph(doc);
+                doc = report.CreateTable(doc, dataGridView1, font);
+                font = report.SetFont(16f, iTextSharp.text.Font.BOLDITALIC, BaseColor.BLACK);
+                string maxValueDataReport = GetValues();
+                doc = report.CreateFooter(doc, new [] { maxValueDataReport}, null, font, 0, 0, 30f);
+                doc.Close();
+                MessageBox.Show("Создан pdf  файл!");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private string GetValues()
+        {
+            string[]
+                //Для Select
+                nameFullFields = {"info.full_name", "position.position", "employees.department", "employees.salary"},
+                //Для From
+                nameTables = {"employees", "info", "position"},
+                //для where часть primary = secondary
+                primaryTables = {"position", "info"},
+                primaryIdFields = {"id_position", "id_info"},
+                secondaryIdFields = {"id_position", "id_info"},
+                //для where части с вычисляемыми подзапросами
+                tableWhereFunc = {"employees"},
+                selectTableWhereFunc = {"employees"},
+                //Функции которые будут использоваться для части where с вычисляемыми подзапросами
+                func = {"MAX"};
+            //для where части с вычисляемыми подзапросами
+            string[][] fieldsWhereFunc =
+            {
+                new string[] {"salary"}
+            },
+                selectFieldsWhereFunc =
+                {
+                    new string[] { "salary" }
+                };
+            //для where часть primary = secondary
+            string secondaryTable = "employees";
+
+            string result = connection.GetLineResult(nameFullFields,nameTables,
+                primaryTables,secondaryTable, primaryIdFields, secondaryIdFields, 
+                tableWhereFunc, fieldsWhereFunc, selectTableWhereFunc, selectFieldsWhereFunc, func);
+            return result;
         }
     }
 }
