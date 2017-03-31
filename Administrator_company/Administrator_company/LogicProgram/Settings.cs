@@ -660,5 +660,27 @@ namespace Administrator_company.LogicProgram
         #region GetDateTimeNow
         public static string GetDateTimeNow() => DateTime.Now.ToString("dd'.'MM'.'yyyy' 'HH':'mm':'ss", CultureInfo.InvariantCulture);
         #endregion
+
+        #region
+        public void DisplayEmptuCells(DataGridView dataGridView)
+        {
+            foreach (DataGridViewRow rw in dataGridView.Rows)
+            {
+                for (int i = 0; i < rw.Cells.Count; i++)
+                {
+                    if (rw.Cells[i].Value == null || rw.Cells[i].Value == DBNull.Value || String.IsNullOrWhiteSpace(rw.Cells[i].Value.ToString()))
+                    {
+                        rw.Cells[i].Value = " ";
+                    }
+                }
+            }
+
+            for (int i = 0; i < dataGridView.RowCount; i++)
+            {
+                dataGridView.Rows[i].Visible = true;
+            }
+
+        }
+        #endregion
     }
 }

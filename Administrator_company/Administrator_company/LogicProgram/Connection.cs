@@ -381,6 +381,8 @@ namespace Administrator_company.LogicProgram
                 //настраиваем отображение таблицы
                 settings.GetSettingDisplayTable(dataGridView, height);
                 dataGridView.DataSource = table; //подключаем заполненную таблицу и отображаем
+                //trying
+                settings.DisplayEmptuCells(dataGridView);
                 if(cellsImages != null)
                 //Для отображения картинки в DataGridView
                 settings.GetViewImageInCellTable(dataGridView, cellsImages);
