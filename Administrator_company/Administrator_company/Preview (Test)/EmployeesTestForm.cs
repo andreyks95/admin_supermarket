@@ -406,8 +406,8 @@ namespace Administrator_company.Preview__Test_
                 doc = report.CreateParagraph(doc);
                 doc = report.CreateTable(doc, dataGridView1, font);
                 font = report.SetFont(16f, iTextSharp.text.Font.BOLDITALIC, BaseColor.BLACK);
-                string maxValueDataReport = GetValues();
-                doc = report.CreateFooter(doc, new [] { maxValueDataReport}, null, font, 0, 0, 30f);
+                string[] allValues = GetValues();
+                doc = report.CreateFooter(doc, allValues, null, font, 0, 0, 30f);
                 doc.Close();
                 MessageBox.Show("Создан pdf  файл!");
             }
@@ -417,8 +417,12 @@ namespace Administrator_company.Preview__Test_
             }
         }
 
-        private string GetValues()
+        private string[] GetValues()
         {
+            //Результаты 
+            List<string> allResult = new List<string>();
+
+            //Общее данные
             string[]
                 //Для Select
                 nameFullFields = {"info.full_name", "position.position", "employees.department", "employees.salary"},
@@ -426,29 +430,57 @@ namespace Administrator_company.Preview__Test_
                 nameTables = {"employees", "info", "position"},
                 //для where часть primary = secondary
                 primaryTables = {"position", "info"},
-                primaryIdFields = {"id_position", "id_info"},
-                secondaryIdFields = {"id_position", "id_info"},
-                //для where части с вычисляемыми подзапросами
-                tableWhereFunc = {"employees"},
-                selectTableWhereFunc = {"employees"},
-                //Функции которые будут использоваться для части where с вычисляемыми подзапросами
-                func = {"MAX"};
-            //для where части с вычисляемыми подзапросами
-            string[][] fieldsWhereFunc =
-            {
-                new string[] {"salary"}
-            },
-                selectFieldsWhereFunc =
-                {
-                    new string[] { "salary" }
-                };
-            //для where часть primary = secondary
-            string secondaryTable = "employees";
+                primaryIdFields,  secondaryIdFields;
+            primaryIdFields = secondaryIdFields = new []{ "id_position", "id_info"};
 
-            string result = connection.GetLineResult(nameFullFields,nameTables,
+            //Для получения наибольшей заробатной платы и кто её получает
+            //для where часть primary = secondary и для where части с вычисляемыми подзапросами
+            string secondaryTable, tableWhereFunc, selectTableWhereFunc, func = "max";
+            secondaryTable = tableWhereFunc = selectTableWhereFunc = "employees";
+                
+            //для where части с вычисляемыми подзапросами
+            string fieldsWhereFunc, selectFieldsWhereFunc;
+            fieldsWhereFunc = selectFieldsWhereFunc = "salary";
+           
+           string result = "Наибольшая зарплата: " + connection.GetLineResult(nameFullFields,nameTables,
                 primaryTables,secondaryTable, primaryIdFields, secondaryIdFields, 
-                tableWhereFunc, fieldsWhereFunc, selectTableWhereFunc, selectFieldsWhereFunc, func);
-            return result;
-        }
+                tableWhereFunc, fieldsWhereFunc, selectTableWhereFunc, selectFieldsWhereFunc, func) + " грн.";
+            allResult.Add(result);
+
+            //для получения наименьшей зароботной платы и кто её получает
+            func = "min";
+            result = "Наименьшая зарплата: " + connection.GetLineResult(nameFullFields, nameTables,
+                primaryTables, secondaryTable, primaryIdFields, secondaryIdFields,
+                tableWhereFunc, fieldsWhereFunc, selectTableWhereFunc, selectFieldsWhereFunc, func) + " грн.";
+            allResult.Add(result);
+
+            //Для получения наибольшого опыта работы и кто это
+            nameFullFields[3] = "employees.experience";
+            fieldsWhereFunc = selectFieldsWhereFunc = "experience";
+            func = "max";
+            result = "Наибольший опыт работы: " + connection.GetLineResult(nameFullFields, nameTables,
+                primaryTables, secondaryTable, primaryIdFields, secondaryIdFields,
+                tableWhereFunc, fieldsWhereFunc, selectTableWhereFunc, selectFieldsWhereFunc, func) + " лет";
+            allResult.Add(result);
+
+            //Для получения наименьшего опыта работы и кто это
+            func = "min";
+            result = "Наименьший опыт работы: " + connection.GetLineResult(nameFullFields, nameTables,
+                primaryTables, secondaryTable, primaryIdFields, secondaryIdFields,
+                tableWhereFunc, fieldsWhereFunc, selectTableWhereFunc, selectFieldsWhereFunc, func) + " лет";
+            allResult.Add(result);
+
+            //Средння зарплата
+            result = "Средняя зарплата: " + connection.GetOneResult(connection.GetSelectFunc("employees","salary", "avg")) + " грн.";
+            allResult.Add(result);
+
+            //Кол. работающих на текущий момент
+            string query = "SELECT count(distinct id_employee) AS result " +
+                           "FROM supermarket.employees " +
+                           "where employees.fired is NULL";
+            result = "Кол. работающих на текущий момент: " + connection.GetOneResult(query) + " чел.";
+            allResult.Add(result);
+            return allResult.ToArray();
+       }
     }
 }
