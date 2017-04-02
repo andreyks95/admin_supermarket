@@ -480,8 +480,13 @@ namespace Administrator_company.LogicProgram
         public void InsertDateInDateTimePickerFromTable(DataTable table, int Column, DateTimePicker dateTimePicker)
         {
             try {
-                dateTimePicker.Text = table.Rows[0][Column].ToString(); //.ToString();
+                if(table.Rows[0][Column].ToString() != null || table.Rows[0][Column] != DBNull.Value || table.Rows[0][Column].ToString() != "")
+                    dateTimePicker.Text = table.Rows[0][Column].ToString(); //.ToString();
                 //or dateTimePicker.Value.Date = table.Rows[0][Column].ToString();
+                else
+                {
+                    dateTimePicker.Text = null;
+                }
             }
             catch (Exception ex) { MessageBox.Show(ex.Message);}
            }
@@ -661,8 +666,9 @@ namespace Administrator_company.LogicProgram
         public static string GetDateTimeNow() => DateTime.Now.ToString("dd'.'MM'.'yyyy' 'HH':'mm':'ss", CultureInfo.InvariantCulture);
         #endregion
 
-        #region
-        public void DisplayEmptuCells(DataGridView dataGridView)
+        #region DisplayEmptyCells
+        /*
+        public void DisplayEmptyCells(DataGridView dataGridView)
         {
             foreach (DataGridViewRow rw in dataGridView.Rows)
             {
@@ -679,8 +685,9 @@ namespace Administrator_company.LogicProgram
             {
                 dataGridView.Rows[i].Visible = true;
             }
+            
 
-        }
-        #endregion
+        }*/
+#endregion
     }
 }
