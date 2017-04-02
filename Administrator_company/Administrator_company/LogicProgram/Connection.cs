@@ -25,7 +25,7 @@ namespace Administrator_company.LogicProgram
 
         public MySqlDataAdapter adapter;
 
-        public string NAME_DATABASE = "supermarket";
+        public readonly string NAME_DATABASE = "supermarket";
 
         DataTable table = new DataTable();  
 
@@ -381,8 +381,7 @@ namespace Administrator_company.LogicProgram
                 //настраиваем отображение таблицы
                 settings.GetSettingDisplayTable(dataGridView, height);
                 dataGridView.DataSource = table; //подключаем заполненную таблицу и отображаем
-                //trying
-                settings.DisplayEmptuCells(dataGridView);
+
                 if(cellsImages != null)
                 //Для отображения картинки в DataGridView
                 settings.GetViewImageInCellTable(dataGridView, cellsImages);
@@ -984,14 +983,14 @@ namespace Administrator_company.LogicProgram
             {
                 //сформировать часть запроса where с столбцами в которых есть числовые значения
                 for (int i = 0; i < nameNumericFields.GetLength(0); i++)
-                    concat += " " + nameNumericFields[i] + ", "; //добавить " id, price, "
+                    concat += " coalesce(" + nameNumericFields[i] + ", ''), "; //добавить " id, price, "
                 concat = concat.Remove(concat.Length - 2) + ") "; //удалить перед like ", " 
             }
             else
             {
                 //сформировать часть запроса where со всеми столбцами
                 for (int i = 0; i < nameFields.GetLength(0); i++)
-                    concat += " " + nameFields[i] + ", ";  //добавить " name, address "
+                    concat += " coalesce(" + nameFields[i] + ", ''), ";  //добавить " name, address "
                 concat = concat.Remove(concat.Length - 2) + ") ";  //удалить перед like ", " 
             }
 
@@ -1004,15 +1003,16 @@ namespace Administrator_company.LogicProgram
             return query;
 
             //SELECT employees.id_employee AS 'ИД', info.full_name AS 'ФИО', position.position AS 'Должность', 
-            //employees.department AS 'Отдел', employees.experience AS 'Опыт работы', employees.salary AS 'Зарплата', 
+            //employees.department AS 'Отдел', employees.experience AS 'Опыт', employees.salary AS 'Зарплата', 
             //employees.started_work AS 'Принят', employees.fired AS 'Уволен'
-            //FROM employees, position, info
+            //FROM supermarket.employees, 
+            //supermarket.position, supermarket.info
             //WHERE employees.id_position = position.id_position
             //AND employees.id_info = info.id_info
-            //AND
-            //(concat(employees.id_employee, info.full_name, position.position,
-            //    employees.department, employees.experience, employees.salary, employees.started_work, employees.fired)
-            //like '%повар%');
+            //AND(CONCAT(coalesce(employees.id_employee, ''), coalesce(info.full_name, ''), coalesce(position.position, ''),
+            //coalesce(employees.department, ''), coalesce(employees.experience, ''),
+            //coalesce(employees.salary, ''), coalesce(employees.started_work, ''), coalesce(employees.fired, ''))
+            //LIKE '%%')
         }
         #endregion
 
