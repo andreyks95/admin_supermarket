@@ -57,6 +57,8 @@
             this.NextRecordButton = new System.Windows.Forms.Button();
             this.LastRecordButton = new System.Windows.Forms.Button();
             this.FirstRecordButton = new System.Windows.Forms.Button();
+            this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
+            this.ReportButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel1.SuspendLayout();
@@ -274,6 +276,7 @@
             // panel1
             // 
             this.panel1.AutoSize = true;
+            this.panel1.Controls.Add(this.ReportButton);
             this.panel1.Controls.Add(this.Find);
             this.panel1.Controls.Add(this.textBox1);
             this.panel1.Controls.Add(this.label1);
@@ -354,6 +357,16 @@
             this.FirstRecordButton.UseVisualStyleBackColor = true;
             this.FirstRecordButton.Click += new System.EventHandler(this.FirstRecordButton_Click);
             // 
+            // ReportButton
+            // 
+            this.ReportButton.Location = new System.Drawing.Point(276, 38);
+            this.ReportButton.Name = "ReportButton";
+            this.ReportButton.Size = new System.Drawing.Size(85, 26);
+            this.ReportButton.TabIndex = 15;
+            this.ReportButton.Text = "Отчет";
+            this.ReportButton.UseVisualStyleBackColor = true;
+            this.ReportButton.Click += new System.EventHandler(this.ReportButton_Click);
+            // 
             // InfoForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -409,5 +422,7 @@
         private System.Windows.Forms.Button NextRecordButton;
         private System.Windows.Forms.Button LastRecordButton;
         private System.Windows.Forms.Button PreviousRecordButton;
+        private System.Windows.Forms.Button ReportButton;
+        private System.Windows.Forms.SaveFileDialog saveFileDialog1;
     }
 }

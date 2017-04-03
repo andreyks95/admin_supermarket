@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Windows.Forms;
 using Administrator_company.LogicProgram;
+using iTextSharp.text;
 using MySql.Data.MySqlClient;
 //Дальше подключаемые 
 
@@ -18,6 +20,7 @@ namespace Administrator_company
         Connection connection = new Connection();
         Settings settings = new Settings();
         Checking checking = new Checking();
+        Report report = new Report();
         BindingManagerBase managerBase; //для перемещения по таблице 
 
 
@@ -84,6 +87,7 @@ namespace Administrator_company
             settings.CurrentColumnCellsTEXT(textBoxs, dataGridView1);
         }
 
+        #region работа с данными (вставка, обновление, удаление)
         //Вставить данные 
         private void Insert_Click(object sender, EventArgs e)
         {
@@ -185,6 +189,7 @@ namespace Administrator_company
             }
 
         }
+        #endregion
 
         //Нахождение записи по id
         private void Find_Click(object sender, EventArgs e)
@@ -231,7 +236,7 @@ namespace Administrator_company
             settings.ClearFields(textBoxs, pictureBoxs: pictureBoxs);
         }
 
-
+        #region навигация по таблице
         private void FirstRecordButton_Click(object sender, EventArgs e)
         {
             managerBase.Position = 0;
@@ -251,6 +256,53 @@ namespace Administrator_company
         {
             managerBase.Position = managerBase.Count;
         }
+        #endregion
+
+        #region создание отчета
+        private void ReportButton_Click(object sender, EventArgs e)
+        {
+            report.CreateBasicReport(dataGridView1,saveFileDialog1, "Информация о сотрудниках",GetValues());
+        }
+
+        private string[] GetValues()
+        {
+            //Результаты 
+            List<string> allResult = new List<string>();
+
+            //Общее данные
+            string partQuery =
+                " select concat(coalesce(info.full_name, ''), \"; \", coalesce(info.passport_id, ''), \"; \"," +
+                " coalesce(info.age, ''), \" лет; \", coalesce(info.address, ''), \"; \"," +
+                " coalesce(info.phone, '')) AS result " +
+                " from supermarket.info " +
+                " where info.age = (SELECT ",
+                otherPart = "(info.age) from supermarket.info);",
+                query = default(string),
+                result = null;
+
+            //Максимальный возраст сотрудника
+            query = partQuery + " max" + otherPart;
+            result = "Максимальный возрасто сотрудника: " + connection.GetOneResult(query);
+            allResult.Add(result);
+
+            //Минимальный возраст сотрудника
+            query = partQuery + " min" + otherPart;
+            result = "Минимальный возрасто сотрудника: " + connection.GetOneResult(query);
+            allResult.Add(result);
+
+            //Общее кол. человек в супермаркете
+            query = connection.GetSelectFunc("info", "id_info", "count");
+            result = "Общее кол. сотрудников супермаркета: " + connection.GetOneResult(query);
+            allResult.Add(result);
+
+            //Средний возраст в супермаркете
+            query = connection.GetSelectFunc("info", "age");
+            result = "Средний возраст сотрудников супермаркета: " + connection.GetOneResult(query);
+            allResult.Add(result);
+
+            return allResult.ToArray();
+        }
+        #endregion
 
     }
 }
