@@ -179,14 +179,17 @@ namespace Administrator_company.LogicProgram
         #endregion
 
         #region Создание таблицы. Получение данных с DataGridView
+
         /// <summary>
         /// Создание таблицы. Получение данных с DataGridView
         /// </summary>
         /// <param name="doc">Текущий документ</param>
         /// <param name="dataGridView">DataGridView формы с которого нужно вытащить данные</param>
         /// <param name="font">Шрифт</param>
+        /// <param name="countColumns">Количество столбцов, которые нужно отобразить (последовательно)</param>
+        /// <param name="numberColumns">Номера столбцов, которые нужно отобразить</param>
         /// <returns>Изменённый документ</returns>
-        public iTextSharp.text.Document InsertTable(iTextSharp.text.Document doc, DataGridView dataGridView, Font font = null)
+        public iTextSharp.text.Document InsertTable(iTextSharp.text.Document doc, DataGridView dataGridView, Font font = null, int countColumns = 0, int[] numberColumns = null)
         {
             //Создать таблицу
             PdfPTable table = new PdfPTable(dataGridView.Columns.Count);
@@ -220,41 +223,85 @@ namespace Administrator_company.LogicProgram
                 inputFormat = "dd'.'MM'.'yyyy' 'H':'mm':'ss",
                 outputFormat = "dd'.'MM'.'yyyy";
             DateTime dateTime = default(DateTime);
-            
-            for (int i = 0; i < dataGridView.Rows.Count; i++)
-            {
-                for (int j = 0; j < dataGridView.Columns.Count; j++)
-                {
-                    if (dataGridView[j, i].Value != null)
-                    {
-                        //Получаем значение ячейки
-                        value = dataGridView[j, i].Value.ToString();
-                        //Если значение строки являеться датой, то превращаем её в дату с заданным форматом
-                        if (DateTime.TryParseExact(value, inputFormat,
-                            CultureInfo.InvariantCulture, DateTimeStyles.NoCurrentDateDefault,
-                            out dateTime))
-                        {
-                            //Получаем строку с необходимым нам форматом даты
-                            value = dateTime.ToString(outputFormat, null);
-                            //Создаём ячейку
-                            cell = new PdfPCell(new Phrase(value, font));
-                            //Выравниваем содержимое ячейки по левому краю
-                            cell.HorizontalAlignment = 0;
-                            table.AddCell(cell);
-                            //table.AddCell(new Phrase(value, font));
-                        }
-                        else
-                        {
-                            cell = new PdfPCell(new Phrase(value, font));
-                            cell.HorizontalAlignment = 0;
-                            table.AddCell(cell);
-                            //table.AddCell(new Phrase(value, font));
-                        }
 
+            int columnsCount;
+            if (numberColumns != null)
+            {
+                for (int i = 0; i < dataGridView.Rows.Count; i++)
+                {
+                    for (int j = 0; j < numberColumns.Length; j++)
+                    {
+                        if (dataGridView[numberColumns[j], i].Value != null)
+                        {
+                            //Получаем значение ячейки
+                            value = dataGridView[numberColumns[j], i].Value.ToString();
+                            //Если значение строки являеться датой, то превращаем её в дату с заданным форматом
+                            if (DateTime.TryParseExact(value, inputFormat,
+                                CultureInfo.InvariantCulture, DateTimeStyles.NoCurrentDateDefault,
+                                out dateTime))
+                            {
+                                //Получаем строку с необходимым нам форматом даты
+                                value = dateTime.ToString(outputFormat, null);
+                                //Создаём ячейку
+                                cell = new PdfPCell(new Phrase(value, font));
+                                //Выравниваем содержимое ячейки по левому краю
+                                cell.HorizontalAlignment = 0;
+                                table.AddCell(cell);
+                                //table.AddCell(new Phrase(value, font));
+                            }
+                            else
+                            {
+                                cell = new PdfPCell(new Phrase(value, font));
+                                cell.HorizontalAlignment = 0;
+                                table.AddCell(cell);
+                                //table.AddCell(new Phrase(value, font));
+                            }
+
+                        }
                     }
                 }
             }
+            else
+            {
+                if (countColumns > 0)
+                    columnsCount = countColumns;
+                else
+                    columnsCount = dataGridView.Columns.Count;
 
+                for (int i = 0; i < dataGridView.Rows.Count; i++)
+                {
+                    for (int j = 0; j < columnsCount; j++)
+                    {
+                        if (dataGridView[j, i].Value != null)
+                        {
+                            //Получаем значение ячейки
+                            value = dataGridView[j, i].Value.ToString();
+                            //Если значение строки являеться датой, то превращаем её в дату с заданным форматом
+                            if (DateTime.TryParseExact(value, inputFormat,
+                                CultureInfo.InvariantCulture, DateTimeStyles.NoCurrentDateDefault,
+                                out dateTime))
+                            {
+                                //Получаем строку с необходимым нам форматом даты
+                                value = dateTime.ToString(outputFormat, null);
+                                //Создаём ячейку
+                                cell = new PdfPCell(new Phrase(value, font));
+                                //Выравниваем содержимое ячейки по левому краю
+                                cell.HorizontalAlignment = 0;
+                                table.AddCell(cell);
+                                //table.AddCell(new Phrase(value, font));
+                            }
+                            else
+                            {
+                                cell = new PdfPCell(new Phrase(value, font));
+                                cell.HorizontalAlignment = 0;
+                                table.AddCell(cell);
+                                //table.AddCell(new Phrase(value, font));
+                            }
+
+                        }
+                    }
+                }
+            }
             doc.Add(table);
             return doc;
         }
