@@ -406,24 +406,7 @@ namespace Administrator_company
         #region создание отчёта
         private void ReportButton_Click(object sender, EventArgs e)
         {
-            try
-            {
-               iTextSharp.text.Document doc = report.CreateReport(saveFileDialog1);
-                iTextSharp.text.Font font = report.SetFont();
-                doc.Open();
-                doc = report.CreateHeader(doc, "Сотрудники", font);
-                doc = report.CreateParagraph(doc);
-                doc = report.CreateTable(doc, dataGridView1, font);
-                font = report.SetFont(16f, iTextSharp.text.Font.BOLDITALIC, BaseColor.BLACK);
-                string[] allValues = GetValues();
-                doc = report.CreateFooter(doc, allValues, null, font, 0, 0, 30f);
-                doc.Close();
-                MessageBox.Show("Создан pdf  файл!");
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
+            report.CreateBasicReport(dataGridView1, saveFileDialog1, "Сотрудники", GetValues());
         }
 
         private string[] GetValues()
@@ -485,7 +468,7 @@ namespace Administrator_company
 
             //Кол. работающих на текущий момент
             string query = "SELECT count(distinct id_employee) AS result " +
-                           "FROM supermarket.employees " +
+                           "FROM " + connection.NAME_DATABASE + ".employees " +
                            "where employees.fired is NULL";
             result = "Кол. работающих на текущий момент: " + connection.GetOneResult(query) + " чел.";
             allResult.Add(result);
