@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Administrator_company.LogicProgram;
+using iTextSharp.text;
 using MySql.Data.MySqlClient;
 
 namespace Administrator_company
@@ -24,6 +25,7 @@ namespace Administrator_company
         Checking checking = new Checking();
         Сalculations calculations = new Сalculations();
         GetTextObjectsForm getText = new GetTextObjectsForm();
+        Report report = new Report();
 
 
         BindingManagerBase managerBase; //для перемещения по таблице 
@@ -194,6 +196,8 @@ namespace Administrator_company
             FillDataGridView("");
         }
 
+        #region Работа с данными (вставка, обновление, удаление)
+
         private void Insert_Click(object sender, EventArgs e)
         {
             TextBox[] textBoxs = { textBox1, textBox2 };
@@ -278,6 +282,7 @@ namespace Administrator_company
             }
         }
 
+
         private void Delete_Click(object sender, EventArgs e)
         {
             //возвращаем результаты проверок всех полей
@@ -310,6 +315,8 @@ namespace Administrator_company
                 checking.ErrorMessage(this);
             }
         }
+        
+        #endregion
 
         private void Find_Click(object sender, EventArgs e)
         {
@@ -372,6 +379,8 @@ namespace Administrator_company
             ChangedInDataGridView();
         }
 
+        #region кнопки навигации
+
         private void FirstRecordButton_Click(object sender, EventArgs e)
         {
             managerBase.Position = 0;
@@ -391,5 +400,98 @@ namespace Administrator_company
         {
             managerBase.Position = managerBase.Count;
         }
+
+        #endregion
+
+        #region создание отчёта
+        private void ReportButton_Click(object sender, EventArgs e)
+        {
+            try
+            {
+               iTextSharp.text.Document doc = report.CreateReport(saveFileDialog1);
+                iTextSharp.text.Font font = report.SetFont();
+                doc.Open();
+                doc = report.CreateHeader(doc, "Сотрудники", font);
+                doc = report.CreateParagraph(doc);
+                doc = report.CreateTable(doc, dataGridView1, font);
+                font = report.SetFont(16f, iTextSharp.text.Font.BOLDITALIC, BaseColor.BLACK);
+                string[] allValues = GetValues();
+                doc = report.CreateFooter(doc, allValues, null, font, 0, 0, 30f);
+                doc.Close();
+                MessageBox.Show("Создан pdf  файл!");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private string[] GetValues()
+        {
+            //Результаты 
+            List<string> allResult = new List<string>();
+
+            //Общее данные
+            string[]
+                //Для Select
+                nameFullFields = { "info.full_name", "position.position", "employees.department", "employees.salary" },
+                //Для From
+                nameTables = { "employees", "info", "position" },
+                //для where часть primary = secondary
+                primaryTables = { "position", "info" },
+                primaryIdFields, secondaryIdFields;
+            primaryIdFields = secondaryIdFields = new[] { "id_position", "id_info" };
+
+            //Для получения наибольшей заробатной платы и кто её получает
+            //для where часть primary = secondary и для where части с вычисляемыми подзапросами
+            string secondaryTable, tableWhereFunc, selectTableWhereFunc, func = "max";
+            secondaryTable = tableWhereFunc = selectTableWhereFunc = "employees";
+
+            //для where части с вычисляемыми подзапросами
+            string fieldsWhereFunc, selectFieldsWhereFunc;
+            fieldsWhereFunc = selectFieldsWhereFunc = "salary";
+
+            string result = "Наибольшая зарплата: " + connection.GetLineResult(nameFullFields, nameTables,
+                 primaryTables, secondaryTable, primaryIdFields, secondaryIdFields,
+                 tableWhereFunc, fieldsWhereFunc, selectTableWhereFunc, selectFieldsWhereFunc, func) + " грн.";
+            allResult.Add(result);
+
+            //для получения наименьшей зароботной платы и кто её получает
+            func = "min";
+            result = "Наименьшая зарплата: " + connection.GetLineResult(nameFullFields, nameTables,
+                primaryTables, secondaryTable, primaryIdFields, secondaryIdFields,
+                tableWhereFunc, fieldsWhereFunc, selectTableWhereFunc, selectFieldsWhereFunc, func) + " грн.";
+            allResult.Add(result);
+
+            //Для получения наибольшого опыта работы и кто это
+            nameFullFields[3] = "employees.experience";
+            fieldsWhereFunc = selectFieldsWhereFunc = "experience";
+            func = "max";
+            result = "Наибольший опыт работы: " + connection.GetLineResult(nameFullFields, nameTables,
+                primaryTables, secondaryTable, primaryIdFields, secondaryIdFields,
+                tableWhereFunc, fieldsWhereFunc, selectTableWhereFunc, selectFieldsWhereFunc, func) + " лет";
+            allResult.Add(result);
+
+            //Для получения наименьшего опыта работы и кто это
+            func = "min";
+            result = "Наименьший опыт работы: " + connection.GetLineResult(nameFullFields, nameTables,
+                primaryTables, secondaryTable, primaryIdFields, secondaryIdFields,
+                tableWhereFunc, fieldsWhereFunc, selectTableWhereFunc, selectFieldsWhereFunc, func) + " лет";
+            allResult.Add(result);
+
+            //Средння зарплата
+            result = "Средняя зарплата: " + connection.GetOneResult(connection.GetSelectFunc("employees", "salary", "avg")) + " грн.";
+            allResult.Add(result);
+
+            //Кол. работающих на текущий момент
+            string query = "SELECT count(distinct id_employee) AS result " +
+                           "FROM supermarket.employees " +
+                           "where employees.fired is NULL";
+            result = "Кол. работающих на текущий момент: " + connection.GetOneResult(query) + " чел.";
+            allResult.Add(result);
+            return allResult.ToArray();
+        }
+        #endregion
+
     }
 }
