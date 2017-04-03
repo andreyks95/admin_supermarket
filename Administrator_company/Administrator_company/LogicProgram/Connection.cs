@@ -1389,6 +1389,50 @@ namespace Administrator_company.LogicProgram
         }
         #endregion
 
+        #region GetQueryResultAllLineReportWithConditions
+        ///  <summary>
+        ///  Получить запрос для выбора всех объединённых записей в таблице с результатом
+        /// Examples:
+        /// select concat(products.name, '   ', sum(stock.quantity)) as result
+        /// from products, stock
+        /// where stock.id_products = products.id_products
+        /// AND stock.available = "Нету"
+        /// Group by products.name
+        /// employees.salary = (SELECT MAX(employees.salary) from employees);
+        ///  </summary>
+        ///  <param name="nameFullFields">Название всех полей в SELECT которые будут отображаться как одно с помощью CONCAT </param>
+        ///  <param name="nameTables">Название всех таблиц для FROM</param>
+        ///  <param name="primaryTables">Главные табицы</param>
+        ///  <param name="secondaryTables">Зависимая таблица</param>
+        ///  <param name="primaryIdField">Главные ID поля таблиц</param>
+        ///  <param name="secondaryIdField">Зависимые ID поля таблицы</param>
+        /// <param name="nameFullField">Полное название поля для условия </param>
+        /// <param name="conditions">Условие выборки по столбцу</param>
+        /// <param name="nameFullFieldForGroupBy">Полное название поля для Group By</param>
+        /// <returns>Запрос</returns>
+        public string GetQueryResultAllLineReportWithConditions(string[] nameFullFields, string[] nameTables,
+            string[] primaryTables, string secondaryTables, string[] primaryIdField, string[] secondaryIdField,
+            string nameFullField, string conditions, string nameFullFieldForGroupBy
+            )
+        {
+            string selectConcat = GetSelectConcatReport(nameFullFields),
+                from = GetFromPartQuery(nameTables),
+                wherePrimarySecondary = GetWherePrimarySecondary(primaryTables, secondaryTables, primaryIdField, secondaryIdField),
+                whereWithConditions = nameFullField + " = " + conditions,
+                groupBy = " GROUP BY " + nameFullFieldForGroupBy,
+                query = default(string);
+            query = selectConcat + from + " WHERE " + wherePrimarySecondary + " AND " + whereWithConditions + groupBy + " ; ";
+            return query;
+            //Examples:
+            //select concat(products.name, '   ', sum(stock.quantity)) as result
+            //from products, stock
+            //where stock.id_products = products.id_products
+            //AND stock.available = "Нету"
+            //Group by products.name
+            //employees.salary = (SELECT MAX(employees.salary) from employees);
+        }
+        #endregion
+
         #region GetOneResult
         /// <summary>
         /// Позволяет получить результат с запроса в виде:
@@ -1415,6 +1459,44 @@ namespace Administrator_company.LogicProgram
             {
                 CloseConnection();
             }
+        }
+        #endregion
+
+        #region GetAllResult
+        /// <summary>
+        /// Позволяет получить все строки с запроса 
+        /// </summary>
+        /// <param name="query">Запрос для получения значения</param>
+        /// <returns>Вернуть все строки с значениями</returns>
+        public string[] GetAllResult(string query)
+        {
+            OpenConnection();
+            try
+            {
+                command = new MySqlCommand(query, connection);
+                //Create a data reader and Execute the command
+                MySqlDataReader dataReader = command.ExecuteReader();
+                List<string> valuesAll = new List<string>();
+                while (dataReader.Read())
+                {
+                    valuesAll.Add(dataReader[0].ToString());
+                }
+                return valuesAll.ToArray();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Не получено значение с запроса: \n" + ex.Message);
+                return new string[] {};
+            }
+            finally
+            {
+                CloseConnection();
+            }
+           
+            
+            
+
+
         }
         #endregion
 
@@ -1474,6 +1556,33 @@ namespace Administrator_company.LogicProgram
         }
         #endregion
 
+        #region GetAllLineResult for GetQueryResultAllLineReportWithConditions
+        ///  <summary>
+        ///  Получить все записи в таблице
+        ///  </summary>
+        ///  <param name="nameFullFields">Название всех полей в SELECT которые будут отображаться как одно с помощью CONCAT </param>
+        ///  <param name="nameTables">Название всех таблиц для FROM</param>
+        ///  <param name="primaryTables">Главные табицы</param>
+        ///  <param name="secondaryTables">Зависимая таблица</param>
+        ///  <param name="primaryIdField">Главные ID поля таблиц</param>
+        ///  <param name="secondaryIdField">Зависимые ID поля таблицы</param>
+        /// <param name="nameFullField">Полное название поля для условия </param>
+        /// <param name="conditions">Условие выборки по столбцу</param>
+        /// <param name="nameFullFieldForGroupBy">Полное название поля для Group By</param>
+        /// <returns>Все записи</returns>
+        public string[] GetAllLineResult(string[] nameFullFields, string[] nameTables,
+                string[] primaryTables, string secondaryTables, string[] primaryIdField, string[] secondaryIdField,
+                string nameFullField, string conditions, string nameFullFieldForGroupBy)
+        {
+          string getQuery = GetQueryResultAllLineReportWithConditions(nameFullFields, nameTables,
+             primaryTables, secondaryTables, primaryIdField, secondaryIdField,
+                nameFullField, conditions, nameFullFieldForGroupBy);
+            return GetAllResult(getQuery);
+        }
         #endregion
+
+        #endregion
+
+
     }
 }
