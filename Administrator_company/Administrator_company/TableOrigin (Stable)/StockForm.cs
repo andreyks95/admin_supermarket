@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Windows.Forms;
 using Administrator_company.LogicProgram;
+using iTextSharp.text;
 using MySql.Data.MySqlClient;
 
 namespace Administrator_company
@@ -19,6 +20,7 @@ namespace Administrator_company
         Checking checking = new Checking();
         Сalculations calculations = new Сalculations();
         GetTextObjectsForm getText = new GetTextObjectsForm();
+        Report report = new Report();
 
         BindingManagerBase managerBase; //для перемещения по таблице
 
@@ -168,6 +170,8 @@ namespace Administrator_company
             FillDataGridView(""); //при загрузке отображаем таблицу
         }
 
+        #region Работа с данными (вставка, обновление, удаление) 
+
         private void Insert_Click(object sender, EventArgs e)
         {
             TextBox[] textBoxs = {textBox1, textBox2};
@@ -273,6 +277,7 @@ namespace Administrator_company
                 checking.ErrorMessage(this);
             }
         }
+        #endregion
 
         private void Find_Click(object sender, EventArgs e)
         {
@@ -334,6 +339,8 @@ namespace Administrator_company
             ChangedInDataGridView();
         }
 
+        #region Навигация по таблице
+
         private void FirstRecordButton_Click(object sender, EventArgs e)
         {
             managerBase.Position = 0;
@@ -354,5 +361,60 @@ namespace Administrator_company
             managerBase.Position = managerBase.Count;
         }
 
+        #endregion
+
+        #region создание отчёта
+        private void ReportButton_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                iTextSharp.text.Document doc = report.CreateReport(saveFileDialog1);
+                iTextSharp.text.Font font = report.SetFont();
+                doc.Open();
+                doc = report.CreateHeader(doc, "Склад", font);
+                doc = report.CreateParagraph(doc);
+                doc = report.CreateTable(doc, dataGridView1, font);
+                font = report.SetFont(16f, iTextSharp.text.Font.BOLDITALIC, BaseColor.BLACK);
+                string[] allValues = GetValues();
+                doc = report.CreateFooter(doc, allValues, null, font, 0, 0, 30f);
+                doc.Close();
+                MessageBox.Show("Создан pdf  файл!");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+
+        private string[] GetValues()
+        {
+            //Результаты 
+            List<string> allResult = new List<string>();
+
+            //Для получения количества товаров в наличии/не наличии и их сумму
+            string partQuery =
+                "select concat(products.name, '   ', sum(stock.quantity), '   ', sum(stock.price), ' грн.') as result " +
+                " from " + connection.NAME_DATABASE + ".products, " + connection.NAME_DATABASE + ".stock " +
+                " where stock.id_products = products.id_products " +
+                " AND stock.available = ",
+                groupBy = " Group by products.name ",
+                query = default(string);
+            string[] result = null;
+
+            allResult.Add("Количество товаров в наличии и их сумма");
+            query = partQuery + "\"Нету\"" + groupBy;
+            result = connection.GetAllResult(query);
+            allResult.AddRange(result);
+
+            allResult.Add("Количество товаров которых нету в наличии и их сумма");
+            query = partQuery + "\"Есть\"" + groupBy;
+            result = connection.GetAllResult(query);
+            allResult.AddRange(result);
+
+            return allResult.ToArray();
+        }
+
+        #endregion
     }
 }
