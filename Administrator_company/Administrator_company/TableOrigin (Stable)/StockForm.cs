@@ -366,27 +366,9 @@ namespace Administrator_company
         #region создание отчёта
         private void ReportButton_Click(object sender, EventArgs e)
         {
-            try
-            {
-                iTextSharp.text.Document doc = report.CreateReport(saveFileDialog1);
-                iTextSharp.text.Font font = report.SetFont();
-                doc.Open();
-                doc = report.CreateHeader(doc, "Склад", font);
-                doc = report.CreateParagraph(doc);
-                doc = report.CreateTable(doc, dataGridView1, font);
-                font = report.SetFont(16f, iTextSharp.text.Font.BOLDITALIC, BaseColor.BLACK);
-                string[] allValues = GetValues();
-                doc = report.CreateFooter(doc, allValues, null, font, 0, 0, 30f);
-                doc.Close();
-                MessageBox.Show("Создан pdf  файл!");
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
+            report.CreateBasicReport(dataGridView1,saveFileDialog1, "Склад", GetValues());
         }
-
-
+        
         private string[] GetValues()
         {
             //Результаты 
