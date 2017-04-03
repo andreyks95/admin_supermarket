@@ -155,8 +155,37 @@ namespace Administrator_company.LogicProgram
 
         //Создание таблицы
         public iTextSharp.text.Document CreateTable(iTextSharp.text.Document doc, DataGridView dataGridView,
-            Font font = null) => document.InsertTable(doc, dataGridView, font);
+            Font font = null, int countColumns = 0, int[] numberColumns = null) => document.InsertTable(doc, dataGridView, font, countColumns, numberColumns);
 
-        
+        #region CreateBasicReport
+        /// <summary>
+        /// Создать базовый отчёт
+        /// </summary>
+        /// <param name="dataGridView">Текущий DataGridView формы</param>
+        /// <param name="saveFileDialog">Куда следует сохранить файл</param>
+        /// <param name="nameHeader">Название отчёта, данные для шапки отчёта</param>
+        /// <param name="totalsForFooter">Набор значений для подвала (футера) отчёта</param>
+        public void CreateBasicReport(DataGridView  dataGridView, SaveFileDialog saveFileDialog, string nameHeader, string[] totalsForFooter)
+        {
+            try
+            {
+                iTextSharp.text.Document doc = CreateReport(saveFileDialog);
+                iTextSharp.text.Font font = SetFont();
+                doc.Open();
+                doc = CreateHeader(doc, nameHeader, font);
+                doc = CreateParagraph(doc);
+                doc = CreateTable(doc, dataGridView, font);
+                font = SetFont(16f, iTextSharp.text.Font.BOLDITALIC, BaseColor.BLACK);
+                string[] allValues = totalsForFooter;
+                doc = CreateFooter(doc, allValues, null, font, 0, 0, 30f);
+                doc.Close();
+                MessageBox.Show("Создан pdf  файл!");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+        #endregion
     }
 }
