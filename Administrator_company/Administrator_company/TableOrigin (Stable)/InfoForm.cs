@@ -261,7 +261,7 @@ namespace Administrator_company
         #region создание отчета
         private void ReportButton_Click(object sender, EventArgs e)
         {
-            report.CreateBasicReport(dataGridView1,saveFileDialog1, "Информация о сотрудниках",GetValues());
+            report.CreateBasicReport(dataGridView1,saveFileDialog1, "Информация о сотрудниках",GetValues(), 6);
         }
 
         private string[] GetValues()
@@ -274,9 +274,9 @@ namespace Administrator_company
                 " select concat(coalesce(info.full_name, ''), \"; \", coalesce(info.passport_id, ''), \"; \"," +
                 " coalesce(info.age, ''), \" лет; \", coalesce(info.address, ''), \"; \"," +
                 " coalesce(info.phone, '')) AS result " +
-                " from supermarket.info " +
+                " from " + connection.NAME_DATABASE + ".info " +
                 " where info.age = (SELECT ",
-                otherPart = "(info.age) from supermarket.info);",
+                otherPart = "(info.age) from " + connection.NAME_DATABASE + ".info);",
                 query = default(string),
                 result = null;
 
