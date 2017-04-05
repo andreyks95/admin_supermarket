@@ -178,8 +178,10 @@ namespace Administrator_company.LogicProgram
         }
         #endregion
 
+
         #region Создание таблицы. Получение данных с DataGridView
 
+        #region InsertTable
         /// <summary>
         /// Создание таблицы. Получение данных с DataGridView
         /// </summary>
@@ -191,16 +193,37 @@ namespace Administrator_company.LogicProgram
         /// <returns>Изменённый документ</returns>
         public iTextSharp.text.Document InsertTable(iTextSharp.text.Document doc, DataGridView dataGridView, Font font = null, int countColumns = 0, int[] numberColumns = null)
         {
+            iTextSharp.text.Document newDoc = null;
+            if (countColumns < 1 && numberColumns.Length == 0)
+            {
+                newDoc = InsertTable(doc, dataGridView, font);
+            }
+            else if (countColumns > 0)
+            {
+                newDoc = InsertTable(doc, dataGridView, font, countColumns);
+            }
+            else if (numberColumns.Length != 0)
+            {
+                newDoc = InsertTable(doc, dataGridView, font, numberColumns);
+            }
+            return newDoc;
+        }
+        #endregion
+
+        #region InsertTable зависит от количества столбцов в DataGridView
+        public iTextSharp.text.Document InsertTable(iTextSharp.text.Document doc, DataGridView dataGridView, Font font = null)
+        {
+            
             //Создать таблицу
             PdfPTable table = new PdfPTable(dataGridView.Columns.Count);
             //Создать массив для ширины столбцов таблицы
             float[] widths = new float[dataGridView.Columns.Count];
             //ширина одного столбца
-            float width = doc.PageSize.Width/dataGridView.Columns.Count;
+            float width = doc.PageSize.Width / dataGridView.Columns.Count;
             //установить ширину столбца "ИД"
-            widths[0] = width*0.4f; 
+            widths[0] = width * 0.4f;
             //Уставовить ширину для каждого столбца
-            for (int i = 1; i < dataGridView.ColumnCount; i++)
+            for (int i = 1; i < dataGridView.Columns.Count; i++)
             {
                 widths[i] = width;
             }
@@ -208,7 +231,7 @@ namespace Administrator_company.LogicProgram
             table.SetWidths(widths);
             //Создание шапки таблицы
             PdfPCell cell = null;
-            for (int i = 0; i < dataGridView.ColumnCount; i++)
+            for (int i = 0; i < dataGridView.Columns.Count; i++)
             {
                 //Создать ячейку таблицы с данными
                 cell = new PdfPCell(new Phrase(dataGridView.Columns[i].HeaderText, font));
@@ -224,10 +247,160 @@ namespace Administrator_company.LogicProgram
                 outputFormat = "dd'.'MM'.'yyyy";
             DateTime dateTime = default(DateTime);
 
-            int columnsCount;
-            if (numberColumns != null)
+           for (int i = 0; i < dataGridView.Rows.Count; i++)
+                {
+                    for (int j = 0; j < dataGridView.Columns.Count; j++)
+                    {
+                        if (dataGridView[j, i].Value != null)
+                        {
+                            //Получаем значение ячейки
+                            value = dataGridView[j, i].Value.ToString();
+                            //Если значение строки являеться датой, то превращаем её в дату с заданным форматом
+                            if (DateTime.TryParseExact(value, inputFormat,
+                                CultureInfo.InvariantCulture, DateTimeStyles.NoCurrentDateDefault,
+                                out dateTime))
+                            {
+                                //Получаем строку с необходимым нам форматом даты
+                                value = dateTime.ToString(outputFormat, null);
+                                //Создаём ячейку
+                                cell = new PdfPCell(new Phrase(value, font));
+                                //Выравниваем содержимое ячейки по левому краю
+                                cell.HorizontalAlignment = 0;
+                                table.AddCell(cell);
+                                //table.AddCell(new Phrase(value, font));
+                            }
+                            else
+                            {
+                                cell = new PdfPCell(new Phrase(value, font));
+                                cell.HorizontalAlignment = 0;
+                                table.AddCell(cell);
+                                //table.AddCell(new Phrase(value, font));
+                            }
+
+                        }
+                    }
+             }
+            doc.Add(table);
+            return doc;
+        }
+        #endregion
+
+        #region InsertTable для последовательных столбцов
+        public iTextSharp.text.Document InsertTable(iTextSharp.text.Document doc, DataGridView dataGridView,
+            Font font = null, int countColumns = 0)
+        {
+            
+            //Создать таблицу
+            PdfPTable table = new PdfPTable(countColumns);
+            //Создать массив для ширины столбцов таблицы
+            float[] widths = new float[countColumns];
+            //ширина одного столбца
+            float width = doc.PageSize.Width / countColumns;
+            //установить ширину столбца "ИД"
+            widths[0] = width * 0.4f;
+            //Уставовить ширину для каждого столбца
+            for (int i = 1; i < countColumns; i++)
             {
-                for (int i = 0; i < dataGridView.Rows.Count; i++)
+                widths[i] = width;
+            }
+            //Задать размер таблицы
+            table.SetWidths(widths);
+            //Создание шапки таблицы
+            PdfPCell cell = null;
+            for (int i = 0; i < countColumns; i++)
+            {
+                //Создать ячейку таблицы с данными
+                cell = new PdfPCell(new Phrase(dataGridView.Columns[i].HeaderText, font));
+                cell.HorizontalAlignment = 1;
+                table.AddCell(cell);
+                //table.AddCell(new Phrase(dataGridView.Columns[i].HeaderText, font));
+            }
+            //Флаг первая строка как шапка
+            table.HeaderRows = 1;
+            //установить значение, задать входной формат даты и нужный формат даты на выходе
+            string value = default(string),
+                inputFormat = "dd'.'MM'.'yyyy' 'H':'mm':'ss",
+                outputFormat = "dd'.'MM'.'yyyy";
+            DateTime dateTime = default(DateTime);
+
+            //создать таблицу по заданным столбцам
+             for (int i = 0; i < dataGridView.Rows.Count; i++)
+                {
+                    for (int j = 0; j < countColumns; j++)
+                    {
+                        if (dataGridView[j, i].Value != null)
+                        {
+                            //Получаем значение ячейки
+                            value = dataGridView[j, i].Value.ToString();
+                            //Если значение строки являеться датой, то превращаем её в дату с заданным форматом
+                            if (DateTime.TryParseExact(value, inputFormat,
+                                CultureInfo.InvariantCulture, DateTimeStyles.NoCurrentDateDefault,
+                                out dateTime))
+                            {
+                                //Получаем строку с необходимым нам форматом даты
+                                value = dateTime.ToString(outputFormat, null);
+                                //Создаём ячейку
+                                cell = new PdfPCell(new Phrase(value, font));
+                                //Выравниваем содержимое ячейки по левому краю
+                                cell.HorizontalAlignment = 0;
+                                table.AddCell(cell);
+                                //table.AddCell(new Phrase(value, font));
+                            }
+                            else
+                            {
+                                cell = new PdfPCell(new Phrase(value, font));
+                                cell.HorizontalAlignment = 0;
+                                table.AddCell(cell);
+                                //table.AddCell(new Phrase(value, font));
+                            }
+
+                        }
+                    }
+                }         
+            doc.Add(table);
+            return doc;
+        }
+        #endregion
+
+        #region InsertTable для заданных столбцов 
+        public iTextSharp.text.Document InsertTable(iTextSharp.text.Document doc, DataGridView dataGridView,
+            Font font = null, int[] numberColumns = null)
+        {
+            //Создать таблицу
+            PdfPTable table = new PdfPTable(numberColumns.Length);
+            //Создать массив для ширины столбцов таблицы
+            float[] widths = new float[numberColumns.Length];
+            //ширина одного столбца
+            float width = doc.PageSize.Width / numberColumns.Length;
+            //установить ширину столбца "ИД"
+            widths[0] = width * 0.4f;
+            //Уставовить ширину для каждого столбца
+            for (int i = 1; i < numberColumns.Length; i++)
+            {
+                widths[i] = width;
+            }
+            //Задать размер таблицы
+            table.SetWidths(widths);
+            //Создание шапки таблицы
+            PdfPCell cell = null;
+            for (int i = 0; i < numberColumns.Length; i++)
+            {
+                //Создать ячейку таблицы с данными
+                cell = new PdfPCell(new Phrase(dataGridView.Columns[i].HeaderText, font));
+                cell.HorizontalAlignment = 1;
+                table.AddCell(cell);
+                //table.AddCell(new Phrase(dataGridView.Columns[i].HeaderText, font));
+            }
+            //Флаг первая строка как шапка
+            table.HeaderRows = 1;
+            //установить значение, задать входной формат даты и нужный формат даты на выходе
+            string value = default(string),
+                inputFormat = "dd'.'MM'.'yyyy' 'H':'mm':'ss",
+                outputFormat = "dd'.'MM'.'yyyy";
+            DateTime dateTime = default(DateTime);
+
+            //создать таблицу по заданным столбцам
+            for (int i = 0; i < dataGridView.Rows.Count; i++)
                 {
                     for (int j = 0; j < numberColumns.Length; j++)
                     {
@@ -259,55 +432,13 @@ namespace Administrator_company.LogicProgram
 
                         }
                     }
-                }
-            }
-            else
-            {
-                if (countColumns > 0)
-                    columnsCount = countColumns;
-                else
-                    columnsCount = dataGridView.Columns.Count;
-
-                for (int i = 0; i < dataGridView.Rows.Count; i++)
-                {
-                    for (int j = 0; j < columnsCount; j++)
-                    {
-                        if (dataGridView[j, i].Value != null)
-                        {
-                            //Получаем значение ячейки
-                            value = dataGridView[j, i].Value.ToString();
-                            //Если значение строки являеться датой, то превращаем её в дату с заданным форматом
-                            if (DateTime.TryParseExact(value, inputFormat,
-                                CultureInfo.InvariantCulture, DateTimeStyles.NoCurrentDateDefault,
-                                out dateTime))
-                            {
-                                //Получаем строку с необходимым нам форматом даты
-                                value = dateTime.ToString(outputFormat, null);
-                                //Создаём ячейку
-                                cell = new PdfPCell(new Phrase(value, font));
-                                //Выравниваем содержимое ячейки по левому краю
-                                cell.HorizontalAlignment = 0;
-                                table.AddCell(cell);
-                                //table.AddCell(new Phrase(value, font));
-                            }
-                            else
-                            {
-                                cell = new PdfPCell(new Phrase(value, font));
-                                cell.HorizontalAlignment = 0;
-                                table.AddCell(cell);
-                                //table.AddCell(new Phrase(value, font));
-                            }
-
-                        }
-                    }
-                }
             }
             doc.Add(table);
             return doc;
         }
-
-
+        #endregion
 
         #endregion
+
     }
-}
+    }
