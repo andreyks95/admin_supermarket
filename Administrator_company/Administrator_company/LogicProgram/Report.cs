@@ -165,7 +165,9 @@ namespace Administrator_company.LogicProgram
         /// <param name="saveFileDialog">Куда следует сохранить файл</param>
         /// <param name="nameHeader">Название отчёта, данные для шапки отчёта</param>
         /// <param name="totalsForFooter">Набор значений для подвала (футера) отчёта</param>
-        public void CreateBasicReport(DataGridView  dataGridView, SaveFileDialog saveFileDialog, string nameHeader, string[] totalsForFooter)
+        /// <param name="countColumnsTable">Количество столбцов, которые нужно отобразить (последовательно)</param>
+        /// <param name="numberColumnsTable">Номера столбцов, которые нужно отобразить</param>
+        public void CreateBasicReport(DataGridView  dataGridView, SaveFileDialog saveFileDialog, string nameHeader, string[] totalsForFooter, int countColumnsTable = 0, int[] numberColumnsTable = null)
         {
             try
             {
@@ -174,7 +176,7 @@ namespace Administrator_company.LogicProgram
                 doc.Open();
                 doc = CreateHeader(doc, nameHeader, font);
                 doc = CreateParagraph(doc);
-                doc = CreateTable(doc, dataGridView, font);
+                doc = CreateTable(doc, dataGridView, font, countColumnsTable, numberColumnsTable);
                 font = SetFont(16f, iTextSharp.text.Font.BOLDITALIC, BaseColor.BLACK);
                 string[] allValues = totalsForFooter;
                 doc = CreateFooter(doc, allValues, null, font, 0, 0, 30f);
