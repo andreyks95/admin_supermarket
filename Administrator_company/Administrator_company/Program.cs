@@ -14,9 +14,9 @@ namespace Administrator_company
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             //Запустить сначала эту форму
-            Application.Run(new MainFormTest());
+            //Application.Run(new MainFormTest());
             //Application.Run(new Administrator_company.TableOld.MainForm());
-            //Application.Run(new MainForm());
+            Application.Run(new MainForm());
         }
     }
 }

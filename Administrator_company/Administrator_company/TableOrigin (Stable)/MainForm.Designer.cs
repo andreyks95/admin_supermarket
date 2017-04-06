@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.InfoButton = new System.Windows.Forms.Button();
             this.PositionButton = new System.Windows.Forms.Button();
             this.EmployeesButton = new System.Windows.Forms.Button();
@@ -93,7 +94,7 @@
             this.ProductsButton.Name = "ProductsButton";
             this.ProductsButton.Size = new System.Drawing.Size(140, 40);
             this.ProductsButton.TabIndex = 5;
-            this.ProductsButton.Text = "Продукты";
+            this.ProductsButton.Text = "Товары";
             this.ProductsButton.UseVisualStyleBackColor = true;
             this.ProductsButton.Click += new System.EventHandler(this.ProductsButton_Click);
             // 
@@ -165,7 +166,7 @@
             // 
             this.продуктыToolStripMenuItem.Name = "продуктыToolStripMenuItem";
             this.продуктыToolStripMenuItem.Size = new System.Drawing.Size(229, 22);
-            this.продуктыToolStripMenuItem.Text = "Продукты";
+            this.продуктыToolStripMenuItem.Text = "Товары";
             this.продуктыToolStripMenuItem.Click += new System.EventHandler(this.продуктыToolStripMenuItem_Click);
             // 
             // складToolStripMenuItem
@@ -186,7 +187,7 @@
             // оПрограммеToolStripMenuItem
             // 
             this.оПрограммеToolStripMenuItem.Name = "оПрограммеToolStripMenuItem";
-            this.оПрограммеToolStripMenuItem.Size = new System.Drawing.Size(149, 22);
+            this.оПрограммеToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.оПрограммеToolStripMenuItem.Text = "О программе";
             this.оПрограммеToolStripMenuItem.Click += new System.EventHandler(this.оПрограммеToolStripMenuItem_Click);
             // 
@@ -203,6 +204,7 @@
             this.Controls.Add(this.PositionButton);
             this.Controls.Add(this.InfoButton);
             this.Controls.Add(this.menuStrip1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
             this.MaximizeBox = false;
             this.MaximumSize = new System.Drawing.Size(250, 310);
