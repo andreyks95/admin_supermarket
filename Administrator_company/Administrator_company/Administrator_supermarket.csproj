@@ -23,7 +23,7 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <ApplicationRevision>1</ApplicationRevision>
+    <ApplicationRevision>2</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -61,6 +61,12 @@
     <SignManifests>true</SignManifests>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="itextsharp, Version=5.5.11.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <HintPath>..\packages\iTextSharp.5.5.11\lib\itextsharp.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.Common, Version=12.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91" />
+    <Reference Include="Microsoft.ReportViewer.WinForms, Version=12.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL" />
     <Reference Include="MySql.Data, Version=6.9.9.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -72,6 +78,7 @@
       <HintPath>..\packages\Microsoft.Chart.Controls.3.5.30729\lib\net35\System.Web.DataVisualization.Design.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="System.Web.Services" />
     <Reference Include="System.Windows.Forms.DataVisualization">
       <HintPath>..\packages\Microsoft.Chart.Controls.3.5.30729\lib\net35\System.Windows.Forms.DataVisualization.dll</HintPath>
       <Private>True</Private>
@@ -89,57 +96,80 @@
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
+    <Reference Include="Telerik.WinControls, Version=2016.2.608.40, Culture=neutral, PublicKeyToken=5bb2a467cbec794e" />
+    <Reference Include="Telerik.WinControls.Themes.Windows8, Version=2016.2.608.40, Culture=neutral, PublicKeyToken=5bb2a467cbec794e, processorArchitecture=MSIL" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="LogicProgram\Checking.cs" />
     <Compile Include="LogicProgram\Connection.cs" />
-    <Compile Include="Form1.cs">
+    <Compile Include="LogicProgram\DocumentPDF.cs" />
+    <Compile Include="LogicProgram\GetTextObjectsForm.cs" />
+    <Compile Include="LogicProgram\Report.cs" />
+    <Compile Include="Preview %28Test%29\EmployeesTestForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="Preview %28Test%29\EmployeesTestForm.Designer.cs">
+      <DependentUpon>EmployeesTestForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="CodeForTable\TableAdministrator.cs">
+    <Compile Include="Preview %28Test%29\MainFormTest.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="CodeForTable\TableAdministrator.Designer.cs">
+    <Compile Include="Preview %28Test%29\MainFormTest.Designer.cs">
+      <DependentUpon>MainFormTest.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Preview %28Test%29\ReportTestForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Preview %28Test%29\ReportTestForm.Designer.cs">
+      <DependentUpon>ReportTestForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TableOld\MainForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TableOld\MainForm.Designer.cs">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TableOld\TableAdministrator.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TableOld\TableAdministrator.Designer.cs">
       <DependentUpon>TableAdministrator.cs</DependentUpon>
     </Compile>
     <Compile Include="LogicProgram\Settings.cs" />
-    <Compile Include="Preview %28Test%29\EmployeesForm.cs">
+    <Compile Include="TableOrigin %28Stable%29\AboutProgram.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Preview %28Test%29\EmployeesForm.Designer.cs">
+    <Compile Include="TableOrigin %28Stable%29\AboutProgram.Designer.cs">
+      <DependentUpon>AboutProgram.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TableOrigin %28Stable%29\EmployeesForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TableOrigin %28Stable%29\EmployeesForm.Designer.cs">
       <DependentUpon>EmployeesForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Preview %28Test%29\MainForm.cs">
+    <Compile Include="TableOrigin %28Stable%29\MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Preview %28Test%29\MainForm.Designer.cs">
+    <Compile Include="TableOrigin %28Stable%29\MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Preview %28Test%29\PositionForm.cs">
+    <Compile Include="TableOrigin %28Stable%29\PositionForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Preview %28Test%29\PositionForm.Designer.cs">
+    <Compile Include="TableOrigin %28Stable%29\PositionForm.Designer.cs">
       <DependentUpon>PositionForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Preview %28Test%29\ProductsForm.cs">
+    <Compile Include="TableOrigin %28Stable%29\ProductsForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Preview %28Test%29\ProductsForm.Designer.cs">
+    <Compile Include="TableOrigin %28Stable%29\ProductsForm.Designer.cs">
       <DependentUpon>ProductsForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Preview %28Test%29\Stock.cs">
+    <Compile Include="TableOrigin %28Stable%29\StockForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Preview %28Test%29\Stock.Designer.cs">
-      <DependentUpon>Stock.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Preview %28Test%29\StockForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Preview %28Test%29\StockForm.Designer.cs">
+    <Compile Include="TableOrigin %28Stable%29\StockForm.Designer.cs">
       <DependentUpon>StockForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Preview %28Test%29\TestForm.cs">
@@ -148,68 +178,79 @@
     <Compile Include="Preview %28Test%29\TestForm.Designer.cs">
       <DependentUpon>TestForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Preview %28Test%29\InfoForm.cs">
+    <Compile Include="TableOrigin %28Stable%29\InfoForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Preview %28Test%29\InfoForm.Designer.cs">
+    <Compile Include="TableOrigin %28Stable%29\InfoForm.Designer.cs">
       <DependentUpon>InfoForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Preview %28Test%29\TestFunction.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="CodeForTable\TableDepartment.cs">
+    <Compile Include="TableOld\TableDepartment.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="CodeForTable\TableDepartment.Designer.cs">
+    <Compile Include="TableOld\TableDepartment.Designer.cs">
       <DependentUpon>TableDepartment.cs</DependentUpon>
     </Compile>
-    <Compile Include="CodeForTable\TableEmployees.cs">
+    <Compile Include="TableOld\TableEmployees.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="CodeForTable\TableEmployees.Designer.cs">
+    <Compile Include="TableOld\TableEmployees.Designer.cs">
       <DependentUpon>TableEmployees.cs</DependentUpon>
     </Compile>
-    <Compile Include="CodeForTable\TableProducts.cs">
+    <Compile Include="TableOld\TableProducts.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="CodeForTable\TableProducts.Designer.cs">
+    <Compile Include="TableOld\TableProducts.Designer.cs">
       <DependentUpon>TableProducts.cs</DependentUpon>
     </Compile>
-    <Compile Include="CodeForTable\TableStock.cs">
+    <Compile Include="TableOld\TableStock.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="CodeForTable\TableStock.Designer.cs">
+    <Compile Include="TableOld\TableStock.Designer.cs">
       <DependentUpon>TableStock.cs</DependentUpon>
     </Compile>
     <Compile Include="LogicProgram\Сalculations.cs" />
-    <EmbeddedResource Include="Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <EmbeddedResource Include="Preview %28Test%29\EmployeesTestForm.resx">
+      <DependentUpon>EmployeesTestForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="CodeForTable\TableAdministrator.resx">
-      <DependentUpon>TableAdministrator.cs</DependentUpon>
+    <EmbeddedResource Include="Preview %28Test%29\MainFormTest.resx">
+      <DependentUpon>MainFormTest.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Preview %28Test%29\EmployeesForm.resx">
-      <DependentUpon>EmployeesForm.cs</DependentUpon>
+    <EmbeddedResource Include="Preview %28Test%29\MyReport.rdlc" />
+    <EmbeddedResource Include="Preview %28Test%29\ReportTestForm.resx">
+      <DependentUpon>ReportTestForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Preview %28Test%29\MainForm.resx">
+    <EmbeddedResource Include="Properties\licenses.licx" />
+    <EmbeddedResource Include="TableOld\MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Preview %28Test%29\PositionForm.resx">
+    <EmbeddedResource Include="TableOld\TableAdministrator.resx">
+      <DependentUpon>TableAdministrator.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TableOrigin %28Stable%29\AboutProgram.resx">
+      <DependentUpon>AboutProgram.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TableOrigin %28Stable%29\EmployeesForm.resx">
+      <DependentUpon>EmployeesForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TableOrigin %28Stable%29\MainForm.resx">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TableOrigin %28Stable%29\PositionForm.resx">
       <DependentUpon>PositionForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Preview %28Test%29\ProductsForm.resx">
+    <EmbeddedResource Include="TableOrigin %28Stable%29\ProductsForm.resx">
       <DependentUpon>ProductsForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Preview %28Test%29\Stock.resx">
-      <DependentUpon>Stock.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Preview %28Test%29\StockForm.resx">
+    <EmbeddedResource Include="TableOrigin %28Stable%29\StockForm.resx">
       <DependentUpon>StockForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Preview %28Test%29\TestForm.resx">
       <DependentUpon>TestForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Preview %28Test%29\InfoForm.resx">
+    <EmbeddedResource Include="TableOrigin %28Stable%29\InfoForm.resx">
       <DependentUpon>InfoForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -221,16 +262,16 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="CodeForTable\TableDepartment.resx">
+    <EmbeddedResource Include="TableOld\TableDepartment.resx">
       <DependentUpon>TableDepartment.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="CodeForTable\TableEmployees.resx">
+    <EmbeddedResource Include="TableOld\TableEmployees.resx">
       <DependentUpon>TableEmployees.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="CodeForTable\TableProducts.resx">
+    <EmbeddedResource Include="TableOld\TableProducts.resx">
       <DependentUpon>TableProducts.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="CodeForTable\TableStock.resx">
+    <EmbeddedResource Include="TableOld\TableStock.resx">
       <DependentUpon>TableStock.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Administrator_supermarket_TemporaryKey.pfx" />

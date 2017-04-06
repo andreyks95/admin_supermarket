@@ -1,11 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
-namespace Administrator_supermarket
+namespace Administrator_company.LogicProgram
 {
     /// <summary>
     /// Этот класс содержит методы для:
@@ -587,6 +585,47 @@ namespace Administrator_supermarket
 
         #endregion
 
+        #region Проверить корректность ввода дат
+
+        #region CheckDate. Проверить корректность ввода дат
+        /// <summary>
+        /// CheckDate. Проверить корректность ввода дат
+        /// </summary>
+        /// <param name="startDateTimePicker">Начальная дата</param>
+        /// <param name="endDateTimePicker">Конечная дата</param>
+        /// <returns>Можно добавлять или нет</returns>
+        public bool CheckDate(DateTimePicker startDateTimePicker, DateTimePicker endDateTimePicker)
+        {
+            try
+            {
+                DateTime startDate = startDateTimePicker.Value,
+                    endDate = endDateTimePicker.Value;
+                TimeSpan difference = endDate - startDate;
+                string resultDif = difference.ToString();
+                return resultDif[0] != '-';
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                return false;
+            }
+        }
+        #endregion
+
+        #region CheckDate. Проверить корректность ввода дат
+        /// <summary>
+        /// CheckDate. Проверить корректность ввода дат
+        /// </summary>
+        /// <param name="dateTimePickers">Все dateTimpePicker-ы которые содержат даты</param>
+        /// <returns>Можно добавлять или нет</returns>
+        public bool CheckDate(DateTimePicker[] dateTimePickers)
+        {
+            return CheckDate(dateTimePickers[0], dateTimePickers[1]);
+        }
+        #endregion
+        
+        #endregion
+
         #region ErrorMessage
         /// <summary>
         ///Если имеются неверно вводимиые данные в таблицу, то закрываем окно в которой оторображается таблица
@@ -597,7 +636,7 @@ namespace Administrator_supermarket
         public void ErrorMessage(System.Windows.Forms.Form Form)
         {
 
-            string message = "Ошибка при добавление записей в БД! \nПричины: пустое обязательное для записи поле или попытка ввода sql-инъекции.";
+            string message = "Ошибка при добавление записей в БД! \nПричины: пустое обязательное для записи поле, попытка ввода sql-инъекции, конечная дата меньше чем началальная";
             string caption = "Неверный ввод!";
             //создаётся MessageBox с кнопками: "Продолжить", "Отмена"
             MessageBoxButtons buttons = MessageBoxButtons.RetryCancel;
@@ -609,5 +648,6 @@ namespace Administrator_supermarket
                Form.Close();
         }
         #endregion
+
     }
 }
