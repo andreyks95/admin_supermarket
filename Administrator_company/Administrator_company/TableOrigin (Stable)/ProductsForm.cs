@@ -17,6 +17,8 @@ namespace Administrator_company
         Connection connection = new Connection();
         Settings settings = new Settings();
         Checking checking = new Checking();
+        Report report = new Report();
+
         BindingManagerBase managerBase; //для перемещения по таблице 
 
         private static string nameTable = "products", //таблица
@@ -51,6 +53,7 @@ namespace Administrator_company
             managerBase = this.BindingContext[table]; //подключаем таблицу для передвижения по ней
         }
 
+        #region Работа с данными (вставка, обновление, удаление)
         private void Insert_Click(object sender, EventArgs e)
         {
             TextBox[] textBoxs = { textBox1, textBox2, textBox3, textBox4, textBox5 };
@@ -148,6 +151,7 @@ namespace Administrator_company
                 checking.ErrorMessage(this);
             }
         }
+        #endregion
 
         private void Find_Click(object sender, EventArgs e)
         {
@@ -222,6 +226,8 @@ namespace Administrator_company
             settings.CurrentColumnCellsTEXT(ColumnsTextForComboBox, comboBoxs, dataGridView1);
         }
 
+
+        #region Навигация по таблице
         private void FirstRecordButton_Click(object sender, EventArgs e)
         {
             managerBase.Position = 0;
@@ -241,5 +247,52 @@ namespace Administrator_company
         {
             managerBase.Position = managerBase.Count;
         }
+        #endregion
+
+        #region Отчет
+        private void ReportButton_Click(object sender, EventArgs e)
+        {
+            report.CreateBasicReport(dataGridView1, saveFileDialog1, "Информация о продуктах", GetValues());
+        }
+
+        private string[] GetValues()
+        {
+            //Результаты 
+            List<string> allResult = new List<string>();
+
+            //Общее данные
+            string partQuery =
+                " select concat(coalesce(products.name, ''), \"; \", coalesce(products.category, ''), \" категория; \"," +
+                " coalesce(products.kind, ''), \"; \", coalesce(products.subspecies, ''), \"; \"," +
+                " coalesce(products.price_for_one, ''), \" грн.; \", coalesce(products.measurement, '')) AS result" +
+                " from " + connection.NAME_DATABASE + ".products " +
+                " where products.price_for_one = (SELECT ",
+                otherPart = "(products.price_for_one) from " + connection.NAME_DATABASE + ".products);",
+                query = default(string),
+                result = null;
+
+            //Максимальный возраст сотрудника
+            query = partQuery + " max" + otherPart;
+            result = "Максимальная цена товара: " + connection.GetOneResult(query);
+            allResult.Add(result);
+
+            //Минимальный возраст сотрудника
+            query = partQuery + " min" + otherPart;
+            result = "Минимальная цена товара: " + connection.GetOneResult(query);
+            allResult.Add(result);
+
+            //Cр. цена продуктов
+            query = connection.GetSelectFunc("products", "price_for_one");
+            result = "Средняя цена продуктов: " + connection.GetOneResult(query) + " грн.";
+            allResult.Add(result);
+
+            //Суммарная стоимость закупки в супермаркете
+            query = connection.GetSelectFunc("products", "price_for_one", "sum");
+            result = "Суммарная стоимость закупки: " + connection.GetOneResult(query) + " грн.";
+            allResult.Add(result);
+
+            return allResult.ToArray();
+        }
+        #endregion
     }
 }
