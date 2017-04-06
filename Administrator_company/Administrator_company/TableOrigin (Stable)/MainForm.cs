@@ -10,70 +10,73 @@ namespace Administrator_company
             InitializeComponent();
         }
 
-        private void InfoButton_Click(object sender, EventArgs e)
-        {
-            InfoForm infoForm = new InfoForm();
-            infoForm.Show();
-        }
+        PositionForm positionForm = new PositionForm();
+        EmployeesForm employeesForm = new EmployeesForm();
+        ProductsForm productsForm = new ProductsForm();
+        StockForm stockForm = new StockForm();
+        InfoForm infoForm = new InfoForm();
+        AboutProgram aboutProgram = new AboutProgram();
 
         private void PositionButton_Click(object sender, EventArgs e)
         {
-            PositionForm positionForm = new PositionForm();
-            positionForm.Show();
+           positionForm.Show();
         }
 
         private void EmployeesButton_Click(object sender, EventArgs e)
         {
-            EmployeesForm employeesForm = new EmployeesForm();
             employeesForm.Show();
         }
 
         private void ProductsButton_Click(object sender, EventArgs e)
         {
-            ProductsForm productsForm = new ProductsForm();
             productsForm.Show();
         }
 
         private void StockButton_Click(object sender, EventArgs e)
         {
-            StockForm stockForm = new StockForm();
             stockForm.Show();
         }
 
+        private void InfoButton_Click(object sender, EventArgs e)
+        {
+            infoForm.Show();
+        }
+
+        #region Пункты меню
+
+        #region Таблицы
         private void информацияОСотрудникахToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            InfoForm infoForm = new InfoForm();
             infoForm.Show();
         }
 
         private void должностиToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            PositionForm positionForm = new PositionForm();
             positionForm.Show();
         }
 
         private void сотрудникиToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            EmployeesForm employeesForm = new EmployeesForm();
             employeesForm.Show();
         }
 
         private void продуктыToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ProductsForm productsForm = new ProductsForm();
-            productsForm.Show();
+           productsForm.Show();
         }
 
         private void складToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            StockForm stockForm = new StockForm();
-            stockForm.Show();
+           stockForm.Show();
         }
 
         private void оПрограммеToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            AboutProgram aboutProgram = new AboutProgram();
             aboutProgram.Show();
         }
+        #endregion
+
+
+        #endregion
     }
 }
