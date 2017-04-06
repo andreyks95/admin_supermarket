@@ -28,7 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(StockForm));
             this.panel1 = new System.Windows.Forms.Panel();
+            this.ReportButton = new System.Windows.Forms.Button();
             this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.label9 = new System.Windows.Forms.Label();
@@ -54,7 +56,6 @@
             this.textBoxSearch = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.ReportButton = new System.Windows.Forms.Button();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -86,6 +87,16 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(370, 266);
             this.panel1.TabIndex = 0;
+            // 
+            // ReportButton
+            // 
+            this.ReportButton.Location = new System.Drawing.Point(258, 44);
+            this.ReportButton.Name = "ReportButton";
+            this.ReportButton.Size = new System.Drawing.Size(86, 26);
+            this.ReportButton.TabIndex = 58;
+            this.ReportButton.Text = "Отчет";
+            this.ReportButton.UseVisualStyleBackColor = true;
+            this.ReportButton.Click += new System.EventHandler(this.ReportButton_Click);
             // 
             // dateTimePicker2
             // 
@@ -319,16 +330,6 @@
             this.dataGridView1.SelectionChanged += new System.EventHandler(this.dataGridView1_SelectionChanged);
             this.dataGridView1.Click += new System.EventHandler(this.dataGridView1_Click);
             // 
-            // ReportButton
-            // 
-            this.ReportButton.Location = new System.Drawing.Point(258, 44);
-            this.ReportButton.Name = "ReportButton";
-            this.ReportButton.Size = new System.Drawing.Size(86, 26);
-            this.ReportButton.TabIndex = 58;
-            this.ReportButton.Text = "Отчет";
-            this.ReportButton.UseVisualStyleBackColor = true;
-            this.ReportButton.Click += new System.EventHandler(this.ReportButton_Click);
-            // 
             // StockForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -337,9 +338,10 @@
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MinimumSize = new System.Drawing.Size(965, 305);
             this.Name = "StockForm";
-            this.Text = "StockForm";
+            this.Text = "Склад";
             this.Load += new System.EventHandler(this.StockForm_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
