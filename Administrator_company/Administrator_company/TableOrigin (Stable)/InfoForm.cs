@@ -261,8 +261,10 @@ namespace Administrator_company
         #region создание отчета
         private void ReportButton_Click(object sender, EventArgs e)
         {
-            report.CreateBasicReport(dataGridView1,saveFileDialog1, "Информация о сотрудниках",GetValues(), 6);
+          report.CreateBasicReport(dataGridView1,saveFileDialog1, "Информация о сотрудниках",GetValues(), 6);
         }
+
+        //public  void CreateReport() => report.CreateBasicReport(dataGridView1, saveFileDialog1, "Информация о сотрудниках", GetValues(), 6);
 
         private string[] GetValues()
         {
@@ -282,12 +284,12 @@ namespace Administrator_company
 
             //Максимальный возраст сотрудника
             query = partQuery + " max" + otherPart;
-            result = "Максимальный возрасто сотрудника: " + connection.GetOneResult(query);
+            result = "Максимальный возраст сотрудника: " + connection.GetOneResult(query);
             allResult.Add(result);
 
             //Минимальный возраст сотрудника
             query = partQuery + " min" + otherPart;
-            result = "Минимальный возрасто сотрудника: " + connection.GetOneResult(query);
+            result = "Минимальный возраст сотрудника: " + connection.GetOneResult(query);
             allResult.Add(result);
 
             //Общее кол. человек в супермаркете

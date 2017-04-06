@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(InfoForm));
             this.label1 = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
@@ -52,13 +53,13 @@
             this.Find = new System.Windows.Forms.Button();
             this.Clear = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.ReportButton = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
             this.PreviousRecordButton = new System.Windows.Forms.Button();
             this.NextRecordButton = new System.Windows.Forms.Button();
             this.LastRecordButton = new System.Windows.Forms.Button();
             this.FirstRecordButton = new System.Windows.Forms.Button();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
-            this.ReportButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel1.SuspendLayout();
@@ -303,6 +304,16 @@
             this.panel1.Size = new System.Drawing.Size(364, 486);
             this.panel1.TabIndex = 23;
             // 
+            // ReportButton
+            // 
+            this.ReportButton.Location = new System.Drawing.Point(276, 38);
+            this.ReportButton.Name = "ReportButton";
+            this.ReportButton.Size = new System.Drawing.Size(85, 26);
+            this.ReportButton.TabIndex = 15;
+            this.ReportButton.Text = "Отчет";
+            this.ReportButton.UseVisualStyleBackColor = true;
+            this.ReportButton.Click += new System.EventHandler(this.ReportButton_Click);
+            // 
             // panel2
             // 
             this.panel2.Controls.Add(this.PreviousRecordButton);
@@ -357,16 +368,6 @@
             this.FirstRecordButton.UseVisualStyleBackColor = true;
             this.FirstRecordButton.Click += new System.EventHandler(this.FirstRecordButton_Click);
             // 
-            // ReportButton
-            // 
-            this.ReportButton.Location = new System.Drawing.Point(276, 38);
-            this.ReportButton.Name = "ReportButton";
-            this.ReportButton.Size = new System.Drawing.Size(85, 26);
-            this.ReportButton.TabIndex = 15;
-            this.ReportButton.Text = "Отчет";
-            this.ReportButton.UseVisualStyleBackColor = true;
-            this.ReportButton.Click += new System.EventHandler(this.ReportButton_Click);
-            // 
             // InfoForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -376,6 +377,7 @@
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.dataGridView1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MinimumSize = new System.Drawing.Size(1005, 525);
             this.Name = "InfoForm";
             this.Text = "Информация о сотрудниках";
