@@ -15,7 +15,13 @@ namespace Administrator_company.LogicProgram
     {
         #region Подключение к БД
         //Подсоединение к БД MySQL
-        public MySqlConnection connection = new MySqlConnection("datasource=localhost; port=3306; username = root; password = andrey_1a6c2b");
+
+        static readonly string connectString = 
+            //Подключение к локальной БД
+            "datasource=localhost; port=3306; username = root; password = andrey_1a6c2b";
+            //подкючение к серверу
+           // @"Server = sql11.freemysqlhosting.net; Port=3306; Database=sql11167831; Uid=sql11167831; Pwd=lP5p66HsVp;";
+        public MySqlConnection connection = new MySqlConnection(connectString);
 
         //подключение к серверу где находится бд.
         //public MySqlConnection connection = new MySqlConnection("Server =sql7.freemysqlhosting.net; Port=3306; Database=sql7150982; Uid=sql7150982; Pwd=1VAsQp6rY1;");
@@ -25,7 +31,11 @@ namespace Administrator_company.LogicProgram
 
         public MySqlDataAdapter adapter;
 
-        public readonly string NAME_DATABASE = "supermarket";
+        public readonly string NAME_DATABASE =
+            //Удалённая БД
+            //"sql11167831";
+            //Локальная БД
+            "supermarket";
 
         DataTable table = new DataTable();  
 
