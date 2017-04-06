@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PositionForm));
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -35,6 +36,7 @@
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.textBox3 = new System.Windows.Forms.TextBox();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.ReportButton = new System.Windows.Forms.Button();
             this.Delete = new System.Windows.Forms.Button();
             this.Update = new System.Windows.Forms.Button();
             this.Clear = new System.Windows.Forms.Button();
@@ -48,6 +50,7 @@
             this.textBoxSearch = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -103,6 +106,7 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.ReportButton);
             this.panel1.Controls.Add(this.Delete);
             this.panel1.Controls.Add(this.Update);
             this.panel1.Controls.Add(this.Clear);
@@ -119,6 +123,16 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(344, 161);
             this.panel1.TabIndex = 6;
+            // 
+            // ReportButton
+            // 
+            this.ReportButton.Location = new System.Drawing.Point(251, 40);
+            this.ReportButton.Name = "ReportButton";
+            this.ReportButton.Size = new System.Drawing.Size(86, 23);
+            this.ReportButton.TabIndex = 17;
+            this.ReportButton.Text = "Отчет";
+            this.ReportButton.UseVisualStyleBackColor = true;
+            this.ReportButton.Click += new System.EventHandler(this.ReportButton_Click);
             // 
             // Delete
             // 
@@ -262,9 +276,10 @@
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MinimumSize = new System.Drawing.Size(960, 200);
             this.Name = "PositionForm";
-            this.Text = "PositionForm";
+            this.Text = "Должности";
             this.Load += new System.EventHandler(this.PositionForm_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
@@ -297,5 +312,7 @@
         private System.Windows.Forms.Button FirstRecordButton;
         private System.Windows.Forms.TextBox textBoxSearch;
         private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Button ReportButton;
+        private System.Windows.Forms.SaveFileDialog saveFileDialog1;
     }
 }

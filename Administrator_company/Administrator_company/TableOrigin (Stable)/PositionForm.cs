@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Windows.Forms;
 using Administrator_company.LogicProgram;
@@ -16,6 +17,8 @@ namespace Administrator_company
         Connection connection = new Connection();
         Settings settings = new Settings();
         Checking checking = new Checking();
+        Report report = new Report();
+
         BindingManagerBase managerBase; //для перемещения по таблице 
 
         private static string nameTable = "position", //таблица
@@ -25,28 +28,6 @@ namespace Administrator_company
                                  nameFieldsAS = { "ИД", "Должность", "Зарплата"}, //как будут отображаться
                                  numericFields = { "id_position", "salary" }; //для корректного поиска по числовым столбцам                                                    
         private static MySqlDbType[] mySqlDbTypes = { MySqlDbType.UInt32, MySqlDbType.VarChar,  MySqlDbType.UInt32 };//для типов в (AddParameters)
-
-        //private object[] objects = new object[3];
-        //private readonly TextBox[] textBoxs = new TextBox[3];
-        //public object[] Objects
-        //{
-        //    get   { return objects;}
-        //    set{
-        //        objects[0] = textBox1;
-        //        objects[1] = textBox2;
-        //        objects[2] = textBox3;
-        //    }
-        //}
-        //public TextBox[] TextBoxs
-        //{
-        //    get{return textBoxs;}
-        //    set
-        //    {
-        //        textBoxs[0] = textBox1;
-        //        textBoxs[1] = textBox2;
-        //        textBoxs[2] = textBox3;
-        //    }
-        //}
 
         //При загрузке отобразить таблицу
         private void PositionForm_Load(object sender, EventArgs e)
@@ -63,6 +44,7 @@ namespace Administrator_company
             managerBase = this.BindingContext[table]; //подключаем таблицу для передвижения по ней
         }
 
+        #region Работа с записями (вставка, обновление, удаление)
         //Вставить данные 
         private void Insert_Click(object sender, EventArgs e)
         {
@@ -151,6 +133,8 @@ namespace Administrator_company
             }
         }
 
+        #endregion
+
         //Нахождение записи по id
         private void Find_Click(object sender, EventArgs e)
         {
@@ -211,6 +195,8 @@ namespace Administrator_company
             settings.CurrentColumnCellsTEXT(textBoxs, dataGridView1);
         }
 
+        #region навигация по таблице
+
         private void FirstRecordButton_Click(object sender, EventArgs e)
         {
             managerBase.Position = 0;
@@ -230,5 +216,51 @@ namespace Administrator_company
         {
             managerBase.Position = managerBase.Count;
         }
+        #endregion
+
+        #region создание отчёта
+
+        private void ReportButton_Click(object sender, EventArgs e)
+        {
+            report.CreateBasicReport(dataGridView1, saveFileDialog1, "Информация о должностях", GetValues());
+        }
+
+        private string[] GetValues()
+        {
+            //Результаты 
+            List<string> allResult = new List<string>();
+
+            //Общее данные
+            string partQuery = " select concat(position.position, \" - \", position.salary, \" грн.\") as result" +
+                               " from " + connection.NAME_DATABASE + ".position " +
+                               " where position.salary = (select ",
+                   otherPart = "(position.salary) from " + connection.NAME_DATABASE + ".position);",
+                   query = default(string),
+                   result = null;
+
+            //Должность и максимальная заработная плата 
+            query = partQuery + " max" + otherPart;
+            result = "Должность и максимальная заработная плата: " + connection.GetOneResult(query);
+            allResult.Add(result);
+
+            //Должность и минимальная заработная плата 
+            query = partQuery + " min" + otherPart;
+            result = "Должность и минимальная заработная плата: " + connection.GetOneResult(query);
+            allResult.Add(result);
+
+            //Cр. зарплата по должностям
+            query = connection.GetSelectFunc("position", "salary");
+            result = "Cр. зарплата по должностям: " + connection.GetOneResult(query) + " грн.";
+            allResult.Add(result);
+
+            //Количество должностей
+            query = connection.GetSelectFunc("position", "position", "count");
+            result = "Количество должностей: " + connection.GetOneResult(query);
+            allResult.Add(result);
+
+            return allResult.ToArray();
+        }
+
+        #endregion 
     }
 }
