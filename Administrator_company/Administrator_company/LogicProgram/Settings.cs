@@ -1,13 +1,12 @@
 ﻿using System;
-using System.CodeDom;
+using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
+using System.Globalization;
 using System.IO;
-using System.Reflection;
 using System.Windows.Forms;
-using MySql.Data.MySqlClient;
 
-namespace Administrator_supermarket
+namespace Administrator_company.LogicProgram
 {
     public class Settings
     {
@@ -448,7 +447,7 @@ namespace Administrator_supermarket
         /// <param name="comboBox">ComboBox формы куда нужно вставить текст из таблицы</param>
         public void InsertTextInComboBoxFromTable(DataTable table, int Column, ComboBox comboBox)
         {
-                comboBox.SelectedItem = table.Rows[0][Column].ToString();
+                comboBox.Text = table.Rows[0][Column].ToString();
         }
         #endregion
 
@@ -459,7 +458,7 @@ namespace Administrator_supermarket
         /// <param name="table">Текущая таблица</param>
         /// <param name="Columns">Номера столбцов где находятся текст</param>
         /// <param name="comboBoxs">Все ComboBox формы куда нужно вставить текст из таблицы</param>
-        public void InsertTextInComboBoxFromTable(DataTable table, int[] Columns, params ComboBox[] comboBoxs)
+        public void InsertTextInComboBoxFromTable(DataTable table, int[] Columns, ComboBox[] comboBoxs)
         {
             if(comboBoxs !=  null)
                 for (int i = 0; i < comboBoxs.Length; i++)
@@ -480,9 +479,17 @@ namespace Administrator_supermarket
         /// <param name="dateTimePicker">DateTimePicker формы куда нужно вставить дату из таблицы</param>
         public void InsertDateInDateTimePickerFromTable(DataTable table, int Column, DateTimePicker dateTimePicker)
         {
-            dateTimePicker.Text = table.Rows[0][Column].ToString(); //.ToString();
-            //or dateTimePicker.Value.Date = table.Rows[0][Column].ToString();
-        }
+            try {
+                if(table.Rows[0][Column].ToString() != null || table.Rows[0][Column] != DBNull.Value || table.Rows[0][Column].ToString() != "")
+                    dateTimePicker.Text = table.Rows[0][Column].ToString(); //.ToString();
+                //or dateTimePicker.Value.Date = table.Rows[0][Column].ToString();
+                else
+                {
+                    dateTimePicker.Text = null;
+                }
+            }
+            catch (Exception ex) { MessageBox.Show(ex.Message);}
+           }
         #endregion
 
         #region InsertDateInDateTimePickerFromTable overload. Вставить дату из таблицы в DateTimePicker-ы
@@ -574,5 +581,113 @@ namespace Administrator_supermarket
                     i.Text = null;
         }
         #endregion
+
+        #region FillComboBox. Заполнение значениями (Items) ComboBox
+        /// <summary>
+        /// аполнение значениями (Items) ComboBox
+        /// </summary>
+        /// <param name="comboBox">ComboBox формы, куда будут добавляться данные</param>
+        /// <param name="values">Список значений для Items ComboBox-a</param>
+        public void FillComboBox(ComboBox comboBox, List<string> values)
+        {
+            Connection connection = new Connection();
+            connection.OpenConnection();
+            foreach (var i in values)
+            {
+                comboBox.Items.Add(i);
+            }
+            connection.CloseConnection();
+        }
+        #endregion
+
+        #region GetIdFromComboBox
+
+        #region GetIdFromComboBox. Получить Id столбца из ComboBox
+        /// <summary>
+        /// Получить Id столбца из ComboBox
+        /// </summary>
+        /// <param name="comboBox">Текущий ComboBox с которого нужно получить id</param>
+        /// <returns>Id </returns>
+        public string GetIdFromComboBox(ComboBox comboBox)
+        {
+            string currentText = comboBox.Text,
+                   valueNumber = "";
+            foreach (char ch in currentText)
+            {
+                if (char.IsNumber(ch))
+                    valueNumber += ch;
+                else
+                    break;
+            }
+            return valueNumber;
+        }
+        #endregion
+
+        #region GetIdFromComboBox overload. Получить Id столбца из ComboBox. 
+        /// <summary>
+        /// Получить Id столбца из ComboBox
+        /// </summary>
+        /// <param name="value">Текущий ComboBox.Text с которого нужно получить id</param>
+        /// <returns>Id </returns>
+        public string GetIdFromComboBox(string value)
+        {
+            string currentText = value,
+                   valueNumber = "";
+            foreach (char ch in currentText)
+            {
+                if (char.IsNumber(ch))
+                    valueNumber += ch;
+                else
+                    break;
+            }
+            return valueNumber;
+        }
+        #endregion
+
+        #region GetIdFromComboBox overload. Получить массив всех id с ComboBox-ов
+        /// <summary>
+        /// Получить массив всех id с ComboBox-ов
+        /// </summary>
+        /// <param name="comboBoxs">Все переданные ComboBox-ы из которых можно получить id</param>
+        /// <returns>все значения id</returns>
+        public string[] GetIdFromComboBox(ComboBox[] comboBoxs)
+        {
+            string[] allValues = new string[comboBoxs.Length];
+            int i = 0;
+            foreach (var element in comboBoxs)
+                allValues[i++] = GetIdFromComboBox(element);
+            return allValues;
+        }
+        #endregion
+
+        #endregion
+
+        #region GetDateTimeNow
+        public static string GetDateTimeNow() => DateTime.Now.ToString("dd'.'MM'.'yyyy' 'HH':'mm':'ss", CultureInfo.InvariantCulture);
+        #endregion
+
+        #region DisplayEmptyCells
+        /*
+        public void DisplayEmptyCells(DataGridView dataGridView)
+        {
+            foreach (DataGridViewRow rw in dataGridView.Rows)
+            {
+                for (int i = 0; i < rw.Cells.Count; i++)
+                {
+                    if (rw.Cells[i].Value == null || rw.Cells[i].Value == DBNull.Value || String.IsNullOrWhiteSpace(rw.Cells[i].Value.ToString()))
+                    {
+                        rw.Cells[i].Value = " ";
+                    }
+                }
+            }
+
+            for (int i = 0; i < dataGridView.RowCount; i++)
+            {
+                dataGridView.Rows[i].Visible = true;
+            }
+            
+
+        }*/
+#endregion
     }
 }

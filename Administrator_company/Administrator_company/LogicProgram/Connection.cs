@@ -2,18 +2,26 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Globalization;
+using System.IO;
+using System.Linq;
 using System.Reflection;
 using System.Windows.Forms;
 using MySql.Data.MySqlClient;
 
-namespace Administrator_supermarket
+namespace Administrator_company.LogicProgram
 {
     //В этот класс будет скидываться все общие переменные (константы) и методы, которые будут использоваться для работы с таблицами
     public class Connection
     {
         #region Подключение к БД
         //Подсоединение к БД MySQL
-        public MySqlConnection connection = new MySqlConnection("datasource=localhost; port=3306; username = root; password = andrey_1a6c2b");
+
+        static readonly string connectString = 
+            //Подключение к локальной БД
+            "datasource=localhost; port=3306; username = root; password = andrey_1a6c2b";
+            //подкючение к серверу
+           // @"Server = sql11.freemysqlhosting.net; Port=3306; Database=sql11167831; Uid=sql11167831; Pwd=lP5p66HsVp;";
+        public MySqlConnection connection = new MySqlConnection(connectString);
 
         //подключение к серверу где находится бд.
         //public MySqlConnection connection = new MySqlConnection("Server =sql7.freemysqlhosting.net; Port=3306; Database=sql7150982; Uid=sql7150982; Pwd=1VAsQp6rY1;");
@@ -23,7 +31,11 @@ namespace Administrator_supermarket
 
         public MySqlDataAdapter adapter;
 
-        public const string NAME_DATABASE = "supermarket";
+        public readonly string NAME_DATABASE =
+            //Удалённая БД
+            //"sql11167831";
+            //Локальная БД
+            "supermarket";
 
         DataTable table = new DataTable();  
 
@@ -379,6 +391,7 @@ namespace Administrator_supermarket
                 //настраиваем отображение таблицы
                 settings.GetSettingDisplayTable(dataGridView, height);
                 dataGridView.DataSource = table; //подключаем заполненную таблицу и отображаем
+
                 if(cellsImages != null)
                 //Для отображения картинки в DataGridView
                 settings.GetViewImageInCellTable(dataGridView, cellsImages);
@@ -568,111 +581,6 @@ namespace Administrator_supermarket
         }
         #endregion
 
-        #region GetTextDate - Получить дату в виде текста для DateTimePicker
-        /// <summary>
-        /// Получить дату в виде текста для DateTimePicker
-        /// </summary>
-        /// <param name="obj">Объект DateTimePicker</param>
-        /// <returns>Дата в виде текста</returns>
-        public string GetTextDate(object obj)
-        {
-            string text;
-            Type currentType = obj.GetType();
-            PropertyInfo property = currentType.GetProperty("Value");
-            text= property.GetValue(obj).ToString();//в свойстве получить значение объекта
-
-            string inputFormat = "dd'.'MM'.'yyyy' 'H':'mm':'ss", //Текущий формат ввода DateTimePicker //"dd'.'MM'.'yyyy' 'HH':'mm':'ss"
-                   outputFormat =  "yyyy'-'MM'-'dd"; //для конвертирования даты в формат Date MySQL 
-            DateTime dateTime = DateTime.ParseExact(text, inputFormat, CultureInfo.InvariantCulture);//null); //Превращаем текст в дату  
-            text = dateTime.ToString(outputFormat, null); //Конвертируем дату в текст с нужным форматом данных
-            return text;
-        }
-        #endregion
-
-        #region GetText overload - Перегруженный. Получить текст с свойства объекта WinForm (TextBox, ComboBox ...)
-        /// <summary>
-        /// Получить текст с свойства объекта WinForm (TextBox, ComboBox ...)
-        /// </summary>
-        /// <param name="obj">Объект WinForm (TextBox, ComboBox ...)</param>
-        /// <param name="nameProperty">Название свойства объекта</param>
-        /// <returns>Текст с свойства объекта</returns>
-        public string GetText(object obj, string nameProperty)
-        {
-            string text = null;
-            Type currentType = obj.GetType();//получаем тип
-            PropertyInfo property = currentType.GetProperty(nameProperty);//Присваиваем ему свойство, c определённым именем. Получить свойство из этого типа
-           // text = property.GetValue(obj).ToString(); //в свойстве получить значение объекта
-
-            //Если выбран ComboBox
-            if (nameProperty == "SelectedItem")
-            {
-                //если SelectedItem == null, то есть не выбран
-                //Берём значение того, что введено в ComboBox
-                if (currentType.GetProperty(nameProperty).GetValue(obj) == null)
-                    //or if (string.IsNullOrEmpty(comboBox1.Text)) or if (comboBox1.SelectedIndex == -1)
-                {
-                    //text = currentType.GetProperty("Text").GetValue(obj).ToString();
-                    property = currentType.GetProperty("Text");
-                    text=property.GetValue(obj).ToString();//
-                }
-                else
-                    text = property.GetValue(obj).ToString();
-            }
-            else
-            {
-                text = property.GetValue(obj).ToString(); //в свойстве получить значение объекта             
-            }
-            return text;
-        }
-        #endregion
-
-        #region GetText. Получить текущий текст из TextBox, ComboBox
-        /// <summary>
-        /// возвращает текущий текст из comboBox или textBox
-        /// можно передать просто textBox или comboBox, а дальше из свойства объекта он вернёт текущий текст 
-        /// </summary>
-        /// <param name="obj">Объект который передаётся для выбора текста из его свойства</param>
-        /// <returns>Текущий текст объекта</returns>
-        public string GetText(object obj)
-        {
-            string text = null;
-            Type currentType; //создаём  тип
-            PropertyInfo property; //создаём свойство
-
-            if (obj is TextBox)
-            {
-                text = GetText(obj, "Text");
-                //currentType = obj.GetType(); //получаем тип
-                //property = currentType.GetProperty("Text");//Присваиваем ему свойство Text, если это textBox. Получить свойство text из этого типа                                            
-                //text = property.GetValue(obj).ToString(); //в свойстве получить значение объекта
-            }
-
-            //здесь нужно сделать если не selected item!
-            else if (obj is ComboBox)
-            {
-                //Выберает то свойство, в котором содержиться текст
-                //text = GetText(obj, "SelectedItem") ?? GetText(obj, "Text");
-                //text = GetText(obj, "Text");
-                text = GetText(obj, "SelectedItem");
-                //currentType = obj.GetType(); //получаем тип
-                //property = currentType.GetProperty("SelectedItem");//Присваиваем ему свойство SelectedItem, если это ComboBox. Получить свойство SelectedItem из этого типа                                            
-                //text = property.GetValue(obj).ToString(); //в свойстве получить значение объекта
-            }
-            else if (obj is DateTimePicker)
-            {
-                text = GetTextDate(obj);
-                //text = GetText(obj, "Value");
-                //currentType = obj.GetType(); //получаем тип
-                //property = currentType.GetProperty("Value");//Присваиваем ему свойство SelectedItem, если это ComboBox. Получить свойство SelectedItem из этого типа                                            
-                //text = property.GetValue(obj).ToString(); //в свойстве получить значение объекта
-            }
-            else
-                text = "";
-
-            return text;
-        }
-        #endregion
-
         #region AddParameters. Выполняем добавление команды (записи) Parameters.Add в MySqlCommand
         /// <summary>
         /// Выполняем добавление команды (записи) Parameters.Add в MySqlCommand
@@ -683,12 +591,31 @@ namespace Administrator_supermarket
         /// <param name="objects">Объекты TextBox, ComboBox, byte[]</param>
         public void AddParameters(MySqlCommand command, string variables, MySqlDbType mySqlDbTypes, object objects)
         {
+                GetTextObjectsForm getText = new GetTextObjectsForm();
                 //если объект является ComboBox или TextBox
                 if (objects is ComboBox || objects is TextBox || objects is DateTimePicker)
-                    command.Parameters.Add(variables, mySqlDbTypes).Value = GetText(objects); //GetText если есть текст в объектах
+                    command.Parameters.Add(variables, mySqlDbTypes).Value = getText.GetText(objects); //GetText если есть текст в объектах
                 else
                     command.Parameters.Add(variables, mySqlDbTypes).Value = objects; //Для других объектов                
         }
+        #endregion
+
+        #region AddParametersString overload. Выполняем добавление команды (записи) Parameters.Add в MySqlCommand
+        /// <summary>
+        /// Выполняем добавление команды (записи) Parameters.Add в MySqlCommand
+        /// </summary>
+        /// <param name="command">текущая MySqlCommand готова к выполнению</param>
+        /// <param name="variables">Переменные для добавление записи в таблицу</param>
+        /// <param name="mySqlDbTypes">Массив MySqlDbType MediumText, LongBlob, UInt32, VarChar</param>
+        /// <param name="values">Значения, необходимые для добавления</param>
+        public void AddParametersString(MySqlCommand command, string[] variables,  MySqlDbType[] mySqlDbTypes, string[] values)
+        {
+            int  i = 0, j=0;
+            foreach (string val in values)
+                command.Parameters.Add(variables[i++], mySqlDbTypes[j++]).Value = val;
+                //command.Parameters.AddWithValue(variables[i++],val);
+        }
+
         #endregion
 
         #region AddParameters overload. Выполняем добавление команды (записи) Parameters.Add в MySqlCommand
@@ -714,6 +641,31 @@ namespace Administrator_supermarket
                 //    AddParameters(command, variables[i], mySqlDbTypes[i], objects[i]);
                 //    //command.Parameters.Add(variables[i], mySqlDbTypes[i]).Value = objects[i]; //Для других объектов        
             }
+        }
+        #endregion
+
+        #region AddParameters overload. Выполняем добавление команды (записи) Parameters.Add в MySqlCommand
+        /// <summary>
+        /// Выполняем добавление команды (записи) Parameters.Add в MySqlCommand для многих полей
+        /// </summary>
+        /// <param name="command">текущая MySqlCommand готова к выполнению</param>
+        /// <param name="variables">Переменные для добавление записи в таблицу</param>
+        /// <param name="mySqlDbTypes">Массив MySqlDbType MediumText, LongBlob, UInt32, VarChar</param>
+        /// <param name="objects">Объекты TextBox, ComboBox, byte[]</param>
+        /// <param name="textBoxs">TextBox-ы на форме</param>
+        /// <param name="comboBoxs">ComboBox-ы на форме</param>
+        /// <param name="dateTimePickers">DateTimePikcer-ы на форме</param>
+        /// <param name="pictureBoxs">PictureBox-ы на форме</param>
+        public void AddParameters(MySqlCommand command, string[] variables, MySqlDbType[] mySqlDbTypes,
+            object[] objects=null, TextBox[] textBoxs = null, ComboBox[] comboBoxs = null,
+            DateTimePicker[] dateTimePickers = null, PictureBox[] pictureBoxs = null)
+        {
+            GetTextObjectsForm getText = new GetTextObjectsForm();
+            //Получить все строковые значения 
+            string[] allValues = getText.GetText(objects, textBoxs, comboBoxs, dateTimePickers, pictureBoxs);
+            //добавить
+            AddParameters(command, variables, mySqlDbTypes, allValues);      
+            
         }
         #endregion
 
@@ -797,11 +749,11 @@ namespace Administrator_supermarket
         /// <summary>
         /// Получить Select запрос поиска по ид поля таблицы
         /// </summary>
-        /// <param name="nameTable"></param>
-        /// <param name="nameFields"></param>
-        /// <param name="newNameFieldsAS"></param>
-        /// <param name="id_field"></param>
-        /// <returns></returns>
+        /// <param name="nameTable">Название таблицы</param>
+        /// <param name="nameFields">Название полей таблицы</param>
+        /// <param name="newNameFieldsAS">Подписать их "как"</param>
+        /// <param name="id_field">Ид поле таблицы</param>
+        /// <returns>Запрос для поиска по ид</returns>
         public string GetQueryFindSelect(string nameTable, string[] nameFields, string[] newNameFieldsAS, string id_field)
         {
             string query, select, from, where;
@@ -822,40 +774,90 @@ namespace Administrator_supermarket
             // " WHERE id_info = @id ";
         }
         #endregion
-        
-       /* #region Find. Найти данные по id поля
+
+        #region GetQueryFindSelect overload. Получить Select запрос по ид поля таблицы
         /// <summary>
-        /// Найти данные по id поля
+        /// Получить Select запрос поиска по ид поля таблицы
         /// </summary>
-        /// <param name="commandLocal">MySqlCommand с содержанием select запроса</param>
-        /// <param name="textBoxs">Если найденные данные нужно отобразить в textBoх-ах</param>
-        /// <param name="comboBoxs">Если найденные данные нужно отобразить в comboBox-ах</param>
-        /// <param name="pictureBoxs">Если найденные данные нужно отобразить в pictureBox-ах</param>
-        /// <param name="ColumnsTextForTextBox">Строки dataGridView которые содержать текстовые данные для TextBox-ов</param>
-        /// <param name="ColumnsTextForComboBox">Строки dataGridView которые содержать текстовые данные для comboBox-ов</param>
-        /// <param name="ColumnsPictureForPictureBox">Строки dataGridView которые содержать изображения для pictureBox-ов</param>
-        public void Find(MySqlCommand commandLocal, TextBox[] textBoxs=null, ComboBox[] comboBoxs = null, PictureBox[] pictureBoxs= null,
-                        int[] ColumnsTextForTextBox=null, int[] ColumnsTextForComboBox = null, int[] ColumnsPictureForPictureBox = null)
+        /// <param name="nameTables">Название таблиц</param>
+        /// <param name="nameFields">Название полей таблиц</param>
+        /// <param name="newNameFieldsAS">Подписать их "как"</param>
+        /// <param name="primaryTables">Главные таблицы</param>
+        /// <param name="secondaryTable">Подчинённая таблица</param>
+        /// <param name="primaryIdField">Главные id поля</param>
+        /// <param name="secondaryIdField">Подчинённые id поля</param>
+        /// <param name="id_field">Ид поле таблицы</param>
+        /// <returns>Запрос для поиска по ид</returns>
+        public string GetQueryFindSelect(string[] nameTables, string[] nameFields, string[] newNameFieldsAS,
+            string[] primaryTables, string secondaryTable, string[] primaryIdField, string[] secondaryIdField, string id_field)
         {
-            ///Для отображения в таблице
-            DataTable table = new DataTable(); //Создаём таблицу
-            adapter.SelectCommand = commandLocal;
-            adapter.Fill(table); //Вставляем данные при выполнении команды в таблицу
-            Settings settings = new Settings();
-            if (table.Columns.Count <= 0)
-            {
-                MessageBox.Show("Указанная запись: " + textBoxs[0].Text + " не найдена!");//textBoxs[0] должен содержать id 
-                settings.ClearFields(textBoxs, comboBoxs, pictureBoxs);
-            }
-            else
-            {
-                MessageBox.Show("Указанная запись " + textBoxs[0].Text + " найдена!");
-                settings.InsertTextInTextBoxFromTable(table, ColumnsTextForTextBox, textBoxs);
-                settings.InsertTextInComboBoxFromTable(table, ColumnsTextForComboBox, comboBoxs);
-                settings.InsertImageInPictureBoxFromTable(table, ColumnsPictureForPictureBox, pictureBoxs);   
-            }
+            string select = " SELECT ",
+                            from = " FROM ",
+                            where = " WHERE ",
+                            query = "";
+
+
+            //сформировать часть запроса select со всех столбцов
+            for (int i = 0; i < nameFields.GetLength(0); i++)
+                select += " " + nameFields[i] + " AS " + "'" + newNameFieldsAS[i] + "'" + ", "; //добавить "  price AS 'цена', "
+            select = select.Remove(select.Length - 2) + " "; //удалить перед from ", " 
+
+            //сформировать часть запроса from
+            for (int i = 0; i < nameTables.GetLength(0); i++)
+                from += " " + NAME_DATABASE + "." + nameTables[i] + ", "; //добавить " supermarket.stock"
+            from = from.Remove(from.Length - 2) + " "; //удалить перед where ", " 
+
+            //вытаскиваем primary.idfields = secondary.ifields
+            where += GetWherePrimarySecondary(primaryTables, secondaryTable, primaryIdField, secondaryIdField) + "AND";
+            //Добавляем нахождение по id
+            where += " " + id_field + " = @id";
+
+            //составляем полностью запрос из частей
+            query += select + from + where;
+
+            return query;
+
+            //SELECT employees.id_employee AS 'ИД', info.full_name AS 'ФИО', position.position AS 'Должность', 
+            //employees.department AS 'Отдел', employees.experience AS 'Опыт работы', employees.salary AS 'Зарплата', 
+            //employees.started_work AS 'Принят', employees.fired AS 'Уволен'
+            //FROM employees, position, info
+            //WHERE employees.id_position = @id
         }
-        #endregion*/
+        #endregion
+
+        /* #region Find. Найти данные по id поля
+         /// <summary>
+         /// Найти данные по id поля
+         /// </summary>
+         /// <param name="commandLocal">MySqlCommand с содержанием select запроса</param>
+         /// <param name="textBoxs">Если найденные данные нужно отобразить в textBoх-ах</param>
+         /// <param name="comboBoxs">Если найденные данные нужно отобразить в comboBox-ах</param>
+         /// <param name="pictureBoxs">Если найденные данные нужно отобразить в pictureBox-ах</param>
+         /// <param name="ColumnsTextForTextBox">Строки dataGridView которые содержать текстовые данные для TextBox-ов</param>
+         /// <param name="ColumnsTextForComboBox">Строки dataGridView которые содержать текстовые данные для comboBox-ов</param>
+         /// <param name="ColumnsPictureForPictureBox">Строки dataGridView которые содержать изображения для pictureBox-ов</param>
+         public void Find(MySqlCommand commandLocal, TextBox[] textBoxs=null, ComboBox[] comboBoxs = null, PictureBox[] pictureBoxs= null,
+                         int[] ColumnsTextForTextBox=null, int[] ColumnsTextForComboBox = null, int[] ColumnsPictureForPictureBox = null)
+         {
+             ///Для отображения в таблице
+             DataTable table = new DataTable(); //Создаём таблицу
+             adapter.SelectCommand = commandLocal;
+             adapter.Fill(table); //Вставляем данные при выполнении команды в таблицу
+             Settings settings = new Settings();
+             if (table.Columns.Count <= 0)
+             {
+                 MessageBox.Show("Указанная запись: " + textBoxs[0].Text + " не найдена!");//textBoxs[0] должен содержать id 
+                 settings.ClearFields(textBoxs, comboBoxs, pictureBoxs);
+             }
+             else
+             {
+                 MessageBox.Show("Указанная запись " + textBoxs[0].Text + " найдена!");
+                 settings.InsertTextInTextBoxFromTable(table, ColumnsTextForTextBox, textBoxs);
+                 settings.InsertTextInComboBoxFromTable(table, ColumnsTextForComboBox, comboBoxs);
+                 settings.InsertImageInPictureBoxFromTable(table, ColumnsPictureForPictureBox, pictureBoxs);   
+             }
+         }
+         #endregion*/
 
         #region Find. Найти данные по id поля
         /// <summary>
@@ -872,29 +874,654 @@ namespace Administrator_supermarket
                               TextBox[] textBoxs = null, ComboBox[] comboBoxs = null, PictureBox[] pictureBoxs = null, DateTimePicker[] dateTimePickers =null,
                               int[] ColumnsTextForTextBox = null, int[] ColumnsTextForComboBox = null, int[] ColumnsPictureForPictureBox = null, int[] ColumnsDateForDateDateTimePicker = null)
         {
-            //Для отображения в таблице
-            adapter = new MySqlDataAdapter(commandLocal); //Выполняем команду                
-            adapter.SelectCommand = commandLocal; //выполнить выборку. Select нужно новый создавать
             DataTable table = new DataTable();
-            //table.Clear();
-            adapter.Fill(table); //Вставляем данные при выполнении команды в таблицу
-            Settings settings = new Settings();
-            //dataGrid.DataSource = table; //подключаем заполненную таблицу и отображаем
-            if (table.Columns.Count <= 0)
+            try
             {
-                MessageBox.Show("Указанная запись: " + textBoxs[0].Text + " не найдена!");//textBoxs[0] должен содержать id 
-                settings.ClearFields(textBoxs, comboBoxs, pictureBoxs);
+                //Для отображения в таблице
+                adapter = new MySqlDataAdapter(commandLocal); //Выполняем команду                
+                adapter.SelectCommand = commandLocal; //выполнить выборку. Select нужно новый создавать
+                table.Clear();
+                adapter.Fill(table); //Вставляем данные при выполнении команды в таблицу
+                Settings settings = new Settings();
+                //dataGrid.DataSource = table; //подключаем заполненную таблицу и отображаем
+                if (table.Columns.Count <= 0)
+                {
+                    MessageBox.Show("Указанная запись: " + textBoxs[0].Text + " не найдена!");
+                    //textBoxs[0] должен содержать id 
+                    settings.ClearFields(textBoxs, comboBoxs, pictureBoxs);
+                }
+                else
+                {
+                    MessageBox.Show("Указанная запись " + textBoxs[0].Text + " найдена!");
+                    settings.InsertTextInTextBoxFromTable(table, ColumnsTextForTextBox, textBoxs);
+                    //вставляем все значения из таблицы в text-Box так же для остальных
+                    settings.InsertTextInComboBoxFromTable(table, ColumnsTextForComboBox, comboBoxs);
+                    settings.InsertImageInPictureBoxFromTable(table, ColumnsPictureForPictureBox, pictureBoxs);
+                    settings.InsertDateInDateTimePickerFromTable(table, ColumnsDateForDateDateTimePicker,
+                        dateTimePickers);
+                }
+            } catch (Exception ex){ MessageBox.Show(ex.Message);}
+            return table;
+        }
+        #endregion
+
+        //------- тестим новые функции ------//
+
+        #region  GetQueryShowSearch. Получить запрос исходя из условия (числовых или строковых столбцов)
+
+        /// <summary>
+        /// Составляет запрос select в зависимости от условия, на которое влияет значения столбцов (с числовыми данными или строковы)
+        /// </summary>
+        /// <param name="nameTables">Название таблиц</param>
+        /// <param name="nameFieldsAll">Название столбцов для запроса</param>
+        /// <param name="newNameFieldsAS">Назвать столбцы как. Как они будут отображаться в таблице</param>
+        /// <param name="primaryTables">Главные таблицы</param>
+        /// <param name="secondaryTable">Подчинённая таблица</param>
+        /// <param name="primaryIdField">Главные id поля</param>
+        /// <param name="secondaryIdField">Подчинённые id поля</param>
+        /// <param name="nameNumericFields">Название столбцов, которые содержат числовые значения</param>
+        /// <param name="valueToSearh">Значения для поиска</param>
+        /// <returns>Запрос SELECT</returns>
+        public string GetQueryShowSearch(string[] nameTables, string[] nameFieldsAll, string[] newNameFieldsAS,
+             string[] primaryTables, string secondaryTable, string[] primaryIdField, string[] secondaryIdField,
+            string[] nameNumericFields = null, string valueToSearh = "")
+        {
+            string query = default(string), //для запроса
+                value = valueToSearh; //значение для поиска
+            uint valueNumber = 0;
+
+            //если строковое значение поиска не пустое и числовое (можно попытаться с успехом превратить в число)
+            if (value != "" && uint.TryParse(value, out valueNumber) == true)
+            {
+                //если искомое число больше нуля и есть числовые столбцы, где нужно отыскать это число
+                if (valueNumber > 0 && nameNumericFields != null)
+                    query = GetQuerySearch(nameTables, nameFieldsAll, newNameFieldsAS,
+                        primaryTables, secondaryTable, primaryIdField, secondaryIdField,
+                        nameNumericFields, valueNumber.ToString()); //возвращаем запрос с учётом числовых полей
+            }
+            else
+                query = GetQuerySearch(nameTables, nameFieldsAll, newNameFieldsAS,
+                    primaryTables, secondaryTable, primaryIdField, secondaryIdField,
+                    valueToSearh: value); //возвращаем запрос со всеми строковыми полями
+
+            return query;
+        }
+        #endregion
+
+        #region GetQuerySearch. Получить Select запрос
+        /// <summary>
+        /// Составляет запрос select в зависимости от столбцов (с числовыми данными или без)
+        /// </summary>
+        /// <param name="nameTables">Название таблицы</param>
+        /// <param name="nameFields">Название столбцов для запроса</param>
+        /// <param name="newNameFieldsAS">Назвать столбцов как. Как они будут отображаться в таблице</param>
+        /// <param name="primaryTables">Главные таблицы</param>
+        /// <param name="secondaryTable">Подчинённая таблица</param>
+        /// <param name="primaryIdField">Главные id поля</param>
+        /// <param name="secondaryIdField">Подчинённые id поля</param>
+        /// <param name="nameNumericFields">Название столбцов, которые содержат числовые значения</param>
+        /// <param name="valueToSearh">Значения для поиска</param>
+        /// <returns>Запрос SELECT</returns>
+        public string GetQuerySearch(string[] nameTables, string[] nameFields, string[] newNameFieldsAS,
+            string[] primaryTables, string secondaryTable, string[] primaryIdField, string[] secondaryIdField,
+            string[] nameNumericFields = null, string valueToSearh = "")
+        {
+            string select = " SELECT ",
+                from = " FROM ",
+                where = " WHERE ",
+                concat = " (CONCAT( ",
+                like = " LIKE ",
+                query = "";
+
+
+            //сформировать часть запроса select со всех столбцов
+            for (int i = 0; i < nameFields.GetLength(0); i++)
+                select += " " + nameFields[i] + " AS " + "'" + newNameFieldsAS[i] + "'" + ", "; //добавить "  price AS 'цена', "
+            select = select.Remove(select.Length - 2) + " "; //удалить перед from ", " 
+
+            //сформировать часть запроса from
+            for(int i= 0; i < nameTables.GetLength(0); i++)
+                from += " " + NAME_DATABASE + "." + nameTables[i] + ", "; //добавить " supermarket.stock"
+            from = from.Remove(from.Length - 2) + " "; //удалить перед where ", " 
+
+            //вытаскиваем primary.idfields = secondary.ifields
+            where += GetWherePrimarySecondary(primaryTables, secondaryTable, primaryIdField, secondaryIdField) + "AND";
+
+            //тестим здесь
+            //если есть столбцы в которых имеются числовые значения
+            if (nameNumericFields != null)
+            {
+                //сформировать часть запроса where с столбцами в которых есть числовые значения
+                for (int i = 0; i < nameNumericFields.GetLength(0); i++)
+                    concat += " coalesce(" + nameNumericFields[i] + ", ''), "; //добавить " id, price, "
+                concat = concat.Remove(concat.Length - 2) + ") "; //удалить перед like ", " 
             }
             else
             {
-                MessageBox.Show("Указанная запись " + textBoxs[0].Text + " найдена!");
-                settings.InsertTextInTextBoxFromTable(table, ColumnsTextForTextBox, textBoxs); //вставляем все значения из таблицы в text-Box так же для остальных
-                settings.InsertTextInComboBoxFromTable(table, ColumnsTextForComboBox, comboBoxs);
-                settings.InsertImageInPictureBoxFromTable(table, ColumnsPictureForPictureBox, pictureBoxs);
-                settings.InsertDateInDateTimePickerFromTable(table, ColumnsDateForDateDateTimePicker, dateTimePickers);
+                //сформировать часть запроса where со всеми столбцами
+                for (int i = 0; i < nameFields.GetLength(0); i++)
+                    concat += " coalesce(" + nameFields[i] + ", ''), ";  //добавить " name, address "
+                concat = concat.Remove(concat.Length - 2) + ") ";  //удалить перед like ", " 
             }
-            return table;
+
+            //сформировать часть запроса
+            like += "'%" + valueToSearh + "%'" + ")"; //конец части запроса "'%краматорск%'"
+
+            //составляем полностью запрос из частей
+            query += select + from + where + concat + like;
+
+            return query;
+
+            //SELECT employees.id_employee AS 'ИД', info.full_name AS 'ФИО', position.position AS 'Должность', 
+            //employees.department AS 'Отдел', employees.experience AS 'Опыт', employees.salary AS 'Зарплата', 
+            //employees.started_work AS 'Принят', employees.fired AS 'Уволен'
+            //FROM supermarket.employees, 
+            //supermarket.position, supermarket.info
+            //WHERE employees.id_position = position.id_position
+            //AND employees.id_info = info.id_info
+            //AND(CONCAT(coalesce(employees.id_employee, ''), coalesce(info.full_name, ''), coalesce(position.position, ''),
+            //coalesce(employees.department, ''), coalesce(employees.experience, ''),
+            //coalesce(employees.salary, ''), coalesce(employees.started_work, ''), coalesce(employees.fired, ''))
+            //LIKE '%%')
         }
+        #endregion
+
+
+        #region GetWhere
+
+        #region GetWherePrimarySecondary
+        /// <summary>
+        /// Получить часть запроса для Where отношение между id
+        /// Главной и зависимой таблицы
+        /// </summary>
+        /// <param name="primaryTables">Главные табицы</param>
+        /// <param name="secondaryTables">Зависимая таблица</param>
+        /// <param name="primaryIdField">Главные ID поля таблиц</param>
+        /// <param name="secondaryIdField">Зависимые ID поля таблицы</param>
+        /// <returns></returns>
+        public string GetWherePrimarySecondary(string[] primaryTables, string secondaryTables, string[] primaryIdField,  string[] secondaryIdField)
+        {
+            string partQuery = default(string);
+            for (int i = 0; i < primaryTables.GetLength(0); i++)
+            {
+                partQuery += " " + secondaryTables + "." + secondaryIdField[i] + " = " +
+                             primaryTables[i] + "." + primaryIdField[i] + " " + "AND";
+            }
+            partQuery = partQuery.Remove(partQuery.Length - 3) + " "; 
+            //WHERE employees.id_position = position.id_position
+            //AND employees.id_info = info.id_info
+            return partQuery;
+        }
+        #endregion
+
+        #region GetPartWhereFuncValue
+        /// <summary>
+        /// Получить часть запроса Where. Examples:
+        /// employees.salary = (SELECT MAX(employees.salary) from employees);
+        /// </summary>
+        /// <param name="table">Название таблицы для выборки</param>
+        /// <param name="field">Название поля таблицы для выборки</param>
+        /// <param name="selectTable">Выбранная таблица для получения значения</param>
+        /// <param name="selectField">Выбранное поле для получния значения</param>
+        /// <param name="func">Функция для получения значения</param>
+        /// <returns>Часть запроса Where</returns>
+        public string GetPartWhereFuncValue(string table, string field, string selectTable, string selectField, string func = "AVG")
+        {
+            string partQuery = default(string);
+            partQuery = " " + table + "." + field + " = (" + GetSelectFunc(selectTable, selectField, func) + ") ";
+            return partQuery;
+            //employees.salary = (SELECT MAX(employees.salary) from employees);
+        }
+        #endregion
+
+        #region GetPartWhereFuncValue overload
+        /// <summary>
+        /// Получить часть запроса Where. Examples:
+        /// employees.salary = (SELECT MAX(employees.salary) from employees) 
+        /// AND stock.price = (SELECT MIN(stock.price) from stock)
+        /// </summary>
+        /// <param name="table">Таблицы</param>
+        /// <param name="field">Поля таблиц</param>
+        /// <param name="selectTable">Выбранные таблицы для получения значений</param>
+        /// <param name="selectField">Выбранные поля для получния значения</param>
+        /// <param name="func">Функции для получения значения</param>
+        /// <returns>Часть запроса Where</returns>
+        public string GetPartWhereFuncValue(string[] table, string[][] field, string[] selectTable, string[][] selectField, string[] func = null)
+        {
+            string partQuery = default(string);
+            for (int i = 0; i < table.Length; i++)
+            {
+                for (int j = 0; j < field[i].Length; j++)
+                {
+                    partQuery += GetPartWhereFuncValue(table[i], field[i][j], selectTable[i], selectField[i][j], func[i]) + " AND ";
+                }
+            }
+            partQuery = partQuery.Remove(partQuery.Length - 5) + " ";
+            return partQuery;
+            //employees.salary = (SELECT MAX(employees.salary) from employees) AND stock.price = (SELECT MIN(stock.price) from stock)
+        }
+        #endregion
+
+        #endregion
+
+        #region GetValuesColumn. Получить все значения столбца таблицы
+
+        #region GetValuesColumn. Получить все значения столбца таблицы
+        /// <summary>
+        /// Получить все значения столбца таблицы с запроса
+        /// </summary>
+        /// <param name="query">Запрос, для получения значений</param>
+        /// <returns>Список значений </returns>
+        public List<string> GetValuesColumn(string query)
+        {
+            OpenConnection();
+            command = new MySqlCommand(query, connection);
+            string value; //= command.ExecuteScalar().ToString(); //вид перечислений будет таким 'text','text2'
+            //Create a data reader and Execute the command
+            MySqlDataReader dataReader = command.ExecuteReader();
+            List<string> valuesEnum = new List<string>();
+            while (dataReader.Read())
+            {
+                valuesEnum.Add(dataReader[0].ToString());
+            }
+            CloseConnection();
+            return valuesEnum;
+        }
+        #endregion
+
+        #region GetValuesColumn overload. Получить все значения столбца таблицы
+        /// <summary>
+        /// Получить все значения столбца таблицы
+        /// </summary>
+        /// <param name="nameTables">Название таблиц для concat</param>
+        /// <param name="fields">Название полей для concat</param>
+        /// <returns>Список значений</returns>
+        public List<string> GetValuesColumn(string[] nameTables, string[] fields)
+        {
+            OpenConnection();
+            string query = GetQueryConcat(nameTables, fields);
+            command = new MySqlCommand(query, connection);
+            string value; //= command.ExecuteScalar().ToString(); //вид перечислений будет таким 'text','text2'
+            //Create a data reader and Execute the command
+            MySqlDataReader dataReader = command.ExecuteReader();
+            List<string> valuesEnum = new List<string>();
+            while (dataReader.Read())
+            {
+                valuesEnum.Add(dataReader[0].ToString());
+            }
+            CloseConnection();
+            return valuesEnum;
+        }
+        #endregion
+
+        #endregion
+
+        #region GetEnum
+
+        #region GetEnum. Получить все значения enum столбца таблицы
+        /// <summary>
+        /// Получить все значения enum, которое может принимать значения столбца таблицы
+        /// </summary>
+        /// <param name="query">Запрос для получения значений enum</param>
+        /// <returns>Значения enum</returns>
+        public List<string> GetEnum(string query)
+        {
+            OpenConnection();
+            command = new MySqlCommand(query, connection);
+            string enumCategory = command.ExecuteScalar().ToString(); //вид перечислений будет таким 'text','text2'
+            char delimiter = '\'';
+            string[] substrings = enumCategory.Split(delimiter); //массив строк будет таким "text" "," "text2"
+            enumCategory = "";
+            foreach (var str in substrings)
+                enumCategory += str; //объединяем массив в строку чтобы потом удалить , будет таким  "text,text2"
+            delimiter = ',';
+            substrings = enumCategory.Split(delimiter); //массив строк будет таки "text" "text2"
+            List<string> valuesEnum = new List<string>();
+            foreach (var x in substrings)
+                valuesEnum.Add(x); //Получаем все значения products.name  
+            CloseConnection();
+            return valuesEnum;
+        }
+        #endregion
+
+        #region GetEnum overload. Получить все значения enum столбца таблицы
+        /// <summary>
+        /// Получить все значения enum, которое может принимать значения столбца таблицы
+        /// </summary>
+        /// <param name="tableName">Название таблицы</param>
+        /// <param name="columnName">Название поля (столбца) таблицы</param>
+        /// <returns>Значения enum</returns>
+        public List<string> GetEnum(string tableName, string columnName)
+        {
+            OpenConnection();
+            string query = GetQueryConcat(tableName, columnName);
+            command = new MySqlCommand(query, connection);
+            string enumCategory = command.ExecuteScalar().ToString(); //вид перечислений будет таким 'text','text2'
+            char delimiter = '\'';
+            string[] substrings = enumCategory.Split(delimiter); //массив строк будет таким "text" "," "text2"
+            enumCategory = "";
+            foreach (var str in substrings)
+                enumCategory += str; //объединяем массив в строку чтобы потом удалить , будет таким  "text,text2"
+            delimiter = ',';
+            substrings = enumCategory.Split(delimiter); //массив строк будет таки "text" "text2"
+            List<string> valuesEnum = new List<string>();
+            foreach (var x in substrings)
+                valuesEnum.Add(x); //Получаем все значения products.name  
+            CloseConnection();
+            return valuesEnum;
+        }
+        #endregion
+
+        #endregion
+
+        #region GetQueryConcat
+
+        #region GetQueryConcat
+        /// <summary>
+        /// Данный метод подойдёт для получения запроса объединенного в один столбец concat
+        ///  значений с разных столбцов разных таблиц
+        /// </summary>
+        /// <param name="nameTables">Название таблиц</param>
+        /// <param name="fields">Поля (столбцы) таблицы</param>
+        /// <returns>Запрос concat с содержанием значений в одном столбце</returns>
+        public string GetQueryConcat(string[] nameTables, string[] fields)
+        {
+            string query = "SELECT ",
+                concat = " CONCAT( ",
+                from = " FROM ",
+                orderBy = " ORDER BY " + fields[0];
+
+            for (int i = 0; i < fields.GetLength(0); i++)
+            {
+                concat += " " + fields[i] + ", " + "'   ', ";
+            }
+            concat = concat.Remove(concat.Length - 9) + " ) ";
+
+            //сформировать часть запроса from
+            for (int i = 0; i < nameTables.GetLength(0); i++)
+                from += " " + NAME_DATABASE + "." + nameTables[i] + ", "; //добавить " supermarket.stock"
+            from = from.Remove(from.Length - 2) + " "; 
+
+            query += concat + " AS 'Field' " + from + orderBy;
+
+            return query;
+            //Select concat(info.id_info, '   ', info.full_name) AS 'Field'
+            //from info
+        }
+        #endregion
+
+        #region GetQueryConcat
+        /// <summary>
+        /// Данный метод подойдёт для получения значений enum
+        ///  которое может принимать запись столбца таблицы
+        /// </summary>
+        /// <param name="tableName">Название таблицы</param>
+        /// <param name="columnName">Название столбца, содержащий enum значения</param>
+        /// <returns>Запрос concat с содержанием enum значений в одном столбце</returns>
+        public string GetQueryConcat(string tableName, string columnName)
+        {
+           return "select trim(trailing ')'                       " +
+                          "    from trim(leading '('                            " +
+                          "    from trim(leading 'enum'                         " +
+                          "    from column_type))) column_type                  " +
+                          "    from information_schema.COLUMNS                  " +
+                          "    where TABLE_SCHEMA = " + "'" + NAME_DATABASE + "'" +
+                          "    AND TABLE_NAME = " + "'" + tableName + "'        " +
+                          "    AND COLUMN_NAME = " + "'" + columnName + "';      ";           
+        }
+        #endregion
+
+        #region GetConcatReport
+        public string GetSelectConcatReport(string[] nameFullFields)
+        {
+            string partQuery = "SELECT CONCAT( ";
+            for (int i = 0; i < nameFullFields.Length; i++)
+            {
+                partQuery += nameFullFields[i] + ", \", \", ";
+            }
+            partQuery = partQuery.Remove(partQuery.Length - 8) + " ) AS result";
+            return partQuery;
+            //select concat(info.full_name, " ", position.position, " ", employees.department, " ", employees.salary ) AS result
+        }
+        #endregion
+
+        #endregion
+
+        #region GetFromPartQuery
+
+        public string GetFromPartQuery(string[] nameTables)
+        {
+            string from = " FROM ";
+            for (int i = 0; i < nameTables.Length; i++)
+            {
+                from += " " + NAME_DATABASE + "." + nameTables[i] + ", ";
+            }
+            from = from.Remove(from.Length - 2) + " ";
+            return from; 
+            //from supermarket.employees, supermarket.info, supermarket.position
+        }
+
+        #endregion
+
+        #region GetSelectFunc
+        //  Support functions 
+        //  AVG()  BIT_AND()  BIT_OR()   BIT_XOR()   COUNT() COUNT(DISTINCT) GROUP_CONCAT()  MAX()  MIN()  STD()  
+        //  STDDEV()    STDDEV_POP()  STDDEV_SAMP()  SUM()  VAR_POP()   VAR_SAMP()  VARIANCE() 
+        public string GetSelectFunc(string table, string field, string func = "avg")
+        {
+            return " SELECT " + func + "(" + field + ")" + " FROM " + NAME_DATABASE + "." + table;
+        }
+        #endregion
+
+        #region LineResultForReport
+
+        #region GetQueryResultLineReport
+        /// <summary>
+        /// Получить запрос для выбора одной объединённой записи в таблице с результатом
+        ///Examples:
+        ///select concat(info.full_name, " ", position.position, " ", employees.department, " ", employees.salary ) AS result
+        ///from supermarket.employees, supermarket.info, supermarket.position
+        ///where  employees.id_position = position.id_position AND
+        ///employees.id_info = info.id_info AND
+        ///  employees.salary = (SELECT MAX(employees.salary) from employees);
+        /// </summary>
+        /// <param name="nameFullFields">Название всех полей в SELECT которые будут отображаться как одно с помощью CONCAT </param>
+        /// <param name="nameTables">Название всех таблиц для FROM</param>
+        /// <param name="primaryTables">Главные табицы</param>
+        /// <param name="secondaryTables">Зависимая таблица</param>
+        /// <param name="primaryIdField">Главные ID поля таблиц</param>
+        /// <param name="secondaryIdField">Зависимые ID поля таблицы</param>
+        /// <param name="table">Таблицы для получения части where с вычисляемыми подзапросами</param>
+        /// <param name="field">Поля таблиц для получения части where с вычисляемыми подзапросами</param>
+        /// <param name="selectTable">Выбранные таблицы для получения значений</param>
+        /// <param name="selectField">Выбранные поля для получния значения</param>
+        /// <param name="func">Функции для получения значения</param>
+        /// <returns>Запрос</returns>
+        public string GetQueryResultLineReport(string[] nameFullFields, string[] nameTables,
+            string[] primaryTables, string secondaryTables, string[] primaryIdField, string[] secondaryIdField,
+            string[] table, string[][] field, string[] selectTable, string[][] selectField, string[] func = null)
+        {
+            string selectConcat = GetSelectConcatReport(nameFullFields),
+                from = GetFromPartQuery(nameTables),
+                wherePrimarySecondary = GetWherePrimarySecondary(primaryTables, secondaryTables, primaryIdField,secondaryIdField),
+                whereFuncValue = GetPartWhereFuncValue(table, field, selectTable, selectField, func),
+                query = default(string);
+            query = selectConcat + from + " WHERE "+wherePrimarySecondary + " AND " + whereFuncValue + " ; ";
+            return query;
+            //Examples:
+            //select concat(info.full_name, " ", position.position, " ", employees.department, " ", employees.salary ) AS result
+            //from supermarket.employees, supermarket.info, supermarket.position
+            //where  employees.id_position = position.id_position AND
+            //employees.id_info = info.id_info AND
+            //  employees.salary = (SELECT MAX(employees.salary) from employees);
+        }
+        #endregion
+
+        #region GetQueryResultLineReport
+        /// <summary>
+        /// Получить запрос для выбора одной объединённой записи в таблице с результатом
+        ///Examples:
+        ///select concat(info.full_name, " ", position.position, " ", employees.department, " ", employees.salary ) AS result
+        ///from supermarket.employees, supermarket.info, supermarket.position
+        ///where  employees.id_position = position.id_position AND
+        ///employees.id_info = info.id_info AND
+        ///  employees.salary = (SELECT MAX(employees.salary) from employees);
+        /// </summary>
+        /// <param name="nameFullFields">Название всех полей в SELECT которые будут отображаться как одно с помощью CONCAT </param>
+        /// <param name="nameTables">Название всех таблиц для FROM</param>
+        /// <param name="primaryTables">Главные табицы</param>
+        /// <param name="secondaryTables">Зависимая таблица</param>
+        /// <param name="primaryIdField">Главные ID поля таблиц</param>
+        /// <param name="secondaryIdField">Зависимые ID поля таблицы</param>
+        /// <param name="table">Таблица для получения части where с вычисляемыми подзапросами</param>
+        /// <param name="field">Поле таблицы для получения части where с вычисляемыми подзапросами</param>
+        /// <param name="selectTable">Выбранная таблица для получения значений</param>
+        /// <param name="selectField">Выбранное поле для получния значения</param>
+        /// <param name="func">Функция для получения значения</param>
+        /// <returns>Запрос</returns>
+        public string GetQueryResultLineReport(string[] nameFullFields, string[] nameTables,
+            string[] primaryTables, string secondaryTables, string[] primaryIdField, string[] secondaryIdField,
+            string table, string field, string selectTable, string selectField, string func = null)
+        {
+            string selectConcat = GetSelectConcatReport(nameFullFields),
+                from = GetFromPartQuery(nameTables),
+                wherePrimarySecondary = GetWherePrimarySecondary(primaryTables, secondaryTables, primaryIdField, secondaryIdField),
+                whereFuncValue = GetPartWhereFuncValue(table, field, selectTable, selectField, func),
+                query = default(string);
+            query = selectConcat + from + " WHERE " + wherePrimarySecondary + " AND " + whereFuncValue + " ; ";
+            return query;
+            //Examples:
+            //select concat(info.full_name, " ", position.position, " ", employees.department, " ", employees.salary ) AS result
+            //from supermarket.employees, supermarket.info, supermarket.position
+            //where  employees.id_position = position.id_position AND
+            //employees.id_info = info.id_info AND
+            //  employees.salary = (SELECT MAX(employees.salary) from employees);
+        }
+        #endregion
+
+        #region GetOneResult
+        /// <summary>
+        /// Позволяет получить результат с запроса в виде:
+        /// 'Шулишина М.С. продавец Хлебо-булочный 6000'
+        /// </summary>
+        /// <param name="query">Запрос для получения значения</param>
+        /// <returns>Вернуть строку с значением</returns>
+        public string GetOneResult(string query)
+        {
+            OpenConnection();
+            try
+            {
+                command = new MySqlCommand(query, connection);
+                var v = command.ExecuteScalar();
+                string value = Convert.ToString(v);
+                return value;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Не получено значение с запроса: \n" + ex.Message);
+                return "";
+            }
+            finally
+            {
+                CloseConnection();
+            }
+        }
+        #endregion
+
+        #region GetAllResult
+        /// <summary>
+        /// Позволяет получить все строки с запроса 
+        /// </summary>
+        /// <param name="query">Запрос для получения значения</param>
+        /// <returns>Вернуть все строки с значениями</returns>
+        public string[] GetAllResult(string query)
+        {
+            OpenConnection();
+            try
+            {
+                command = new MySqlCommand(query, connection);
+                //Create a data reader and Execute the command
+                MySqlDataReader dataReader = command.ExecuteReader();
+                List<string> valuesAll = new List<string>();
+                while (dataReader.Read())
+                {
+                    valuesAll.Add(dataReader[0].ToString());
+                }
+                return valuesAll.ToArray();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Не получено значение с запроса: \n" + ex.Message);
+                return new string[] {};
+            }
+            finally
+            {
+                CloseConnection();
+            }
+           
+            
+            
+
+
+        }
+        #endregion
+
+        #region GetLineResult
+        /// <summary>
+        /// Позволяет получить результат с созданного запроса в виде:
+        /// 'Шулишина М.С. продавец Хлебо-булочный 6000'
+        /// </summary>
+        /// <param name="nameFullFields">Название всех полей в SELECT которые будут отображаться как одно с помощью CONCAT </param>
+        /// <param name="nameTables">Название всех таблиц для FROM</param>
+        /// <param name="primaryTables">Главные табицы</param>
+        /// <param name="secondaryTables">Зависимая таблица</param>
+        /// <param name="primaryIdField">Главные ID поля таблиц</param>
+        /// <param name="secondaryIdField">Зависимые ID поля таблицы</param>
+        /// <param name="table">Таблицы для получения части where с вычисляемыми подзапросами</param>
+        /// <param name="field">Поля таблиц для получения части where с вычисляемыми подзапросами</param>
+        /// <param name="selectTable">Выбранные таблицы для получения значений</param>
+        /// <param name="selectField">Выбранные поля для получния значения</param>
+        /// <param name="func">Функции для получения значения</param>
+        /// <returns>Вернуть строку с значением</returns>
+        public string GetLineResult(string[] nameFullFields, string[] nameTables,
+            string[] primaryTables, string secondaryTables, string[] primaryIdField, string[] secondaryIdField,
+            string[] table, string[][] field, string[] selectTable, string[][] selectField, string[] func = null)
+        {
+            string query = GetQueryResultLineReport(nameFullFields, nameTables,
+                primaryTables, secondaryTables, primaryIdField, secondaryIdField,
+                table, field, selectTable, selectField, func);
+            return GetOneResult(query);
+        }
+        #endregion
+
+        #region GetLineResult
+        /// <summary>
+        /// Позволяет получить результат с созданного запроса в виде:
+        /// 'Шулишина М.С. продавец Хлебо-булочный 6000'
+        /// </summary>
+        /// <param name="nameFullFields">Название всех полей в SELECT которые будут отображаться как одно с помощью CONCAT </param>
+        /// <param name="nameTables">Название всех таблиц для FROM</param>
+        /// <param name="primaryTables">Главные табицы</param>
+        /// <param name="secondaryTables">Зависимая таблица</param>
+        /// <param name="primaryIdField">Главные ID поля таблиц</param>
+        /// <param name="secondaryIdField">Зависимые ID поля таблицы</param>
+        /// <param name="table">Таблица для получения части where с вычисляемыми подзапросами</param>
+        /// <param name="field">Поле таблицы для получения части where с вычисляемыми подзапросами</param>
+        /// <param name="selectTable">Выбранная таблица для получения значений</param>
+        /// <param name="selectField">Выбранное поле для получния значения</param>
+        /// <param name="func">Функция для получения значения</param>
+        /// <returns>Вернуть строку с значением</returns>
+        public string GetLineResult(string[] nameFullFields, string[] nameTables,
+            string[] primaryTables, string secondaryTables, string[] primaryIdField, string[] secondaryIdField,
+            string table, string field, string selectTable, string selectField, string func = null)
+        {
+            string query = GetQueryResultLineReport(nameFullFields, nameTables,
+                primaryTables, secondaryTables, primaryIdField, secondaryIdField,
+                table, field, selectTable, selectField, func);
+            return GetOneResult(query);
+        }
+        #endregion
+
         #endregion
 
     }
