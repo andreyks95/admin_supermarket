@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="RIDER_MODULE" version="4">
+  <component name="NewModuleRootManager">
+    <content url="file://$MODULE_DIR$/../..">
+      <sourceFolder url="file://$MODULE_DIR$/../../Admin.UnitTest" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/../../Administrator_company" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/../../ModelingProject2" isTestSource="false" />
+      <excludeFolder url="file://$MODULE_DIR$/../../Admin.UnitTest/bin" />
+      <excludeFolder url="file://$MODULE_DIR$/../../Admin.UnitTest/obj" />
+      <excludeFolder url="file://$MODULE_DIR$/../../Administrator_company/bin" />
+      <excludeFolder url="file://$MODULE_DIR$/../../Administrator_company/obj" />
+      <excludeFolder url="file://$MODULE_DIR$/../../ModelingProject2/bin" />
+      <excludeFolder url="file://$MODULE_DIR$/../../ModelingProject2/obj" />
+      <excludeFolder url="file://$MODULE_DIR$/../../packages" />
+    </content>
+    <orderEntry type="sourceFolder" forTests="false" />
+  </component>
+</module>
