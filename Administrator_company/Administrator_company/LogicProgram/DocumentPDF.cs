@@ -25,9 +25,14 @@ namespace Administrator_company.LogicProgram
             {
                 string name = saveFileDialog.FileName;
                 pdfWriter = PdfWriter.GetInstance(doc, new FileStream(name, FileMode.Create));
+                return doc;
             }
             //doc.Open();
-            return doc;
+            else
+            {
+                MessageBox.Show("Выберите путь для сохранения отчета");
+                return null;
+            }
         }
         #endregion
 
@@ -177,8 +182,7 @@ namespace Administrator_company.LogicProgram
             return doc;
         }
         #endregion
-
-
+        
         #region Создание таблицы. Получение данных с DataGridView
 
         #region InsertTable
@@ -193,25 +197,18 @@ namespace Administrator_company.LogicProgram
         /// <returns>Изменённый документ</returns>
         public iTextSharp.text.Document InsertTable(iTextSharp.text.Document doc, DataGridView dataGridView, Font font = null, int countColumns = 0, int[] numberColumns = null)
         {
-            iTextSharp.text.Document newDoc = null;
-            if (countColumns < 1 && numberColumns.Length == 0)
+            //if ((countColumns == 0 || countColumns < 1) && (numberColumns.Length == 0 || numberColumns.Length == null))
+            if (countColumns > 0)
             {
-                newDoc = InsertTable(doc, dataGridView, font);
+                return InsertTable(doc, dataGridView, font, countColumns);
             }
-            else if (countColumns > 0)
-            {
-                newDoc = InsertTable(doc, dataGridView, font, countColumns);
-            }
-            else if (numberColumns.Length != 0)
-            {
-                newDoc = InsertTable(doc, dataGridView, font, numberColumns);
-            }
-            return newDoc;
+            return numberColumns != null ? InsertTable(doc, dataGridView, font, numberColumns) : 
+                                           InsertTableSimple(doc, dataGridView, font);
         }
         #endregion
 
         #region InsertTable зависит от количества столбцов в DataGridView
-        public iTextSharp.text.Document InsertTable(iTextSharp.text.Document doc, DataGridView dataGridView, Font font = null)
+        public iTextSharp.text.Document InsertTableSimple(iTextSharp.text.Document doc, DataGridView dataGridView, Font font = null)
         {
             
             //Создать таблицу
