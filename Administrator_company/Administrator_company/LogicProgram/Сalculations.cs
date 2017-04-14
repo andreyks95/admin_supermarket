@@ -447,7 +447,8 @@ namespace Administrator_company.LogicProgram
                     salary = values[1], //Зарплата без стажа
                     result = default(float);
                 //Формула начисления зароботной платы от стажа
-                result = ((experience*0.01f)*salary) + salary;
+                //ЗЧист = (ЗПосн. – (ЗПосн.*НДФЛ + ЗПосн*ВС + ЗПосн*ЕСВ)) + ((Стаж * 0.01)*зарплату)
+                result = (salary - (salary * 0.18f + salary * 0.015f + salary * 0.22f)) + ((experience*0.01f)*salary);
                 return result;
             }
         }
