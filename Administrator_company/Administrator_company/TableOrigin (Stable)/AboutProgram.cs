@@ -16,7 +16,7 @@ namespace Administrator_company
             //this.textBoxDescription.Text = AssemblyDescription;
             Text = "Система администрирования продуктового супермаркета";
             labelProductName.Text = "Система администрирования продуктового супермаркета";
-            labelVersion.Text = "1.5.20.75";
+            labelVersion.Text = "2.11.37.162";
             labelCopyright.Text = "Авторские права: ст.гр.ИТ - 15 - 1т Когута Андрея";
             labelCompanyName.Text = "Название учебного заведения: ДГМА";
             textBoxDescription.Text = "Данный программный продукт предназначен для легкого и быстрого управления базой данных для администрирования продуктового супермаркета.";
