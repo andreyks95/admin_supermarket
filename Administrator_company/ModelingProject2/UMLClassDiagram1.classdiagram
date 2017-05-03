@@ -6,7 +6,7 @@
         <elementDefinition Id="00e02b5c-9476-4279-a259-d24bc98624b1" />
         <targetEnds>
           <association Id="3a59d515-456f-4f2b-9076-a89ac3867d65" isDerived="false" sourceEndRoleName="Продуктовый супермаркет" targetEndRoleName="Должность" isLeaf="false" isAbstract="false">
-            <classMoniker Id="9d622c9e-395f-4612-806b-cc5b83d24336" LastKnownName="Должность" />
+            <classMoniker Id="9d622c9e-395f-4612-806b-cc5b83d24336" LastKnownName="Должности" />
             <relationshipOwnedElementsInternal>
               <associationHasOwnedEnds>
                 <memberEnd Id="52a5b37f-16e4-458b-84fa-0286b6b2d351" name="Продуктовый супермаркет" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="Shared" isComposite="false" isNavigableOwned="false">
@@ -151,21 +151,21 @@
       </class>
     </logicalClassDesignerModelHasTypes>
     <logicalClassDesignerModelHasTypes>
-      <class Id="9d622c9e-395f-4612-806b-cc5b83d24336" name="Должность" isAbstract="false" isLeaf="false" isActiveClass="false">
+      <class Id="9d622c9e-395f-4612-806b-cc5b83d24336" name="Должности" isAbstract="false" isLeaf="false" isActiveClass="false">
         <elementDefinition Id="b6a11564-72bd-4a9c-a112-7111fd0b0e75" />
         <targetEnds>
-          <association Id="57dee4eb-aef2-426c-9127-9d57f93f0aee" isDerived="false" sourceEndRoleName="Должность" targetEndRoleName="Сотрудники" isLeaf="false" isAbstract="false">
+          <association Id="57dee4eb-aef2-426c-9127-9d57f93f0aee" isDerived="false" sourceEndRoleName="Должности" targetEndRoleName="Сотрудники" isLeaf="false" isAbstract="false">
             <classMoniker Id="ebe8b033-21f5-40a7-8af8-edf3b0d7ee7e" LastKnownName="Сотрудники" />
             <relationshipOwnedElementsInternal>
               <associationHasOwnedEnds>
-                <memberEnd Id="a98c5b4b-2635-4193-80df-89480cf28c4a" name="Должность" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                <memberEnd Id="a98c5b4b-2635-4193-80df-89480cf28c4a" name="Должности" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
                   <lowerValueInternal>
-                    <literalString Id="3a505e85-fd9d-4daf-b9dc-139b41b6e8f7" name="Lower" value="m">
+                    <literalString Id="3a505e85-fd9d-4daf-b9dc-139b41b6e8f7" name="Lower" value="1">
                       <elementDefinition Id="1bf7fa87-af68-4a27-a9be-6be38ccd3918" />
                     </literalString>
                   </lowerValueInternal>
                   <upperValueInternal>
-                    <literalString Id="c446daf7-222a-486f-9595-e6e5d9685522" name="Upper" value="m">
+                    <literalString Id="c446daf7-222a-486f-9595-e6e5d9685522" name="Upper" value="1">
                       <elementDefinition Id="29f52651-0b5c-450d-92df-532c29120a45" />
                     </literalString>
                   </upperValueInternal>
@@ -221,6 +221,44 @@
     <logicalClassDesignerModelHasTypes>
       <class Id="3165c1c7-4eef-4951-9abc-09d3e5ceea44" name="Товары" isAbstract="false" isLeaf="false" isActiveClass="false">
         <elementDefinition Id="fbeb796d-7090-4a58-be4c-3fb64b6e5cc5" />
+        <targetEnds>
+          <association Id="fefb8884-ae0b-41ed-9051-8b12d7f539e3" isDerived="false" sourceEndRoleName="Товары" targetEndRoleName="Склад" isLeaf="false" isAbstract="false">
+            <classMoniker Id="64c5a0d8-844a-4e6d-b372-87c6b05f38cf" LastKnownName="Склад" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="430f6f6e-daeb-4c4c-92f5-7ae00876f2d5" name="Товары" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                  <lowerValueInternal>
+                    <literalString Id="a685b67a-0595-4571-8bdf-2ddc86e3a385" name="Lower" value="1">
+                      <elementDefinition Id="2f9143b7-5a16-43d0-b006-da8140eafc25" />
+                    </literalString>
+                  </lowerValueInternal>
+                  <upperValueInternal>
+                    <literalString Id="605eeff5-b0ac-4dfc-8424-abd59ee99ba2" name="Upper" value="1">
+                      <elementDefinition Id="fe539177-e792-4852-847d-3a19c48260b3" />
+                    </literalString>
+                  </upperValueInternal>
+                  <elementDefinition Id="d65a12c0-c612-4d06-ac33-0e673efa9c02" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="bbaca722-d8da-4164-8ca4-c1679889d85c" name="Склад" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <lowerValueInternal>
+                    <literalString Id="5e00bd70-a913-4859-b8a9-52399061d032" name="Lower" value="n">
+                      <elementDefinition Id="43a47442-0138-4a79-b2a1-be1be2c16ec4" />
+                    </literalString>
+                  </lowerValueInternal>
+                  <upperValueInternal>
+                    <literalString Id="a15bb0ea-9822-49e7-9570-3d9a2920327d" name="Upper" value="n">
+                      <elementDefinition Id="5533ec40-0e07-4d11-858b-ced2554d032a" />
+                    </literalString>
+                  </upperValueInternal>
+                  <elementDefinition Id="c9c56039-a990-4223-8733-b58b94d2beab" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="83a97d79-18aa-4f19-a9c6-7f93d2cca7a4" />
+          </association>
+        </targetEnds>
         <ownedAttributesInternal>
           <property Id="6ce8bb28-5a9d-4ac2-8a3a-cfa2982f7174" name="int id" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
             <elementDefinition Id="5705b902-9339-459b-91a5-da83eb8c8227" />
@@ -263,34 +301,6 @@
     <logicalClassDesignerModelHasTypes>
       <class Id="64c5a0d8-844a-4e6d-b372-87c6b05f38cf" name="Склад" isAbstract="false" isLeaf="false" isActiveClass="false">
         <elementDefinition Id="4d314d5c-8b8c-4ef4-8a80-c27a11febcf7" />
-        <targetEnds>
-          <association Id="d2b56657-f8a2-432f-abac-d3a0c79ae992" isDerived="false" sourceEndRoleName="Склад" targetEndRoleName="Товары" isLeaf="false" isAbstract="false">
-            <classMoniker Id="3165c1c7-4eef-4951-9abc-09d3e5ceea44" LastKnownName="Товары" />
-            <relationshipOwnedElementsInternal>
-              <associationHasOwnedEnds>
-                <memberEnd Id="233a4df4-2603-4c26-9bf8-c76705c1e132" name="Склад" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
-                  <elementDefinition Id="e86454e3-6d41-4fca-97e0-c65303f7b5a5" />
-                </memberEnd>
-              </associationHasOwnedEnds>
-              <associationHasOwnedEnds>
-                <memberEnd Id="c956ba57-f2fe-4190-91b4-88fd41998411" name="Товары" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
-                  <lowerValueInternal>
-                    <literalString Id="6a962c33-be8d-4e7f-9837-41e1e2d2e888" name="Lower" value="m">
-                      <elementDefinition Id="d09228bc-35d4-4f94-99fd-6a90f68170aa" />
-                    </literalString>
-                  </lowerValueInternal>
-                  <upperValueInternal>
-                    <literalString Id="d8bc0bf2-2cbc-4b17-8e78-ee1e985d5079" name="Upper" value="m">
-                      <elementDefinition Id="3ce4a307-33f0-4afd-a8e6-5ed1f5b1621c" />
-                    </literalString>
-                  </upperValueInternal>
-                  <elementDefinition Id="923afdae-6c02-43e4-ae05-f83708f88b97" />
-                </memberEnd>
-              </associationHasOwnedEnds>
-            </relationshipOwnedElementsInternal>
-            <elementDefinition Id="59c4f371-afd4-49a7-95e6-06d7a1b0272d" />
-          </association>
-        </targetEnds>
         <ownedAttributesInternal>
           <property Id="e2f49aca-ee3d-49e3-b497-96b91bdd7c79" name="enum в наличии" visibility="Private" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
             <elementDefinition Id="dace0057-2c91-4dde-8ef8-2500b62f8cce" />
@@ -340,12 +350,12 @@
               <associationHasOwnedEnds>
                 <memberEnd Id="b81a93f8-cf08-4fd2-898b-dbbd4936d5f0" name="Информация о сотрудниках" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
                   <lowerValueInternal>
-                    <literalString Id="2eb658cb-e5b9-4ab4-ac19-9a1638f20b86" name="Lower" value="m">
+                    <literalString Id="2eb658cb-e5b9-4ab4-ac19-9a1638f20b86" name="Lower" value="1">
                       <elementDefinition Id="d2a66bab-2963-4ece-8543-42d7885673b5" />
                     </literalString>
                   </lowerValueInternal>
                   <upperValueInternal>
-                    <literalString Id="d6e8a801-5a92-4bd7-812e-fd5e0b29a035" name="Upper" value="m">
+                    <literalString Id="d6e8a801-5a92-4bd7-812e-fd5e0b29a035" name="Upper" value="1">
                       <elementDefinition Id="96176942-8668-415c-a858-26561854f63b" />
                     </literalString>
                   </upperValueInternal>
@@ -394,6 +404,20 @@
             <elementDefinition Id="4fb0aefc-f1b4-4a31-981e-99421aa11836" />
           </property>
         </ownedAttributesInternal>
+        <ownedOperationsInternal>
+          <operation Id="36b7f013-3e70-4a35-9926-f337c26833fd" name="ДобавитьДанные" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="593e5cd0-de1f-4b1d-a620-e345eb4112bb" />
+          </operation>
+          <operation Id="099022e1-9d27-47cd-a2f7-3a2d327200a0" name="ИзменитьДанные" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="6ca75725-0744-42a3-be7f-5e8daf1d69c2" />
+          </operation>
+          <operation Id="20596bab-84de-40f7-a1e0-6cf94f4d1a02" name="ОтобразитьДанные" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="6394839e-916b-43ff-822a-f78715f656ac" />
+          </operation>
+          <operation Id="770b5de8-5f86-4980-9f81-ac8eae28c50a" name="УдалитьДанные" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="1b3653c1-5d2d-47dd-8364-ff6bff0a32b5" />
+          </operation>
+        </ownedOperationsInternal>
       </class>
     </logicalClassDesignerModelHasTypes>
   </packagedElements>
