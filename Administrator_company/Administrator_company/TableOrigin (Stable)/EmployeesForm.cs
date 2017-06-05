@@ -98,7 +98,7 @@ namespace Administrator_company
             if (values != null)
             {
                 ids[0] = values[0];
-                ids[1] = values[1];
+                ids[1] = values[2];//Id должности
             }
 
 
