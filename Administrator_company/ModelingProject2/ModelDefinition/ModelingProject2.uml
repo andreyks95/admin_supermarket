@@ -34,7 +34,7 @@
             <coveredLifelines>
               <lifelineMoniker
                 Id="ed12f217-b429-45b6-898d-23db01d5ad75"
-                LastKnownName="Администратор"
+                LastKnownName="Адміністратор"
                 LastKnownLocation="ModelingProject2.uml" />
             </coveredLifelines>
             <finish>
@@ -110,7 +110,7 @@
             <covered>
               <lifelineMoniker
                 Id="ed12f217-b429-45b6-898d-23db01d5ad75"
-                LastKnownName="Администратор"
+                LastKnownName="Адміністратор"
                 LastKnownLocation="ModelingProject2.uml" />
             </covered>
           </executionOccurrenceSpecification>
@@ -120,7 +120,7 @@
             <covered>
               <lifelineMoniker
                 Id="ed12f217-b429-45b6-898d-23db01d5ad75"
-                LastKnownName="Администратор"
+                LastKnownName="Адміністратор"
                 LastKnownLocation="ModelingProject2.uml" />
             </covered>
           </messageOccurrenceSpecification>
@@ -191,7 +191,7 @@
             <covered>
               <lifelineMoniker
                 Id="ed12f217-b429-45b6-898d-23db01d5ad75"
-                LastKnownName="Администратор"
+                LastKnownName="Адміністратор"
                 LastKnownLocation="ModelingProject2.uml" />
             </covered>
           </messageOccurrenceSpecification>
@@ -211,7 +211,7 @@
             <coveredLifelines>
               <lifelineMoniker
                 Id="e95ea6e3-c1d6-44a3-8353-133aa9d24404"
-                LastKnownName="Должность"
+                LastKnownName="Посади"
                 LastKnownLocation="ModelingProject2.uml" />
             </coveredLifelines>
             <finish>
@@ -259,7 +259,7 @@
             <covered>
               <lifelineMoniker
                 Id="e95ea6e3-c1d6-44a3-8353-133aa9d24404"
-                LastKnownName="Должность"
+                LastKnownName="Посади"
                 LastKnownLocation="ModelingProject2.uml" />
             </covered>
           </executionOccurrenceSpecification>
@@ -279,7 +279,7 @@
             <covered>
               <lifelineMoniker
                 Id="e95ea6e3-c1d6-44a3-8353-133aa9d24404"
-                LastKnownName="Должность"
+                LastKnownName="Посади"
                 LastKnownLocation="ModelingProject2.uml" />
             </covered>
           </messageOccurrenceSpecification>
@@ -349,7 +349,7 @@
             <covered>
               <lifelineMoniker
                 Id="e95ea6e3-c1d6-44a3-8353-133aa9d24404"
-                LastKnownName="Должность"
+                LastKnownName="Посади"
                 LastKnownLocation="ModelingProject2.uml" />
             </covered>
           </messageOccurrenceSpecification>
@@ -369,7 +369,7 @@
             <covered>
               <lifelineMoniker
                 Id="e95ea6e3-c1d6-44a3-8353-133aa9d24404"
-                LastKnownName="Должность"
+                LastKnownName="Посади"
                 LastKnownLocation="ModelingProject2.uml" />
             </covered>
           </messageOccurrenceSpecification>
@@ -397,7 +397,7 @@
             <covered>
               <lifelineMoniker
                 Id="e95ea6e3-c1d6-44a3-8353-133aa9d24404"
-                LastKnownName="Должность"
+                LastKnownName="Посади"
                 LastKnownLocation="ModelingProject2.uml" />
             </covered>
           </messageOccurrenceSpecification>
@@ -425,7 +425,7 @@
             <covered>
               <lifelineMoniker
                 Id="e95ea6e3-c1d6-44a3-8353-133aa9d24404"
-                LastKnownName="Должность"
+                LastKnownName="Посади"
                 LastKnownLocation="ModelingProject2.uml" />
             </covered>
           </executionOccurrenceSpecification>
@@ -445,7 +445,7 @@
             <covered>
               <lifelineMoniker
                 Id="ed12f217-b429-45b6-898d-23db01d5ad75"
-                LastKnownName="Администратор"
+                LastKnownName="Адміністратор"
                 LastKnownLocation="ModelingProject2.uml" />
             </covered>
           </messageOccurrenceSpecification>
@@ -543,7 +543,7 @@
             <covered>
               <lifelineMoniker
                 Id="ed12f217-b429-45b6-898d-23db01d5ad75"
-                LastKnownName="Администратор"
+                LastKnownName="Адміністратор"
                 LastKnownLocation="ModelingProject2.uml" />
             </covered>
           </messageOccurrenceSpecification>
@@ -563,7 +563,7 @@
             <coveredLifelines>
               <lifelineMoniker
                 Id="e95ea6e3-c1d6-44a3-8353-133aa9d24404"
-                LastKnownName="Должность"
+                LastKnownName="Посади"
                 LastKnownLocation="ModelingProject2.uml" />
             </coveredLifelines>
             <finish>
@@ -611,7 +611,7 @@
             <covered>
               <lifelineMoniker
                 Id="e95ea6e3-c1d6-44a3-8353-133aa9d24404"
-                LastKnownName="Должность"
+                LastKnownName="Посади"
                 LastKnownLocation="ModelingProject2.uml" />
             </covered>
           </executionOccurrenceSpecification>
@@ -621,7 +621,7 @@
             <covered>
               <lifelineMoniker
                 Id="e95ea6e3-c1d6-44a3-8353-133aa9d24404"
-                LastKnownName="Должность"
+                LastKnownName="Посади"
                 LastKnownLocation="ModelingProject2.uml" />
             </covered>
           </messageOccurrenceSpecification>
@@ -701,7 +701,7 @@
             <covered>
               <lifelineMoniker
                 Id="e95ea6e3-c1d6-44a3-8353-133aa9d24404"
-                LastKnownName="Должность"
+                LastKnownName="Посади"
                 LastKnownLocation="ModelingProject2.uml" />
             </covered>
           </messageOccurrenceSpecification>
@@ -721,7 +721,7 @@
             <covered>
               <lifelineMoniker
                 Id="e95ea6e3-c1d6-44a3-8353-133aa9d24404"
-                LastKnownName="Должность"
+                LastKnownName="Посади"
                 LastKnownLocation="ModelingProject2.uml" />
             </covered>
           </messageOccurrenceSpecification>
@@ -759,7 +759,7 @@
             <covered>
               <lifelineMoniker
                 Id="e95ea6e3-c1d6-44a3-8353-133aa9d24404"
-                LastKnownName="Должность"
+                LastKnownName="Посади"
                 LastKnownLocation="ModelingProject2.uml" />
             </covered>
           </messageOccurrenceSpecification>
@@ -777,7 +777,7 @@
             <covered>
               <lifelineMoniker
                 Id="e95ea6e3-c1d6-44a3-8353-133aa9d24404"
-                LastKnownName="Должность"
+                LastKnownName="Посади"
                 LastKnownLocation="ModelingProject2.uml" />
             </covered>
           </executionOccurrenceSpecification>
@@ -881,7 +881,7 @@
             <covered>
               <lifelineMoniker
                 Id="ed12f217-b429-45b6-898d-23db01d5ad75"
-                LastKnownName="Администратор"
+                LastKnownName="Адміністратор"
                 LastKnownLocation="ModelingProject2.uml" />
             </covered>
           </messageOccurrenceSpecification>
@@ -987,7 +987,7 @@
             <covered>
               <lifelineMoniker
                 Id="ed12f217-b429-45b6-898d-23db01d5ad75"
-                LastKnownName="Администратор"
+                LastKnownName="Адміністратор"
                 LastKnownLocation="ModelingProject2.uml" />
             </covered>
           </messageOccurrenceSpecification>
@@ -1007,7 +1007,7 @@
             <coveredLifelines>
               <lifelineMoniker
                 Id="e95ea6e3-c1d6-44a3-8353-133aa9d24404"
-                LastKnownName="Должность"
+                LastKnownName="Посади"
                 LastKnownLocation="ModelingProject2.uml" />
             </coveredLifelines>
             <finish>
@@ -1055,7 +1055,7 @@
             <covered>
               <lifelineMoniker
                 Id="e95ea6e3-c1d6-44a3-8353-133aa9d24404"
-                LastKnownName="Должность"
+                LastKnownName="Посади"
                 LastKnownLocation="ModelingProject2.uml" />
             </covered>
           </executionOccurrenceSpecification>
@@ -1075,7 +1075,7 @@
             <covered>
               <lifelineMoniker
                 Id="e95ea6e3-c1d6-44a3-8353-133aa9d24404"
-                LastKnownName="Должность"
+                LastKnownName="Посади"
                 LastKnownLocation="ModelingProject2.uml" />
             </covered>
           </messageOccurrenceSpecification>
@@ -1135,7 +1135,7 @@
             <covered>
               <lifelineMoniker
                 Id="e95ea6e3-c1d6-44a3-8353-133aa9d24404"
-                LastKnownName="Должность"
+                LastKnownName="Посади"
                 LastKnownLocation="ModelingProject2.uml" />
             </covered>
           </messageOccurrenceSpecification>
@@ -1165,7 +1165,7 @@
             <covered>
               <lifelineMoniker
                 Id="e95ea6e3-c1d6-44a3-8353-133aa9d24404"
-                LastKnownName="Должность"
+                LastKnownName="Посади"
                 LastKnownLocation="ModelingProject2.uml" />
             </covered>
           </messageOccurrenceSpecification>
@@ -1193,7 +1193,7 @@
             <covered>
               <lifelineMoniker
                 Id="e95ea6e3-c1d6-44a3-8353-133aa9d24404"
-                LastKnownName="Должность"
+                LastKnownName="Посади"
                 LastKnownLocation="ModelingProject2.uml" />
             </covered>
           </messageOccurrenceSpecification>
@@ -1221,7 +1221,7 @@
             <covered>
               <lifelineMoniker
                 Id="e95ea6e3-c1d6-44a3-8353-133aa9d24404"
-                LastKnownName="Должность"
+                LastKnownName="Посади"
                 LastKnownLocation="ModelingProject2.uml" />
             </covered>
           </executionOccurrenceSpecification>
@@ -1231,7 +1231,7 @@
             <coveredLifelines>
               <lifelineMoniker
                 Id="e95ea6e3-c1d6-44a3-8353-133aa9d24404"
-                LastKnownName="Должность"
+                LastKnownName="Посади"
                 LastKnownLocation="ModelingProject2.uml" />
             </coveredLifelines>
             <finish>
@@ -1279,7 +1279,7 @@
             <covered>
               <lifelineMoniker
                 Id="e95ea6e3-c1d6-44a3-8353-133aa9d24404"
-                LastKnownName="Должность"
+                LastKnownName="Посади"
                 LastKnownLocation="ModelingProject2.uml" />
             </covered>
           </executionOccurrenceSpecification>
@@ -1299,7 +1299,7 @@
             <covered>
               <lifelineMoniker
                 Id="e95ea6e3-c1d6-44a3-8353-133aa9d24404"
-                LastKnownName="Должность"
+                LastKnownName="Посади"
                 LastKnownLocation="ModelingProject2.uml" />
             </covered>
           </messageOccurrenceSpecification>
@@ -1369,7 +1369,7 @@
             <covered>
               <lifelineMoniker
                 Id="e95ea6e3-c1d6-44a3-8353-133aa9d24404"
-                LastKnownName="Должность"
+                LastKnownName="Посади"
                 LastKnownLocation="ModelingProject2.uml" />
             </covered>
           </messageOccurrenceSpecification>
@@ -1389,7 +1389,7 @@
             <covered>
               <lifelineMoniker
                 Id="e95ea6e3-c1d6-44a3-8353-133aa9d24404"
-                LastKnownName="Должность"
+                LastKnownName="Посади"
                 LastKnownLocation="ModelingProject2.uml" />
             </covered>
           </messageOccurrenceSpecification>
@@ -1417,7 +1417,7 @@
             <covered>
               <lifelineMoniker
                 Id="e95ea6e3-c1d6-44a3-8353-133aa9d24404"
-                LastKnownName="Должность"
+                LastKnownName="Посади"
                 LastKnownLocation="ModelingProject2.uml" />
             </covered>
           </messageOccurrenceSpecification>
@@ -1445,7 +1445,7 @@
             <covered>
               <lifelineMoniker
                 Id="e95ea6e3-c1d6-44a3-8353-133aa9d24404"
-                LastKnownName="Должность"
+                LastKnownName="Посади"
                 LastKnownLocation="ModelingProject2.uml" />
             </covered>
           </executionOccurrenceSpecification>
@@ -1549,7 +1549,7 @@
             <covered>
               <lifelineMoniker
                 Id="ed12f217-b429-45b6-898d-23db01d5ad75"
-                LastKnownName="Администратор"
+                LastKnownName="Адміністратор"
                 LastKnownLocation="ModelingProject2.uml" />
             </covered>
           </messageOccurrenceSpecification>
@@ -1647,7 +1647,7 @@
             <covered>
               <lifelineMoniker
                 Id="ed12f217-b429-45b6-898d-23db01d5ad75"
-                LastKnownName="Администратор"
+                LastKnownName="Адміністратор"
                 LastKnownLocation="ModelingProject2.uml" />
             </covered>
           </messageOccurrenceSpecification>
@@ -1667,7 +1667,7 @@
             <coveredLifelines>
               <lifelineMoniker
                 Id="e95ea6e3-c1d6-44a3-8353-133aa9d24404"
-                LastKnownName="Должность"
+                LastKnownName="Посади"
                 LastKnownLocation="ModelingProject2.uml" />
             </coveredLifelines>
             <finish>
@@ -1715,7 +1715,7 @@
             <covered>
               <lifelineMoniker
                 Id="e95ea6e3-c1d6-44a3-8353-133aa9d24404"
-                LastKnownName="Должность"
+                LastKnownName="Посади"
                 LastKnownLocation="ModelingProject2.uml" />
             </covered>
           </executionOccurrenceSpecification>
@@ -1725,7 +1725,7 @@
             <covered>
               <lifelineMoniker
                 Id="e95ea6e3-c1d6-44a3-8353-133aa9d24404"
-                LastKnownName="Должность"
+                LastKnownName="Посади"
                 LastKnownLocation="ModelingProject2.uml" />
             </covered>
           </messageOccurrenceSpecification>
@@ -1795,7 +1795,7 @@
             <covered>
               <lifelineMoniker
                 Id="e95ea6e3-c1d6-44a3-8353-133aa9d24404"
-                LastKnownName="Должность"
+                LastKnownName="Посади"
                 LastKnownLocation="ModelingProject2.uml" />
             </covered>
           </messageOccurrenceSpecification>
@@ -1825,7 +1825,7 @@
             <covered>
               <lifelineMoniker
                 Id="e95ea6e3-c1d6-44a3-8353-133aa9d24404"
-                LastKnownName="Должность"
+                LastKnownName="Посади"
                 LastKnownLocation="ModelingProject2.uml" />
             </covered>
           </messageOccurrenceSpecification>
@@ -1863,7 +1863,7 @@
             <covered>
               <lifelineMoniker
                 Id="e95ea6e3-c1d6-44a3-8353-133aa9d24404"
-                LastKnownName="Должность"
+                LastKnownName="Посади"
                 LastKnownLocation="ModelingProject2.uml" />
             </covered>
           </messageOccurrenceSpecification>
@@ -1881,7 +1881,7 @@
             <covered>
               <lifelineMoniker
                 Id="e95ea6e3-c1d6-44a3-8353-133aa9d24404"
-                LastKnownName="Должность"
+                LastKnownName="Посади"
                 LastKnownLocation="ModelingProject2.uml" />
             </covered>
           </executionOccurrenceSpecification>
@@ -1985,7 +1985,7 @@
             <covered>
               <lifelineMoniker
                 Id="ed12f217-b429-45b6-898d-23db01d5ad75"
-                LastKnownName="Администратор"
+                LastKnownName="Адміністратор"
                 LastKnownLocation="ModelingProject2.uml" />
             </covered>
           </messageOccurrenceSpecification>
@@ -2073,7 +2073,7 @@
             <covered>
               <lifelineMoniker
                 Id="ed12f217-b429-45b6-898d-23db01d5ad75"
-                LastKnownName="Администратор"
+                LastKnownName="Адміністратор"
                 LastKnownLocation="ModelingProject2.uml" />
             </covered>
           </messageOccurrenceSpecification>
@@ -2093,7 +2093,7 @@
             <covered>
               <lifelineMoniker
                 Id="ed12f217-b429-45b6-898d-23db01d5ad75"
-                LastKnownName="Администратор"
+                LastKnownName="Адміністратор"
                 LastKnownLocation="ModelingProject2.uml" />
             </covered>
           </messageOccurrenceSpecification>
@@ -2129,7 +2129,7 @@
             <covered>
               <lifelineMoniker
                 Id="ed12f217-b429-45b6-898d-23db01d5ad75"
-                LastKnownName="Администратор"
+                LastKnownName="Адміністратор"
                 LastKnownLocation="ModelingProject2.uml" />
             </covered>
           </executionOccurrenceSpecification>
@@ -2137,9 +2137,9 @@
         <lifelines>
           <lifeline
             Id="ed12f217-b429-45b6-898d-23db01d5ad75"
-            name="Администратор"
+            name="Адміністратор"
             isActor="true"
-            lifelineDisplayName="Администратор">
+            lifelineDisplayName="Адміністратор">
             <topLevelOccurrences>
               <executionOccurrenceSpecificationMoniker
                 Id="0e7a4083-cb1e-4c26-b773-8310f4442fc8"
@@ -2201,9 +2201,9 @@
           </lifeline>
           <lifeline
             Id="e95ea6e3-c1d6-44a3-8353-133aa9d24404"
-            name="Должность"
+            name="Посади"
             isActor="false"
-            lifelineDisplayName="Должность">
+            lifelineDisplayName="Посади">
             <represents>
               <propertyMoniker
                 Id="c7d6cf3a-1c9f-4867-8785-3c1807f5d334"
@@ -2322,7 +2322,7 @@
           </message>
           <message
             Id="5caeefab-20be-4992-a01f-ab81f737cf88"
-            name="Вход в приложение"
+            name="Вхід в програму"
             messageKind="Complete"
             messageSort="SynchCall"
             createSelfMessage="false">
@@ -2341,7 +2341,7 @@
           </message>
           <message
             Id="81dfff24-f3fa-4280-9a9d-77af50d53ba0"
-            name="Посмотреть форму"
+            name="Подивитися форму"
             messageKind="Complete"
             messageSort="SynchCall"
             createSelfMessage="false">
@@ -2379,7 +2379,7 @@
           </message>
           <message
             Id="af0b804a-66f3-4f0b-af06-38cc5d515328"
-            name="Удалось или не удалось подключится"
+            name="Вдалося або не вдалося підключитися"
             messageKind="Complete"
             messageSort="Reply"
             createSelfMessage="false">
@@ -2398,7 +2398,7 @@
           </message>
           <message
             Id="09a8322d-3db9-4866-a8c2-3c9211730d0d"
-            name="Состояние подключения"
+            name="Стан підключення"
             messageKind="Complete"
             messageSort="Reply"
             createSelfMessage="false">
@@ -2417,7 +2417,7 @@
           </message>
           <message
             Id="354ebe17-c157-4df9-83da-b71ba8bd84b8"
-            name="результат подключения"
+            name="Результат підключення"
             messageKind="Complete"
             messageSort="Reply"
             createSelfMessage="false">
@@ -2436,7 +2436,7 @@
           </message>
           <message
             Id="fde5020b-7cc2-4fce-ab09-b8ca09706668"
-            name="Посмотреть данные"
+            name="Переглянути дані"
             messageKind="Complete"
             messageSort="SynchCall"
             createSelfMessage="false">
@@ -2455,7 +2455,7 @@
           </message>
           <message
             Id="27d57598-38e6-4df1-b64d-a4262f7b31bb"
-            name="Посмотреть данные в табл."
+            name="Переглянути дані в табл."
             messageKind="Complete"
             messageSort="SynchCall"
             createSelfMessage="false">
@@ -2493,7 +2493,7 @@
           </message>
           <message
             Id="74eaa239-f6a2-4cbd-80f3-bb9388a7fb8d"
-            name="Вернуть данные"
+            name="Повернути дані"
             messageKind="Complete"
             messageSort="Reply"
             createSelfMessage="false">
@@ -2512,7 +2512,7 @@
           </message>
           <message
             Id="cd1ccb3b-81b9-4b3a-ad20-a6c05ee63c6e"
-            name="вывести на экран"
+            name="Вивести на екран"
             messageKind="Complete"
             messageSort="Reply"
             createSelfMessage="false">
@@ -2531,7 +2531,7 @@
           </message>
           <message
             Id="2a708bc6-3bcd-45d3-819b-1337390daf8c"
-            name="Повторить"
+            name="Повторити"
             messageKind="Complete"
             messageSort="SynchCall"
             createSelfMessage="true">
@@ -2550,7 +2550,7 @@
           </message>
           <message
             Id="706ffc1f-3139-40c3-8777-c2f6b4871c45"
-            name="Отобразить данные"
+            name="Відобразити дані"
             messageKind="Complete"
             messageSort="Reply"
             createSelfMessage="false">
@@ -2569,7 +2569,7 @@
           </message>
           <message
             Id="f2b50e77-487e-497e-8570-8b6f9b9b2b63"
-            name="Редактировать данные"
+            name="Редагувати дані"
             messageKind="Complete"
             messageSort="SynchCall"
             createSelfMessage="false">
@@ -2588,7 +2588,7 @@
           </message>
           <message
             Id="0afd7f30-8cc1-4723-85b4-db98ef0e30a0"
-            name="Добавить данные"
+            name="Добавити дані"
             messageKind="Complete"
             messageSort="SynchCall"
             createSelfMessage="false">
@@ -2626,7 +2626,7 @@
           </message>
           <message
             Id="eef55edc-bbd7-4deb-9c21-b3e7825bc89d"
-            name="Данные добавлены или ошибка"
+            name="Дані добавлені або помилка"
             messageKind="Complete"
             messageSort="Reply"
             createSelfMessage="false">
@@ -2664,7 +2664,7 @@
           </message>
           <message
             Id="d2789cf3-5400-4df9-b38e-219e55d05ab0"
-            name="Изменение данных"
+            name="Змінення даних"
             messageKind="Complete"
             messageSort="SynchCall"
             createSelfMessage="false">
@@ -2702,7 +2702,7 @@
           </message>
           <message
             Id="b66dd0eb-8608-4886-bea9-3c345a36d9db"
-            name="Данные изменены или ошибка"
+            name="Дані змінені або помилка"
             messageKind="Complete"
             messageSort="Reply"
             createSelfMessage="false">
@@ -2740,7 +2740,7 @@
           </message>
           <message
             Id="904b7fcc-ef25-4f7d-bd54-ae427859f4a5"
-            name="Повторить"
+            name="Повторити"
             messageKind="Complete"
             messageSort="SynchCall"
             createSelfMessage="true">
@@ -2759,7 +2759,7 @@
           </message>
           <message
             Id="3af6b612-267b-4923-9500-16d9b35a79a8"
-            name="Завершение редактирования"
+            name="Завершення редагування"
             messageKind="Complete"
             messageSort="Reply"
             createSelfMessage="false">
@@ -2778,7 +2778,7 @@
           </message>
           <message
             Id="954d490f-588d-4264-8f64-b7d68ca41e1e"
-            name="Удаление данных"
+            name="Видалення даних"
             messageKind="Complete"
             messageSort="SynchCall"
             createSelfMessage="false">
@@ -2797,7 +2797,7 @@
           </message>
           <message
             Id="92f81e16-ddd8-4db6-a4a8-9280cd86492c"
-            name="Удаление данных"
+            name="Видалення даних"
             messageKind="Complete"
             messageSort="SynchCall"
             createSelfMessage="false">
@@ -2835,7 +2835,7 @@
           </message>
           <message
             Id="d9ceb7d3-18a6-4f1d-bbd3-1491da27288f"
-            name="Данные удалены или ошибка"
+            name="Дані видалені або помилка"
             messageKind="Complete"
             messageSort="Reply"
             createSelfMessage="false">
@@ -2873,7 +2873,7 @@
           </message>
           <message
             Id="69013e68-79d5-4deb-b1af-2ab12fa6e2b6"
-            name="Повторить"
+            name="Повторити"
             messageKind="Complete"
             messageSort="SynchCall"
             createSelfMessage="true">
@@ -2892,7 +2892,7 @@
           </message>
           <message
             Id="9ec76263-4df9-4078-b2b9-74ce3a8377f3"
-            name="Завершение удаления"
+            name="Завершення видалення"
             messageKind="Complete"
             messageSort="Reply"
             createSelfMessage="false">
@@ -2911,7 +2911,7 @@
           </message>
           <message
             Id="37d82d4d-8b13-4d72-a921-91dc0a9b0c86"
-            name="Выход с программы"
+            name="Вихід із програми"
             messageKind="Complete"
             messageSort="SynchCall"
             createSelfMessage="false">
@@ -2961,7 +2961,7 @@
             <type_NamedElement>
               <classMoniker
                 Id="b6a11564-72bd-4a9c-a112-7111fd0b0e75"
-                LastKnownName="Должность"
+                LastKnownName="Посади"
                 LastKnownLocation="ModelingProject2.uml" />
             </type_NamedElement>
           </property>
@@ -2977,7 +2977,7 @@
             <type_NamedElement>
               <classMoniker
                 Id="b6a11564-72bd-4a9c-a112-7111fd0b0e75"
-                LastKnownName="Должность"
+                LastKnownName="Посади"
                 LastKnownLocation="ModelingProject2.uml" />
             </type_NamedElement>
           </property>
@@ -2987,7 +2987,7 @@
     <packageHasNamedElement>
       <class
         Id="00e02b5c-9476-4279-a259-d24bc98624b1"
-        name="Продуктовый супермаркет"
+        name="Продуктовий супермаркет"
         isAbstract="false"
         isLeaf="false"
         isActiveClass="false">
@@ -2995,19 +2995,19 @@
           <association
             Id="8df65f06-c140-46e7-a257-b4117f9986de"
             isDerived="false"
-            sourceEndRoleName="Продуктовый супермаркет"
-            targetEndRoleName="Должность"
+            sourceEndRoleName="Продуктовий супермаркет"
+            targetEndRoleName="Посади"
             isLeaf="false"
             isAbstract="false">
             <classMoniker
               Id="b6a11564-72bd-4a9c-a112-7111fd0b0e75"
-              LastKnownName="Должность"
+              LastKnownName="Посади"
               LastKnownLocation="ModelingProject2.uml" />
             <relationshipOwnedElementsInternal>
               <associationHasOwnedEnds>
                 <memberEnd
                   Id="86625fda-7cec-46a3-b4e3-73bf2db9e8ec"
-                  name="Продуктовый супермаркет"
+                  name="Продуктовий супермаркет"
                   isLeaf="false"
                   isStatic="false"
                   isReadOnly="false"
@@ -3020,33 +3020,46 @@
               <associationHasOwnedEnds>
                 <memberEnd
                   Id="26b43a2c-227c-4dd2-8d40-3b454a969fc2"
-                  name="Должность"
+                  name="Посади"
                   isLeaf="false"
                   isStatic="false"
                   isReadOnly="false"
                   isDerived="false"
                   isDerivedUnion="false"
                   aggregation="None"
-                  isComposite="false" />
+                  isComposite="false">
+                  <lowerValueInternal>
+                    <literalString
+                      Id="1466c694-8cdd-43d5-9c9a-e58dc427ac9a"
+                      name="Lower"
+                      value="*" />
+                  </lowerValueInternal>
+                  <upperValueInternal>
+                    <literalString
+                      Id="4484bba1-7bfb-458a-86d1-e14c0c050fb8"
+                      name="Upper"
+                      value="*" />
+                  </upperValueInternal>
+                </memberEnd>
               </associationHasOwnedEnds>
             </relationshipOwnedElementsInternal>
           </association>
           <association
             Id="b4bf8f1c-a904-4699-b8b4-eda0e99632f1"
             isDerived="false"
-            sourceEndRoleName="Продуктовый супермаркет"
-            targetEndRoleName="Сотрудники"
+            sourceEndRoleName="Продуктовий супермаркет"
+            targetEndRoleName="Співробітники"
             isLeaf="false"
             isAbstract="false">
             <classMoniker
               Id="67f1b829-7a4a-4b08-be98-122b88bc37b4"
-              LastKnownName="Сотрудники"
+              LastKnownName="Співробітники"
               LastKnownLocation="ModelingProject2.uml" />
             <relationshipOwnedElementsInternal>
               <associationHasOwnedEnds>
                 <memberEnd
                   Id="c25385ae-bfb8-4587-8d0b-b58242f164f5"
-                  name="Продуктовый супермаркет"
+                  name="Продуктовий супермаркет"
                   isLeaf="false"
                   isStatic="false"
                   isReadOnly="false"
@@ -3059,33 +3072,46 @@
               <associationHasOwnedEnds>
                 <memberEnd
                   Id="f870431b-624f-4da4-acd5-51eea7f5a7f3"
-                  name="Сотрудники"
+                  name="Співробітники"
                   isLeaf="false"
                   isStatic="false"
                   isReadOnly="false"
                   isDerived="false"
                   isDerivedUnion="false"
                   aggregation="None"
-                  isComposite="false" />
+                  isComposite="false">
+                  <lowerValueInternal>
+                    <literalString
+                      Id="da5149e4-7f7c-43f0-8d07-f6c17b3f9fbd"
+                      name="Lower"
+                      value="*" />
+                  </lowerValueInternal>
+                  <upperValueInternal>
+                    <literalString
+                      Id="85931dbc-f1d8-477b-b967-d0d47f14a5ad"
+                      name="Upper"
+                      value="*" />
+                  </upperValueInternal>
+                </memberEnd>
               </associationHasOwnedEnds>
             </relationshipOwnedElementsInternal>
           </association>
           <association
             Id="67906c75-f771-4d66-bb59-507925303d8c"
             isDerived="false"
-            sourceEndRoleName="Продуктовый супермаркет"
-            targetEndRoleName="Товары"
+            sourceEndRoleName="Продуктовий супермаркет"
+            targetEndRoleName="Товари"
             isLeaf="false"
             isAbstract="false">
             <classMoniker
               Id="fbeb796d-7090-4a58-be4c-3fb64b6e5cc5"
-              LastKnownName="Товары"
+              LastKnownName="Товари"
               LastKnownLocation="ModelingProject2.uml" />
             <relationshipOwnedElementsInternal>
               <associationHasOwnedEnds>
                 <memberEnd
                   Id="3aaf2729-3d44-4748-8a34-0b8e373b600a"
-                  name="Продуктовый супермаркет"
+                  name="Продуктовий супермаркет"
                   isLeaf="false"
                   isStatic="false"
                   isReadOnly="false"
@@ -3098,14 +3124,27 @@
               <associationHasOwnedEnds>
                 <memberEnd
                   Id="fbfa522e-7fde-425c-856f-adb81b410ca4"
-                  name="Товары"
+                  name="Товари"
                   isLeaf="false"
                   isStatic="false"
                   isReadOnly="false"
                   isDerived="false"
                   isDerivedUnion="false"
                   aggregation="None"
-                  isComposite="false" />
+                  isComposite="false">
+                  <lowerValueInternal>
+                    <literalString
+                      Id="7add7115-7024-4dc4-a3b5-7ec327b596eb"
+                      name="Lower"
+                      value="*" />
+                  </lowerValueInternal>
+                  <upperValueInternal>
+                    <literalString
+                      Id="5aa82233-4b8c-4a99-a0ba-029fbf7e37fe"
+                      name="Upper"
+                      value="*" />
+                  </upperValueInternal>
+                </memberEnd>
               </associationHasOwnedEnds>
             </relationshipOwnedElementsInternal>
           </association>
@@ -3151,7 +3190,7 @@
           <association
             Id="ae049daa-ef64-4d0a-8a12-07021f8f71a5"
             isDerived="false"
-            sourceEndRoleName="Продуктовый супермаркет"
+            sourceEndRoleName="Продуктовий супермаркет"
             targetEndRoleName="Склад"
             isLeaf="false"
             isAbstract="false">
@@ -3163,7 +3202,7 @@
               <associationHasOwnedEnds>
                 <memberEnd
                   Id="31d915b0-2c33-4dde-b0cc-20f705575e06"
-                  name="Продуктовый супермаркет"
+                  name="Продуктовий супермаркет"
                   isLeaf="false"
                   isStatic="false"
                   isReadOnly="false"
@@ -3183,26 +3222,39 @@
                   isDerived="false"
                   isDerivedUnion="false"
                   aggregation="None"
-                  isComposite="false" />
+                  isComposite="false">
+                  <lowerValueInternal>
+                    <literalString
+                      Id="abfa007c-3897-467e-abf3-c86199a26c0e"
+                      name="Lower"
+                      value="*" />
+                  </lowerValueInternal>
+                  <upperValueInternal>
+                    <literalString
+                      Id="f43d2a02-fab9-44af-8dcb-87455675f263"
+                      name="Upper"
+                      value="*" />
+                  </upperValueInternal>
+                </memberEnd>
               </associationHasOwnedEnds>
             </relationshipOwnedElementsInternal>
           </association>
           <association
             Id="3397b00f-870c-4ea9-9b73-cddb040d4237"
             isDerived="false"
-            sourceEndRoleName="Продуктовый супермаркет"
-            targetEndRoleName="Информация о сотрудниках"
+            sourceEndRoleName="Продуктовий супермаркет"
+            targetEndRoleName="Інформація про співробітників"
             isLeaf="false"
             isAbstract="false">
             <classMoniker
               Id="2919ef36-f6b4-4266-8e0e-8a55dce94517"
-              LastKnownName="Информация о сотрудниках"
+              LastKnownName="Інформація про співробітників"
               LastKnownLocation="ModelingProject2.uml" />
             <relationshipOwnedElementsInternal>
               <associationHasOwnedEnds>
                 <memberEnd
                   Id="1c7cf999-308f-4efd-acfd-7cf0e987930c"
-                  name="Продуктовый супермаркет"
+                  name="Продуктовий супермаркет"
                   isLeaf="false"
                   isStatic="false"
                   isReadOnly="false"
@@ -3215,14 +3267,79 @@
               <associationHasOwnedEnds>
                 <memberEnd
                   Id="79e56f28-6f3e-4a69-88a4-09e916cccf07"
-                  name="Информация о сотрудниках"
+                  name="Інформація про співробітників"
                   isLeaf="false"
                   isStatic="false"
                   isReadOnly="false"
                   isDerived="false"
                   isDerivedUnion="false"
                   aggregation="None"
-                  isComposite="false" />
+                  isComposite="false">
+                  <lowerValueInternal>
+                    <literalString
+                      Id="086c9118-3c6f-4814-a38d-2cf37f595905"
+                      name="Lower"
+                      value="*" />
+                  </lowerValueInternal>
+                  <upperValueInternal>
+                    <literalString
+                      Id="94b22d5c-e439-4e7c-8ca4-b8dde9fd3e3d"
+                      name="Upper"
+                      value="*" />
+                  </upperValueInternal>
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+          <association
+            Id="aa67e0f2-1386-4f49-9095-cbb4880a2f44"
+            isDerived="false"
+            sourceEndRoleName="Продуктовий супермаркет"
+            targetEndRoleName="Звіт"
+            isLeaf="false"
+            isAbstract="false">
+            <classMoniker
+              Id="1d803026-faaa-4631-aedd-9b01991beee5"
+              LastKnownName="Звіт"
+              LastKnownLocation="ModelingProject2.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="64318ab6-8b42-465d-a72a-f54992425244"
+                  name="Продуктовий супермаркет"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="Shared"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="e0c22db6-96fd-4cee-9d85-a71d09fbb1f7"
+                  name="Звіт"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false">
+                  <lowerValueInternal>
+                    <literalString
+                      Id="d7a57a24-2dbe-4b7a-a97e-c6ba4f2dc142"
+                      name="Lower"
+                      value="*" />
+                  </lowerValueInternal>
+                  <upperValueInternal>
+                    <literalString
+                      Id="21687201-b7a1-4e18-a907-ca7f23aef325"
+                      name="Upper"
+                      value="*" />
+                  </upperValueInternal>
+                </memberEnd>
               </associationHasOwnedEnds>
             </relationshipOwnedElementsInternal>
           </association>
@@ -3230,7 +3347,7 @@
         <ownedOperationsInternal>
           <operation
             Id="1ae8db9d-9342-465c-b9e6-6f8c8e54a2f5"
-            name="ОтобразитьСотрудников"
+            name="ВідобразитиСпівробітників"
             isLeaf="false"
             isStatic="false"
             isAbstract="false"
@@ -3238,7 +3355,7 @@
             isQuery="false" />
           <operation
             Id="85c955df-8460-402d-a922-0b597301c385"
-            name="ОтобразитьДолжность"
+            name="ВідобразитиПосади"
             isLeaf="false"
             isStatic="false"
             isAbstract="false"
@@ -3246,7 +3363,7 @@
             isQuery="false" />
           <operation
             Id="0a7ed2ff-901f-46fd-8460-6c0f764dc2bb"
-            name="ОтобразитьСклад"
+            name="ВідобразитиСклад"
             isLeaf="false"
             isStatic="false"
             isAbstract="false"
@@ -3254,7 +3371,7 @@
             isQuery="false" />
           <operation
             Id="625a54fb-d15a-4692-a607-db92a8f43517"
-            name="ОтобразитьТовары"
+            name="ВідобразитиТовари"
             isLeaf="false"
             isStatic="false"
             isAbstract="false"
@@ -3262,7 +3379,7 @@
             isQuery="false" />
           <operation
             Id="d3e3f4db-a43a-4769-b701-35c0ca398dbf"
-            name="ОтобразитьИнформациюОСотрудниках"
+            name="ВідобразитиИнформаціюПроСпівробітників"
             isLeaf="false"
             isStatic="false"
             isAbstract="false"
@@ -3390,7 +3507,7 @@
     <packageHasNamedElement>
       <class
         Id="67f1b829-7a4a-4b08-be98-122b88bc37b4"
-        name="Сотрудники"
+        name="Співробітники"
         isAbstract="false"
         isLeaf="false"
         isActiveClass="false">
@@ -3408,7 +3525,7 @@
             isComposite="false" />
           <property
             Id="0ef82237-79a4-4942-b6f1-97d9247d9d72"
-            name="enum отдел"
+            name="enum відділ"
             visibility="Private"
             isLeaf="false"
             isStatic="false"
@@ -3432,7 +3549,7 @@
             isComposite="false" />
           <property
             Id="cf1f7beb-a220-4ab5-89ef-eae36fb9dfc8"
-            name="int id_инфо"
+            name="int id_інформації"
             visibility="Private"
             isLeaf="false"
             isStatic="false"
@@ -3444,7 +3561,7 @@
             isComposite="false" />
           <property
             Id="c03df186-95c3-4be7-bd77-d87ac558c6c2"
-            name="int id_должность"
+            name="int id_посади"
             visibility="Private"
             isLeaf="false"
             isStatic="false"
@@ -3468,7 +3585,7 @@
             isComposite="false" />
           <property
             Id="1e04ae9d-a917-44a1-9ba3-bb274d599936"
-            name="date уволен"
+            name="date звільнений"
             visibility="Private"
             isLeaf="false"
             isStatic="false"
@@ -3480,7 +3597,7 @@
             isComposite="false" />
           <property
             Id="3ff04e7b-f83f-4839-ab59-53c885f289cf"
-            name="date принят"
+            name="date прийнятий"
             visibility="Private"
             isLeaf="false"
             isStatic="false"
@@ -3494,31 +3611,39 @@
         <ownedOperationsInternal>
           <operation
             Id="89882dc2-36b5-4bc4-8461-a5330d1658a6"
-            name="ДобавитьДанные"
+            name="РозрахуватиЗаробітнуПлату"
             isLeaf="false"
             isStatic="false"
             isAbstract="false"
             concurrency="Sequential"
             isQuery="false" />
           <operation
-            Id="18012d2c-42df-4fdc-a6f7-872735e4b8dd"
-            name="ОтобразитьДанные"
+            Id="6da0eea8-4046-4495-b033-d0fef88feb48"
+            name="ВідобразитиДані"
             isLeaf="false"
             isStatic="false"
             isAbstract="false"
             concurrency="Sequential"
             isQuery="false" />
           <operation
-            Id="9fcddf12-ec45-400f-b798-c379c0ed58d5"
-            name="ИзменитьДанные"
+            Id="10cf5050-989e-4a29-b4f7-85b54beb0e15"
+            name="ВидалитиДані"
             isLeaf="false"
             isStatic="false"
             isAbstract="false"
             concurrency="Sequential"
             isQuery="false" />
           <operation
-            Id="990c7a2f-014b-47d8-8837-4f8d8d3aaeb1"
-            name="УдалитьДанные"
+            Id="b109ae7a-eec4-4804-84b3-f8bd1237dca2"
+            name="ДобавитиДані"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false" />
+          <operation
+            Id="bc46e77a-6c45-41df-8a41-9d5c84813694"
+            name="ЗмінитиДані"
             isLeaf="false"
             isStatic="false"
             isAbstract="false"
@@ -3530,7 +3655,7 @@
     <packageHasNamedElement>
       <class
         Id="b6a11564-72bd-4a9c-a112-7111fd0b0e75"
-        name="Должность"
+        name="Посади"
         isAbstract="false"
         isLeaf="false"
         isActiveClass="false">
@@ -3601,47 +3726,34 @@
             </relationshipOwnedElementsInternal>
           </association>
           <association
-            Id="40c4b0f3-8518-40a7-b5f0-a26fdb9a853c"
+            Id="7a44d4fc-14d1-4a10-9027-927939ba6058"
             isDerived="false"
-            sourceEndRoleName="Должность"
-            targetEndRoleName="Сотрудники"
+            sourceEndRoleName="Посади"
+            targetEndRoleName="Співробітники"
             isLeaf="false"
             isAbstract="false">
             <classMoniker
               Id="67f1b829-7a4a-4b08-be98-122b88bc37b4"
-              LastKnownName="Сотрудники"
+              LastKnownName="Співробітники"
               LastKnownLocation="ModelingProject2.uml" />
             <relationshipOwnedElementsInternal>
               <associationHasOwnedEnds>
                 <memberEnd
-                  Id="08ffa0b1-8ccf-4b67-9ea8-563393df76ca"
-                  name="Должность"
+                  Id="d61e19be-9785-43ae-9de9-ea05ce8a8e26"
+                  name="Посади"
                   isLeaf="false"
                   isStatic="false"
                   isReadOnly="false"
                   isDerived="false"
                   isDerivedUnion="false"
-                  aggregation="None"
+                  aggregation="Shared"
                   isComposite="false"
-                  isNavigableOwned="false">
-                  <lowerValueInternal>
-                    <literalString
-                      Id="1bf7fa87-af68-4a27-a9be-6be38ccd3918"
-                      name="Lower"
-                      value="m" />
-                  </lowerValueInternal>
-                  <upperValueInternal>
-                    <literalString
-                      Id="29f52651-0b5c-450d-92df-532c29120a45"
-                      name="Upper"
-                      value="m" />
-                  </upperValueInternal>
-                </memberEnd>
+                  isNavigableOwned="false" />
               </associationHasOwnedEnds>
               <associationHasOwnedEnds>
                 <memberEnd
-                  Id="6a5e0fee-e6bf-4a8f-8c2c-b8b24f7bac57"
-                  name="Сотрудники"
+                  Id="df98c929-82cd-4a90-a958-eb10d93cf84c"
+                  name="Співробітники"
                   isLeaf="false"
                   isStatic="false"
                   isReadOnly="false"
@@ -3651,15 +3763,15 @@
                   isComposite="false">
                   <lowerValueInternal>
                     <literalString
-                      Id="41f97a95-2b29-4625-bb50-1d84e4d2970a"
+                      Id="93c026ec-80d0-4ec0-b5ec-49ba3185d715"
                       name="Lower"
-                      value="n" />
+                      value="*" />
                   </lowerValueInternal>
                   <upperValueInternal>
                     <literalString
-                      Id="7ca1e7c5-94a7-4789-bb3d-1a6f13f9ebb3"
+                      Id="a90d1e52-a794-4bfc-aaad-0d7fbc63a247"
                       name="Upper"
-                      value="n" />
+                      value="*" />
                   </upperValueInternal>
                 </memberEnd>
               </associationHasOwnedEnds>
@@ -3680,7 +3792,7 @@
             isComposite="false" />
           <property
             Id="bf45410d-0be9-4fba-8253-4d9920cc2f02"
-            name="string должность"
+            name="string посада"
             visibility="Private"
             isLeaf="false"
             isStatic="false"
@@ -3705,32 +3817,32 @@
         </ownedAttributesInternal>
         <ownedOperationsInternal>
           <operation
-            Id="60999980-ca33-4874-b542-7b9ab00f7b72"
-            name="ДобавитьДанные"
+            Id="1c57349c-a394-49f3-8b21-320396b9d560"
+            name="ВідобразитиДані"
             isLeaf="false"
             isStatic="false"
             isAbstract="false"
             concurrency="Sequential"
             isQuery="false" />
           <operation
-            Id="10e2cf87-6774-4910-8c2b-3d4f33c01c34"
-            name="ИзменитьДанные"
+            Id="68db6866-6ec5-47c3-988f-3efbe4fc7382"
+            name="ВидалитиДані"
             isLeaf="false"
             isStatic="false"
             isAbstract="false"
             concurrency="Sequential"
             isQuery="false" />
           <operation
-            Id="f9c1a420-94f0-41bf-8bd5-32e74491c477"
-            name="ОтобразитьДанные"
+            Id="8563f0ca-76d4-4c7a-acb6-2bb4438cb4de"
+            name="ДобавитиДані"
             isLeaf="false"
             isStatic="false"
             isAbstract="false"
             concurrency="Sequential"
             isQuery="false" />
           <operation
-            Id="34ea91c5-de6b-4f90-a23b-46f60e0a8c9d"
-            name="УдалитьДанные"
+            Id="64982745-ddcb-440b-8171-5b45fb0def73"
+            name="ЗмінитиДані"
             isLeaf="false"
             isStatic="false"
             isAbstract="false"
@@ -3742,7 +3854,7 @@
     <packageHasNamedElement>
       <class
         Id="fbeb796d-7090-4a58-be4c-3fb64b6e5cc5"
-        name="Товары"
+        name="Товари"
         isAbstract="false"
         isLeaf="false"
         isActiveClass="false">
@@ -3760,7 +3872,7 @@
             isComposite="false" />
           <property
             Id="ee48a18d-6ca0-4092-831b-3def3ed3b2c3"
-            name="string наименование товара"
+            name="string найменуванняТовару"
             visibility="Private"
             isLeaf="false"
             isStatic="false"
@@ -3772,7 +3884,7 @@
             isComposite="false" />
           <property
             Id="089a5efe-bcdc-401e-8569-d5fc209712c9"
-            name="enum категория"
+            name="enum категорія"
             visibility="Private"
             isLeaf="false"
             isStatic="false"
@@ -3784,7 +3896,7 @@
             isComposite="false" />
           <property
             Id="d9664c2e-8fe0-45f3-a43a-3194851555e1"
-            name="float ценаЗаЕдиницуИзмерения"
+            name="float цінаЗаОдиницюВиміруТовару"
             visibility="Private"
             isLeaf="false"
             isStatic="false"
@@ -3796,7 +3908,7 @@
             isComposite="false" />
           <property
             Id="d5c756ee-a149-42e3-91d4-d618e752b4d2"
-            name="string вид товара"
+            name="string видТовару"
             visibility="Private"
             isLeaf="false"
             isStatic="false"
@@ -3808,7 +3920,7 @@
             isComposite="false" />
           <property
             Id="2ade7d5c-ac03-48f0-82f5-d252566af76c"
-            name="string подвид товара"
+            name="string підвидТовару"
             visibility="Private"
             isLeaf="false"
             isStatic="false"
@@ -3820,7 +3932,7 @@
             isComposite="false" />
           <property
             Id="037cfdf2-524e-4509-8b34-c88f8b562081"
-            name="enum единица измерения"
+            name="enum одиницяВиміру"
             visibility="Private"
             isLeaf="false"
             isStatic="false"
@@ -3834,7 +3946,7 @@
         <ownedOperationsInternal>
           <operation
             Id="e22a20ee-0dce-444e-a4e8-67099e04d04f"
-            name="ДобавитьДанные"
+            name="ДобавитиДані"
             isLeaf="false"
             isStatic="false"
             isAbstract="false"
@@ -3842,7 +3954,7 @@
             isQuery="false" />
           <operation
             Id="3a0f9323-50b4-4009-bada-693b7e002e44"
-            name="ИзменитьДанные"
+            name="ЗмінитиДані"
             isLeaf="false"
             isStatic="false"
             isAbstract="false"
@@ -3850,7 +3962,7 @@
             isQuery="false" />
           <operation
             Id="7cde354f-0d20-4eaf-b274-bcf8d21d40a4"
-            name="ОтобразитьДанные"
+            name="ВідобразитиДані"
             isLeaf="false"
             isStatic="false"
             isAbstract="false"
@@ -3858,7 +3970,7 @@
             isQuery="false" />
           <operation
             Id="4d654513-3fee-414e-a7a9-fbca7a39929b"
-            name="УдалитьДанные"
+            name="ВидалитиДані"
             isLeaf="false"
             isStatic="false"
             isAbstract="false"
@@ -3876,34 +3988,34 @@
         isActiveClass="false">
         <targetEnds>
           <association
-            Id="59c4f371-afd4-49a7-95e6-06d7a1b0272d"
+            Id="ed40f5fc-1a1a-47ec-ad42-bbce656e98e2"
             isDerived="false"
             sourceEndRoleName="Склад"
-            targetEndRoleName="Товары"
+            targetEndRoleName="Товари"
             isLeaf="false"
             isAbstract="false">
             <classMoniker
               Id="fbeb796d-7090-4a58-be4c-3fb64b6e5cc5"
-              LastKnownName="Товары"
+              LastKnownName="Товари"
               LastKnownLocation="ModelingProject2.uml" />
             <relationshipOwnedElementsInternal>
               <associationHasOwnedEnds>
                 <memberEnd
-                  Id="e86454e3-6d41-4fca-97e0-c65303f7b5a5"
+                  Id="0b35a727-989c-454f-a6a4-23fd73205734"
                   name="Склад"
                   isLeaf="false"
                   isStatic="false"
                   isReadOnly="false"
                   isDerived="false"
                   isDerivedUnion="false"
-                  aggregation="None"
+                  aggregation="Shared"
                   isComposite="false"
                   isNavigableOwned="false" />
               </associationHasOwnedEnds>
               <associationHasOwnedEnds>
                 <memberEnd
-                  Id="923afdae-6c02-43e4-ae05-f83708f88b97"
-                  name="Товары"
+                  Id="c4523d1f-3030-4297-a7a8-aa7006eb6df4"
+                  name="Товари"
                   isLeaf="false"
                   isStatic="false"
                   isReadOnly="false"
@@ -3913,15 +4025,15 @@
                   isComposite="false">
                   <lowerValueInternal>
                     <literalString
-                      Id="d09228bc-35d4-4f94-99fd-6a90f68170aa"
+                      Id="49ff2981-4440-459f-b631-797f5bbac549"
                       name="Lower"
-                      value="m" />
+                      value="*" />
                   </lowerValueInternal>
                   <upperValueInternal>
                     <literalString
-                      Id="3ce4a307-33f0-4afd-a8e6-5ed1f5b1621c"
+                      Id="0cd756e4-0e9d-449a-a819-4a607616bcd5"
                       name="Upper"
-                      value="m" />
+                      value="*" />
                   </upperValueInternal>
                 </memberEnd>
               </associationHasOwnedEnds>
@@ -3931,7 +4043,7 @@
         <ownedAttributesInternal>
           <property
             Id="dace0057-2c91-4dde-8ef8-2500b62f8cce"
-            name="enum в наличии"
+            name="enum в наявності"
             visibility="Private"
             isLeaf="false"
             isStatic="false"
@@ -3954,7 +4066,7 @@
             isComposite="false" />
           <property
             Id="687eedf3-635c-434e-9ee5-f1988542fb9e"
-            name="int количество"
+            name="int кількість"
             visibility="Private"
             isLeaf="false"
             isStatic="false"
@@ -3966,7 +4078,7 @@
             isComposite="false" />
           <property
             Id="6daefceb-0699-4e3a-bc95-3db707455fe3"
-            name="float цена"
+            name="float ціна"
             visibility="Private"
             isLeaf="false"
             isStatic="false"
@@ -3978,7 +4090,7 @@
             isComposite="false" />
           <property
             Id="d55292b6-07b2-4c21-921c-5a1b1cdcba9a"
-            name="date доставлен"
+            name="date доставлений"
             visibility="Private"
             isLeaf="false"
             isStatic="false"
@@ -3990,7 +4102,7 @@
             isComposite="false" />
           <property
             Id="f1c02eb9-0088-41f3-a27b-7aac18c86e9c"
-            name="date продан"
+            name="date проданий"
             visibility="Private"
             isLeaf="false"
             isStatic="false"
@@ -4002,7 +4114,7 @@
             isComposite="false" />
           <property
             Id="db9f4583-26bc-4b5c-8db7-5ea4a7c9040f"
-            name="int id_товара"
+            name="int id_товару"
             isLeaf="false"
             isStatic="false"
             isReadOnly="false"
@@ -4014,32 +4126,40 @@
         </ownedAttributesInternal>
         <ownedOperationsInternal>
           <operation
-            Id="b16e2432-91fa-4206-89d3-00084c23402a"
-            name="ДобавитьДанные"
+            Id="3591f590-43a8-4389-8b27-b44fff9089a4"
+            name="РозрахуватиВартістьЗакупівліТовару"
             isLeaf="false"
             isStatic="false"
             isAbstract="false"
             concurrency="Sequential"
             isQuery="false" />
           <operation
-            Id="d18c0d61-7565-4a1f-a31a-142d1bbc6d6d"
-            name="ИзменитьДанные"
+            Id="d4df408c-1042-4649-87f8-66aed062ee9d"
+            name="ВідобразитиДані"
             isLeaf="false"
             isStatic="false"
             isAbstract="false"
             concurrency="Sequential"
             isQuery="false" />
           <operation
-            Id="e4727fe3-11ba-461b-a70f-5fe3d5996b5d"
-            name="ОтобразитьДанные"
+            Id="6286f32c-2025-453f-b34b-819bdbf280b6"
+            name="ВидалитиДані"
             isLeaf="false"
             isStatic="false"
             isAbstract="false"
             concurrency="Sequential"
             isQuery="false" />
           <operation
-            Id="506e97fb-e50e-4c0b-a09d-4cc88e26441a"
-            name="УдалитьДанные"
+            Id="37bd5c0a-234f-480f-b883-2de6f333829c"
+            name="ДобавитиДані"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false" />
+          <operation
+            Id="956a5587-6c22-4771-8ebe-2d0d51d5f864"
+            name="ЗмінитиДані"
             isLeaf="false"
             isStatic="false"
             isAbstract="false"
@@ -6493,53 +6613,40 @@
     <packageHasNamedElement>
       <class
         Id="2919ef36-f6b4-4266-8e0e-8a55dce94517"
-        name="Информация о сотрудниках"
+        name="Інформація про співробітників"
         isAbstract="false"
         isLeaf="false"
         isActiveClass="false">
         <targetEnds>
           <association
-            Id="5c19579d-ff4c-4618-b295-ba1db66f664f"
+            Id="91898d43-7598-42a5-a798-cd666479b228"
             isDerived="false"
-            sourceEndRoleName="Информация о сотрудниках"
-            targetEndRoleName="Сотрудники"
+            sourceEndRoleName="Інформація про співробітників"
+            targetEndRoleName="Співробітники"
             isLeaf="false"
             isAbstract="false">
             <classMoniker
               Id="67f1b829-7a4a-4b08-be98-122b88bc37b4"
-              LastKnownName="Сотрудники"
+              LastKnownName="Співробітники"
               LastKnownLocation="ModelingProject2.uml" />
             <relationshipOwnedElementsInternal>
               <associationHasOwnedEnds>
                 <memberEnd
-                  Id="7a93dac3-eb2b-4639-969c-8aeb1028bf3a"
-                  name="Информация о сотрудниках"
+                  Id="13731fc4-be49-47d1-984f-48ea7c04d5b1"
+                  name="Інформація про співробітників"
                   isLeaf="false"
                   isStatic="false"
                   isReadOnly="false"
                   isDerived="false"
                   isDerivedUnion="false"
-                  aggregation="None"
+                  aggregation="Shared"
                   isComposite="false"
-                  isNavigableOwned="false">
-                  <lowerValueInternal>
-                    <literalString
-                      Id="d2a66bab-2963-4ece-8543-42d7885673b5"
-                      name="Lower"
-                      value="m" />
-                  </lowerValueInternal>
-                  <upperValueInternal>
-                    <literalString
-                      Id="96176942-8668-415c-a858-26561854f63b"
-                      name="Upper"
-                      value="m" />
-                  </upperValueInternal>
-                </memberEnd>
+                  isNavigableOwned="false" />
               </associationHasOwnedEnds>
               <associationHasOwnedEnds>
                 <memberEnd
-                  Id="02859e98-0ed0-48d0-b6d7-f9f14ed66934"
-                  name="Сотрудники"
+                  Id="e92772de-865c-4748-ae52-3eb5f8a8d4bb"
+                  name="Співробітники"
                   isLeaf="false"
                   isStatic="false"
                   isReadOnly="false"
@@ -6549,15 +6656,15 @@
                   isComposite="false">
                   <lowerValueInternal>
                     <literalString
-                      Id="99014740-d496-4bc0-8f40-329e6657b523"
+                      Id="b632b6d5-c72c-4082-90c0-e20d23c092c6"
                       name="Lower"
-                      value="n" />
+                      value="*" />
                   </lowerValueInternal>
                   <upperValueInternal>
                     <literalString
-                      Id="cdc308d0-8052-4360-a32c-4ca0a579b632"
+                      Id="5c2069c4-371f-4625-9441-d28b812721a5"
                       name="Upper"
-                      value="n" />
+                      value="*" />
                   </upperValueInternal>
                 </memberEnd>
               </associationHasOwnedEnds>
@@ -6578,7 +6685,7 @@
             isComposite="false" />
           <property
             Id="79ee190a-2264-41c0-b45e-10e648c7995b"
-            name="string ФИО"
+            name="string ПІБ"
             visibility="Private"
             isLeaf="false"
             isStatic="false"
@@ -6590,7 +6697,7 @@
             isComposite="false" />
           <property
             Id="c382cd9f-46af-401a-b1cc-5288165e045d"
-            name="string паспортные данные"
+            name="string паспортні дані"
             visibility="Private"
             isLeaf="false"
             isStatic="false"
@@ -6602,7 +6709,7 @@
             isComposite="false" />
           <property
             Id="6ccba554-7daa-46d2-abf7-c9639f3351f8"
-            name="int возраст"
+            name="int вік"
             visibility="Private"
             isLeaf="false"
             isStatic="false"
@@ -6614,7 +6721,7 @@
             isComposite="false" />
           <property
             Id="328f8fb0-280d-4453-bdd2-d4f49ba5c253"
-            name="string адрес"
+            name="string адреса"
             visibility="Private"
             isLeaf="false"
             isStatic="false"
@@ -6626,7 +6733,7 @@
             isComposite="false" />
           <property
             Id="ef99bdf8-a58f-472e-9dbc-f9295d71c697"
-            name="string номер телефона"
+            name="string номер телефону"
             visibility="Private"
             isLeaf="false"
             isStatic="false"
@@ -6649,6 +6756,353 @@
             aggregation="None"
             isComposite="false" />
         </ownedAttributesInternal>
+        <ownedOperationsInternal>
+          <operation
+            Id="e1dc599c-c0e5-4e02-a1dc-988ddc2ba44f"
+            name="ВідобразитиДані"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false" />
+          <operation
+            Id="bca41181-2bfa-49ec-bba5-0df83c78ed3b"
+            name="ВидалитиДані"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false" />
+          <operation
+            Id="fb887da5-b693-4842-840d-13ca94200a2f"
+            name="ДобавитиДані"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false" />
+          <operation
+            Id="bc2c2821-d9dd-410e-8fa6-ca95ee5167ac"
+            name="ЗмінитиДані"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false" />
+        </ownedOperationsInternal>
+      </class>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="1d803026-faaa-4631-aedd-9b01991beee5"
+        name="Звіт"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <targetEnds>
+          <association
+            Id="8d8bbb95-6928-4f11-bf4a-7bc1f1646796"
+            isDerived="false"
+            sourceEndRoleName="Звіт"
+            targetEndRoleName="Співробітники"
+            isLeaf="false"
+            isAbstract="false">
+            <classMoniker
+              Id="67f1b829-7a4a-4b08-be98-122b88bc37b4"
+              LastKnownName="Співробітники"
+              LastKnownLocation="ModelingProject2.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="4ccfcf59-1233-4642-8e95-754d09aa9c43"
+                  name="Звіт"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="Shared"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="3ba09c96-ed5e-436c-acef-925df3244d71"
+                  name="Співробітники"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false">
+                  <lowerValueInternal>
+                    <literalString
+                      Id="f47282e4-d7af-4274-84f6-b67fe0c1a774"
+                      name="Lower"
+                      value="*" />
+                  </lowerValueInternal>
+                  <upperValueInternal>
+                    <literalString
+                      Id="59e01023-60ba-4218-809b-6461c36dfdc3"
+                      name="Upper"
+                      value="*" />
+                  </upperValueInternal>
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+          <association
+            Id="9e59ccf9-5449-49bb-aaa3-b28131c03147"
+            isDerived="false"
+            sourceEndRoleName="Звіт"
+            targetEndRoleName="Посади"
+            isLeaf="false"
+            isAbstract="false">
+            <classMoniker
+              Id="b6a11564-72bd-4a9c-a112-7111fd0b0e75"
+              LastKnownName="Посади"
+              LastKnownLocation="ModelingProject2.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="040bfbcb-3e56-41a1-8f44-5fe5faeac64c"
+                  name="Звіт"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="Shared"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="13de95ee-e0d2-4d6f-b059-6b038b10454c"
+                  name="Посади"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false">
+                  <lowerValueInternal>
+                    <literalString
+                      Id="0e063e1e-75b2-408d-b9d7-aa5836d8d4d9"
+                      name="Lower"
+                      value="*" />
+                  </lowerValueInternal>
+                  <upperValueInternal>
+                    <literalString
+                      Id="03c660be-bba3-47bf-b4f2-347f2690a6c3"
+                      name="Upper"
+                      value="*" />
+                  </upperValueInternal>
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+          <association
+            Id="d8c3feb4-5c00-4140-87b9-5dc0e72d7ece"
+            isDerived="false"
+            sourceEndRoleName="Звіт"
+            targetEndRoleName="Інформація про співробітників"
+            isLeaf="false"
+            isAbstract="false">
+            <classMoniker
+              Id="2919ef36-f6b4-4266-8e0e-8a55dce94517"
+              LastKnownName="Інформація про співробітників"
+              LastKnownLocation="ModelingProject2.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="81de4126-f178-4776-b706-b43109ad5650"
+                  name="Звіт"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="Shared"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="22565853-e9a8-48b5-a3ad-a318a6297125"
+                  name="Інформація про співробітників"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false">
+                  <lowerValueInternal>
+                    <literalString
+                      Id="4a1977da-f605-4144-8c3d-2c5d16f4cf33"
+                      name="Lower"
+                      value="*" />
+                  </lowerValueInternal>
+                  <upperValueInternal>
+                    <literalString
+                      Id="e8defba7-96cc-4f90-9fcc-7271b23ee144"
+                      name="Upper"
+                      value="*" />
+                  </upperValueInternal>
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+          <association
+            Id="ca56ff2f-50c5-45df-a157-e9b3c37e4dec"
+            isDerived="false"
+            sourceEndRoleName="Звіт"
+            targetEndRoleName="Склад"
+            isLeaf="false"
+            isAbstract="false">
+            <classMoniker
+              Id="4d314d5c-8b8c-4ef4-8a80-c27a11febcf7"
+              LastKnownName="Склад"
+              LastKnownLocation="ModelingProject2.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="ed28ec0b-1146-4571-8f63-b0555b1dbfcf"
+                  name="Звіт"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="Shared"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="6c8d3124-5701-449c-8a09-dc066bcb4ee7"
+                  name="Склад"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false">
+                  <lowerValueInternal>
+                    <literalString
+                      Id="1f6ede58-2852-4baa-9390-2a9987376fe4"
+                      name="Lower"
+                      value="*" />
+                  </lowerValueInternal>
+                  <upperValueInternal>
+                    <literalString
+                      Id="fa0c892b-7a47-449c-947c-69d73ee5e8a6"
+                      name="Upper"
+                      value="*" />
+                  </upperValueInternal>
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+          <association
+            Id="6acfaeba-18f5-419d-902c-f37ba92682ab"
+            isDerived="false"
+            sourceEndRoleName="Звіт"
+            targetEndRoleName="Товари"
+            isLeaf="false"
+            isAbstract="false">
+            <classMoniker
+              Id="fbeb796d-7090-4a58-be4c-3fb64b6e5cc5"
+              LastKnownName="Товари"
+              LastKnownLocation="ModelingProject2.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="10689970-b645-4102-83b8-3c4a7675c740"
+                  name="Звіт"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="Shared"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="091a83f9-c765-47f4-868b-efcf4d016b79"
+                  name="Товари"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false">
+                  <lowerValueInternal>
+                    <literalString
+                      Id="7a97b78f-31cb-402a-a037-183f9a90566a"
+                      name="Lower"
+                      value="*" />
+                  </lowerValueInternal>
+                  <upperValueInternal>
+                    <literalString
+                      Id="582bd5ef-4fc5-47a1-861f-8d87fee8685c"
+                      name="Upper"
+                      value="*" />
+                  </upperValueInternal>
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+        </targetEnds>
+        <ownedOperationsInternal>
+          <operation
+            Id="cfe8d659-6d95-4315-9c3c-711c86c5763f"
+            name="СтоверенняДокументу"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false" />
+          <operation
+            Id="262fc428-d4af-46a8-9552-6ac14bd6954d"
+            name="ЗбірІнформації"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false" />
+          <operation
+            Id="c7acce72-7e24-4111-999f-95862bf7dc9e"
+            name="СтворенняЗаголовка"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false" />
+          <operation
+            Id="0e291649-e5ef-42c9-b561-ce8ba8c447be"
+            name="СтворенняТаблиці"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false" />
+          <operation
+            Id="ca23bea5-32fd-4983-b3d9-3ab366e7827b"
+            name="СтворенняПідсумковихДаних"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false" />
+        </ownedOperationsInternal>
       </class>
     </packageHasNamedElement>
   </packagedElements>

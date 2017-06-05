@@ -14,9 +14,9 @@ namespace Administrator_company
             //this.labelCopyright.Text = AssemblyCopyright;
             //this.labelCompanyName.Text = AssemblyCompany;
             //this.textBoxDescription.Text = AssemblyDescription;
-            Text = "Система администрирования продуктового супермаркета";
-            labelProductName.Text = "Система администрирования продуктового супермаркета";
-            labelVersion.Text = "1.5.20.75";
+            Text = "О программе";//"Проект автоматизированного рабочего места администратора продуктового супермаркета с удаленным доступом к базе данных.";
+            labelProductName.Text = "Проект АРМ администратора продуктового супермаркета с удаленным доступом к базе данных.";
+            labelVersion.Text = "2.11.38.166";
             labelCopyright.Text = "Авторские права: ст.гр.ИТ - 15 - 1т Когута Андрея";
             labelCompanyName.Text = "Название учебного заведения: ДГМА";
             textBoxDescription.Text = "Данный программный продукт предназначен для легкого и быстрого управления базой данных для администрирования продуктового супермаркета.";
