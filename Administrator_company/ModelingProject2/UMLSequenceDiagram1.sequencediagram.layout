@@ -3,14 +3,14 @@
   <SequenceDesignerModelMoniker Id="8869e0d8-3334-499c-b1fe-abe28013722b" />
   <nestedChildShapes>
     <lifelineShape Id="4ec4b7bb-1d98-4215-a062-4ebdbc207857" absoluteBounds="2.6551788080014411, 1, 0.15, 15.733333333333345" visible="true" visualStyleMode="Modified">
-      <lifelineMoniker Id="198defd7-5ad4-450b-b713-f0b548d2b3e8" LastKnownName="Администратор" />
+      <lifelineMoniker Id="198defd7-5ad4-450b-b713-f0b548d2b3e8" LastKnownName="Адміністратор" />
       <relativeChildShapes>
-        <umlLifelineHeadShape Id="b075335d-a290-4b20-af36-94c68dd9f29d" absoluteBounds="2.1440409660615147, 0.6, 1.1722756838798523, 0.4" customColor="White" visualStyleMode="Modified">
-          <lifelineMoniker Id="198defd7-5ad4-450b-b713-f0b548d2b3e8" LastKnownName="Администратор" />
+        <umlLifelineHeadShape Id="b075335d-a290-4b20-af36-94c68dd9f29d" absoluteBounds="2.1840800285615152, 0.6, 1.0921975588798523, 0.4" customColor="White" visualStyleMode="Modified">
+          <lifelineMoniker Id="198defd7-5ad4-450b-b713-f0b548d2b3e8" LastKnownName="Адміністратор" />
           <relativeChildShapes />
         </umlLifelineHeadShape>
         <lifelineHoverShape Id="3a338859-53a1-4f15-be89-5609027ccc31" absoluteBounds="2.6551788080014411, 1, 0, 15.75">
-          <lifelineMoniker Id="198defd7-5ad4-450b-b713-f0b548d2b3e8" LastKnownName="Администратор" />
+          <lifelineMoniker Id="198defd7-5ad4-450b-b713-f0b548d2b3e8" LastKnownName="Адміністратор" />
         </lifelineHoverShape>
         <umlExecutionSpecificationShape Id="da108bc3-1614-4ed6-b3e3-2faa3c170bd5" absoluteBounds="2.6551788080014411, 1.5520833333333333, 0.15, 14.547916666666678" customColor="184, 204, 215" visualStyleMode="Modified">
           <behaviorExecutionSpecificationMoniker Id="33467f9a-d485-48d0-a535-769e2aeb3058" LastKnownName="BehaviorExecutionSpecification23" />
@@ -90,14 +90,14 @@
       </relativeChildShapes>
     </lifelineShape>
     <lifelineShape Id="0bae2b5d-101c-43dc-a9ae-fffc624cec93" absoluteBounds="6.5625, 1, 0.15, 15.264583333333356" visible="true" visualStyleMode="Modified">
-      <lifelineMoniker Id="1fef939b-a847-4705-8bdd-5a60d09c23c1" LastKnownName="Отдел" />
+      <lifelineMoniker Id="1fef939b-a847-4705-8bdd-5a60d09c23c1" LastKnownName="Посади" />
       <relativeChildShapes>
         <umlLifelineHeadShape Id="883ee9e4-bb65-41b5-a1d4-84859ace7431" absoluteBounds="6.1375, 0.6, 1, 0.4" customColor="White" visualStyleMode="Modified">
-          <lifelineMoniker Id="1fef939b-a847-4705-8bdd-5a60d09c23c1" LastKnownName="Отдел" />
+          <lifelineMoniker Id="1fef939b-a847-4705-8bdd-5a60d09c23c1" LastKnownName="Посади" />
           <relativeChildShapes />
         </umlLifelineHeadShape>
         <lifelineHoverShape Id="745ba3d9-1cce-452c-9268-ef51af811a08" absoluteBounds="6.5625, 1, 0, 15.25">
-          <lifelineMoniker Id="1fef939b-a847-4705-8bdd-5a60d09c23c1" LastKnownName="Отдел" />
+          <lifelineMoniker Id="1fef939b-a847-4705-8bdd-5a60d09c23c1" LastKnownName="Посади" />
         </lifelineHoverShape>
         <umlExecutionSpecificationShape Id="6292de25-3f73-4415-96e5-ce82d7ada036" absoluteBounds="6.5625, 2.2895833333333337, 0.15, 1.1500000000000021" customColor="184, 204, 215" visualStyleMode="Modified">
           <behaviorExecutionSpecificationMoniker Id="223eefc3-1f7d-4930-afb6-19d904b0982f" LastKnownName="BehaviorExecutionSpecification5" />
