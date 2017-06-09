@@ -211,7 +211,7 @@
             <coveredLifelines>
               <lifelineMoniker
                 Id="e95ea6e3-c1d6-44a3-8353-133aa9d24404"
-                LastKnownName="Посади"
+                LastKnownName="Посада"
                 LastKnownLocation="ModelingProject2.uml" />
             </coveredLifelines>
             <finish>
@@ -259,7 +259,7 @@
             <covered>
               <lifelineMoniker
                 Id="e95ea6e3-c1d6-44a3-8353-133aa9d24404"
-                LastKnownName="Посади"
+                LastKnownName="Посада"
                 LastKnownLocation="ModelingProject2.uml" />
             </covered>
           </executionOccurrenceSpecification>
@@ -279,7 +279,7 @@
             <covered>
               <lifelineMoniker
                 Id="e95ea6e3-c1d6-44a3-8353-133aa9d24404"
-                LastKnownName="Посади"
+                LastKnownName="Посада"
                 LastKnownLocation="ModelingProject2.uml" />
             </covered>
           </messageOccurrenceSpecification>
@@ -334,22 +334,22 @@
             </covered>
           </executionOccurrenceSpecification>
           <messageOccurrenceSpecification
+            Id="972db994-8800-4a77-9a4d-4c655ca46d28"
+            name="MessageOccurrenceSpecification19">
+            <covered>
+              <lifelineMoniker
+                Id="e95ea6e3-c1d6-44a3-8353-133aa9d24404"
+                LastKnownName="Посада"
+                LastKnownLocation="ModelingProject2.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <messageOccurrenceSpecification
             Id="d6552d5f-6b5a-4ffc-af26-51b1aee5103f"
             name="MessageOccurrenceSpecification20">
             <covered>
               <lifelineMoniker
                 Id="d7b088d7-5688-4d0e-8eff-70de6c710b2c"
                 LastKnownName="БД"
-                LastKnownLocation="ModelingProject2.uml" />
-            </covered>
-          </messageOccurrenceSpecification>
-          <messageOccurrenceSpecification
-            Id="972db994-8800-4a77-9a4d-4c655ca46d28"
-            name="MessageOccurrenceSpecification19">
-            <covered>
-              <lifelineMoniker
-                Id="e95ea6e3-c1d6-44a3-8353-133aa9d24404"
-                LastKnownName="Посади"
                 LastKnownLocation="ModelingProject2.uml" />
             </covered>
           </messageOccurrenceSpecification>
@@ -369,7 +369,7 @@
             <covered>
               <lifelineMoniker
                 Id="e95ea6e3-c1d6-44a3-8353-133aa9d24404"
-                LastKnownName="Посади"
+                LastKnownName="Посада"
                 LastKnownLocation="ModelingProject2.uml" />
             </covered>
           </messageOccurrenceSpecification>
@@ -397,7 +397,7 @@
             <covered>
               <lifelineMoniker
                 Id="e95ea6e3-c1d6-44a3-8353-133aa9d24404"
-                LastKnownName="Посади"
+                LastKnownName="Посада"
                 LastKnownLocation="ModelingProject2.uml" />
             </covered>
           </messageOccurrenceSpecification>
@@ -425,7 +425,7 @@
             <covered>
               <lifelineMoniker
                 Id="e95ea6e3-c1d6-44a3-8353-133aa9d24404"
-                LastKnownName="Посади"
+                LastKnownName="Посада"
                 LastKnownLocation="ModelingProject2.uml" />
             </covered>
           </executionOccurrenceSpecification>
@@ -563,7 +563,7 @@
             <coveredLifelines>
               <lifelineMoniker
                 Id="e95ea6e3-c1d6-44a3-8353-133aa9d24404"
-                LastKnownName="Посади"
+                LastKnownName="Посада"
                 LastKnownLocation="ModelingProject2.uml" />
             </coveredLifelines>
             <finish>
@@ -611,7 +611,7 @@
             <covered>
               <lifelineMoniker
                 Id="e95ea6e3-c1d6-44a3-8353-133aa9d24404"
-                LastKnownName="Посади"
+                LastKnownName="Посада"
                 LastKnownLocation="ModelingProject2.uml" />
             </covered>
           </executionOccurrenceSpecification>
@@ -621,7 +621,7 @@
             <covered>
               <lifelineMoniker
                 Id="e95ea6e3-c1d6-44a3-8353-133aa9d24404"
-                LastKnownName="Посади"
+                LastKnownName="Посада"
                 LastKnownLocation="ModelingProject2.uml" />
             </covered>
           </messageOccurrenceSpecification>
@@ -701,7 +701,7 @@
             <covered>
               <lifelineMoniker
                 Id="e95ea6e3-c1d6-44a3-8353-133aa9d24404"
-                LastKnownName="Посади"
+                LastKnownName="Посада"
                 LastKnownLocation="ModelingProject2.uml" />
             </covered>
           </messageOccurrenceSpecification>
@@ -721,7 +721,7 @@
             <covered>
               <lifelineMoniker
                 Id="e95ea6e3-c1d6-44a3-8353-133aa9d24404"
-                LastKnownName="Посади"
+                LastKnownName="Посада"
                 LastKnownLocation="ModelingProject2.uml" />
             </covered>
           </messageOccurrenceSpecification>
@@ -759,7 +759,7 @@
             <covered>
               <lifelineMoniker
                 Id="e95ea6e3-c1d6-44a3-8353-133aa9d24404"
-                LastKnownName="Посади"
+                LastKnownName="Посада"
                 LastKnownLocation="ModelingProject2.uml" />
             </covered>
           </messageOccurrenceSpecification>
@@ -777,7 +777,7 @@
             <covered>
               <lifelineMoniker
                 Id="e95ea6e3-c1d6-44a3-8353-133aa9d24404"
-                LastKnownName="Посади"
+                LastKnownName="Посада"
                 LastKnownLocation="ModelingProject2.uml" />
             </covered>
           </executionOccurrenceSpecification>
@@ -1007,7 +1007,7 @@
             <coveredLifelines>
               <lifelineMoniker
                 Id="e95ea6e3-c1d6-44a3-8353-133aa9d24404"
-                LastKnownName="Посади"
+                LastKnownName="Посада"
                 LastKnownLocation="ModelingProject2.uml" />
             </coveredLifelines>
             <finish>
@@ -1055,7 +1055,7 @@
             <covered>
               <lifelineMoniker
                 Id="e95ea6e3-c1d6-44a3-8353-133aa9d24404"
-                LastKnownName="Посади"
+                LastKnownName="Посада"
                 LastKnownLocation="ModelingProject2.uml" />
             </covered>
           </executionOccurrenceSpecification>
@@ -1075,7 +1075,7 @@
             <covered>
               <lifelineMoniker
                 Id="e95ea6e3-c1d6-44a3-8353-133aa9d24404"
-                LastKnownName="Посади"
+                LastKnownName="Посада"
                 LastKnownLocation="ModelingProject2.uml" />
             </covered>
           </messageOccurrenceSpecification>
@@ -1130,22 +1130,22 @@
             </covered>
           </executionOccurrenceSpecification>
           <messageOccurrenceSpecification
-            Id="783d52a9-f282-4dc6-9da9-e35116b791d5"
-            name="MessageOccurrenceSpecification55">
-            <covered>
-              <lifelineMoniker
-                Id="e95ea6e3-c1d6-44a3-8353-133aa9d24404"
-                LastKnownName="Посади"
-                LastKnownLocation="ModelingProject2.uml" />
-            </covered>
-          </messageOccurrenceSpecification>
-          <messageOccurrenceSpecification
             Id="43033044-f7f3-4ebb-bba2-a20a9d0ae9d5"
             name="MessageOccurrenceSpecification56">
             <covered>
               <lifelineMoniker
                 Id="d7b088d7-5688-4d0e-8eff-70de6c710b2c"
                 LastKnownName="БД"
+                LastKnownLocation="ModelingProject2.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="783d52a9-f282-4dc6-9da9-e35116b791d5"
+            name="MessageOccurrenceSpecification55">
+            <covered>
+              <lifelineMoniker
+                Id="e95ea6e3-c1d6-44a3-8353-133aa9d24404"
+                LastKnownName="Посада"
                 LastKnownLocation="ModelingProject2.uml" />
             </covered>
           </messageOccurrenceSpecification>
@@ -1165,7 +1165,7 @@
             <covered>
               <lifelineMoniker
                 Id="e95ea6e3-c1d6-44a3-8353-133aa9d24404"
-                LastKnownName="Посади"
+                LastKnownName="Посада"
                 LastKnownLocation="ModelingProject2.uml" />
             </covered>
           </messageOccurrenceSpecification>
@@ -1193,7 +1193,7 @@
             <covered>
               <lifelineMoniker
                 Id="e95ea6e3-c1d6-44a3-8353-133aa9d24404"
-                LastKnownName="Посади"
+                LastKnownName="Посада"
                 LastKnownLocation="ModelingProject2.uml" />
             </covered>
           </messageOccurrenceSpecification>
@@ -1221,7 +1221,7 @@
             <covered>
               <lifelineMoniker
                 Id="e95ea6e3-c1d6-44a3-8353-133aa9d24404"
-                LastKnownName="Посади"
+                LastKnownName="Посада"
                 LastKnownLocation="ModelingProject2.uml" />
             </covered>
           </executionOccurrenceSpecification>
@@ -1231,7 +1231,7 @@
             <coveredLifelines>
               <lifelineMoniker
                 Id="e95ea6e3-c1d6-44a3-8353-133aa9d24404"
-                LastKnownName="Посади"
+                LastKnownName="Посада"
                 LastKnownLocation="ModelingProject2.uml" />
             </coveredLifelines>
             <finish>
@@ -1279,7 +1279,7 @@
             <covered>
               <lifelineMoniker
                 Id="e95ea6e3-c1d6-44a3-8353-133aa9d24404"
-                LastKnownName="Посади"
+                LastKnownName="Посада"
                 LastKnownLocation="ModelingProject2.uml" />
             </covered>
           </executionOccurrenceSpecification>
@@ -1299,7 +1299,7 @@
             <covered>
               <lifelineMoniker
                 Id="e95ea6e3-c1d6-44a3-8353-133aa9d24404"
-                LastKnownName="Посади"
+                LastKnownName="Посада"
                 LastKnownLocation="ModelingProject2.uml" />
             </covered>
           </messageOccurrenceSpecification>
@@ -1369,7 +1369,17 @@
             <covered>
               <lifelineMoniker
                 Id="e95ea6e3-c1d6-44a3-8353-133aa9d24404"
-                LastKnownName="Посади"
+                LastKnownName="Посада"
+                LastKnownLocation="ModelingProject2.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="0d2d6f2d-cf2e-411f-abf4-521ff359a316"
+            name="MessageOccurrenceSpecification66">
+            <covered>
+              <lifelineMoniker
+                Id="e95ea6e3-c1d6-44a3-8353-133aa9d24404"
+                LastKnownName="Посада"
                 LastKnownLocation="ModelingProject2.uml" />
             </covered>
           </messageOccurrenceSpecification>
@@ -1380,16 +1390,6 @@
               <lifelineMoniker
                 Id="d7b088d7-5688-4d0e-8eff-70de6c710b2c"
                 LastKnownName="БД"
-                LastKnownLocation="ModelingProject2.uml" />
-            </covered>
-          </messageOccurrenceSpecification>
-          <messageOccurrenceSpecification
-            Id="0d2d6f2d-cf2e-411f-abf4-521ff359a316"
-            name="MessageOccurrenceSpecification66">
-            <covered>
-              <lifelineMoniker
-                Id="e95ea6e3-c1d6-44a3-8353-133aa9d24404"
-                LastKnownName="Посади"
                 LastKnownLocation="ModelingProject2.uml" />
             </covered>
           </messageOccurrenceSpecification>
@@ -1417,7 +1417,7 @@
             <covered>
               <lifelineMoniker
                 Id="e95ea6e3-c1d6-44a3-8353-133aa9d24404"
-                LastKnownName="Посади"
+                LastKnownName="Посада"
                 LastKnownLocation="ModelingProject2.uml" />
             </covered>
           </messageOccurrenceSpecification>
@@ -1445,7 +1445,7 @@
             <covered>
               <lifelineMoniker
                 Id="e95ea6e3-c1d6-44a3-8353-133aa9d24404"
-                LastKnownName="Посади"
+                LastKnownName="Посада"
                 LastKnownLocation="ModelingProject2.uml" />
             </covered>
           </executionOccurrenceSpecification>
@@ -1642,16 +1642,6 @@
             </covered>
           </executionOccurrenceSpecification>
           <messageOccurrenceSpecification
-            Id="60ce8e8c-1791-40b8-8c2c-f82e54e281d2"
-            name="MessageOccurrenceSpecification31">
-            <covered>
-              <lifelineMoniker
-                Id="ed12f217-b429-45b6-898d-23db01d5ad75"
-                LastKnownName="Адміністратор"
-                LastKnownLocation="ModelingProject2.uml" />
-            </covered>
-          </messageOccurrenceSpecification>
-          <messageOccurrenceSpecification
             Id="1f808cd7-4d41-436d-98b3-eb43ae99d3e1"
             name="MessageOccurrenceSpecification32">
             <covered>
@@ -1661,13 +1651,23 @@
                 LastKnownLocation="ModelingProject2.uml" />
             </covered>
           </messageOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="60ce8e8c-1791-40b8-8c2c-f82e54e281d2"
+            name="MessageOccurrenceSpecification31">
+            <covered>
+              <lifelineMoniker
+                Id="ed12f217-b429-45b6-898d-23db01d5ad75"
+                LastKnownName="Адміністратор"
+                LastKnownLocation="ModelingProject2.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
           <behaviorExecutionSpecification
             Id="9bc1a22d-3102-408e-9c11-92026797a60a"
             name="BehaviorExecutionSpecification20">
             <coveredLifelines>
               <lifelineMoniker
                 Id="e95ea6e3-c1d6-44a3-8353-133aa9d24404"
-                LastKnownName="Посади"
+                LastKnownName="Посада"
                 LastKnownLocation="ModelingProject2.uml" />
             </coveredLifelines>
             <finish>
@@ -1715,7 +1715,7 @@
             <covered>
               <lifelineMoniker
                 Id="e95ea6e3-c1d6-44a3-8353-133aa9d24404"
-                LastKnownName="Посади"
+                LastKnownName="Посада"
                 LastKnownLocation="ModelingProject2.uml" />
             </covered>
           </executionOccurrenceSpecification>
@@ -1725,7 +1725,7 @@
             <covered>
               <lifelineMoniker
                 Id="e95ea6e3-c1d6-44a3-8353-133aa9d24404"
-                LastKnownName="Посади"
+                LastKnownName="Посада"
                 LastKnownLocation="ModelingProject2.uml" />
             </covered>
           </messageOccurrenceSpecification>
@@ -1795,7 +1795,7 @@
             <covered>
               <lifelineMoniker
                 Id="e95ea6e3-c1d6-44a3-8353-133aa9d24404"
-                LastKnownName="Посади"
+                LastKnownName="Посада"
                 LastKnownLocation="ModelingProject2.uml" />
             </covered>
           </messageOccurrenceSpecification>
@@ -1825,7 +1825,7 @@
             <covered>
               <lifelineMoniker
                 Id="e95ea6e3-c1d6-44a3-8353-133aa9d24404"
-                LastKnownName="Посади"
+                LastKnownName="Посада"
                 LastKnownLocation="ModelingProject2.uml" />
             </covered>
           </messageOccurrenceSpecification>
@@ -1863,7 +1863,7 @@
             <covered>
               <lifelineMoniker
                 Id="e95ea6e3-c1d6-44a3-8353-133aa9d24404"
-                LastKnownName="Посади"
+                LastKnownName="Посада"
                 LastKnownLocation="ModelingProject2.uml" />
             </covered>
           </messageOccurrenceSpecification>
@@ -1881,7 +1881,7 @@
             <covered>
               <lifelineMoniker
                 Id="e95ea6e3-c1d6-44a3-8353-133aa9d24404"
-                LastKnownName="Посади"
+                LastKnownName="Посада"
                 LastKnownLocation="ModelingProject2.uml" />
             </covered>
           </executionOccurrenceSpecification>
@@ -2201,9 +2201,9 @@
           </lifeline>
           <lifeline
             Id="e95ea6e3-c1d6-44a3-8353-133aa9d24404"
-            name="Посади"
+            name="Посада"
             isActor="false"
-            lifelineDisplayName="Посади">
+            lifelineDisplayName="Посада">
             <represents>
               <propertyMoniker
                 Id="c7d6cf3a-1c9f-4867-8785-3c1807f5d334"
@@ -2961,7 +2961,7 @@
             <type_NamedElement>
               <classMoniker
                 Id="b6a11564-72bd-4a9c-a112-7111fd0b0e75"
-                LastKnownName="Посади"
+                LastKnownName="Посада"
                 LastKnownLocation="ModelingProject2.uml" />
             </type_NamedElement>
           </property>
@@ -2977,7 +2977,7 @@
             <type_NamedElement>
               <classMoniker
                 Id="b6a11564-72bd-4a9c-a112-7111fd0b0e75"
-                LastKnownName="Посади"
+                LastKnownName="Посада"
                 LastKnownLocation="ModelingProject2.uml" />
             </type_NamedElement>
           </property>
@@ -2993,58 +2993,6 @@
         isActiveClass="false">
         <targetEnds>
           <association
-            Id="8df65f06-c140-46e7-a257-b4117f9986de"
-            isDerived="false"
-            sourceEndRoleName="Продуктовий супермаркет"
-            targetEndRoleName="Посади"
-            isLeaf="false"
-            isAbstract="false">
-            <classMoniker
-              Id="b6a11564-72bd-4a9c-a112-7111fd0b0e75"
-              LastKnownName="Посади"
-              LastKnownLocation="ModelingProject2.uml" />
-            <relationshipOwnedElementsInternal>
-              <associationHasOwnedEnds>
-                <memberEnd
-                  Id="86625fda-7cec-46a3-b4e3-73bf2db9e8ec"
-                  name="Продуктовий супермаркет"
-                  isLeaf="false"
-                  isStatic="false"
-                  isReadOnly="false"
-                  isDerived="false"
-                  isDerivedUnion="false"
-                  aggregation="Shared"
-                  isComposite="false"
-                  isNavigableOwned="false" />
-              </associationHasOwnedEnds>
-              <associationHasOwnedEnds>
-                <memberEnd
-                  Id="26b43a2c-227c-4dd2-8d40-3b454a969fc2"
-                  name="Посади"
-                  isLeaf="false"
-                  isStatic="false"
-                  isReadOnly="false"
-                  isDerived="false"
-                  isDerivedUnion="false"
-                  aggregation="None"
-                  isComposite="false">
-                  <lowerValueInternal>
-                    <literalString
-                      Id="1466c694-8cdd-43d5-9c9a-e58dc427ac9a"
-                      name="Lower"
-                      value="*" />
-                  </lowerValueInternal>
-                  <upperValueInternal>
-                    <literalString
-                      Id="4484bba1-7bfb-458a-86d1-e14c0c050fb8"
-                      name="Upper"
-                      value="*" />
-                  </upperValueInternal>
-                </memberEnd>
-              </associationHasOwnedEnds>
-            </relationshipOwnedElementsInternal>
-          </association>
-          <association
             Id="b4bf8f1c-a904-4699-b8b4-eda0e99632f1"
             isDerived="false"
             sourceEndRoleName="Продуктовий супермаркет"
@@ -3053,7 +3001,7 @@
             isAbstract="false">
             <classMoniker
               Id="67f1b829-7a4a-4b08-be98-122b88bc37b4"
-              LastKnownName="Співробітники"
+              LastKnownName="Співробітник"
               LastKnownLocation="ModelingProject2.uml" />
             <relationshipOwnedElementsInternal>
               <associationHasOwnedEnds>
@@ -3089,58 +3037,6 @@
                   <upperValueInternal>
                     <literalString
                       Id="85931dbc-f1d8-477b-b967-d0d47f14a5ad"
-                      name="Upper"
-                      value="*" />
-                  </upperValueInternal>
-                </memberEnd>
-              </associationHasOwnedEnds>
-            </relationshipOwnedElementsInternal>
-          </association>
-          <association
-            Id="67906c75-f771-4d66-bb59-507925303d8c"
-            isDerived="false"
-            sourceEndRoleName="Продуктовий супермаркет"
-            targetEndRoleName="Товари"
-            isLeaf="false"
-            isAbstract="false">
-            <classMoniker
-              Id="fbeb796d-7090-4a58-be4c-3fb64b6e5cc5"
-              LastKnownName="Товари"
-              LastKnownLocation="ModelingProject2.uml" />
-            <relationshipOwnedElementsInternal>
-              <associationHasOwnedEnds>
-                <memberEnd
-                  Id="3aaf2729-3d44-4748-8a34-0b8e373b600a"
-                  name="Продуктовий супермаркет"
-                  isLeaf="false"
-                  isStatic="false"
-                  isReadOnly="false"
-                  isDerived="false"
-                  isDerivedUnion="false"
-                  aggregation="Shared"
-                  isComposite="false"
-                  isNavigableOwned="false" />
-              </associationHasOwnedEnds>
-              <associationHasOwnedEnds>
-                <memberEnd
-                  Id="fbfa522e-7fde-425c-856f-adb81b410ca4"
-                  name="Товари"
-                  isLeaf="false"
-                  isStatic="false"
-                  isReadOnly="false"
-                  isDerived="false"
-                  isDerivedUnion="false"
-                  aggregation="None"
-                  isComposite="false">
-                  <lowerValueInternal>
-                    <literalString
-                      Id="7add7115-7024-4dc4-a3b5-7ec327b596eb"
-                      name="Lower"
-                      value="*" />
-                  </lowerValueInternal>
-                  <upperValueInternal>
-                    <literalString
-                      Id="5aa82233-4b8c-4a99-a0ba-029fbf7e37fe"
                       name="Upper"
                       value="*" />
                   </upperValueInternal>
@@ -3291,63 +3187,11 @@
               </associationHasOwnedEnds>
             </relationshipOwnedElementsInternal>
           </association>
-          <association
-            Id="aa67e0f2-1386-4f49-9095-cbb4880a2f44"
-            isDerived="false"
-            sourceEndRoleName="Продуктовий супермаркет"
-            targetEndRoleName="Звіт"
-            isLeaf="false"
-            isAbstract="false">
-            <classMoniker
-              Id="1d803026-faaa-4631-aedd-9b01991beee5"
-              LastKnownName="Звіт"
-              LastKnownLocation="ModelingProject2.uml" />
-            <relationshipOwnedElementsInternal>
-              <associationHasOwnedEnds>
-                <memberEnd
-                  Id="64318ab6-8b42-465d-a72a-f54992425244"
-                  name="Продуктовий супермаркет"
-                  isLeaf="false"
-                  isStatic="false"
-                  isReadOnly="false"
-                  isDerived="false"
-                  isDerivedUnion="false"
-                  aggregation="Shared"
-                  isComposite="false"
-                  isNavigableOwned="false" />
-              </associationHasOwnedEnds>
-              <associationHasOwnedEnds>
-                <memberEnd
-                  Id="e0c22db6-96fd-4cee-9d85-a71d09fbb1f7"
-                  name="Звіт"
-                  isLeaf="false"
-                  isStatic="false"
-                  isReadOnly="false"
-                  isDerived="false"
-                  isDerivedUnion="false"
-                  aggregation="None"
-                  isComposite="false">
-                  <lowerValueInternal>
-                    <literalString
-                      Id="d7a57a24-2dbe-4b7a-a97e-c6ba4f2dc142"
-                      name="Lower"
-                      value="*" />
-                  </lowerValueInternal>
-                  <upperValueInternal>
-                    <literalString
-                      Id="21687201-b7a1-4e18-a907-ca7f23aef325"
-                      name="Upper"
-                      value="*" />
-                  </upperValueInternal>
-                </memberEnd>
-              </associationHasOwnedEnds>
-            </relationshipOwnedElementsInternal>
-          </association>
         </targetEnds>
         <ownedOperationsInternal>
           <operation
             Id="1ae8db9d-9342-465c-b9e6-6f8c8e54a2f5"
-            name="ВідобразитиСпівробітників"
+            name="ВідобразитиСпівробітника"
             isLeaf="false"
             isStatic="false"
             isAbstract="false"
@@ -3355,7 +3199,7 @@
             isQuery="false" />
           <operation
             Id="85c955df-8460-402d-a922-0b597301c385"
-            name="ВідобразитиПосади"
+            name="ВідобразитиПосаду"
             isLeaf="false"
             isStatic="false"
             isAbstract="false"
@@ -3371,15 +3215,7 @@
             isQuery="false" />
           <operation
             Id="625a54fb-d15a-4692-a607-db92a8f43517"
-            name="ВідобразитиТовари"
-            isLeaf="false"
-            isStatic="false"
-            isAbstract="false"
-            concurrency="Sequential"
-            isQuery="false" />
-          <operation
-            Id="d3e3f4db-a43a-4769-b701-35c0ca398dbf"
-            name="ВідобразитиИнформаціюПроСпівробітників"
+            name="ВідобразитиТовар"
             isLeaf="false"
             isStatic="false"
             isAbstract="false"
@@ -3507,7 +3343,7 @@
     <packageHasNamedElement>
       <class
         Id="67f1b829-7a4a-4b08-be98-122b88bc37b4"
-        name="Співробітники"
+        name="Співробітник"
         isAbstract="false"
         isLeaf="false"
         isActiveClass="false">
@@ -3607,6 +3443,89 @@
             isDerivedUnion="false"
             aggregation="None"
             isComposite="false" />
+          <property
+            Id="b76f1a5a-6d24-455e-9d18-aaa592908a3c"
+            name="int id1"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false" />
+          <property
+            Id="ef96516f-a450-404d-ada1-35eb93a0c844"
+            name="blob фото"
+            visibility="Private"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false" />
+          <property
+            Id="122bdc46-e7bb-46fe-b214-5e9a8d757db7"
+            name="int вік"
+            visibility="Private"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false" />
+          <property
+            Id="bcb0410e-0aff-497e-9208-7ee01d6bcc04"
+            name="string адреса"
+            visibility="Private"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false" />
+          <property
+            Id="da7f92a1-b695-46ed-8b82-648c0c16eb01"
+            name="string номер телефону"
+            visibility="Private"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false" />
+          <property
+            Id="35f871d5-d899-4b3d-a462-a1a66c058d39"
+            name="string ПІБ"
+            visibility="Private"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false" />
+          <property
+            Id="ece5cf20-321b-4f98-8457-003b89ed0d87"
+            name="string паспортні дані"
+            visibility="Private"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false" />
         </ownedAttributesInternal>
         <ownedOperationsInternal>
           <operation
@@ -3655,7 +3574,7 @@
     <packageHasNamedElement>
       <class
         Id="b6a11564-72bd-4a9c-a112-7111fd0b0e75"
-        name="Посади"
+        name="Посада"
         isAbstract="false"
         isLeaf="false"
         isActiveClass="false">
@@ -3734,7 +3653,7 @@
             isAbstract="false">
             <classMoniker
               Id="67f1b829-7a4a-4b08-be98-122b88bc37b4"
-              LastKnownName="Співробітники"
+              LastKnownName="Співробітник"
               LastKnownLocation="ModelingProject2.uml" />
             <relationshipOwnedElementsInternal>
               <associationHasOwnedEnds>
@@ -3854,7 +3773,7 @@
     <packageHasNamedElement>
       <class
         Id="fbeb796d-7090-4a58-be4c-3fb64b6e5cc5"
-        name="Товари"
+        name="Товар"
         isAbstract="false"
         isLeaf="false"
         isActiveClass="false">
@@ -3996,7 +3915,7 @@
             isAbstract="false">
             <classMoniker
               Id="fbeb796d-7090-4a58-be4c-3fb64b6e5cc5"
-              LastKnownName="Товари"
+              LastKnownName="Товар"
               LastKnownLocation="ModelingProject2.uml" />
             <relationshipOwnedElementsInternal>
               <associationHasOwnedEnds>
@@ -6627,7 +6546,7 @@
             isAbstract="false">
             <classMoniker
               Id="67f1b829-7a4a-4b08-be98-122b88bc37b4"
-              LastKnownName="Співробітники"
+              LastKnownName="Співробітник"
               LastKnownLocation="ModelingProject2.uml" />
             <relationshipOwnedElementsInternal>
               <associationHasOwnedEnds>
@@ -6809,7 +6728,7 @@
             isAbstract="false">
             <classMoniker
               Id="67f1b829-7a4a-4b08-be98-122b88bc37b4"
-              LastKnownName="Співробітники"
+              LastKnownName="Співробітник"
               LastKnownLocation="ModelingProject2.uml" />
             <relationshipOwnedElementsInternal>
               <associationHasOwnedEnds>
@@ -6845,58 +6764,6 @@
                   <upperValueInternal>
                     <literalString
                       Id="59e01023-60ba-4218-809b-6461c36dfdc3"
-                      name="Upper"
-                      value="*" />
-                  </upperValueInternal>
-                </memberEnd>
-              </associationHasOwnedEnds>
-            </relationshipOwnedElementsInternal>
-          </association>
-          <association
-            Id="9e59ccf9-5449-49bb-aaa3-b28131c03147"
-            isDerived="false"
-            sourceEndRoleName="Звіт"
-            targetEndRoleName="Посади"
-            isLeaf="false"
-            isAbstract="false">
-            <classMoniker
-              Id="b6a11564-72bd-4a9c-a112-7111fd0b0e75"
-              LastKnownName="Посади"
-              LastKnownLocation="ModelingProject2.uml" />
-            <relationshipOwnedElementsInternal>
-              <associationHasOwnedEnds>
-                <memberEnd
-                  Id="040bfbcb-3e56-41a1-8f44-5fe5faeac64c"
-                  name="Звіт"
-                  isLeaf="false"
-                  isStatic="false"
-                  isReadOnly="false"
-                  isDerived="false"
-                  isDerivedUnion="false"
-                  aggregation="Shared"
-                  isComposite="false"
-                  isNavigableOwned="false" />
-              </associationHasOwnedEnds>
-              <associationHasOwnedEnds>
-                <memberEnd
-                  Id="13de95ee-e0d2-4d6f-b059-6b038b10454c"
-                  name="Посади"
-                  isLeaf="false"
-                  isStatic="false"
-                  isReadOnly="false"
-                  isDerived="false"
-                  isDerivedUnion="false"
-                  aggregation="None"
-                  isComposite="false">
-                  <lowerValueInternal>
-                    <literalString
-                      Id="0e063e1e-75b2-408d-b9d7-aa5836d8d4d9"
-                      name="Lower"
-                      value="*" />
-                  </lowerValueInternal>
-                  <upperValueInternal>
-                    <literalString
-                      Id="03c660be-bba3-47bf-b4f2-347f2690a6c3"
                       name="Upper"
                       value="*" />
                   </upperValueInternal>
@@ -7017,7 +6884,7 @@
             isAbstract="false">
             <classMoniker
               Id="fbeb796d-7090-4a58-be4c-3fb64b6e5cc5"
-              LastKnownName="Товари"
+              LastKnownName="Товар"
               LastKnownLocation="ModelingProject2.uml" />
             <relationshipOwnedElementsInternal>
               <associationHasOwnedEnds>

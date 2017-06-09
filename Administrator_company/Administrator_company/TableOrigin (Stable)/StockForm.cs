@@ -5,6 +5,7 @@ using System.Windows.Forms;
 using Administrator_company.LogicProgram;
 using iTextSharp.text;
 using MySql.Data.MySqlClient;
+using Excel = Microsoft.Office.Interop.Excel;
 
 namespace Administrator_company
 {
@@ -21,6 +22,7 @@ namespace Administrator_company
         Сalculations calculations = new Сalculations();
         GetTextObjectsForm getText = new GetTextObjectsForm();
         Report report = new Report();
+        
 
         BindingManagerBase managerBase; //для перемещения по таблице
 
@@ -317,6 +319,8 @@ namespace Administrator_company
             }
         }
 
+
+
         private void Clear_Click(object sender, EventArgs e)
         {
             TextBox[] textBoxs = { textBox1, textBox2 };
@@ -397,6 +401,105 @@ namespace Administrator_company
             return allResult.ToArray();
         }
 
+        #endregion
+
+        #region создание графика
+        //Создания графика 
+        private void Graph_Click(object sender, EventArgs e)
+        {
+            //GraphForm graph = new GraphForm();
+            //graph.Show();
+            //GetDataForChart();
+         
+        string sql = " SELECT MONTH(stock.sold) as Month, SUM(stock.price) as Sum " +
+             " FROM supermarket.stock " +
+             " where  stock.available = 'Нету' " +
+             " GROUP BY MONTH(stock.sold); ";
+
+            MySqlCommand command = new MySqlCommand(sql, connection.connection);
+            connection.OpenConnection();
+            MySqlDataReader reader = command.ExecuteReader();
+            List<int> month = new List<int>();
+            List<double> sum = new List<Double>();
+
+            while (reader.Read())
+            {
+                month.Add(Convert.ToInt32(reader.GetString("Month")));
+                sum.Add(Convert.ToDouble(reader.GetString("Sum")));
+            }
+
+            connection.CloseConnection();
+   /*         string s = "";
+
+            foreach (var m in month)
+            {
+                s += m + " ";
+            }
+            
+            foreach (var su in sum)
+            {
+                s += su + " ";
+            }
+            MessageBox.Show(s);*/
+        
+            Excel.Application xlApp;
+            Excel.Workbook xlWorkBook;
+            Excel.Worksheet xlWorkSheet;
+            object misValue = System.Reflection.Missing.Value;
+
+            xlApp = new Excel.Application();
+            xlWorkBook = xlApp.Workbooks.Add(misValue);
+            xlWorkSheet = (Excel.Worksheet)xlWorkBook.Worksheets.get_Item(1);
+
+            //add data 
+            xlWorkSheet.Cells[1, 1] = "";
+            xlWorkSheet.Cells[1, 2] = "Сумма";
+            int element = 0; //элементы в списке
+            for (int i = 2; i < month.Count+1; i++)
+            {
+                xlWorkSheet.Cells[i, 1] = month[element];
+                xlWorkSheet.Cells[i, 2] = sum[element++];
+            }
+
+            Excel.Range chartRange;
+
+            Excel.ChartObjects xlCharts = (Excel.ChartObjects)xlWorkSheet.ChartObjects(Type.Missing);
+            Excel.ChartObject myChart = (Excel.ChartObject)xlCharts.Add(100, 10, 300, 250);
+            Excel.Chart chartPage = myChart.Chart;
+
+            int countB = month.Count + 1;
+            chartRange = xlWorkSheet.get_Range("A1", "B" + countB);
+            chartPage.SetSourceData(chartRange, misValue);
+            chartPage.ChartType = Excel.XlChartType.xlColumnClustered;
+
+            xlWorkBook.SaveAs("Общая сумма проданных товаров.xls", Excel.XlFileFormat.xlWorkbookNormal, misValue, misValue, misValue, misValue, Excel.XlSaveAsAccessMode.xlExclusive, misValue, misValue, misValue, misValue, misValue);
+            xlWorkBook.Close(true, misValue, misValue);
+            xlApp.Quit();
+
+            releaseObject(xlWorkSheet);
+            releaseObject(xlWorkBook);
+            releaseObject(xlApp);
+
+            MessageBox.Show("Создан excel файл!");
+        }
+
+        private void releaseObject(object obj)
+        {
+            try
+            {
+                System.Runtime.InteropServices.Marshal.ReleaseComObject(obj);
+                obj = null;
+            }
+            catch (Exception ex)
+            {
+                obj = null;
+                MessageBox.Show("Exception Occured while releasing object " + ex.ToString());
+            }
+            finally
+            {
+                GC.Collect();
+            }
+        }
         #endregion
     }
 }

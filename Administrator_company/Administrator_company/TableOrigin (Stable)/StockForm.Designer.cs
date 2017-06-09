@@ -57,6 +57,7 @@
             this.label6 = new System.Windows.Forms.Label();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
+            this.Graph = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -64,6 +65,7 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.Graph);
             this.panel1.Controls.Add(this.ReportButton);
             this.panel1.Controls.Add(this.dateTimePicker2);
             this.panel1.Controls.Add(this.dateTimePicker1);
@@ -330,6 +332,16 @@
             this.dataGridView1.SelectionChanged += new System.EventHandler(this.dataGridView1_SelectionChanged);
             this.dataGridView1.Click += new System.EventHandler(this.dataGridView1_Click);
             // 
+            // Graph
+            // 
+            this.Graph.Location = new System.Drawing.Point(258, 81);
+            this.Graph.Name = "Graph";
+            this.Graph.Size = new System.Drawing.Size(84, 23);
+            this.Graph.TabIndex = 59;
+            this.Graph.Text = "График";
+            this.Graph.UseVisualStyleBackColor = true;
+            this.Graph.Click += new System.EventHandler(this.Graph_Click);
+            // 
             // StockForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -382,5 +394,6 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Button ReportButton;
         private System.Windows.Forms.SaveFileDialog saveFileDialog1;
+        private System.Windows.Forms.Button Graph;
     }
 }
